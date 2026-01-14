@@ -37,9 +37,9 @@ const AboutPartner: React.FC = () => {
                   About Us
                 </span>
               </div>
-              <h2 className="font-sans text-[32px] md:text-[40px] leading-[1.2] font-bold text-black max-w-[450px]">
-                Your Trusted Real Estate Partner In Kochi
-              </h2>
+                <h2 className="font-sans text-[32px] md:text-[40px] leading-[1.2] font-bold text-black max-w-[450px]">
+                  Your Trusted Real Estate Business In Kochi
+                </h2>
             </div>
 
             <div className="lg:w-[45%] flex flex-col items-start lg:items-end">

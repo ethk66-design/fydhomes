@@ -3,6 +3,7 @@ import "./globals.css";
 import { VisualEditsMessenger } from "orchids-visual-edits";
 import Navigation from "@/components/sections/Navigation";
 import Footer from "@/components/sections/Footer";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "FYD Homes | Find Your Dream Home in Kochi",
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className="antialiased">
         <Navigation />
         {children}
+        <WhatsAppButton />
         <Footer />
         <VisualEditsMessenger />
       </body>

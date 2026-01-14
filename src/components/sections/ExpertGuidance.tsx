@@ -25,25 +25,25 @@ const ExpertGuidance = () => {
           </div>
 
           {/* Content Box */}
-          <div className="relative z-10 h-full flex items-center px-6 md:px-12 py-10 md:py-0">
-            <div className="bg-white/95 md:bg-white p-8 md:p-12 max-w-[500px] rounded-sm shadow-card animate-fadeInUp">
-              <h2 className="font-serif text-[28px] md:text-[32px] font-bold leading-[1.2] text-black mb-4">
-                Looking To Buy Or Sell? <br />
-                Get Expert Guidance Today!
-              </h2>
-              
-              <p className="font-sans text-[16px] leading-[1.6] text-[#5c5c5c] mb-8">
-                Contact us now for a free consultation and let our team of experts guide you through the process.
-              </p>
-
-              <a 
-                href="/contact" 
-                className="inline-block bg-[#2D7A8C] hover:bg-[#2D7A8C]/90 text-white font-sans text-[14px] font-semibold uppercase tracking-[0.5px] px-8 py-4 rounded-[4px] transition-all duration-200"
-              >
-                CONTACT US
-              </a>
+            <div className="relative z-10 h-full flex items-center px-6 md:px-12 py-10 md:py-0">
+              <div className="bg-white/95 md:bg-white p-8 md:p-12 max-w-[500px] rounded-sm shadow-card animate-fadeInUp">
+                <h2 className="font-sans text-[28px] md:text-[32px] font-bold leading-[1.2] text-black mb-4">
+                  Looking To Buy Or Sell? <br />
+                  Get Expert Guidance Today!
+                </h2>
+                
+                <p className="font-sans text-[16px] leading-[1.6] text-[#5c5c5c] mb-8">
+                  Contact us now for a free consultation and let our team of experts guide you through the process.
+                </p>
+  
+                <a 
+                  href="/contact" 
+                  className="inline-block bg-[#205c6d] hover:bg-[#1a4b59] text-white font-sans text-[14px] font-semibold uppercase tracking-[0.5px] px-8 py-4 rounded-[4px] transition-all duration-200"
+                >
+                  CONTACT US
+                </a>
+              </div>
             </div>
-          </div>
         </div>
       </div>
 

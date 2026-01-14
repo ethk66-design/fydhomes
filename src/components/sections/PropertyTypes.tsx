@@ -46,8 +46,8 @@ const PropertyTypes = () => {
             </div>
             <span className="text-[12px] font-semibold text-primary uppercase tracking-[1px]">Lifestyle</span>
           </div>
-          <h2 className="text-[32px] font-bold text-black font-serif m-0">Explore Property Types</h2>
-        </div>
+            <h2 className="text-[32px] font-bold text-black font-sans m-0">Explore Property Types</h2>
+          </div>
 
         {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">

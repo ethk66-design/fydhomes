@@ -58,10 +58,10 @@ export default function FeaturedForRent() {
           </span>
         </div>
 
-        <div className="flex justify-between items-end mb-[30px]">
-          <h2 className="text-[32px] font-bold font-serif text-black leading-[1.3] m-0">
-            Featured For Rent
-          </h2>
+          <div className="flex justify-between items-end mb-[30px]">
+            <h2 className="text-[32px] font-bold font-sans text-black leading-[1.3] m-0">
+              Featured For Rent
+            </h2>
           <div className="flex gap-2">
             <button className="w-11 h-8 flex items-center justify-center border border-[#eeeeee] hover:bg-gray-50 transition-colors">
               <ChevronLeft size={16} className="text-[#5c5c5c]" />

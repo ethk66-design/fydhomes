@@ -36,12 +36,12 @@ const Testimonials = () => {
             <div className="w-4 h-4 rounded-full border border-primary flex items-center justify-center">
               <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
             </div>
-            <span className="uppercase text-[14px] font-semibold tracking-[0.5px] text-primary">TESTIMONIALS</span>
+              <span className="uppercase text-[14px] font-semibold tracking-[0.5px] text-primary">TESTIMONIALS</span>
+            </div>
+            <h2 className="font-sans text-[32px] font-bold text-black leading-[1.3] mb-0">
+              Client Testimonials: Trust <br />And Success
+            </h2>
           </div>
-          <h2 className="font-serif text-[32px] font-bold text-black leading-[1.3] mb-0">
-            Client Testimonials: Trust <br />And Success
-          </h2>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[30px]">
           {testimonials.map((testimonial, index) => (
@@ -81,28 +81,6 @@ const Testimonials = () => {
           ))}
         </div>
       </div>
-
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Roboto+Slab:wght@700&display=swap');
-        
-        .font-serif {
-          font-family: 'Roboto Slab', serif;
-        }
-        
-        .font-sans {
-          font-family: 'Roboto', sans-serif;
-        }
-
-        .container {
-          max-width: 1170px;
-        }
-
-        @media (min-width: 1200px) {
-          .container {
-            max-width: 1170px;
-          }
-        }
-      `}</style>
     </section>
   );
 };

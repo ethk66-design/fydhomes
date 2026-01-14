@@ -27,11 +27,11 @@ const Newsletter = () => {
       }}
     >
       <div className="container relative z-10 px-5 text-center">
-        <div className="max-w-[700px] mx-auto">
-          {/* Section Heading */}
-          <h2 className="text-white font-serif font-bold text-[32px] md:text-[36px] leading-[1.2] mb-[15px]">
-            Stay Updated With Us
-          </h2>
+          <div className="max-w-[700px] mx-auto">
+            {/* Section Heading */}
+            <h2 className="text-white font-sans font-bold text-[32px] md:text-[36px] leading-[1.2] mb-[15px]">
+              Stay Updated With Us
+            </h2>
 
           {/* Subtext */}
           <p className="text-white/90 font-sans text-[16px] leading-[1.6] mb-[30px] px-2">

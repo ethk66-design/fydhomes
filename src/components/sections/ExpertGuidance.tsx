@@ -10,41 +10,39 @@ const ExpertGuidance = () => {
   return (
     <section className="relative w-full py-[80px] md:py-[100px] overflow-hidden bg-white">
       <div className="container mx-auto px-5">
-        <div className="relative w-full min-h-[400px] md:min-h-[500px] rounded-lg overflow-hidden shadow-lg">
-          {/* Background Image Container */}
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={backgroundImage}
-              alt="Looking To Buy Or Sell? Get Expert Guidance Today!"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-            {/* Overlay to ensure text readability if needed, though screenshot shows clean background */}
-            <div className="absolute inset-0 bg-black/10"></div>
-          </div>
+          <div className="relative w-full min-h-[450px] md:min-h-[550px] rounded-[10px] overflow-hidden shadow-2xl">
+            {/* Background Image Container */}
+            <div className="absolute inset-0 z-0">
+              <Image
+                src={backgroundImage}
+                alt="Looking To Buy Or Sell? Get Expert Guidance Today!"
+                fill
+                className="object-cover object-center"
+                priority
+              />
+            </div>
 
-          {/* Content Box */}
-            <div className="relative z-10 h-full flex items-center px-6 md:px-12 py-10 md:py-0">
-              <div className="bg-white/95 md:bg-white p-8 md:p-12 max-w-[500px] rounded-sm shadow-card animate-fadeInUp">
-                <h2 className="font-sans text-[28px] md:text-[32px] font-bold leading-[1.2] text-black mb-4">
-                  Looking To Buy Or Sell? <br />
+            {/* Content Box */}
+            <div className="relative z-10 h-full flex items-center px-6 md:px-16 py-12 md:py-20">
+              <div className="bg-white p-8 md:p-14 max-w-[550px] rounded-[10px] shadow-xl animate-fadeInUp">
+                <h2 className="font-sans text-[32px] md:text-[42px] font-bold leading-[1.1] text-[#1a1a1a] mb-6">
+                  Looking To Buy Or Sell?<br />
                   Get Expert Guidance Today!
                 </h2>
                 
-                <p className="font-sans text-[16px] leading-[1.6] text-[#5c5c5c] mb-8">
+                <p className="font-sans text-[18px] leading-[1.5] text-[#4a4a4a] mb-10 max-w-[450px]">
                   Contact us now for a free consultation and let our team of experts guide you through the process.
                 </p>
   
                 <a 
                   href="/contact" 
-                  className="inline-block bg-[#205c6d] hover:bg-[#1a4b59] text-white font-sans text-[14px] font-semibold uppercase tracking-[0.5px] px-8 py-4 rounded-[4px] transition-all duration-200"
+                  className="inline-block bg-[#2b7489] hover:bg-[#236071] text-white font-sans text-[15px] font-bold uppercase tracking-[1px] px-10 py-4 rounded-[6px] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                 >
                   CONTACT US
                 </a>
               </div>
             </div>
-        </div>
+          </div>
       </div>
 
       <style jsx global>{`

@@ -1,7 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Phone, Mail, MapPin, ChevronDown } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 const ContactDetailsForm = () => {
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    city: '',
+    propertyType: '',
+    area: '',
+    budget: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.from('leads').insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          location: `${formData.city}, ${formData.area}`,
+          property_type: formData.propertyType,
+          expected_price: formData.budget,
+          message: formData.message,
+          source: 'contact'
+        }
+      ]);
+
+      if (error) throw error;
+
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        city: '',
+        propertyType: '',
+        area: '',
+        budget: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting inquiry:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (submitted) {
+    return (
+      <section className="bg-white py-[60px]">
+        <div className="container mx-auto max-w-[1140px] px-[15px]">
+          <div className="bg-[#1db043]/10 p-12 rounded-[15px] text-center max-w-[600px] mx-auto">
+            <div className="w-16 h-16 bg-[#1db043] text-white rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <h2 className="text-2xl font-bold mb-4">Message Sent!</h2>
+            <p className="text-[#5c5c5c] mb-8">Thank you for your interest. Our experts will get back to you within 24 hours.</p>
+            <button 
+              onClick={() => setSubmitted(false)}
+              className="text-[#1db043] font-bold uppercase text-xs tracking-widest hover:underline"
+            >
+              Send another message
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="bg-white py-[60px]">
       <div className="container mx-auto max-w-[1140px] px-[15px]">
@@ -54,12 +134,16 @@ const ContactDetailsForm = () => {
               </h2>
             </div>
 
-            <form className="space-y-[15px]" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-[15px]" onSubmit={handleSubmit}>
               {/* Row 1: Personal Info Inputs */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-[15px]">
                 <div>
                   <input
+                    required
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Full Name"
                     className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none h-[48px]"
                   />
@@ -67,13 +151,20 @@ const ContactDetailsForm = () => {
                 <div>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="Email"
                     className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none h-[48px]"
                   />
                 </div>
                 <div>
                   <input
+                    required
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     placeholder="Phone number"
                     className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none h-[48px]"
                   />
@@ -82,7 +173,12 @@ const ContactDetailsForm = () => {
 
               {/* Row 2: City Dropdown */}
               <div className="relative">
-                <select className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white">
+                <select 
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white"
+                >
                   <option value="">City</option>
                   <option value="kakkanad">Kakkanad</option>
                   <option value="kochi">Kochi</option>
@@ -100,7 +196,12 @@ const ContactDetailsForm = () => {
 
               {/* Row 3: Property Type Dropdown */}
               <div className="relative">
-                <select className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white">
+                <select 
+                  name="propertyType"
+                  value={formData.propertyType}
+                  onChange={handleChange}
+                  className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white"
+                >
                   <option value="">Property Type</option>
                   <option value="commercial">Commercial</option>
                   <option value="office">- Office</option>
@@ -118,7 +219,12 @@ const ContactDetailsForm = () => {
 
               {/* Row 4: Area Dropdown */}
               <div className="relative">
-                <select className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white">
+                <select 
+                  name="area"
+                  value={formData.area}
+                  onChange={handleChange}
+                  className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white"
+                >
                   <option value="">Area</option>
                   <option value="aluva">ALUVA</option>
                   <option value="edapally">Edapally</option>
@@ -136,6 +242,9 @@ const ContactDetailsForm = () => {
               <div>
                 <input
                   type="text"
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
                   placeholder="Your Budget"
                   className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none h-[48px]"
                 />
@@ -144,6 +253,9 @@ const ContactDetailsForm = () => {
               {/* Row 6: Message TextArea */}
               <div>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Enquiry Purpose (Rent/Sale)"
                   rows={4}
                   className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none resize-none"
@@ -154,9 +266,10 @@ const ContactDetailsForm = () => {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-[#1db043] hover:bg-[#199438] text-white font-sans text-sm font-bold uppercase py-[14px] px-[30px] transition-colors duration-200 rounded-none cursor-pointer tracking-wider"
+                  disabled={loading}
+                  className="w-full bg-[#1db043] hover:bg-[#199438] text-white font-sans text-sm font-bold uppercase py-[14px] px-[30px] transition-colors duration-200 rounded-none cursor-pointer tracking-wider disabled:bg-[#cccccc]"
                 >
-                  SUBMIT
+                  {loading ? 'SUBMITTING...' : 'SUBMIT'}
                 </button>
               </div>
             </form>

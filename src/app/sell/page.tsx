@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { supabase } from '@/lib/supabase';
 
 export default function SellPage() {
   const [formData, setFormData] = useState({
@@ -14,22 +15,44 @@ export default function SellPage() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you'd send this to an API or Supabase
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    // Reset form
-    setFormData({
-      name: '',
-      phone: '',
-      email: '',
-      propertyType: '',
-      location: '',
-      expectedPrice: '',
-      message: ''
-    });
+    setLoading(true);
+    
+    try {
+      const { error } = await supabase.from('leads').insert([
+        {
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          property_type: formData.propertyType,
+          location: formData.location,
+          expected_price: formData.expectedPrice,
+          message: formData.message,
+          source: 'sell'
+        }
+      ]);
+
+      if (error) throw error;
+      
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        propertyType: '',
+        location: '',
+        expectedPrice: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting property:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -162,12 +185,13 @@ export default function SellPage() {
                     ></textarea>
                   </div>
 
-                  <button 
-                    type="submit"
-                    className="w-full h-[60px] bg-black text-white font-bold uppercase tracking-[2px] rounded-[8px] hover:bg-[#1db954] transition-all duration-300"
-                  >
-                    Submit Property
-                  </button>
+                    <button 
+                      type="submit"
+                      disabled={loading}
+                      className="w-full h-[60px] bg-black text-white font-bold uppercase tracking-[2px] rounded-[8px] hover:bg-[#1db954] transition-all duration-300 disabled:bg-[#cccccc]"
+                    >
+                      {loading ? 'Submitting...' : 'Submit Property'}
+                    </button>
                 </form>
               )}
             </div>

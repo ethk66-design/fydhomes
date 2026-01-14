@@ -4,7 +4,7 @@ import { Instagram, Youtube, Menu, X } from 'lucide-react';
 
 const Header = () => {
   return (
-    <header className="absolute top-0 left-0 w-full z-50 bg-transparent">
+    <header className="relative w-full z-50 bg-white">
       <div className="container mx-auto px-4 lg:px-[15px] max-w-[1170px]">
         <div className="flex items-center justify-between h-[100px] lg:h-[120px]">
           {/* Logo */}

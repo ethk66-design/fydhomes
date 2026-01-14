@@ -16,46 +16,46 @@ const AboutPartner: React.FC = () => {
         {/* Header Text Section */}
         <div className="flex flex-col lg:flex-row justify-between mb-16 gap-8">
           <div className="lg:w-1/2">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-primary">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-circle-dot"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <circle cx="12" cy="12" r="1" />
-                </svg>
-              </span>
-              <span className="uppercase text-[12px] font-bold tracking-widest text-[#5c5c5c]">
-                About Us
-              </span>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-[#2d7a8c]">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-dot"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="1" />
+                  </svg>
+                </span>
+                <span className="uppercase text-[12px] font-bold tracking-widest text-[#2d7a8c]">
+                  About Us
+                </span>
+              </div>
+              <h2 className="font-sans text-[32px] md:text-[40px] leading-[1.2] font-bold text-black max-w-[450px]">
+                Your Trusted Real Estate Partner In Kochi
+              </h2>
             </div>
-            <h2 className="font-serif text-[32px] md:text-[40px] leading-[1.2] font-bold text-black max-w-[450px]">
-              Your Trusted Real Estate Partner In Kochi
-            </h2>
-          </div>
 
-          <div className="lg:w-[45%] flex flex-col items-start lg:items-end">
-            <p className="text-[#5c5c5c] text-[16px] leading-[1.6] mb-8 text-left lg:text-right">
-              At Find Your Dream Home, we help you buy, sell, rent, or build with
-              confidence. From prime plots to luxury villas, our local expertise
-              and personalized service make your real estate journey smooth and
-              successful.
-            </p>
-            <a
-              href="/about"
-              className="bg-[#2d7a8c] text-white px-6 py-3.5 rounded-[4px] text-[13px] font-bold uppercase tracking-[0.5px] hover:bg-[#246271] transition-colors"
-            >
-              More Information
-            </a>
-          </div>
+            <div className="lg:w-[45%] flex flex-col items-start lg:items-end">
+              <p className="text-[#5c5c5c] text-[15px] md:text-[16px] leading-[1.6] mb-8 text-left lg:text-right">
+                At Find Your Dream Home, we help you buy, sell, rent, or build with
+                confidence. From prime plots to luxury villas, our local expertise
+                and personalized service make your real estate journey smooth and
+                successful.
+              </p>
+              <a
+                href="/about"
+                className="bg-[#205c6d] text-white px-8 py-3.5 rounded-[4px] text-[13px] font-bold uppercase tracking-[0.5px] hover:bg-[#1a4b59] transition-colors"
+              >
+                More Information
+              </a>
+            </div>
         </div>
 
         {/* Stats Grid Section */}

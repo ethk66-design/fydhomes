@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 
 const Footer = () => {
-  const logoUrl = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/icons/FYD-LOGO-4.png";
+  const logoUrl = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/fyd-homes-scaled-e1754756623724-1.png";
 
   return (
     <footer className="w-full bg-white font-sans text-[#5C5C5C]">
@@ -13,14 +13,14 @@ const Footer = () => {
           {/* Logo & Brand Column */}
           <div className="flex flex-col items-start">
             <a href="/" className="mb-4 block">
-              <Image 
-                src={logoUrl} 
-                alt="Find Your Dream Home" 
-                width={180} 
-                height={60} 
-                className="h-auto w-auto object-contain"
-                priority
-              />
+                <Image 
+                  src={logoUrl} 
+                  alt="Find Your Dream Home" 
+                  width={200} 
+                  height={65} 
+                  className="h-auto w-[180px] md:w-[200px] object-contain"
+                  priority
+                />
             </a>
           </div>
 

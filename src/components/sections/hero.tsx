@@ -1,96 +1,99 @@
 import React from 'react';
-import { PhoneAlt } from 'lucide-react';
+import Image from 'next/image';
+import { Phone, Search } from 'lucide-react';
 
-const HeroSection = () => {
+const Hero = () => {
   return (
-    <section className="relative w-full bg-white font-sans">
-      <div className="container mx-auto px-4 lg:px-[15px] max-w-[1230px]">
-        {/* Top Text Content Split Layout */}
-        <div className="flex flex-col lg:flex-row justify-between items-start pt-[60px] lg:pt-[80px] pb-[40px] lg:pb-[60px] gap-8">
-          {/* Left Column - Headline */}
-          <div className="w-full lg:w-[60%] lg:max-w-[700px]">
-            <h1 className="font-serif text-[42px] lg:text-[60px] font-bold leading-[1.1] text-[#1a1a1a] mb-0 tracking-tight">
-              Find Your Perfect Home And Experience Exceptional Living
+    <section className="pt-20 pb-0 overflow-hidden bg-white">
+      <div className="container mx-auto px-5 max-w-[1170px]">
+        {/* Top Header/Text Section */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-12">
+          <div className="lg:w-1/2">
+            <h1 className="font-serif text-[48px] font-bold leading-[1.2] text-black mb-5 animate-in fade-in slide-in-from-bottom-5 duration-700">
+              Find Your Perfect Home And Experience exceptional Living
             </h1>
           </div>
-
-          {/* Right Column - Subtext & CTA */}
-          <div className="w-full lg:w-[35%] flex flex-col items-start pt-2">
-            <p className="text-[#1a1a1a] text-[16px] leading-[1.6] mb-6">
+          <div className="lg:w-[40%] flex flex-col items-start pt-2">
+            <p className="text-[16px] text-[#5C5C5C] leading-[1.6] mb-8 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
               Whether you’re buying, selling, or investing, our expert team is here to guide you every step of the way. Find your perfect place with ease.
             </p>
-            <a
+            <a 
               href="tel:+919544593991"
-              className="inline-flex items-center justify-center bg-[#2B7387] hover:bg-[#235d6e] text-white px-6 py-3.5 rounded-[4px] font-medium text-[14px] transition-colors duration-200 gap-2"
+              className="inline-flex items-center justify-center bg-[#2d7a8c] hover:bg-[#256a7a] text-white px-6 py-4 rounded-[4px] font-sans font-semibold text-[14px] uppercase tracking-[0.5px] transition-all duration-200 group"
             >
-              <PhoneAlt size={16} fill="white" />
-              <span>CALL US +91 9544593991</span>
+              <Phone size={16} className="mr-3" />
+              Call Us +91 9544593991
             </a>
           </div>
         </div>
 
-        {/* Hero Image Section */}
-        <div className="relative w-full mb-[100px]">
-          <div className="relative rounded-[15px] overflow-hidden shadow-card aspect-[1480/750] max-h-[750px] w-full">
-            <img
+        {/* Featured Image and Search Section Container */}
+        <div className="relative mt-8 animate-in fade-in duration-1000">
+          <div className="rounded-[10px] overflow-hidden shadow-card">
+            <Image
               src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg"
-              alt="Luxury Contemporary Home Architecture"
-              className="w-full h-full object-cover"
+              alt="Modern Luxury Villa"
+              width={1170}
+              height={564}
+              className="w-full object-cover aspect-[16/9] md:aspect-[21/9]"
+              priority
             />
           </div>
 
-          {/* Search Bar Floating Element */}
-          <div className="absolute -bottom-[60px] left-1/2 -translate-x-1/2 w-[95%] lg:w-[90%] bg-white rounded-[10px] shadow-[0px_10px_30px_rgba(0,0,0,0.1)] p-6 z-10">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-              <div className="flex flex-col gap-2">
-                <label className="text-[14px] font-medium text-[#1a1a1a]">SEARCH</label>
-                <input
-                  type="text"
-                  placeholder="Search keyword"
-                  className="w-full border border-[#e5e5e5] rounded-[4px] px-3 py-2.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-[#2B7387]"
+          {/* Search Bar Overlay */}
+          <div className="absolute left-0 right-0 bottom-[-40px] md:bottom-[-30px] px-4 md:px-10 flex justify-center">
+            <div className="w-full max-w-[1070px] bg-white p-6 shadow-card border border-[#eeeeee] flex flex-col md:flex-row items-end gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200">
+              
+              {/* Keyword Field */}
+              <div className="w-full md:flex-[1.2] flex flex-col gap-2">
+                <label className="text-[13px] font-semibold text-black uppercase tracking-wider">Search</label>
+                <input 
+                  type="text" 
+                  placeholder="Search keyword" 
+                  className="w-full h-[50px] border border-[#eeeeee] px-4 text-[15px] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c]"
                 />
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-[14px] font-medium text-[#1a1a1a]">LOOKING FOR</label>
-                <select className="w-full border border-[#e5e5e5] rounded-[4px] px-3 py-2.5 text-[14px] appearance-none bg-white focus:outline-none focus:ring-1 focus:ring-[#2B7387]">
+
+              {/* Property Type Field */}
+              <div className="w-full md:flex-1 flex flex-col gap-2">
+                <label className="text-[13px] font-semibold text-black uppercase tracking-wider">Looking for</label>
+                <select className="w-full h-[50px] border border-[#eeeeee] px-4 text-[15px] bg-white appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#2d7a8c]">
                   <option>Property Type</option>
                   <option>Villa</option>
-                  <option>Apartment</option>
+                  <option>Residential</option>
                   <option>Plot</option>
+                  <option>Commercial</option>
+                  <option>Rent</option>
                 </select>
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-[14px] font-medium text-[#1a1a1a]">SEARCH BY AREA</label>
-                <select className="w-full border border-[#e5e5e5] rounded-[4px] px-3 py-2.5 text-[14px] appearance-none bg-white focus:outline-none focus:ring-1 focus:ring-[#2B7387]">
+
+              {/* Area Field */}
+              <div className="w-full md:flex-1 flex flex-col gap-2">
+                <label className="text-[13px] font-semibold text-black uppercase tracking-wider">Search By Area</label>
+                <select className="w-full h-[50px] border border-[#eeeeee] px-4 text-[15px] bg-white appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#2d7a8c]">
                   <option>Area</option>
-                  <option>Kakkanad</option>
                   <option>Aluva</option>
+                  <option>Kakkanad</option>
                   <option>Pukkattupady</option>
+                  <option>Infopark</option>
                 </select>
               </div>
-              <div>
-                <button className="w-full bg-[#1DB954] hover:bg-[#1aa34a] text-white py-[11px] rounded-[4px] flex items-center justify-center transition-colors duration-200">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                  </svg>
+
+              {/* Search Button */}
+              <div className="w-full md:w-auto">
+                <button className="w-full md:w-[60px] h-[50px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200">
+                  <Search size={22} strokeWidth={2.5} />
                 </button>
               </div>
+
             </div>
           </div>
         </div>
       </div>
+      {/* Spacer to handle the overlapping search bar */}
+      <div className="h-20 lg:h-32"></div>
     </section>
   );
 };
 
-export default HeroSection;
+export default Hero;

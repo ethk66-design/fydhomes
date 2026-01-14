@@ -2,147 +2,163 @@ import React from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, BedDouble, Bath, Square } from 'lucide-react';
 
-const rentalProperties = [
-  {
-    id: 1,
-    title: '4BHK FULLY FURNISHED FOR RENT | PUKKATUPADY |ALUVA|FYD32',
-    price: '29000.00',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_46_08-PM-758x564-23.jpeg',
-    beds: 4,
-    baths: 4,
-    sqft: 2200,
-    badges: ['FOR RENT']
-  },
-  {
-    id: 2,
-    title: 'COMMERCIAL PROPERTIES IN KIZHAKKAMBALAM/ OFFICE SPACE |FYD27',
-    price: '30000.00',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_46_10-PM-1-758x564-24.jpeg',
-    beds: 0,
-    baths: 0,
-    sqft: 1200,
-    badges: ['FOR RENT', 'FOR SALE', 'FEATURED']
-  },
-  {
-    id: 3,
-    title: '3 BHK RENT PUKKATUPADY | FYD 23',
-    price: '30000.00 RS',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_46_12-PM-758x564-26.jpeg',
-    beds: 3,
-    baths: 3,
-    sqft: 0,
-    badges: ['FOR RENT', 'FOR SALE', 'FEATURED']
-  },
-  {
-    id: 4,
-    title: 'HOME FOR RENT PUKKATTUPADY | FYD13',
-    price: '25000.00',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_46_10-PM-1-758x564-24.jpeg',
-    beds: 3,
-    baths: 3,
-    sqft: 1800,
-    badges: ['FOR RENT']
-  }
-];
+interface PropertyCardProps {
+  image: string;
+  title: string;
+  price: string;
+  beds: number;
+  baths: number;
+  sqft?: number;
+  badges: string[];
+}
 
-const FeaturedForRent = () => {
+const PropertyCard = ({ image, title, price, beds, baths, sqft, badges }: PropertyCardProps) => {
   return (
-    <section className="bg-white py-[80px]">
-      <div className="container mx-auto px-[15px] max-w-[1230px]">
-        {/* Section Header */}
-        <div className="flex flex-col mb-[40px]">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-[18px] h-[18px] rounded-full border border-[#2b7387] flex items-center justify-center">
-              <div className="w-[8px] h-[8px] rounded-full bg-[#2b7387]"></div>
-            </div>
-            <span className="text-[12px] font-bold text-[#2b7387] tracking-wider uppercase font-sans">
-              Properties
-            </span>
-          </div>
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <h2 className="text-[32px] font-bold text-[#1a1a1a] font-serif leading-[1.3] m-0">
-              Featured For Rent
-            </h2>
-            
-            <div className="flex items-center gap-2">
-              <button className="w-[40px] h-[30px] flex items-center justify-center border border-[#e5e5e5] rounded-[4px] bg-white hover:bg-[#f4f7f8] transition-colors">
-                <ChevronLeft className="w-[16px] h-[16px] text-[#737373]" />
-              </button>
-              <button className="w-[40px] h-[30px] flex items-center justify-center border border-[#e5e5e5] rounded-[4px] bg-white hover:bg-[#f4f7f8] transition-colors">
-                <ChevronRight className="w-[16px] h-[16px] text-[#737373]" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Listings Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
-          {rentalProperties.map((property) => (
-            <div 
-              key={property.id} 
-              className="bg-white rounded-[4px] border border-[#e5e5e5] hover:shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition-shadow group flex flex-col"
+    <div className="flex flex-col bg-white border border-[#eeeeee] rounded-[4px] overflow-hidden card-hover-effect mb-6">
+      <div className="relative aspect-[4/3] w-full overflow-hidden group">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute top-[15px] right-[15px] flex flex-wrap gap-1 justify-end">
+          {badges.map((badge, idx) => (
+            <span
+              key={idx}
+              className={`text-[10px] font-bold uppercase py-[3px] px-[8px] rounded-[3px] text-white ${
+                badge === 'FOR RENT' ? 'bg-black/70' : 
+                badge === 'FEATURED' ? 'bg-[#1db043]' : 
+                badge === 'SOLD OUT' ? 'bg-black/50' : 'bg-black/70'
+              }`}
             >
-              {/* Image Container */}
-              <div className="relative aspect-[4/3] overflow-hidden rounded-t-[4px]">
-                <Image
-                  src={property.image}
-                  alt={property.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Badges */}
-                <div className="absolute top-[10px] left-[10px] flex flex-wrap gap-1">
-                  {property.badges.map((badge, idx) => (
-                    <span 
-                      key={idx}
-                      className={`text-[10px] font-bold px-[8px] py-[4px] rounded-[2px] text-white uppercase tracking-wider ${
-                        badge === 'FEATURED' ? 'bg-[#1db954]' : 'bg-[#1a1a1a]'
-                      }`}
-                    >
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-[15px] flex flex-col flex-grow">
-                <h3 className="text-[14px] font-medium text-[#1a1a1a] line-clamp-2 mb-[15px] h-[40px] font-sans leading-[1.4] hover:text-[#2b7387] cursor-pointer transition-colors">
-                  {property.title}
-                </h3>
-                
-                <div className="mt-auto">
-                  <p className="text-[18px] font-bold text-[#1a1a1a] mb-[15px] font-sans leading-none">
-                    ₹{property.price}
-                  </p>
-
-                  <div className="flex items-center justify-between pt-[15px] border-t border-[#f4f7f8] text-[#737373]">
-                    <div className="flex items-center gap-1.5 overflow-hidden">
-                      <BedDouble className="w-[14px] h-[14px]" />
-                      <span className="text-[12px] font-medium whitespace-nowrap">{property.beds > 0 ? property.beds : '-'}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 overflow-hidden">
-                      <Bath className="w-[14px] h-[14px]" />
-                      <span className="text-[12px] font-medium whitespace-nowrap">{property.baths > 0 ? property.baths : '-'}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 overflow-hidden">
-                      <Square className="w-[14px] h-[14px]" />
-                      <span className="text-[12px] font-medium whitespace-nowrap">{property.sqft > 0 ? property.sqft : '-'}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              {badge}
+            </span>
           ))}
         </div>
+        {/* Hover Arrow Overlay (Simulated) */}
+        <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button className="w-8 h-8 rounded-full bg-black/30 text-white flex items-center justify-center">
+            <ChevronLeft size={20} />
+          </button>
+          <button className="w-8 h-8 rounded-full bg-black/30 text-white flex items-center justify-center">
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
+      <div className="p-[20px] flex flex-col flex-grow">
+        <h3 className="text-[18px] font-medium text-[#000000] line-clamp-2 min-h-[50px] mb-3 leading-[1.4] hover:text-[#2b6e83] transition-colors cursor-pointer font-sans">
+          {title}
+        </h3>
+        <div className="mt-auto">
+          <div className="text-[16px] font-bold text-[#000000] mb-4">
+            ₹{price}
+          </div>
+          <div className="flex items-center justify-between border-t border-[#eeeeee] pt-4 text-[#747474]">
+            <div className="flex items-center gap-1">
+              <BedDouble size={16} />
+              <span className="text-[13px]">{beds}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Bath size={16} />
+              <span className="text-[13px]">{baths}</span>
+            </div>
+            {sqft ? (
+              <div className="flex items-center gap-1">
+                <Square size={14} />
+                <span className="text-[13px]">{sqft}</span>
+              </div>
+            ) : (
+                <div className="flex items-center gap-1">
+                <Square size={14} />
+                <span className="text-[13px]">{beds}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-        {/* Pagination Dots (Mobile/Slider UI) */}
-        <div className="flex justify-center mt-[30px] gap-2">
-          <div className="w-[6px] h-[6px] rounded-full bg-[#1a1a1a]"></div>
-          <div className="w-[6px] h-[6px] rounded-full bg-[#e5e5e5]"></div>
-          <div className="w-[6px] h-[6px] rounded-full bg-[#e5e5e5]"></div>
+const FeaturedForRent = () => {
+  const properties = [
+    {
+      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_55-PM-2-758x564-7.jpeg",
+      title: "4BHK FULLY FURNISHED FOR RENT | PUKKATUPADY |ALUVA|FYD32",
+      price: "29000.00",
+      beds: 4,
+      baths: 4,
+      badges: ["FOR RENT"]
+    },
+    {
+      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_55-PM-758x564-8.jpeg",
+      title: "COMMERCIAL PROPERTIES IN KIZHAKKAMBALAM/ OFFICE SPACE |FYD27",
+      price: "30000.00",
+      beds: 4,
+      baths: 4,
+      badges: ["FOR RENT", "FOR SALE"]
+    },
+    {
+      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_56-PM-758x564-9.jpeg",
+      title: "3 BHK RENT PUKKATUPADY | FYD 23",
+      price: "30000.00 RS",
+      beds: 3,
+      baths: 3,
+      badges: ["FEATURED", "FOR RENT", "SOLD OUT"]
+    },
+    {
+      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_57-PM-758x564-10.jpeg",
+      title: "HOME FOR RENT PUKKATTUPADY | FYD13",
+      price: "25000.00",
+      beds: 3,
+      baths: 3,
+      badges: ["FOR RENT"]
+    }
+  ];
+
+  return (
+    <section className="section-spacing bg-white">
+      <div className="container px-4">
+        <div className="flex flex-col mb-8">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-4 h-4 rounded-full border border-[#2b6e83] flex items-center justify-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#2b6e83]"></div>
+            </div>
+            <span className="text-[13px] font-bold text-[#2b6e83] tracking-widest uppercase">Properties</span>
+          </div>
+          <div className="flex justify-between items-end">
+            <h2 className="text-[32px] font-semibold text-[#000000] font-serif m-0">
+              Featured For Rent
+            </h2>
+            <div className="flex gap-2">
+              <button className="w-[38px] h-[34px] border border-[#dce0e0] flex items-center justify-center rounded-[3px] text-[#747474] hover:bg-[#2b6e83] hover:text-white hover:border-[#2b6e83] transition-all">
+                <span className="text-[12px] font-bold">Prev</span>
+              </button>
+              <button className="w-[38px] h-[34px] border border-[#dce0e0] flex items-center justify-center rounded-[3px] text-[#747474] hover:bg-[#2b6e83] hover:text-white hover:border-[#2b6e83] transition-all">
+                <span className="text-[12px] font-bold">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {properties.map((property, index) => (
+            <PropertyCard
+              key={index}
+              image={property.image}
+              title={property.title}
+              price={property.price}
+              beds={property.beds}
+              baths={property.baths}
+              badges={property.badges}
+            />
+          ))}
+        </div>
+        
+        {/* Pagination Dots (Visual placeholder) */}
+        <div className="flex justify-center gap-2 mt-8">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#000000]"></div>
         </div>
       </div>
     </section>

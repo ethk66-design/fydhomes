@@ -1,71 +1,63 @@
 import React from 'react';
 
 /**
- * NewsletterSection component clones the "Stay Updated With Us" section.
+ * Newsletter Section
+ * 
  * Features:
- * - Medium gray background (#A8A8A8)
- * - Centralized typography (Roboto Slab for Heading, Roboto for Subtext)
- * - Flex container for input and button
- * - Vibrant green button (#1DB954)
+ * - Background image of a modern building
+ * - Centered content with overlay for readability
+ * - 'Stay Updated With Us' heading (Roboto Slab)
+ * - Email input and 'SIGN UP' button (Emerald Green)
+ * - Fully responsive layout
  */
-const NewsletterSection: React.FC = () => {
+
+const Newsletter = () => {
+  const bgImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-12-at-1_41_55-PM-758x564-28.jpeg";
+
   return (
     <section 
-      style={{ backgroundColor: '#A8A8A8' }} 
-      className="py-16 md:py-20 px-4"
+      className="relative w-full py-[80px] md:py-[100px] flex items-center justify-center overflow-hidden"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(${bgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
     >
-      <div className="max-w-[1240px] mx-auto text-center">
-        {/* Heading */}
-        <h2 
-          className="font-serif text-white text-[32px] md:text-[40px] font-bold leading-[1.2] mb-4"
-          style={{ fontFamily: 'var(--font-serif)' }}
-        >
-          Stay Updated With Us
-        </h2>
+      <div className="container relative z-10 px-5 text-center">
+        <div className="max-w-[700px] mx-auto">
+          {/* Section Heading */}
+          <h2 className="text-white font-serif font-bold text-[32px] md:text-[36px] leading-[1.2] mb-[15px]">
+            Stay Updated With Us
+          </h2>
 
-        {/* Subtext */}
-        <p 
-          className="text-white text-base md:text-[18px] leading-[1.6] max-w-[700px] mx-auto mb-10 opacity-90 px-4"
-          style={{ fontFamily: 'var(--font-sans)', fontWeight: 400 }}
-        >
-          Sign up for our newsletter and be the first to know about new listings, market insights, and exclusive offers.
-        </p>
+          {/* Subtext */}
+          <p className="text-white/90 font-sans text-[16px] leading-[1.6] mb-[30px] px-2">
+            Sign up for our newsletter and be the first to know about new listings, market insights, and exclusive offers.
+          </p>
 
-        {/* Form Container */}
-        <form 
-          className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-2 max-w-[620px] mx-auto"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          {/* Email Input */}
-          <div className="w-full md:flex-1">
+          {/* Subscription Form */}
+          <form 
+            className="flex flex-col md:flex-row gap-0 max-w-[550px] mx-auto"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <input
               type="email"
               placeholder="Enter your email"
+              className="flex-grow bg-white border-0 py-[12px] px-[20px] text-[15px] font-sans text-[#5c5c5c] rounded-t-sm md:rounded-l-sm md:rounded-tr-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
               required
-              className="w-full h-[54px] px-5 rounded-[4px] border-none text-[15px] focus:outline-none focus:ring-2 focus:ring-[#1DB954] transition-all"
-              style={{
-                fontFamily: 'var(--font-sans)',
-                backgroundColor: '#ffffff',
-                color: '#1a1a1a'
-              }}
             />
-          </div>
-
-          {/* Sign Up Button */}
-          <button
-            type="submit"
-            className="w-full md:w-auto h-[54px] px-10 rounded-[4px] text-white font-bold text-[14px] uppercase tracking-wider transition-colors hover:bg-opacity-90 cursor-pointer whitespace-nowrap"
-            style={{
-              backgroundColor: '#1DB954',
-              fontFamily: 'var(--font-sans)'
-            }}
-          >
-            SIGN UP
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="bg-[#1db954] text-white font-sans font-semibold text-[14px] px-[35px] py-[14px] uppercase tracking-[0.5px] rounded-b-sm md:rounded-r-sm md:rounded-bl-none transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+            >
+              SIGN UP
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );
 };
 
-export default NewsletterSection;
+export default Newsletter;

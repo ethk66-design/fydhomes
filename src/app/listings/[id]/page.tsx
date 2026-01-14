@@ -15,7 +15,6 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
 
   const { data: property, error } = await supabase
     .from("properties")
-    .fetchById(id) // This is a placeholder, I should use select().eq('id', id).single()
     .select("*")
     .eq("id", id)
     .single();

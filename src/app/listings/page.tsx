@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase";
 import PropertyCard from "@/components/PropertyCard";
 import SearchFilter from "@/components/sections/SearchFilter";
 import { Suspense } from "react";
+import Link from "next/link";
 
 export const revalidate = 0;
 
@@ -72,12 +73,12 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         ) : (
           <div className="text-center py-20 bg-[#f4f8fb] rounded-lg border-2 border-dashed border-[#eeeeee]">
             <h3 className="text-[#5c5c5c] font-medium">No properties match your search criteria.</h3>
-            <button 
-              onClick={() => window.location.href = '/listings'}
-              className="mt-4 text-[#2d7a8c] font-bold uppercase text-xs tracking-widest hover:underline"
+            <Link 
+              href="/listings"
+              className="mt-4 inline-block text-[#2d7a8c] font-bold uppercase text-xs tracking-widest hover:underline"
             >
               Clear all filters
-            </button>
+            </Link>
           </div>
         )}
       </div>

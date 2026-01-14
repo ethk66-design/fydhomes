@@ -1,47 +1,21 @@
 import React from 'react';
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight, BedDouble, Bath } from 'lucide-react';
+import { supabase } from "@/lib/supabase";
+import PropertyCard from "@/components/PropertyCard";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
-const featuredProperties = [
-  {
-    id: 1,
-    title: "Beautiful 5 BHK Fully Furnished House for Sale in Pukkattupady",
-    price: "₹1.35 cr",
-    beds: 4,
-    baths: 4,
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_54-PM-758x564-3.jpeg",
-    labels: ["FOR SALE", "USED"]
-  },
-  {
-    id: 2,
-    title: "A Well-Designed 3BHK On 3 Cents Near Kakkanad | KUZHIVELIPADY",
-    price: "₹",
-    beds: 3,
-    baths: 3,
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_51-PM-4.jpeg",
-    labels: ["FOR SALE"]
-  },
-  {
-    id: 3,
-    title: "Fully Furnished Villa For Sale With Everything A Family Needs | Thevakkal",
-    price: "₹1.25 CR",
-    beds: 4,
-    baths: 3,
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_54-PM-1-758x564-5.jpeg",
-    labels: ["FOR SALE", "USED"]
-  },
-  {
-    id: 4,
-    title: "Every Malayali Would Dream Of A Home With Amenities Like This | Luxury Gated Villa |THEVAKKAL",
-    price: "₹2.75 CR",
-    beds: 4,
-    baths: 5,
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_55-PM-1-758x564-6.jpeg",
-    labels: ["FOR SALE"]
+export async function FeaturedForSale() {
+  const { data: properties, error } = await supabase
+    .from("properties")
+    .select("*")
+    .eq("listing_type", "sale")
+    .order("created_at", { ascending: false })
+    .limit(4);
+
+  if (error) {
+    console.error("Error fetching featured sale properties:", error);
   }
-];
 
-export function FeaturedForSale() {
   return (
     <section className="bg-white py-[80px]">
       <div className="container mx-auto px-5 lg:px-[15px] max-w-[1170px]">
@@ -54,13 +28,18 @@ export function FeaturedForSale() {
               </div>
               <span className="text-[12px] font-semibold text-[#2D7A8C] uppercase tracking-wider">Properties</span>
             </div>
-              <h2 className="text-[32px] font-bold font-sans text-black leading-tight">
-                Featured For Sale
-              </h2>
-            </div>
+            <h2 className="text-[32px] font-bold font-sans text-black leading-tight">
+              Featured For Sale
+            </h2>
+          </div>
 
-
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
+            <Link 
+              href="/listings?type=sale"
+              className="text-[12px] font-bold text-[#2D7A8C] uppercase tracking-wider hover:underline mr-4"
+            >
+              View All
+            </Link>
             <button className="w-10 h-10 flex items-center justify-center border border-[#EEEEEE] text-[#5C5C5C] hover:bg-[#F4F8FB] transition-colors rounded-sm">
               <ChevronLeft size={18} />
             </button>
@@ -70,82 +49,26 @@ export function FeaturedForSale() {
           </div>
         </div>
 
-        {/* Property Grid/Carousel */}
+        {/* Property Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7.5">
-          {featuredProperties.map((property) => (
-            <div 
-              key={property.id} 
-              className="bg-white border border-[#EEEEEE] rounded-sm shadow-sm overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
-            >
-              {/* Image Container */}
-              <div className="relative aspect-[758/564] w-full">
-                <Image
-                  src={property.image}
-                  alt={property.title}
-                  fill
-                  className="object-cover"
-                />
-                
-                {/* Ribbon Labels */}
-                <div className="absolute top-3 right-3 flex flex-col gap-1 items-end">
-                  {property.labels.map((label, idx) => (
-                    <span 
-                      key={idx}
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-sm shadow-sm ${
-                        label === 'FOR SALE' ? 'bg-black text-white' : 'bg-[#1DB954] text-white'
-                      }`}
-                    >
-                      {label}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Internal arrows (visual only as per screenshot) */}
-                <div className="absolute inset-y-0 left-2 flex items-center opacity-0 hover:opacity-100 transition-opacity">
-                   <ChevronLeft size={24} className="text-white drop-shadow-md cursor-pointer" />
-                </div>
-                <div className="absolute inset-y-0 right-2 flex items-center opacity-0 hover:opacity-100 transition-opacity">
-                   <ChevronRight size={24} className="text-white drop-shadow-md cursor-pointer" />
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-4">
-                <h3 className="text-[14px] line-clamp-2 font-semibold text-black mb-4 leading-[1.4] h-10">
-                  {property.title}
-                </h3>
-                
-                <div className="flex items-center justify-between border-t border-[#EEEEEE] pt-3">
-                   <div className="text-[15px] font-bold text-[#2D7A8C]">
-                    {property.price}
-                   </div>
-                   
-                   <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1.5 text-[#5C5C5C]">
-                        <BedDouble size={16} className="text-[#5C5C5C]/60" />
-                        <span className="text-[13px]">{property.beds}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-[#5C5C5C]">
-                        <Bath size={16} className="text-[#5C5C5C]/60" />
-                        <span className="text-[13px]">{property.baths}</span>
-                      </div>
-                   </div>
-                </div>
-              </div>
+          {properties && properties.length > 0 ? (
+            properties.map((property) => (
+              <PropertyCard key={property.id} property={property} />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-10 text-[#5c5c5c]">
+              No properties available for sale at the moment.
             </div>
-          ))}
+          )}
         </div>
 
-        {/* Carousel Pagination Dots */}
-        <div className="flex justify-center gap-2 mt-8">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2D7A8C]/30 cursor-pointer"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2D7A8C]/30 cursor-pointer"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2D7A8C] cursor-pointer"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2D7A8C]/30 cursor-pointer"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2D7A8C]/30 cursor-pointer"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2D7A8C]/30 cursor-pointer"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2D7A8C]/30 cursor-pointer"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2D7A8C]/30 cursor-pointer"></div>
+        <div className="flex md:hidden justify-center mt-8">
+           <Link 
+              href="/listings?type=sale"
+              className="bg-[#205c6d] text-white px-8 py-3 rounded-sm text-[13px] font-bold uppercase tracking-wider"
+            >
+              View All Properties
+            </Link>
         </div>
       </div>
     </section>

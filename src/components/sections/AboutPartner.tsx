@@ -15,28 +15,28 @@ const AboutPartner: React.FC = () => {
       <div className="container mx-auto px-5 max-w-[1170px]">
         {/* Header Text Section */}
         <div className="flex flex-col lg:flex-row justify-between mb-16 gap-8">
-          <div className="lg:w-1/2">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-[#2d7a8c]">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-circle-dot"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <circle cx="12" cy="12" r="1" />
-                  </svg>
-                </span>
-                <span className="uppercase text-[12px] font-bold tracking-widest text-[#2d7a8c]">
-                  About Us
-                </span>
-              </div>
+            <div className="lg:w-1/2">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-[#2b7489]">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-circle-dot"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <circle cx="12" cy="12" r="1" />
+                    </svg>
+                  </span>
+                  <span className="uppercase text-[12px] font-bold tracking-widest text-[#2b7489]">
+                    About Us
+                  </span>
+                </div>
                 <h2 className="font-sans text-[32px] md:text-[40px] leading-[1.2] font-bold text-black max-w-[450px]">
                   Your Trusted Real Estate Business In Kochi
                 </h2>
@@ -59,33 +59,33 @@ const AboutPartner: React.FC = () => {
         </div>
 
         {/* Stats Grid Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Instagram Stat Card */}
-          <div className="bg-[#f4f8fb] rounded-lg p-10 flex flex-col items-start transition-grow shadow-card">
-            <span className="text-[48px] font-bold text-black mb-2 leading-none">
+          <div className="bg-[#f4f8fb] rounded-[10px] py-11 px-9 flex flex-col items-start hover:shadow-md transition-all">
+            <span className="text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
               295K+
             </span>
-            <span className="text-[#2d7a8c] font-semibold text-[18px]">
+            <span className="text-[#2b7489] font-semibold text-[17px]">
               Instagram Followers
             </span>
           </div>
 
           {/* YouTube Stat Card */}
-          <div className="bg-[#f4f8fb] rounded-lg p-10 flex flex-col items-start transition-grow shadow-card">
-            <span className="text-[48px] font-bold text-black mb-2 leading-none">
+          <div className="bg-[#f4f8fb] rounded-[10px] py-11 px-9 flex flex-col items-start hover:shadow-md transition-all">
+            <span className="text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
               16.4k+
             </span>
-            <span className="text-[#2d7a8c] font-semibold text-[18px]">
+            <span className="text-[#2b7489] font-semibold text-[17px]">
               Youtube Subscribers
             </span>
           </div>
 
           {/* Customers Stat Card */}
-          <div className="bg-[#f4f8fb] rounded-lg p-10 flex flex-col items-start transition-grow shadow-card">
-            <span className="text-[48px] font-bold text-black mb-2 leading-none">
+          <div className="bg-[#f4f8fb] rounded-[10px] py-11 px-9 flex flex-col items-start hover:shadow-md transition-all">
+            <span className="text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
               500+
             </span>
-            <span className="text-[#2d7a8c] font-semibold text-[18px]">
+            <span className="text-[#2b7489] font-semibold text-[17px]">
               Total Customers
             </span>
           </div>

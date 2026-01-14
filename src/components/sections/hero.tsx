@@ -1,8 +1,25 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Phone, Search } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export function Hero() {
+  const router = useRouter();
+  const [keyword, setKeyword] = useState('');
+  const [type, setType] = useState('Property Type');
+  const [area, setArea] = useState('Area');
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (keyword) params.append('keyword', keyword);
+    if (type !== 'Property Type') params.append('type', type);
+    if (area !== 'Area') params.append('area', area);
+    
+    router.push(`/listings?${params.toString()}`);
+  };
+
   return (
     <section className="pt-20 pb-0 overflow-hidden bg-white">
       <div className="container mx-auto px-5 max-w-[1170px]">
@@ -52,6 +69,9 @@ export function Hero() {
                           <input 
                             type="text" 
                             placeholder="Search keyword" 
+                            value={keyword}
+                            onChange={(e) => setKeyword(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                             className="w-full h-[52px] px-4 text-[15px] border border-[#e5e7eb] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999]"
                           />
                         </div>
@@ -61,13 +81,18 @@ export function Hero() {
                       <div className="w-full md:flex-1 flex flex-col gap-2">
                         <label className="text-[12px] font-bold text-black uppercase tracking-[0.5px]">LOOKING FOR</label>
                         <div className="relative">
-                          <select className="w-full h-[52px] px-4 text-[15px] bg-white border border-[#e5e7eb] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555]">
+                          <select 
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                            className="w-full h-[52px] px-4 text-[15px] bg-white border border-[#e5e7eb] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555]"
+                          >
                             <option>Property Type</option>
-                            <option>Villa</option>
-                            <option>Residential</option>
-                            <option>Plot</option>
                             <option>Commercial</option>
+                            <option>Office</option>
+                            <option>Plot</option>
                             <option>Rent</option>
+                            <option>Residential</option>
+                            <option>Villa</option>
                           </select>
                           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                             <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,12 +106,18 @@ export function Hero() {
                       <div className="w-full md:flex-1 flex flex-col gap-2">
                         <label className="text-[12px] font-bold text-black uppercase tracking-[0.5px]">SEARCH BY AREA</label>
                         <div className="relative">
-                          <select className="w-full h-[52px] px-4 text-[15px] bg-white border border-[#e5e7eb] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555]">
+                          <select 
+                            value={area}
+                            onChange={(e) => setArea(e.target.value)}
+                            className="w-full h-[52px] px-4 text-[15px] bg-white border border-[#e5e7eb] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555]"
+                          >
                             <option>Area</option>
                             <option>Aluva</option>
-                            <option>Kakkanad</option>
-                            <option>Pukkattupady</option>
                             <option>Infopark</option>
+                            <option>Kakkanad</option>
+                            <option>Kizhakkambalam</option>
+                            <option>Pukkattupady</option>
+                            <option>Pattimattom</option>
                           </select>
                           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                             <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +129,10 @@ export function Hero() {
       
                       {/* Search Button */}
                       <div className="w-full md:w-auto">
-                        <button className="w-full md:w-[200px] h-[52px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200">
+                        <button 
+                          onClick={handleSearch}
+                          className="w-full md:w-[200px] h-[52px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
+                        >
                           <Search size={20} strokeWidth={2.5} />
                         </button>
                       </div>

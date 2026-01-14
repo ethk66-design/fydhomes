@@ -54,10 +54,11 @@ const FeaturedForSale = () => {
               </div>
               <span className="text-[12px] font-semibold text-[#2D7A8C] uppercase tracking-wider">Properties</span>
             </div>
-            <h2 className="text-[32px] font-bold font-serif text-black leading-tight">
-              Featured For Sale
-            </h2>
-          </div>
+              <h2 className="text-[32px] font-bold font-sans text-black leading-tight">
+                Featured For Sale
+              </h2>
+            </div>
+
 
           <div className="flex items-center gap-2">
             <button className="w-10 h-10 flex items-center justify-center border border-[#EEEEEE] text-[#5C5C5C] hover:bg-[#F4F8FB] transition-colors rounded-sm">

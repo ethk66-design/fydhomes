@@ -1,20 +1,20 @@
 import React from 'react';
 import AboutHero from '@/components/sections/about-hero';
-import AboutContent from '@/components/sections/about-content';
+import MissionStatement from '@/components/sections/mission-statement';
 import WhyChooseUs from '@/components/sections/why-choose-us';
-import OurTeam from '@/components/sections/our-team';
-import CTABanner from '@/components/sections/cta-banner';
-import FAQSection from '@/components/sections/faq';
+import TeamGrid from '@/components/sections/team-grid';
+import CTAConsultation from '@/components/sections/cta-consultation';
+import FAQAccordion from '@/components/sections/faq-accordion';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pt-[90px]">
       <AboutHero />
-      <AboutContent />
+      <MissionStatement />
       <WhyChooseUs />
-      <OurTeam />
-      <CTABanner />
-      <FAQSection />
+      <TeamGrid />
+      <CTAConsultation />
+      <FAQAccordion />
     </main>
   );
 }

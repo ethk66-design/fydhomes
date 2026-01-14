@@ -41,55 +41,69 @@ const Hero = () => {
               />
             </div>
 
-              {/* Search Bar Overlay */}
-              <div className="absolute left-0 right-0 bottom-[-30px] md:bottom-[-25px] px-4 md:px-10 flex justify-center">
-                  <div className="w-full max-w-[1070px] bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-[#eeeeee] flex flex-col md:flex-row items-center gap-0 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200">
-                    
-                    {/* Keyword Field */}
-                    <div className="w-full md:flex-[1.2] flex flex-col gap-2 px-6 border-r border-[#eeeeee]">
-                      <label className="text-[11px] font-bold text-black uppercase tracking-[1px]">SEARCH</label>
-                      <input 
-                        type="text" 
-                        placeholder="Search keyword" 
-                        className="w-full h-[35px] text-[15px] focus:outline-none placeholder:text-[#999999]"
-                      />
-                    </div>
-    
-                    {/* Property Type Field */}
-                    <div className="w-full md:flex-1 flex flex-col gap-2 px-6 border-r border-[#eeeeee]">
-                      <label className="text-[11px] font-bold text-black uppercase tracking-[1px]">LOOKING FOR</label>
-                      <select className="w-full h-[35px] text-[15px] bg-white appearance-none cursor-pointer focus:outline-none text-[#555555]">
-                        <option>Property Type</option>
-                        <option>Villa</option>
-                        <option>Residential</option>
-                        <option>Plot</option>
-                        <option>Commercial</option>
-                        <option>Rent</option>
-                      </select>
-                    </div>
-    
-                    {/* Area Field */}
-                    <div className="w-full md:flex-1 flex flex-col gap-2 px-6 border-r border-[#eeeeee]">
-                      <label className="text-[11px] font-bold text-black uppercase tracking-[1px]">SEARCH BY AREA</label>
-                      <select className="w-full h-[35px] text-[15px] bg-white appearance-none cursor-pointer focus:outline-none text-[#555555]">
-                        <option>Area</option>
-                        <option>Aluva</option>
-                        <option>Kakkanad</option>
-                        <option>Pukkattupady</option>
-                        <option>Infopark</option>
-                      </select>
-                    </div>
-    
-                    {/* Search Button */}
-                    <div className="w-full md:w-auto px-6">
-                      <button className="w-full md:w-[60px] lg:w-[60px] h-[55px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200">
-                        <Search size={22} strokeWidth={2.5} />
-                      </button>
-                    </div>
-
-
+                {/* Search Bar Overlay */}
+                <div className="absolute left-0 right-0 bottom-[-45px] md:bottom-[-40px] px-4 md:px-10 flex justify-center">
+                    <div className="w-full max-w-[1070px] bg-white p-6 md:p-8 rounded-[4px] shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-[#eeeeee] flex flex-col md:flex-row items-end gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-200">
+                      
+                      {/* Keyword Field */}
+                      <div className="w-full md:flex-[1.2] flex flex-col gap-2">
+                        <label className="text-[12px] font-bold text-black uppercase tracking-[0.5px]">SEARCH</label>
+                        <div className="relative">
+                          <input 
+                            type="text" 
+                            placeholder="Search keyword" 
+                            className="w-full h-[52px] px-4 text-[15px] border border-[#e5e7eb] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999]"
+                          />
+                        </div>
+                      </div>
+      
+                      {/* Property Type Field */}
+                      <div className="w-full md:flex-1 flex flex-col gap-2">
+                        <label className="text-[12px] font-bold text-black uppercase tracking-[0.5px]">LOOKING FOR</label>
+                        <div className="relative">
+                          <select className="w-full h-[52px] px-4 text-[15px] bg-white border border-[#e5e7eb] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555]">
+                            <option>Property Type</option>
+                            <option>Villa</option>
+                            <option>Residential</option>
+                            <option>Plot</option>
+                            <option>Commercial</option>
+                            <option>Rent</option>
+                          </select>
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1L5 5L9 1" stroke="#999999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+      
+                      {/* Area Field */}
+                      <div className="w-full md:flex-1 flex flex-col gap-2">
+                        <label className="text-[12px] font-bold text-black uppercase tracking-[0.5px]">SEARCH BY AREA</label>
+                        <div className="relative">
+                          <select className="w-full h-[52px] px-4 text-[15px] bg-white border border-[#e5e7eb] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555]">
+                            <option>Area</option>
+                            <option>Aluva</option>
+                            <option>Kakkanad</option>
+                            <option>Pukkattupady</option>
+                            <option>Infopark</option>
+                          </select>
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1L5 5L9 1" stroke="#999999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+      
+                      {/* Search Button */}
+                      <div className="w-full md:w-auto">
+                        <button className="w-full md:w-[200px] h-[52px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200">
+                          <Search size={20} strokeWidth={2.5} />
+                        </button>
+                      </div>
+                </div>
               </div>
-            </div>
         </div>
       </div>
       {/* Spacer to handle the overlapping search bar */}

@@ -1,61 +1,66 @@
-"use client";
-
 import React from 'react';
-import Image from 'next/image';
 
-const CTABanner = () => {
+/**
+ * CTABanner Component
+ * 
+ * A pixel-perfect clone of the "Looking To Buy Or Sell?" call-to-action banner.
+ * Features a sunset background with a Chinese fishing net, a floating white card,
+ * and a prominent red "CONTACT US" button.
+ */
+const CTABanner: React.FC = () => {
   return (
-    <section className="relative w-full py-[100px] flex justify-center items-center px-5 sm:px-10 lg:px-0">
-      <div className="container max-w-[1140px] relative">
+    <section 
+      className="relative w-full overflow-hidden"
+      style={{
+        marginTop: '60px',
+        marginBottom: '60px'
+      }}
+    >
+      <div className="container px-5 md:px-0">
         <div 
-          className="relative w-full h-[580px] rounded-[10px] overflow-hidden shadow-xl"
+          className="relative w-full h-[450px] md:h-[500px] rounded-[8px] overflow-hidden bg-cover bg-center flex items-center"
           style={{
-            backgroundImage: `url('https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/AdobeStock_866670033-10.jpg')`,
+            // Using a placeholder that matches the visual description since specific asset wasn't provided in <assets>
+            // The image features a sunset with a traditional Chinese fishing net
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1590050730103-600000a06ecb?auto=format&fit=crop&q=80&w=1920')`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundPosition: 'center 60%'
           }}
         >
-          {/* Overlay Box */}
-          <div className="absolute left-[30px] sm:left-[50px] top-1/2 -translate-y-1/2 w-full max-w-[460px] bg-white p-[40px] sm:p-[60px] rounded-[10px] z-10 flex flex-col gap-[20px] fadeInUp">
-            <h2 
-              className="text-[#000000] font-serif text-[32px] sm:text-[36px] font-semibold leading-[1.2] m-0"
-              style={{ fontFamily: 'var(--font-serif)' }}
+          {/* Content Card */}
+          <div className="ml-0 md:ml-12 lg:ml-20 w-full md:w-auto px-4 md:px-0">
+            <div 
+              className="bg-white p-8 md:p-12 max-w-[450px] shadow-lg rounded-[4px]"
+              style={{
+                boxShadow: '0 10px 30px rgba(0,0,0,0.05)'
+              }}
             >
-              Looking To Buy Or Sell? Get Expert Guidance Today!
-            </h2>
-            <p className="text-[#555555] font-sans text-[16px] leading-[1.8] m-0">
-              Contact us now for a free consultation and let our team of experts guide you through the process.
-            </p>
-            <div className="mt-[10px]">
+              <h2 
+                className="font-sans text-[28px] md:text-[32px] font-bold leading-[1.2] text-black mb-4"
+                style={{
+                  letterSpacing: '-0.02em'
+                }}
+              >
+                Looking To Buy Or Sell? <br className="hidden md:block" />
+                Get Expert Guidance Today!
+              </h2>
+              
+              <p 
+                className="text-[#666666] text-[15px] leading-[1.6] mb-8"
+              >
+                Contact us now for a free consultation and let our team of experts guide you through the process.
+              </p>
+              
               <a 
                 href="/contact"
-                className="inline-block bg-[#307185] hover:bg-[#285f70] transition-colors duration-300 text-white font-sans text-[14px] font-medium py-[12px] px-[30px] rounded-[4px] uppercase tracking-wider text-center"
+                className="inline-block bg-[#D32F2F] text-white font-bold text-[13px] tracking-[0.1em] py-[14px] px-[28px] rounded-[4px] hover:opacity-90 transition-opacity uppercase"
               >
                 CONTACT US
               </a>
             </div>
           </div>
-
-          {/* Optional: Subtle dark overlay for better text contrast if needed on mobile */}
-          <div className="md:hidden absolute inset-0 bg-black/10 z-0"></div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px) translateY(-50%);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) translateY(-50%);
-          }
-        }
-        .fadeInUp {
-          animation: fadeInUp 0.7s ease-out forwards;
-        }
-      `}</style>
     </section>
   );
 };

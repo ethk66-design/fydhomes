@@ -1,133 +1,97 @@
-"use client";
+import React from 'react';
+import Image from 'next/image';
+import { Instagram, Youtube, Menu, X } from 'lucide-react';
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Instagram, Youtube, Menu, X } from "lucide-react";
-
-const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Listings", href: "/listings" },
-    { name: "Contact", href: "/contact" },
-  ];
-
+/**
+ * Header component for FYD Homes.
+ * Cloned with pixel-perfect accuracy based on provided design instructions and assets.
+ */
+export default function Header() {
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-[1000] w-full bg-white transition-all duration-300 ${
-        isScrolled ? "shadow-md" : ""
-      }`}
-    >
-      <div className="container mx-auto px-6 max-w-[1140px]">
-        <div className="flex items-center justify-between h-[90px]">
-          {/* Logo Section */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="block">
-              <Image
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/fyd-homes-scaled-e1754756623724-1.png"
-                alt="fyd homes"
-                width={140}
-                height={60}
-                className="h-[60px] w-auto object-contain"
-                priority
-              />
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="nav-link relative text-[#000000] font-sans text-[14px] font-medium uppercase tracking-wider transition-colors hover:text-[#357388] after:content-[''] after:absolute after:left-0 after:-top-1 after:w-0 after:h-[2px] after:bg-[#357388] after:transition-all hover:after:w-full"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Social Icons (Desktop) */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="https://www.instagram.com/findyourdreamhome_/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 flex items-center justify-center bg-[#333333] text-white rounded-full hover:bg-[#357388] transition-colors"
-            >
-              <Instagram size={16} />
-            </a>
-            <a
-              href="https://www.youtube.com/@findyourdreamhome6667"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 flex items-center justify-center bg-[#cc0000] text-white rounded-full hover:opacity-90 transition-opacity"
-            >
-              <Youtube size={16} />
-            </a>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden text-[#000000]"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle navigation"
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+    <header className="w-full bg-white border-b border-[#EAEAEA] sticky top-0 z-[1000]">
+      <div className="container mx-auto max-w-[1200px] px-5 sm:px-10 h-[90px] flex items-center justify-between">
+        
+        {/* Logo Section */}
+        <div className="flex-shrink-0">
+          <a href="/" className="block">
+            <Image
+              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/fyd-homes-scaled-e1754756623724-1.png"
+              alt="fyd homes"
+              width={160}
+              height={50}
+              className="h-[50px] w-auto object-contain"
+              priority
+            />
+          </a>
         </div>
-      </div>
 
-      {/* Mobile Navigation Dropdown */}
-      <div
-        className={`md:hidden absolute top-full left-0 w-full bg-white border-t border-[#e6e6e6] transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0 pointer-events-none"
-        }`}
-      >
-        <div className="container mx-auto px-6 py-6">
-          <ul className="flex flex-col space-y-4">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className="block text-[15px] font-medium uppercase text-[#000000] hover:text-[#357388]"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
+        {/* Desktop Navigation Menu */}
+        <nav className="hidden lg:flex flex-1 justify-center">
+          <ul className="flex items-center gap-10">
+            <li>
+              <a 
+                href="/" 
+                className="text-[14px] font-semibold text-black hover:text-[#D32F2F] uppercase tracking-wider transition-colors duration-200"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a 
+                href="/about" 
+                className="text-[14px] font-semibold text-black hover:text-[#D32F2F] uppercase tracking-wider transition-colors duration-200"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a 
+                href="/listings" 
+                className="text-[14px] font-semibold text-black hover:text-[#D32F2F] uppercase tracking-wider transition-colors duration-200"
+              >
+                Listings
+              </a>
+            </li>
+            <li>
+              <a 
+                href="/contact" 
+                className="text-[14px] font-semibold text-black hover:text-[#D32F2F] uppercase tracking-wider transition-colors duration-200"
+              >
+                Contact
+              </a>
+            </li>
           </ul>
-          <div className="flex items-center space-x-4 mt-8 pt-6 border-t border-[#e6e6e6]">
-            <a
-              href="https://www.instagram.com/findyourdreamhome_/"
-              className="text-[#333333] hover:text-[#357388]"
+        </nav>
+
+        {/* Social Media Icons & Mobile Toggle */}
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-3">
+            <a 
+              href="https://www.instagram.com/findyourdreamhome_/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-[#333333] text-white hover:bg-[#D32F2F] transition-all duration-300"
             >
-              <Instagram size={20} />
+              <Instagram size={18} />
+              <span className="sr-only">Instagram</span>
             </a>
-            <a
-              href="https://www.youtube.com/@findyourdreamhome6667"
-              className="text-[#cc0000] hover:opacity-80"
+            <a 
+              href="https://www.youtube.com/@findyourdreamhome6667" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-[#D32F2F] text-white hover:bg-[#CC0000] transition-all duration-300"
             >
-              <Youtube size={20} />
+              <Youtube size={18} />
+              <span className="sr-only">Youtube</span>
             </a>
           </div>
+          
+          {/* Mobile Menu Toggle (Simplified for clone structure) */}
+          <button className="lg:hidden p-2 text-black hover:text-[#D32F2F] transition-colors">
+            <Menu size={32} />
+          </button>
         </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}

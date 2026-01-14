@@ -45,7 +45,7 @@ const properties = [
   }
 ];
 
-export default function FeaturedForRent() {
+export function FeaturedForRent() {
   return (
     <section className="bg-white py-[80px]">
       <div className="container px-[1.25rem] max-w-[1170px] mx-auto">

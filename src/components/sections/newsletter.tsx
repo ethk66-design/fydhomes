@@ -13,7 +13,7 @@ import React from 'react';
  * - Fully responsive layout
  */
 
-const Newsletter = () => {
+export function Newsletter() {
   const bgImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-12-at-1_41_55-PM-758x564-28.jpeg";
 
   return (
@@ -60,6 +60,4 @@ const Newsletter = () => {
       </div>
     </section>
   );
-};
-
-export default Newsletter;
+}

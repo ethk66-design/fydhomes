@@ -9,7 +9,7 @@ import React from 'react';
  * 3. A grid of social media and client stats cards with specific counters (295K+, 16.4K+, 500+).
  */
 
-const AboutPartner: React.FC = () => {
+export function AboutPartner() {
   return (
     <section className="py-[80px] bg-white">
       <div className="container mx-auto px-5 max-w-[1170px]">

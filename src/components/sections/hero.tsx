@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Phone, Search } from 'lucide-react';
 
-const Hero = () => {
+export function Hero() {
   return (
     <section className="pt-20 pb-0 overflow-hidden bg-white">
       <div className="container mx-auto px-5 max-w-[1170px]">
@@ -110,6 +110,4 @@ const Hero = () => {
       <div className="h-20 lg:h-32"></div>
     </section>
   );
-};
-
-export default Hero;
+}

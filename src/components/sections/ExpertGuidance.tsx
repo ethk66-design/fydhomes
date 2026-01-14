@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-const ExpertGuidance = () => {
+export function ExpertGuidance() {
   // Asset provided in the prompt
   const backgroundImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_46_13-PM-758x564-27.jpeg";
 
@@ -62,6 +62,4 @@ const ExpertGuidance = () => {
       `}</style>
     </section>
   );
-};
-
-export default ExpertGuidance;
+}

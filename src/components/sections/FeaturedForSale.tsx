@@ -41,7 +41,7 @@ const featuredProperties = [
   }
 ];
 
-const FeaturedForSale = () => {
+export function FeaturedForSale() {
   return (
     <section className="bg-white py-[80px]">
       <div className="container mx-auto px-5 lg:px-[15px] max-w-[1170px]">

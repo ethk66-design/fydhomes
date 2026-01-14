@@ -3,7 +3,7 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 
-const Testimonials = () => {
+export function Testimonials() {
   const testimonials = [
     {
       name: "Unnikrishnan",
@@ -83,6 +83,4 @@ const Testimonials = () => {
       </div>
     </section>
   );
-};
-
-export default Testimonials;
+}

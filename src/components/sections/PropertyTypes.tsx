@@ -34,7 +34,7 @@ const propertyTypes = [
   }
 ];
 
-const PropertyTypes = () => {
+export function PropertyTypes() {
   return (
     <section className="bg-white py-[80px]">
       <div className="container px-4">
@@ -82,6 +82,4 @@ const PropertyTypes = () => {
       </div>
     </section>
   );
-};
-
-export default PropertyTypes;
+}

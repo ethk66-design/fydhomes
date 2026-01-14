@@ -21,10 +21,12 @@ const Navigation = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Listings', href: '/listings' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'Admin', href: '/admin' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Buy', href: '/listings?type=sale' },
+    { name: 'Rent', href: '/listings?type=rent' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Sell', href: '/sell' },
+    { name: 'Contact Us', href: '/contact' },
   ];
 
   const socialLinks = [

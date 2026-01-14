@@ -11,11 +11,16 @@ interface ListingsPageProps {
     keyword?: string;
     type?: string;
     area?: string;
+    listing_type?: string;
   };
 }
 
 export default async function ListingsPage({ searchParams }: ListingsPageProps) {
-  const { keyword, type, area } = await searchParams;
+  const params = await searchParams;
+  const keyword = params.keyword;
+  const type = params.type;
+  const area = params.area;
+  const listing_type = params.listing_type;
 
   let query = supabase
     .from("properties")
@@ -25,9 +30,27 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   if (keyword) {
     query = query.ilike("title", `%${keyword}%`);
   }
-  if (type && type !== "Property Type") {
-    query = query.eq("type", type);
+
+  // Handle both type and listing_type
+  let finalListingType = listing_type;
+  let finalPropertyType = type;
+
+  // If type is "Rent" or "Sale", it's actually a listing type
+  if (type === "Rent" || type === "Sale" || type === "rent" || type === "sale") {
+    finalListingType = type;
+    finalPropertyType = undefined;
   }
+  
+  if (finalPropertyType && finalPropertyType !== "Property Type") {
+    query = query.eq("type", finalPropertyType);
+  }
+  
+  if (finalListingType) {
+    // Standardize to Title Case for DB match (Sale/Rent)
+    const formattedListingType = finalListingType.charAt(0).toUpperCase() + finalListingType.slice(1).toLowerCase();
+    query = query.eq("listing_type", formattedListingType);
+  }
+
   if (area && area !== "Area") {
     query = query.ilike("location", `%${area}%`);
   }
@@ -38,6 +61,10 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
     console.error("Error fetching properties:", error);
   }
 
+  const pageTitle = finalListingType 
+    ? `Properties for ${finalListingType.toLowerCase() === 'sale' ? 'Sale' : 'Rent'}`
+    : "Property Listings";
+
   return (
     <main className="min-h-screen bg-white pb-20">
       {/* Header Spacer */}
@@ -46,7 +73,9 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
       {/* Search Section */}
       <div className="bg-[#f4f8fb] pt-12 pb-24">
         <div className="container mx-auto">
-          <h1 className="text-center mb-12 text-4xl font-bold font-serif text-black uppercase tracking-tight">Property Listings</h1>
+          <h1 className="text-center mb-12 text-4xl font-bold font-serif text-black uppercase tracking-tight">
+            {pageTitle}
+          </h1>
           <Suspense fallback={<div>Loading filters...</div>}>
             <SearchFilter />
           </Suspense>
@@ -58,7 +87,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         <div className="flex items-center justify-between mb-10 border-b border-[#eeeeee] pb-4">
           <p className="text-[#5c5c5c] font-medium">
             Showing <span className="text-black font-bold">{properties?.length || 0}</span> properties
-            {(keyword || type || area) && (
+            {(keyword || type || area || listing_type) && (
               <span className="ml-2 text-xs uppercase tracking-widest text-[#2d7a8c]"> (Filtered)</span>
             )}
           </p>

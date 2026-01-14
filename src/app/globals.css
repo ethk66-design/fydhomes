@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@600;700&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -6,24 +6,24 @@
 
 @theme {
   --color-background: #ffffff;
-  --color-foreground: #000000;
+  --color-foreground: #222222;
 
   --color-card: #ffffff;
-  --color-card-foreground: #000000;
+  --color-card-foreground: #222222;
 
   --color-popover: #ffffff;
-  --color-popover-foreground: #000000;
+  --color-popover-foreground: #222222;
 
-  --color-primary: #000000;
+  --color-primary: #1db345;
   --color-primary-foreground: #ffffff;
 
-  --color-secondary: #555555;
+  --color-secondary: #222222;
   --color-secondary-foreground: #ffffff;
 
-  --color-muted: #eff4f7;
-  --color-muted-foreground: #555555;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #777777;
 
-  --color-accent: #307185;
+  --color-accent: #1db345;
   --color-accent-foreground: #ffffff;
 
   --color-destructive: #ef4444;
@@ -31,33 +31,33 @@
 
   --color-border: #e6e6e6;
   --color-input: #e6e6e6;
-  --color-ring: #307185;
+  --color-ring: #1db345;
 
-  --color-chart-1: #307185;
-  --color-chart-2: #000000;
-  --color-chart-3: #555555;
-  --color-chart-4: #eff4f7;
-  --color-chart-5: #e6e6e6;
+  --color-chart-1: #1db345;
+  --color-chart-2: #222222;
+  --color-chart-3: #777777;
+  --color-chart-4: #a5dff1;
+  --color-chart-5: #333333;
 
-  --color-sidebar: #ffffff;
-  --color-sidebar-foreground: #555555;
-  --color-sidebar-primary: #000000;
+  --color-sidebar: #f7f7f7;
+  --color-sidebar-foreground: #404040;
+  --color-sidebar-primary: #1db345;
   --color-sidebar-primary-foreground: #ffffff;
-  --color-sidebar-accent: #eff4f7;
-  --color-sidebar-accent-foreground: #000000;
-  --color-sidebar-border: #e6e6e6;
-  --color-sidebar-ring: #307185;
+  --color-sidebar-accent: #f0f0f0;
+  --color-sidebar-accent-foreground: #222222;
+  --color-sidebar-border: #d4d4d8;
+  --color-sidebar-ring: #1db345;
 
   --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Roboto Slab", ui-serif, Georgia, serif;
+  --font-display: "Roboto Slab", ui-serif, Georgia, serif;
+  --font-ui: "Inter", sans-serif;
 
-  --radius-lg: 10px;
-  --radius-md: 8px;
-  --radius-sm: 4px;
+  --radius-lg: 0.5rem;
+  --radius-md: 4px;
+  --radius-sm: 2px;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-fade-in-up: fade-in-up 0.5s ease-out;
 
   @keyframes accordion-down {
     from {
@@ -75,16 +75,6 @@
       height: 0;
     }
   }
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 }
 
 @layer base {
@@ -95,130 +85,38 @@
   ::file-selector-button {
     border-color: #e6e6e6;
   }
+}
 
+@layer base {
   :root {
     --background: #ffffff;
-    --foreground: #000000;
+    --foreground: #222222;
     --card: #ffffff;
-    --card-foreground: #000000;
+    --card-foreground: #222222;
     --popover: #ffffff;
-    --popover-foreground: #000000;
-    --primary: #000000;
+    --popover-foreground: #222222;
+    --primary: #1db345;
     --primary-foreground: #ffffff;
-    --secondary: #555555;
+    --secondary: #222222;
     --secondary-foreground: #ffffff;
-    --muted: #eff4f7;
-    --muted-foreground: #555555;
-    --accent: #307185;
+    --muted: #f5f5f5;
+    --muted-foreground: #777777;
+    --accent: #1db345;
     --accent-foreground: #ffffff;
     --destructive: #ef4444;
     --destructive-foreground: #fafafa;
     --border: #e6e6e6;
     --input: #e6e6e6;
-    --ring: #307185;
-    --radius: 10px;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    background-color: var(--background);
-    color: var(--secondary);
-    font-size: 16px;
-    line-height: 1.8;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, .h1 {
-    font-family: var(--font-serif);
-    font-size: 50px;
-    font-weight: 600;
-    color: var(--foreground);
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-  }
-
-  h2, .h2 {
-    font-family: var(--font-serif);
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--foreground);
-    line-height: 1.3;
-    margin-bottom: 1.25rem;
-  }
-
-  h3, .h3 {
-    font-family: var(--font-sans);
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--foreground);
-    line-height: 1.4;
-    margin-bottom: 1rem;
-  }
-
-  a {
-    transition: color 0.2s ease;
-  }
-
-  .container {
-    width: 100%;
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .nav-link {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: var(--foreground);
-    letter-spacing: 0.05em;
-  }
-
-  .section-padding {
-    padding-top: 100px;
-    padding-bottom: 100px;
-  }
-
-  .rounded-card {
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .btn-accent {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
-    padding: 12px 24px;
-    font-weight: 500;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s ease;
-  }
-
-  .btn-accent:hover {
-    opacity: 0.9;
-  }
-
-  .faq-container {
-    background-color: var(--muted);
-    border-radius: 10px;
-    padding: 40px;
-  }
-
-  .team-card-overlay {
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 40%);
-  }
-
-  .fade-in-up {
-    animation: fade-in-up 0.5s ease-out forwards;
+    --ring: #1db345;
+    --radius: 4px;
+    --sidebar-background: #f7f7f7;
+    --sidebar-foreground: #404040;
+    --sidebar-primary: #1db345;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #f0f0f0;
+    --sidebar-accent-foreground: #222222;
+    --sidebar-border: #d4d4d8;
+    --sidebar-ring: #1db345;
   }
 }
 
@@ -227,7 +125,179 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, .h1 {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 700;
+    color: #222222;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  h2, .h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    color: #222222;
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+  }
+
+  h3, .h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: #222222;
+  }
+
+  p {
+    color: #222222;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  input, select, textarea {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    height: 50px;
+    padding: 0 15px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background-color: #ffffff;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    color: #444444;
+  }
+
+  textarea {
+    height: auto;
+    padding: 15px;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-primary:hover {
+    background-color: #17a33d;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #222222;
+    letter-spacing: 0.02em;
+  }
+
+  .icon-circle {
+    width: 32px;
+    height: 32px;
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+
+  .icon-circle:hover {
+    opacity: 0.8;
+  }
+
+  .contact-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #222222;
+  }
+
+  .contact-list-icon {
+    color: var(--primary);
+    font-size: 16px;
+    margin-top: 3px;
+  }
+
+  .section-padding {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 400px;
+    background-color: #a5dff1;
+    overflow: hidden;
+  }
+
+  .whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 50;
   }
 }

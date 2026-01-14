@@ -1,70 +1,82 @@
 import React from 'react';
 import Image from 'next/image';
 
-const Footer = () => {
-  const logoUrl = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/FYD-LOGO-ICONS-01-scaled-9.png";
+/**
+ * Footer Component
+ * 
+ * Multi-column footer containing:
+ * - Logo & Tagline (Find Your Dream Home)
+ * - Quick Links
+ * - Social Profiles
+ * - Contact Us details
+ * - Bottom Bar (Copyright & Legal)
+ */
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-white font-sans">
-      {/* Main Footer Content */}
-      <div className="container mx-auto max-w-[1140px] px-5 pt-[80px] pb-[60px]">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+    <footer className="bg-white border-t border-[#e6e6e6] pt-[60px] pb-0 font-sans">
+      <div className="container mx-auto max-w-[1170px] px-[15px]">
+        {/* Top Section - 4 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px] mb-[60px]">
           
-          {/* Brand Column */}
-          <div className="md:col-span-4 flex flex-col justify-start">
-            <div className="mb-6">
-              <Image 
-                src={logoUrl} 
-                alt="Find Your Dream Home" 
-                width={250} 
-                height={80} 
-                className="object-contain"
-                priority
-              />
+          {/* Column 1: Branding */}
+            <div className="flex flex-col items-start">
+              <div className="mb-4">
+                <a href="/" className="inline-block">
+                  <Image 
+                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/FYD-LOGO-ICONS-01-scaled-2.png" 
+                    alt="Find Your Dream Home" 
+                    width={200} 
+                    height={80} 
+                    className="object-contain"
+                    style={{ height: 'auto', width: 'auto', maxWidth: '180px' }}
+                  />
+                </a>
+              </div>
             </div>
-          </div>
 
-          {/* Quick Links Column */}
-          <div className="md:col-span-2">
-            <h3 className="text-[18px] font-bold text-black mb-6 leading-[1.4] font-sans">
+          {/* Column 2: Quick Links */}
+          <div>
+            <h3 className="font-display text-[18px] font-semibold text-[#222222] mb-[25px]">
               Quick Links
             </h3>
-            <ul className="flex flex-col gap-3">
+            <ul className="space-y-[12px]">
               <li>
-                <a href="/" className="text-[#555555] text-[16px] hover:text-[#307185] transition-colors duration-200">
+                <a href="/" className="text-[14px] text-[#777777] hover:text-[#1db345] transition-colors duration-300">
                   Home
                 </a>
               </li>
               <li>
-                <a href="/about" className="text-[#555555] text-[16px] hover:text-[#307185] transition-colors duration-200">
+                <a href="/about" className="text-[14px] text-[#777777] hover:text-[#1db345] transition-colors duration-300">
                   About
                 </a>
               </li>
               <li>
-                <a href="/listings" className="text-[#555555] text-[16px] hover:text-[#307185] transition-colors duration-200">
+                <a href="/listings" className="text-[14px] text-[#777777] hover:text-[#1db345] transition-colors duration-300">
                   Listings
                 </a>
               </li>
               <li>
-                <a href="/contact" className="text-[#555555] text-[16px] hover:text-[#307185] transition-colors duration-200">
+                <a href="/contact" className="text-[14px] text-[#777777] hover:text-[#1db345] transition-colors duration-300">
                   Contact
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Social Profiles Column */}
-          <div className="md:col-span-3">
-            <h3 className="text-[18px] font-bold text-black mb-6 leading-[1.4] font-sans">
+          {/* Column 3: Social Profiles */}
+          <div>
+            <h3 className="font-display text-[18px] font-semibold text-[#222222] mb-[25px]">
               Social Profiles
             </h3>
-            <ul className="flex flex-col gap-3">
+            <ul className="space-y-[12px]">
               <li>
                 <a 
                   href="https://facebook.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-[#555555] text-[16px] hover:text-[#307185] transition-colors duration-200"
+                  className="text-[14px] text-[#777777] hover:text-[#1db345] transition-colors duration-300"
                 >
                   Facebook
                 </a>
@@ -74,7 +86,7 @@ const Footer = () => {
                   href="https://www.instagram.com/findyourdreamhome_/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-[#555555] text-[16px] hover:text-[#307185] transition-colors duration-200"
+                  className="text-[14px] text-[#777777] hover:text-[#1db345] transition-colors duration-300"
                 >
                   Instagram
                 </a>
@@ -84,7 +96,7 @@ const Footer = () => {
                   href="https://www.youtube.com/@findyourdreamhome6667" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-[#555555] text-[16px] hover:text-[#307185] transition-colors duration-200"
+                  className="text-[14px] text-[#777777] hover:text-[#1db345] transition-colors duration-300"
                 >
                   Youtube
                 </a>
@@ -92,17 +104,17 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Us Column */}
-          <div className="md:col-span-3">
-            <h3 className="text-[18px] font-bold text-black mb-6 leading-[1.4] font-sans">
+          {/* Column 4: Contact Us */}
+          <div>
+            <h3 className="font-display text-[18px] font-semibold text-[#222222] mb-[25px]">
               Contact Us
             </h3>
-            <div className="flex flex-col gap-3">
-              <p className="text-[#555555] text-[16px] leading-normal">
-                Call us : <a href="tel:+919544593991" className="hover:text-[#307185] transition-colors">+91 9544593991</a>
+            <div className="space-y-[12px]">
+              <p className="text-[14px] text-[#777777] m-0">
+                Call us : <a href="tel:+919544593991" className="text-[#222222] hover:text-[#1db345] transition-colors">+91 9544593991</a>
               </p>
-              <p className="text-[#555555] text-[16px] leading-normal">
-                <a href="mailto:info@fydhomes.com" className="hover:text-[#307185] transition-colors">info@fydhomes.com</a>
+              <p className="text-[14px] text-[#777777] m-0">
+                <a href="mailto:info@fydhomes.in" className="text-[#222222] hover:text-[#1db345] transition-colors">info@fydhomes.in</a>
               </p>
             </div>
           </div>
@@ -110,41 +122,38 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Copyright Bar */}
-      <div className="border-t border-[#E6E6E6] py-6">
-        <div className="container mx-auto max-w-[1140px] px-5 flex flex-col md:flex-row justify-between items-center text-[14px] text-[#555555]">
+      {/* Bottom Bar */}
+      <div className="border-t border-[#e6e6e6] py-[20px]">
+        <div className="container mx-auto max-w-[1170px] px-[15px] flex flex-col md:flex-row justify-between items-center text-[13px] text-[#777777]">
           <div className="mb-4 md:mb-0">
-            © FYD Media 2025 - All rights reserved
+            © FYD Media {currentYear} - All rights reserved
           </div>
-          <div className="flex items-center gap-6">
-            <a href="/privacy-policy" className="hover:text-[#307185] transition-colors">
-              Privacy Policy
-            </a>
-            <a href="/terms-conditions" className="hover:text-[#307185] transition-colors">
-              Terms & Conditions
-            </a>
-            <div className="hidden md:flex items-center gap-2 bg-[#F3F6F8] px-4 py-2 rounded-full cursor-pointer hover:bg-gray-100 transition-colors">
-              <span className="text-[12px] font-medium">Need Help? <span className="font-bold">Chat with us</span></span>
-            </div>
+          <div className="flex items-center space-x-[20px]">
+            <a href="#" className="hover:text-[#1db345] transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-[#1db345] transition-colors">Terms & Conditions</a>
+            <span className="flex items-center gap-2">
+              Need Help? <span className="font-semibold text-[#222222]">Chat with us</span>
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Floating WhatsApp Action Button Mockup (as seen in screenshots) */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <a 
-          href="https://wa.me/919544593991" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="bg-[#25D366] w-[60px] h-[60px] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
+      {/* WhatsApp Floating Button */}
+      <a 
+        href="https://wa.me/919544593991" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="fixed bottom-[20px] right-[20px] w-[50px] h-[50px] bg-[#25d366] text-white rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.15)] z-[100] hover:scale-105 transition-transform"
+      >
+        <svg 
+          viewBox="0 0 448 512" 
+          width="24" 
+          height="24" 
+          fill="currentColor"
         >
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="white">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.632 1.433h.005c6.554 0 11.89-5.335 11.893-11.892a11.826 11.826 0 00-3.375-8.414" />
-          </svg>
-        </a>
-      </div>
+          <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.4 5.5-6.4 8.3-9.6 2.8-3.2 3.7-5.5 5.5-9.1 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.7 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+        </svg>
+      </a>
     </footer>
   );
-};
-
-export default Footer;
+}

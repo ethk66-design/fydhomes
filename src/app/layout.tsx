@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { VisualEditsMessenger } from "orchids-visual-edits";
-import Navigation from "@/components/sections/Navigation";
+import Header from "@/components/sections/header";
 import Footer from "@/components/sections/footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <Navigation />
+        <Header />
         {children}
         <WhatsAppButton />
         <Footer />

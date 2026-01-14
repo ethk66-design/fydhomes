@@ -2,12 +2,32 @@ import React from 'react';
 
 const PageTitle = () => {
   return (
-    <section className="bg-white pt-[60px] pb-[60px] md:pt-[80px] md:pb-[40px]">
-      <div className="container mx-auto max-w-[1140px] px-[15px]">
-        <div className="flex flex-wrap">
+    <section className="bg-white">
+      <div className="container mx-auto max-w-[1170px] px-[15px]">
+        {/* 
+          Main container for the page title. 
+          According to the HTML structure, it's nested within several elementor containers.
+          The outer padding or spacing is handled by the section and container.
+        */}
+        <div className="flex flex-col py-[60px] md:py-[80px]">
           <div className="w-full">
-            <div className="animate-in fade-in-up duration-700 slide-in-from-bottom-5">
-              <h1 className="font-serif text-[32px] md:text-[42px] font-bold text-black leading-[1.2] mb-0">
+            <div 
+              className="animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out fill-mode-both"
+              style={{
+                animationDuration: '1000ms',
+                animationFillMode: 'both'
+              }}
+            >
+              <h1 
+                className="text-[#222222] font-display font-bold text-[48px] m-0 p-0 leading-[1.2]"
+                style={{
+                  fontFamily: '"Roboto Slab", Serif',
+                  fontSize: '48px',
+                  fontWeight: 700,
+                  color: '#222222',
+                  lineHeight: '1.2'
+                }}
+              >
                 Contact us
               </h1>
             </div>

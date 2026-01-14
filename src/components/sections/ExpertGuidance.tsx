@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import Image from 'next/image';
 
@@ -22,10 +20,11 @@ export function ExpertGuidance() {
               />
             </div>
 
-            {/* Content Box */}
-            <div className="relative z-10 h-full flex items-center px-6 md:px-16 py-12 md:py-20">
-              <div className="bg-white p-8 md:p-14 max-w-[550px] rounded-[10px] shadow-xl animate-fadeInUp">
-                <h2 className="font-sans text-[32px] md:text-[42px] font-bold leading-[1.1] text-[#1a1a1a] mb-6">
+              {/* Content Box */}
+              <div className="relative z-10 h-full flex items-center px-6 md:px-16 py-12 md:py-20">
+                <div className="bg-white p-8 md:p-14 max-w-[550px] rounded-[10px] shadow-xl animate-in fade-in slide-in-from-bottom-5 duration-700">
+                  <h2 className="font-sans text-[32px] md:text-[42px] font-bold leading-[1.1] text-[#1a1a1a] mb-6">
+
                   Looking To Buy Or Sell?<br />
                   Get Expert Guidance Today!
                 </h2>
@@ -41,25 +40,10 @@ export function ExpertGuidance() {
                   CONTACT US
                 </a>
               </div>
+              </div>
             </div>
-          </div>
-      </div>
+        </div>
+      </section>
+    );
+  }
 
-      <style jsx global>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadeInUp {
-          animation: fadeInUp 0.6s ease-out forwards;
-        }
-      `}</style>
-    </section>
-  );
-}

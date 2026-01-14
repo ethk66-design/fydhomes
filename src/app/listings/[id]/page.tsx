@@ -9,13 +9,13 @@ import CTABanner from "@/components/sections/cta-banner";
 import SimilarListings from "@/components/sections/similar-listings";
 
 interface PropertyPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function PropertyDetailPage({ params }: PropertyPageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   const { data: property, error } = await supabase
     .from("properties")

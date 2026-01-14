@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 
 /**
@@ -47,26 +45,9 @@ export default function AboutContent() {
               </p>
             </div>
             
+            </div>
           </div>
         </div>
-      </div>
-
-      <style jsx global>{`
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
-        }
-
-        @keyframes fade-in-up {
-          0% {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
-    </section>
-  );
-}
+      </section>
+    );
+  }

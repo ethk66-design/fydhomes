@@ -25,9 +25,10 @@ const CTAConsultation = () => {
           <div className="absolute inset-0 bg-black/30" />
         </div>
 
-        {/* Content Container (Boxed Layout) */}
-        <div className="container relative z-10 mx-auto px-[15px]">
-          <div className="max-w-[463px] bg-white p-[50px] md:p-[60px] shadow-[0_2px_10px_rgba(0,0,0,0.05)] rounded-[4px]">
+          {/* Content Container (Boxed Layout) */}
+          <div className="container relative z-10 mx-auto px-[15px] max-w-[1170px]">
+            <div className="max-w-[463px] bg-white p-[50px] md:p-[60px] shadow-[0_2px_10px_rgba(0,0,0,0.05)] rounded-[4px]">
+
             <h2 className="font-display text-[28px] md:text-[32px] font-bold leading-[1.2] text-black mb-[20px]">
               Looking To Buy Or Sell? <br />
               Get Expert Guidance Today!
@@ -52,21 +53,11 @@ const CTAConsultation = () => {
            <div className="relative h-full w-full">
              {/* Note: In a real implementation, this would be part of the sunset background image */}
            </div>
+          </div>
         </div>
-      </div>
+      </section>
+    );
+  };
 
-      <style jsx>{`
-        .container {
-          max-width: 1170px;
-        }
-        @media (min-width: 1200px) {
-          .container {
-            max-width: 1170px;
-          }
-        }
-      `}</style>
-    </section>
-  );
-};
 
 export default CTAConsultation;

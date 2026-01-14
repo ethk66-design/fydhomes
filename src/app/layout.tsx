@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { VisualEditsMessenger } from "orchids-visual-edits";
 import Navigation from "@/components/sections/Navigation";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/sections/footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 export const metadata: Metadata = {

@@ -25,7 +25,7 @@ export function Hero() {
       <div className="container mx-auto px-4 sm:px-5 max-w-[1170px] mb-10 sm:mb-14 md:mb-20">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-16">
           <div className="lg:w-[55%]">
-            <h1 className="font-serif text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-bold leading-[1.15] text-black tracking-[-0.02em]">
+            <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }} className="text-[28px] sm:text-[32px] md:text-[38px] lg:text-[44px] font-bold leading-[1.15] text-black tracking-[-0.01em]">
               Find Your Perfect Home And Experience Exceptional Living
             </h1>
           </div>

@@ -32,7 +32,7 @@ const listings: SimilarListing[] = [
   },
   {
     id: '3',
-    title: 'Kochi's Closest Premium Villa Project To Infopark | 4BHK+|PERINGALA',
+    title: "Kochi's Closest Premium Villa Project To Infopark | 4BHK+|PERINGALA",
     price: '₹1.10 CR',
     image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2026-01-14-at-11_11_13-AM-1-584x438-25.jpeg',
     beds: 4,

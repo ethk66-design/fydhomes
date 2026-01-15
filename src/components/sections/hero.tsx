@@ -45,22 +45,22 @@ export function Hero() {
         </div>
       </div>
       <div className="container mx-auto px-4 sm:px-5 max-w-[1170px]">
-        <div className="relative animate-in fade-in duration-1000">
-          <div className="rounded-[4px] overflow-hidden">
-            <Image
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg"
-              alt="Modern Luxury Villa"
-              width={1170}
-              height={564}
-              className="w-full object-cover aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9]"
-              priority
-            />
-          </div>
+          <div className="relative animate-in fade-in duration-1000">
+            <div className="rounded-[4px] overflow-hidden">
+              <Image
+                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg"
+                alt="Modern Luxury Villa"
+                width={1170}
+                height={564}
+                className="w-full object-cover aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9]"
+                priority
+              />
+            </div>
 
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-[calc(100%-32px)] sm:w-[calc(100%-40px)] max-w-[1000px] z-10">
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 w-[calc(100%-32px)] sm:w-[calc(100%-48px)] max-w-[1000px] z-10">
               <div className="bg-white p-4 sm:p-5 md:p-6 rounded-[4px] shadow-[0_5px_30px_rgba(0,0,0,0.12)] animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
-                <div className="flex flex-col lg:flex-row gap-4 lg:gap-0">
-                  <div className="flex-1 lg:border-r lg:border-[#e8e8e8] lg:pr-4">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-0">
+                  <div className="flex-1 md:border-r md:border-[#e8e8e8] md:pr-4">
                     <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH</label>
                     <input 
                       type="text" 
@@ -72,7 +72,7 @@ export function Hero() {
                     />
                   </div>
 
-                  <div className="flex-1 lg:border-r lg:border-[#e8e8e8] lg:px-4">
+                  <div className="flex-1 md:border-r md:border-[#e8e8e8] md:px-4">
                     <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">LOOKING FOR</label>
                     <div className="relative">
                       <select 
@@ -96,7 +96,7 @@ export function Hero() {
                     </div>
                   </div>
 
-                  <div className="flex-1 lg:border-r lg:border-[#e8e8e8] lg:px-4">
+                  <div className="flex-1 md:border-r md:border-[#e8e8e8] md:px-4">
                     <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH BY AREA</label>
                     <div className="relative">
                       <select 
@@ -120,11 +120,11 @@ export function Hero() {
                     </div>
                   </div>
 
-                  <div className="lg:pl-4 flex flex-col justify-end">
-                    <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block lg:opacity-0">&nbsp;</label>
+                  <div className="md:pl-4 flex flex-col justify-end">
+                    <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block md:opacity-0">&nbsp;</label>
                     <button 
                       onClick={handleSearch}
-                      className="w-full lg:w-[160px] h-[44px] sm:h-[46px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
+                      className="w-full md:w-[140px] lg:w-[160px] h-[44px] sm:h-[46px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
                     >
                       <Search size={20} strokeWidth={2.5} />
                     </button>
@@ -132,9 +132,8 @@ export function Hero() {
                 </div>
               </div>
             </div>
+          </div>
         </div>
-      </div>
-      <div className="h-[100px] sm:h-[80px] lg:h-[70px]"></div>
     </section>
   );
 }

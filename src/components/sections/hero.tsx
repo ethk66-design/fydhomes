@@ -52,33 +52,33 @@ export function Hero() {
                 alt="Modern Luxury Villa"
                 width={1170}
                 height={564}
-                className="w-full object-cover aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9]"
+                className="w-full object-cover aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9]"
                 priority
               />
             </div>
 
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 w-[calc(100%-32px)] sm:w-[calc(100%-48px)] max-w-[1000px] z-10">
-              <div className="bg-white p-4 sm:p-5 md:p-6 rounded-[4px] shadow-[0_5px_30px_rgba(0,0,0,0.12)] animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
-                <div className="flex flex-col md:flex-row gap-4 md:gap-0">
-                  <div className="flex-1 md:border-r md:border-[#e8e8e8] md:pr-4">
-                    <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH</label>
+            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-6 lg:bottom-10 w-[calc(100%-48px)] max-w-[1000px] z-10">
+              <div className="bg-white p-5 md:p-6 rounded-[4px] shadow-[0_5px_30px_rgba(0,0,0,0.12)] animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
+                <div className="flex flex-row gap-0">
+                  <div className="flex-1 border-r border-[#e8e8e8] pr-4">
+                    <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH</label>
                     <input 
                       type="text" 
                       placeholder="Search keyword" 
                       value={keyword}
                       onChange={(e) => setKeyword(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                      className="w-full h-[44px] sm:h-[46px] px-3 text-[14px] sm:text-[15px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
+                      className="w-full h-[46px] px-3 text-[15px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
                     />
                   </div>
 
-                  <div className="flex-1 md:border-r md:border-[#e8e8e8] md:px-4">
-                    <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">LOOKING FOR</label>
+                  <div className="flex-1 border-r border-[#e8e8e8] px-4">
+                    <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">LOOKING FOR</label>
                     <div className="relative">
                       <select 
                         value={type}
                         onChange={(e) => setType(e.target.value)}
-                        className="w-full h-[44px] sm:h-[46px] px-3 text-[14px] sm:text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                        className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
                       >
                         <option>Property Type</option>
                         <option>Commercial</option>
@@ -96,13 +96,13 @@ export function Hero() {
                     </div>
                   </div>
 
-                  <div className="flex-1 md:border-r md:border-[#e8e8e8] md:px-4">
-                    <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH BY AREA</label>
+                  <div className="flex-1 border-r border-[#e8e8e8] px-4">
+                    <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH BY AREA</label>
                     <div className="relative">
                       <select 
                         value={area}
                         onChange={(e) => setArea(e.target.value)}
-                        className="w-full h-[44px] sm:h-[46px] px-3 text-[14px] sm:text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                        className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
                       >
                         <option>Area</option>
                         <option>Aluva</option>
@@ -120,16 +120,89 @@ export function Hero() {
                     </div>
                   </div>
 
-                  <div className="md:pl-4 flex flex-col justify-end">
-                    <label className="text-[10px] sm:text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block md:opacity-0">&nbsp;</label>
+                  <div className="pl-4 flex flex-col justify-end">
+                    <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block opacity-0">&nbsp;</label>
                     <button 
                       onClick={handleSearch}
-                      className="w-full md:w-[140px] lg:w-[160px] h-[44px] sm:h-[46px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
+                      className="w-[140px] lg:w-[160px] h-[46px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
                     >
                       <Search size={20} strokeWidth={2.5} />
                     </button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="md:hidden mt-4">
+            <div className="bg-white p-4 rounded-[4px] shadow-[0_5px_30px_rgba(0,0,0,0.12)]">
+              <div className="space-y-4">
+                <div>
+                  <label className="text-[10px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH</label>
+                  <input 
+                    type="text" 
+                    placeholder="Search keyword" 
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                    className="w-full h-[44px] px-3 text-[14px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">LOOKING FOR</label>
+                  <div className="relative">
+                    <select 
+                      value={type}
+                      onChange={(e) => setType(e.target.value)}
+                      className="w-full h-[44px] px-3 text-[14px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                    >
+                      <option>Property Type</option>
+                      <option>Commercial</option>
+                      <option>Office</option>
+                      <option>Plot</option>
+                      <option>Rent</option>
+                      <option>Residential</option>
+                      <option>Villa</option>
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L5 5L9 1" stroke="#999999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH BY AREA</label>
+                  <div className="relative">
+                    <select 
+                      value={area}
+                      onChange={(e) => setArea(e.target.value)}
+                      className="w-full h-[44px] px-3 text-[14px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                    >
+                      <option>Area</option>
+                      <option>Aluva</option>
+                      <option>Infopark</option>
+                      <option>Kakkanad</option>
+                      <option>Kizhakkambalam</option>
+                      <option>Pukkattupady</option>
+                      <option>Pattimattom</option>
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L5 5L9 1" stroke="#999999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={handleSearch}
+                  className="w-full h-[44px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
+                >
+                  <Search size={20} strokeWidth={2.5} />
+                </button>
               </div>
             </div>
           </div>

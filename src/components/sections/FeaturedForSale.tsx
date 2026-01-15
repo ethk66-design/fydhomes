@@ -17,18 +17,17 @@ export async function FeaturedForSale() {
   }
 
   return (
-    <section className="bg-white py-[80px]">
-      <div className="container mx-auto px-5 lg:px-[15px] max-w-[1170px]">
-        {/* Section Header */}
-        <div className="flex items-center justify-between mb-8">
+    <section className="bg-white py-12 sm:py-16 md:py-[80px]">
+      <div className="container mx-auto px-4 sm:px-5 lg:px-[15px] max-w-[1170px]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <div className="w-4 h-4 rounded-full border border-[#2D7A8C] flex items-center justify-center p-[2px]">
                 <div className="w-full h-full rounded-full bg-[#2D7A8C]"></div>
               </div>
-              <span className="text-[12px] font-semibold text-[#2D7A8C] uppercase tracking-wider">Properties</span>
+              <span className="text-[11px] sm:text-[12px] font-semibold text-[#2D7A8C] uppercase tracking-wider">Properties</span>
             </div>
-            <h2 className="text-[32px] font-bold font-sans text-black leading-tight">
+            <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold font-sans text-black leading-tight">
               Featured For Sale
             </h2>
           </div>
@@ -49,8 +48,7 @@ export async function FeaturedForSale() {
           </div>
         </div>
 
-        {/* Property Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-7.5">
           {properties && properties.length > 0 ? (
             properties.map((property) => (
               <PropertyCard key={property.id} property={property} />
@@ -62,10 +60,10 @@ export async function FeaturedForSale() {
           )}
         </div>
 
-        <div className="flex md:hidden justify-center mt-8">
+        <div className="flex md:hidden justify-center mt-6 sm:mt-8">
            <Link 
               href="/listings?type=sale"
-              className="bg-[#205c6d] text-white px-8 py-3 rounded-sm text-[13px] font-bold uppercase tracking-wider"
+              className="bg-[#205c6d] text-white px-6 sm:px-8 py-3 rounded-sm text-[12px] sm:text-[13px] font-bold uppercase tracking-wider"
             >
               View All Properties
             </Link>

@@ -117,98 +117,96 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-xl border border-[#eeeeee] shadow-sm">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8 bg-white p-4 sm:p-6 md:p-8 rounded-xl border border-[#eeeeee] shadow-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         
-        {/* Left Column: Basic Info */}
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-black uppercase tracking-wider">Property Title</label>
+        <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-1.5 sm:space-y-2">
+            <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Property Title</label>
             <Input
               name="title"
               value={formData.title}
               onChange={handleInputChange}
               required
               placeholder="e.g. Luxury 4BHK Villa in Kakkanad"
-              className="border-[#eeeeee]"
+              className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11"
             />
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-black uppercase tracking-wider">Description</label>
+          <div className="space-y-1.5 sm:space-y-2">
+            <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Description</label>
             <Textarea
               name="description"
               value={formData.description}
               onChange={handleInputChange}
               placeholder="Detailed description of the property..."
-              className="min-h-[150px] border-[#eeeeee]"
+              className="min-h-[120px] sm:min-h-[150px] border-[#eeeeee] text-sm sm:text-base"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Price</label>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Price</label>
               <Input
                 name="price"
                 value={formData.price}
                 onChange={handleInputChange}
                 placeholder="₹1.25 CR"
-                className="border-[#eeeeee]"
+                className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11"
               />
             </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Location</label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Location</label>
               <Input
                 name="location"
                 value={formData.location}
                 onChange={handleInputChange}
                 placeholder="Kakkanad, Kochi"
-                className="border-[#eeeeee]"
+                className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Beds</label>
+          <div className="grid grid-cols-3 gap-2 sm:gap-4">
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Beds</label>
               <Input
                 type="number"
                 name="beds"
                 value={formData.beds}
                 onChange={handleInputChange}
-                className="border-[#eeeeee]"
+                className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11"
               />
             </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Baths</label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Baths</label>
               <Input
                 type="number"
                 name="baths"
                 value={formData.baths}
                 onChange={handleInputChange}
-                className="border-[#eeeeee]"
+                className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11"
               />
             </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Area</label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Area</label>
               <Input
                 name="area"
                 value={formData.area}
                 onChange={handleInputChange}
                 placeholder="2500 sqft"
-                className="border-[#eeeeee]"
+                className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11"
               />
             </div>
           </div>
         </div>
 
-        {/* Right Column: Settings & Images */}
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Property Type</label>
+        <div className="space-y-4 sm:space-y-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Property Type</label>
               <Select value={formData.type} onValueChange={(v) => handleSelectChange("type", v)}>
-                <SelectTrigger className="border-[#eeeeee]">
+                <SelectTrigger className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11">
                   <SelectValue placeholder="Select Type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -221,10 +219,10 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
                 </SelectContent>
               </Select>
             </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Listing Type</label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Listing Type</label>
               <Select value={formData.listing_type} onValueChange={(v) => handleSelectChange("listing_type", v)}>
-                <SelectTrigger className="border-[#eeeeee]">
+                <SelectTrigger className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11">
                   <SelectValue placeholder="Select Type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -235,10 +233,10 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-black uppercase tracking-wider">Status</label>
+          <div className="space-y-1.5 sm:space-y-2">
+            <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Status</label>
             <Select value={formData.status} onValueChange={(v) => handleSelectChange("status", v)}>
-              <SelectTrigger className="border-[#eeeeee]">
+              <SelectTrigger className="border-[#eeeeee] text-sm sm:text-base h-10 sm:h-11">
                 <SelectValue placeholder="Select Status" />
               </SelectTrigger>
               <SelectContent>
@@ -249,25 +247,25 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
             </Select>
           </div>
 
-          <div className="space-y-4">
-            <label className="text-sm font-bold text-black uppercase tracking-wider block">Property Images</label>
+          <div className="space-y-3 sm:space-y-4">
+            <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider block">Property Images</label>
             
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3">
               {images.map((img, idx) => (
                 <div key={idx} className="relative aspect-square rounded-md overflow-hidden border border-[#eeeeee] group">
                   <Image src={img} alt={`Property ${idx}`} fill className="object-cover" />
                   <button
                     type="button"
                     onClick={() => removeImage(idx)}
-                    className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-0.5 sm:p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                   >
-                    <X size={12} />
+                    <X size={10} className="sm:w-3 sm:h-3" />
                   </button>
                 </div>
               ))}
               <label className="aspect-square rounded-md border-2 border-dashed border-[#eeeeee] flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors">
-                {uploading ? <Loader2 className="animate-spin text-[#2d7a8c]" /> : <Upload className="text-[#5c5c5c]" />}
-                <span className="text-[10px] font-bold text-[#5c5c5c] mt-2 uppercase">Upload</span>
+                {uploading ? <Loader2 className="animate-spin text-[#2d7a8c] w-5 h-5" /> : <Upload className="text-[#5c5c5c] w-5 h-5" />}
+                <span className="text-[8px] sm:text-[10px] font-bold text-[#5c5c5c] mt-1 sm:mt-2 uppercase">Upload</span>
                 <input type="file" multiple accept="image/*" className="hidden" onChange={handleImageUpload} disabled={uploading} />
               </label>
             </div>
@@ -276,21 +274,21 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
 
       </div>
 
-      <div className="flex justify-end gap-4 pt-6 border-t border-[#eeeeee]">
+      <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-[#eeeeee]">
         <Button
           type="button"
           variant="outline"
           onClick={() => router.push("/admin")}
-          className="border-[#eeeeee] text-[#5c5c5c]"
+          className="border-[#eeeeee] text-[#5c5c5c] w-full sm:w-auto order-2 sm:order-1"
         >
           Cancel
         </Button>
         <Button
           type="submit"
           disabled={loading}
-          className="bg-[#2d7a8c] hover:bg-[#256a7a] text-white px-10"
+          className="bg-[#2d7a8c] hover:bg-[#256a7a] text-white px-6 sm:px-10 w-full sm:w-auto order-1 sm:order-2"
         >
-          {loading ? <Loader2 className="animate-spin mr-2" /> : null}
+          {loading ? <Loader2 className="animate-spin mr-2 w-4 h-4" /> : null}
           {isEditing ? "Update Property" : "Create Property"}
         </Button>
       </div>

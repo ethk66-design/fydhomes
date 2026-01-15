@@ -8,7 +8,7 @@ import FAQAccordion from '@/components/sections/faq-accordion';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white pt-[90px]">
+    <main className="min-h-screen bg-white pt-[70px] sm:pt-[90px]">
       <AboutHero />
       <MissionStatement />
       <WhyChooseUs />

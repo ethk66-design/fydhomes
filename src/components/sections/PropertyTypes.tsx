@@ -36,29 +36,26 @@ const propertyTypes = [
 
 export function PropertyTypes() {
   return (
-    <section className="bg-white py-[80px]">
-      <div className="container px-4">
-        {/* Section Header */}
-        <div className="mb-[40px]">
+    <section className="bg-white py-12 sm:py-16 md:py-[80px]">
+      <div className="container mx-auto px-4 sm:px-5 max-w-[1170px]">
+        <div className="mb-6 sm:mb-[40px]">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-[18px] h-[18px] rounded-full border border-primary flex items-center justify-center">
               <div className="w-[6px] h-[6px] rounded-full bg-primary"></div>
             </div>
-            <span className="text-[12px] font-semibold text-primary uppercase tracking-[1px]">Lifestyle</span>
+            <span className="text-[11px] sm:text-[12px] font-semibold text-primary uppercase tracking-[1px]">Lifestyle</span>
           </div>
-            <h2 className="text-[32px] font-bold text-black font-sans m-0">Explore Property Types</h2>
+            <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-black font-sans m-0">Explore Property Types</h2>
           </div>
 
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-[30px]">
           {propertyTypes.map((type, index) => (
             <a 
               key={index} 
               href="#" 
               className="flex items-center bg-white border border-[#eeeeee] p-[10px] rounded-[4px] hover:shadow-card transition-all duration-300 group"
             >
-              {/* Thumbnail */}
-              <div className="relative w-[100px] h-[80px] overflow-hidden rounded-[2px] flex-shrink-0">
+              <div className="relative w-[80px] h-[70px] sm:w-[100px] sm:h-[80px] overflow-hidden rounded-[2px] flex-shrink-0">
                 <Image
                   src={type.image}
                   alt={type.title}
@@ -67,12 +64,11 @@ export function PropertyTypes() {
                 />
               </div>
 
-              {/* Content */}
-              <div className="ml-[20px] flex flex-col justify-center">
-                <h3 className="text-[14px] font-bold text-black uppercase mb-[4px] tracking-[0.5px]">
+              <div className="ml-4 sm:ml-[20px] flex flex-col justify-center">
+                <h3 className="text-[13px] sm:text-[14px] font-bold text-black uppercase mb-[4px] tracking-[0.5px]">
                   {type.title}
                 </h3>
-                <p className="text-[13px] text-[#5c5c5c] font-medium m-0">
+                <p className="text-[12px] sm:text-[13px] text-[#5c5c5c] font-medium m-0">
                   {type.count}
                 </p>
               </div>

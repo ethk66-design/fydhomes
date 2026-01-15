@@ -33,46 +33,46 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f4f8fb] px-5">
-      <Card className="w-full max-w-md shadow-lg border-[#eeeeee]">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold font-serif text-black">Admin Login</CardTitle>
-          <p className="text-sm text-[#5c5c5c]">Access the FYD Homes management portal</p>
+    <div className="min-h-screen flex items-center justify-center bg-[#f4f8fb] px-4 sm:px-5 py-10">
+      <Card className="w-full max-w-[380px] sm:max-w-md shadow-lg border-[#eeeeee]">
+        <CardHeader className="text-center px-4 sm:px-6 pt-6 sm:pt-8">
+          <CardTitle className="text-xl sm:text-2xl font-bold font-serif text-black">Admin Login</CardTitle>
+          <p className="text-xs sm:text-sm text-[#5c5c5c] mt-1">Access the FYD Homes management portal</p>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Email</label>
+        <CardContent className="px-4 sm:px-6">
+          <form onSubmit={handleLogin} className="space-y-3 sm:space-y-4">
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Email</label>
               <Input
                 type="email"
                 placeholder="admin@fydhomes.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-12 border-[#eeeeee]"
+                className="h-10 sm:h-12 border-[#eeeeee] text-sm sm:text-base"
               />
             </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-black uppercase tracking-wider">Password</label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Password</label>
               <Input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="h-12 border-[#eeeeee]"
+                className="h-10 sm:h-12 border-[#eeeeee] text-sm sm:text-base"
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full h-12 bg-[#2d7a8c] hover:bg-[#256a7a] text-white font-bold uppercase tracking-widest mt-4"
+              className="w-full h-10 sm:h-12 bg-[#2d7a8c] hover:bg-[#256a7a] text-white font-bold uppercase tracking-widest mt-3 sm:mt-4 text-xs sm:text-sm"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="text-center text-xs text-[#5c5c5c]">
+        <CardFooter className="text-center text-[10px] sm:text-xs text-[#5c5c5c] pb-6 sm:pb-8">
           Authorized Personnel Only
         </CardFooter>
       </Card>

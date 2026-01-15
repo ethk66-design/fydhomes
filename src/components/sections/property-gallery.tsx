@@ -15,25 +15,25 @@ const PropertyGallery = ({ images = [] }: PropertyGalleryProps) => {
   const moreCount = displayImages.length > 3 ? displayImages.length - 3 : 0;
 
   return (
-    <section className="w-full bg-white pt-6 pb-2">
-      <div className="container mx-auto px-5 lg:max-w-[1480px]">
+    <section className="w-full bg-white pt-4 sm:pt-6 pb-2">
+      <div className="container mx-auto px-4 sm:px-5 lg:max-w-[1480px]">
         <div className="relative group">
           {moreCount > 0 && (
-            <div className="absolute bottom-4 right-4 z-10">
+            <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 z-10">
               <button 
-                className="flex items-center gap-2 bg-white/90 hover:bg-white text-black px-3 py-1.5 rounded-[4px] text-[13px] font-medium shadow-sm border border-black/5 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 sm:gap-2 bg-white/90 hover:bg-white text-black px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-[4px] text-[12px] sm:text-[13px] font-medium shadow-sm border border-black/5 transition-colors cursor-pointer"
                 aria-label="View more photos"
               >
                 <svg 
                   viewBox="0 0 24 24" 
-                  width="16" 
-                  height="16" 
+                  width="14" 
+                  height="14" 
                   stroke="currentColor" 
                   strokeWidth="2" 
                   fill="none" 
                   strokeLinecap="round" 
                   strokeLinejoin="round" 
-                  className="text-gray-700"
+                  className="text-gray-700 sm:w-4 sm:h-4"
                 >
                   <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                   <circle cx="8.5" cy="8.5" r="1.5" />
@@ -44,8 +44,8 @@ const PropertyGallery = ({ images = [] }: PropertyGalleryProps) => {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[10px] items-stretch">
-            <div className="md:col-span-2 overflow-hidden rounded-[4px] relative h-[300px] md:h-[564px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-[10px] items-stretch">
+            <div className="md:col-span-2 overflow-hidden rounded-[4px] relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[564px]">
               <Image 
                 src={displayImages[0]} 
                 alt="Property Main View" 
@@ -55,7 +55,7 @@ const PropertyGallery = ({ images = [] }: PropertyGalleryProps) => {
               />
             </div>
 
-            <div className="flex flex-col gap-[10px] h-[300px] md:h-[564px]">
+            <div className="flex flex-row md:flex-col gap-2 sm:gap-[10px] h-[120px] sm:h-[150px] md:h-[450px] lg:h-[564px]">
               <div className="flex-1 overflow-hidden rounded-[4px] relative">
                 <Image 
                   src={displayImages[1] || displayImages[0]} 

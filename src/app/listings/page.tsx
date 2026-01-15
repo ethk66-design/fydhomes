@@ -31,11 +31,9 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
     query = query.ilike("title", `%${keyword}%`);
   }
 
-  // Handle both type and listing_type
   let finalListingType = listing_type;
   let finalPropertyType = type;
 
-  // If type is "Rent" or "Sale", it's actually a listing type
   if (type === "Rent" || type === "Sale" || type === "rent" || type === "sale") {
     finalListingType = type;
     finalPropertyType = undefined;
@@ -46,7 +44,6 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   }
   
   if (finalListingType) {
-    // Standardize to Title Case for DB match (Sale/Rent)
     const formattedListingType = finalListingType.charAt(0).toUpperCase() + finalListingType.slice(1).toLowerCase();
     query = query.eq("listing_type", formattedListingType);
   }
@@ -66,26 +63,23 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
     : "Property Listings";
 
   return (
-    <main className="min-h-screen bg-white pb-20">
-      {/* Header Spacer */}
-      <div className="h-[80px] bg-[#f4f8fb]"></div>
+    <main className="min-h-screen bg-white pb-12 sm:pb-20">
+      <div className="h-[60px] sm:h-[80px] bg-[#f4f8fb]"></div>
       
-      {/* Search Section */}
-      <div className="bg-[#f4f8fb] pt-12 pb-24">
-        <div className="container mx-auto">
-          <h1 className="text-center mb-12 text-4xl font-bold font-serif text-black uppercase tracking-tight">
+      <div className="bg-[#f4f8fb] pt-8 sm:pt-12 pb-16 sm:pb-24">
+        <div className="container mx-auto px-4 sm:px-5">
+          <h1 className="text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-black uppercase tracking-tight">
             {pageTitle}
           </h1>
-          <Suspense fallback={<div>Loading filters...</div>}>
+          <Suspense fallback={<div className="text-center">Loading filters...</div>}>
             <SearchFilter />
           </Suspense>
         </div>
       </div>
 
-      {/* Grid Section */}
-      <div className="container mx-auto mt-20 px-5">
-        <div className="flex items-center justify-between mb-10 border-b border-[#eeeeee] pb-4">
-          <p className="text-[#5c5c5c] font-medium">
+      <div className="container mx-auto mt-10 sm:mt-16 md:mt-20 px-4 sm:px-5">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-10 border-b border-[#eeeeee] pb-4 gap-2">
+          <p className="text-[#5c5c5c] font-medium text-sm sm:text-base">
             Showing <span className="text-black font-bold">{properties?.length || 0}</span> properties
             {(keyword || type || area || listing_type) && (
               <span className="ml-2 text-xs uppercase tracking-widest text-[#2d7a8c]"> (Filtered)</span>
@@ -94,14 +88,14 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         </div>
 
         {properties && properties.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {properties.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-[#f4f8fb] rounded-lg border-2 border-dashed border-[#eeeeee]">
-            <h3 className="text-[#5c5c5c] font-medium">No properties match your search criteria.</h3>
+          <div className="text-center py-12 sm:py-20 bg-[#f4f8fb] rounded-lg border-2 border-dashed border-[#eeeeee]">
+            <h3 className="text-[#5c5c5c] font-medium text-sm sm:text-base">No properties match your search criteria.</h3>
             <Link 
               href="/listings"
               className="mt-4 inline-block text-[#2d7a8c] font-bold uppercase text-xs tracking-widest hover:underline"

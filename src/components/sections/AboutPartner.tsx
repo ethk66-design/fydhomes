@@ -1,22 +1,12 @@
 import React from 'react';
 
-/**
- * AboutPartner Component
- * 
- * This component clones the 'Your Trusted Real Estate Partner in Kochi' section including:
- * 1. An informative header with text on the left/right split.
- * 2. A 'More Information' call-to-action button.
- * 3. A grid of social media and client stats cards with specific counters (295K+, 16.4K+, 500+).
- */
-
 export function AboutPartner() {
   return (
-    <section className="py-[80px] bg-white">
-      <div className="container mx-auto px-5 max-w-[1170px]">
-        {/* Header Text Section */}
-        <div className="flex flex-col lg:flex-row justify-between mb-16 gap-8">
+    <section className="py-12 sm:py-16 md:py-[80px] bg-white">
+      <div className="container mx-auto px-4 sm:px-5 max-w-[1170px]">
+        <div className="flex flex-col lg:flex-row justify-between mb-10 sm:mb-16 gap-6 sm:gap-8">
             <div className="lg:w-1/2">
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
                   <span className="text-[#2b7489]">
                     <svg
                       width="14"
@@ -33,17 +23,17 @@ export function AboutPartner() {
                       <circle cx="12" cy="12" r="1" />
                     </svg>
                   </span>
-                  <span className="uppercase text-[12px] font-bold tracking-widest text-[#2b7489]">
+                  <span className="uppercase text-[11px] sm:text-[12px] font-bold tracking-widest text-[#2b7489]">
                     About Us
                   </span>
                 </div>
-                <h2 className="font-sans text-[32px] md:text-[40px] leading-[1.2] font-bold text-black max-w-[450px]">
+                <h2 className="font-sans text-[26px] sm:text-[32px] md:text-[40px] leading-[1.2] font-bold text-black max-w-[450px]">
                   Your Trusted Real Estate Business In Kochi
                 </h2>
             </div>
 
             <div className="lg:w-[45%] flex flex-col items-start lg:items-end">
-              <p className="text-[#5c5c5c] text-[15px] md:text-[16px] leading-[1.6] mb-8 text-left lg:text-right">
+              <p className="text-[#5c5c5c] text-[14px] sm:text-[15px] md:text-[16px] leading-[1.6] mb-6 sm:mb-8 text-left lg:text-right">
                 At Find Your Dream Home, we help you buy, sell, rent, or build with
                 confidence. From prime plots to luxury villas, our local expertise
                 and personalized service make your real estate journey smooth and
@@ -51,41 +41,37 @@ export function AboutPartner() {
               </p>
               <a
                 href="/about"
-                className="bg-[#205c6d] text-white px-8 py-3.5 rounded-[4px] text-[13px] font-bold uppercase tracking-[0.5px] hover:bg-[#1a4b59] transition-colors"
+                className="bg-[#205c6d] text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-[4px] text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.5px] hover:bg-[#1a4b59] transition-colors"
               >
                 More Information
               </a>
             </div>
         </div>
 
-        {/* Stats Grid Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Instagram Stat Card */}
-          <div className="bg-[#f4f8fb] rounded-[10px] py-11 px-9 flex flex-col items-start hover:shadow-md transition-all">
-            <span className="text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="bg-[#f4f8fb] rounded-[10px] py-8 sm:py-11 px-6 sm:px-9 flex flex-col items-start hover:shadow-md transition-all">
+            <span className="text-[32px] sm:text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
               295K+
             </span>
-            <span className="text-[#2b7489] font-semibold text-[17px]">
+            <span className="text-[#2b7489] font-semibold text-[15px] sm:text-[17px]">
               Instagram Followers
             </span>
           </div>
 
-          {/* YouTube Stat Card */}
-          <div className="bg-[#f4f8fb] rounded-[10px] py-11 px-9 flex flex-col items-start hover:shadow-md transition-all">
-            <span className="text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
+          <div className="bg-[#f4f8fb] rounded-[10px] py-8 sm:py-11 px-6 sm:px-9 flex flex-col items-start hover:shadow-md transition-all">
+            <span className="text-[32px] sm:text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
               16.4k+
             </span>
-            <span className="text-[#2b7489] font-semibold text-[17px]">
+            <span className="text-[#2b7489] font-semibold text-[15px] sm:text-[17px]">
               Youtube Subscribers
             </span>
           </div>
 
-          {/* Customers Stat Card */}
-          <div className="bg-[#f4f8fb] rounded-[10px] py-11 px-9 flex flex-col items-start hover:shadow-md transition-all">
-            <span className="text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
+          <div className="bg-[#f4f8fb] rounded-[10px] py-8 sm:py-11 px-6 sm:px-9 flex flex-col items-start hover:shadow-md transition-all">
+            <span className="text-[32px] sm:text-[44px] font-bold text-black mb-1 leading-none tracking-tight">
               500+
             </span>
-            <span className="text-[#2b7489] font-semibold text-[17px]">
+            <span className="text-[#2b7489] font-semibold text-[15px] sm:text-[17px]">
               Total Customers
             </span>
           </div>

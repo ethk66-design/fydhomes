@@ -77,15 +77,15 @@ const Navigation = () => {
       <div className="container mx-auto px-5 lg:px-0">
         <div className="flex items-center justify-between h-[80px]">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="block">
-              <img
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/fyd-homes-scaled-e1754756623724-1.png"
-                alt="fyd homes"
-                className="h-[60px] lg:h-[70px] w-auto transition-transform duration-300"
-              />
-            </Link>
-          </div>
+            <div className="flex-shrink-0">
+              <Link href="/" className="block">
+                <img
+                  src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459775863.png?width=8000&height=8000&resize=contain"
+                  alt="fyd homes"
+                  className="h-[60px] lg:h-[70px] w-auto transition-transform duration-300"
+                />
+              </Link>
+            </div>
 
           {/* Desktop Menu - Center Aligned */}
           <div className="hidden lg:flex flex-grow justify-center">

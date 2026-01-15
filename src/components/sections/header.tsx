@@ -12,12 +12,12 @@ export default function Header() {
       <div className="container mx-auto max-w-[1200px] px-4 sm:px-5 md:px-10 h-[70px] sm:h-[90px] flex items-center justify-between">
         
         <div className="flex-shrink-0">
-          <a href="/" className="block">
-            <Image
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/fyd-homes-scaled-e1754756623724-1.png"
-              alt="fyd homes"
-              width={160}
-              height={50}
+            <a href="/" className="block">
+              <Image
+                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459775863.png?width=8000&height=8000&resize=contain"
+                alt="fyd homes"
+                width={160}
+                height={50}
               className="h-[40px] sm:h-[50px] w-auto object-contain"
               priority
             />

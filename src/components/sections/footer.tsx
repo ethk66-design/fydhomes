@@ -5,14 +5,14 @@ const Footer = () => {
     <footer className="footer-container bg-white pt-10 sm:pt-[60px] pb-0 font-sans border-t border-[#EAEAEA]">
       <div className="container mx-auto px-4 sm:px-5 max-w-[1200px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 sm:pb-[50px]">
-          <div className="sm:col-span-2 lg:col-span-1">
-            <div className="footer-logo mb-6">
-              <a href="/">
-                <img
-                  src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/icons/FYD-LOGO-2.png"
-                  alt="Find Your Dream Home"
-                  width={200}
-                  height={80}
+            <div className="sm:col-span-2 lg:col-span-1">
+              <div className="footer-logo mb-6">
+                <a href="/">
+                  <img
+                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459789386.png?width=8000&height=8000&resize=contain"
+                    alt="Find Your Dream Home"
+                    width={200}
+                    height={80}
                   className="object-contain max-w-[160px] sm:max-w-[200px]"
                 />
               </a>

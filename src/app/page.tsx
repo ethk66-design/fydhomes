@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/hero";
+import { FindPerfectHome } from "@/components/sections/FindPerfectHome";
 import { AboutPartner } from "@/components/sections/AboutPartner";
 import { FeaturedForSale } from "@/components/sections/FeaturedForSale";
 import { FeaturedForRent } from "@/components/sections/FeaturedForRent";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <Hero />
+      <FindPerfectHome />
       <AboutPartner />
       <FeaturedForSale />
       <FeaturedForRent />

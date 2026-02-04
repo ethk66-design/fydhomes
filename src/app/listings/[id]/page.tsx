@@ -19,13 +19,9 @@ interface PropertyPageProps {
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export async function generateStaticParams() {
-  const properties = await prisma.property.findMany({
-    select: { id: true },
-  });
-
-  return properties?.map((property) => ({
-    id: property.id,
-  })) || [];
+  // Return empty array to make pages dynamic (no static pre-generation)
+  // This avoids database connection during build time on Hostinger
+  return [];
 }
 
 export async function generateMetadata({ params }: PropertyPageProps) {

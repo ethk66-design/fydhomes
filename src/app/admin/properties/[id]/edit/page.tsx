@@ -15,36 +15,21 @@ export default async function EditPropertyPage({ params }: EditPropertyPageProps
 
   const property = await prisma.property.findUnique({
     where: { id },
+    include: {
+      images: { orderBy: { order: 'asc' } },
+      tags: true,
+    },
   });
 
   if (!property) {
     notFound();
   }
 
-  // Parse images if stored as JSON string
-  let images = property.images;
-  if (typeof images === 'string') {
-    try {
-      images = JSON.parse(images);
-    } catch {
-      images = [];
-    }
-  }
-
-  // Parse tags if stored as JSON string
-  let tags = property.tags;
-  if (typeof tags === 'string') {
-    try {
-      tags = JSON.parse(tags);
-    } catch {
-      tags = [];
-    }
-  }
-
+  // Transform to match AdminPropertyForm interface (flatten relations to arrays)
   const propertyData = {
     ...property,
-    images: Array.isArray(images) ? images : [],
-    tags: Array.isArray(tags) ? tags : [],
+    images: property.images.map((img) => img.url),
+    tags: property.tags.map((t) => t.tag),
   };
 
   return (

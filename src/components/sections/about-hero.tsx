@@ -13,14 +13,14 @@ import Image from 'next/image';
  * - Tailwind CSS for styling
  * - Design specifications from the provided high-level design and screenshots
  */
-const AboutHero: React.FC = () => {
+const AboutHero: React.FC<{ heroImage?: string }> = ({ heroImage }) => {
   // Asset link from provided list
-  const heroImageUrl = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png";
+  const heroImageUrl = heroImage || "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/ChatGPT-Image-Aug-9-2025-11_24_54-AM-11.png";
 
   return (
     <section className="relative overflow-hidden bg-white">
       {/* Heading Container */}
-      <div className="container mx-auto px-6 pt-16 pb-8 md:pt-20 md:pb-12 max-w-[1140px]">
+      <div className="container mx-auto px-6 pt-4 pb-6 md:pt-4 md:pb-8 max-w-[1140px]">
         <div className="flex flex-col">
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
             <h1 className="font-display text-[40px] md:text-[48px] font-bold leading-[1.2] text-black mb-0">
@@ -44,7 +44,7 @@ const AboutHero: React.FC = () => {
               quality={90}
             />
           </div>
-          
+
           {/* Subtle overlay for professional finish as seen in some variations */}
           <div className="absolute inset-0 bg-black/5 pointer-events-none" />
         </div>

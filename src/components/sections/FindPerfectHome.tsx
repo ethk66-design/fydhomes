@@ -3,7 +3,7 @@ import { Phone } from 'lucide-react';
 
 export function FindPerfectHome() {
   return (
-    <section className="py-12 sm:py-16 md:py-[80px] bg-white">
+    <section className="py-8 sm:py-10 md:py-[40px] bg-white">
       <div className="container mx-auto px-4 sm:px-5 max-w-[1170px]">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-16">
           <div className="lg:w-[55%]">

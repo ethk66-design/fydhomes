@@ -20,7 +20,7 @@ const teamMembers = [
   {
     name: 'Akhil',
     role: 'Agent',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-02-scaled-8.png',
+    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
     phone: '+919656637339',
     email: 'akhilejohn805@gmail.com',
   },
@@ -48,9 +48,9 @@ const OurTeam = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[50px]">
           {teamMembers.map((member, index) => (
-            <div 
-              key={index} 
-              className="group animate-fade-in-up" 
+            <div
+              key={index}
+              className="group animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative aspect-[4/5] rounded-[10px] overflow-hidden mb-5">
@@ -72,14 +72,14 @@ const OurTeam = () => {
               </div>
 
               <div className="flex flex-col space-y-1.5 px-1">
-                <a 
+                <a
                   href={`tel:${member.phone.replace(/\s+/g, '')}`}
                   className="flex items-center text-[13px] text-[#555555] hover:text-[#307185] transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5 mr-2 text-[#307185]" />
                   <span>{member.phone}</span>
                 </a>
-                <a 
+                <a
                   href={`mailto:${member.email}`}
                   className="flex items-center text-[13px] text-[#555555] hover:text-[#307185] transition-colors break-all"
                 >

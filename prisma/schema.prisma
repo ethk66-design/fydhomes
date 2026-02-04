@@ -1,0 +1,133 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id               String    @id @default(uuid()) @db.Char(36)
+  title            String    @db.VarChar(255)
+  description      String?   @db.Text
+  price            String?   @db.VarChar(100)
+  location         String?   @db.VarChar(255)
+  beds             Int?
+  baths            Int?
+  area             String?   @db.VarChar(100)
+  land_area        String?   @db.VarChar(100)
+  status           String    @default("active") @db.VarChar(50)
+  type             String?   @db.VarChar(100)
+  listing_type     String?   @db.VarChar(50)
+  agent_id         String?   @db.Char(36)
+  youtube_video    String?   @db.VarChar(500)
+  parkings         Int?
+  meta_title       String?   @db.VarChar(255)
+  meta_description String?   @db.Text
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
+
+  // Relations for array fields (converted from TEXT[])
+  images PropertyImage[]
+  tags   PropertyTag[]
+  leads  Lead[]
+
+  @@map("properties")
+}
+
+model PropertyImage {
+  id          String   @id @default(uuid()) @db.Char(36)
+  property_id String   @db.Char(36)
+  url         String   @db.VarChar(500)
+  order       Int      @default(0)
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@index([property_id])
+  @@map("property_images")
+}
+
+model PropertyTag {
+  id          String   @id @default(uuid()) @db.Char(36)
+  property_id String   @db.Char(36)
+  tag         String   @db.VarChar(100)
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@index([property_id])
+  @@map("property_tags")
+}
+
+model Testimonial {
+  id         String   @id @default(uuid()) @db.Char(36)
+  name       String   @db.VarChar(255)
+  role       String   @db.VarChar(255)
+  content    String   @db.Text
+  rating     Int
+  image_url  String?  @db.VarChar(500)
+  created_at DateTime @default(now())
+
+  @@map("testimonials")
+}
+
+model PageSeo {
+  id          String   @id @default(uuid()) @db.Char(36)
+  route       String   @unique @db.VarChar(255)
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  og_image    String?  @db.VarChar(500)
+  updated_at  DateTime @updatedAt
+
+  @@map("page_seo")
+}
+
+model PageAsset {
+  id          String   @id @default(uuid()) @db.Char(36)
+  page_route  String   @db.VarChar(255)
+  section_key String   @db.VarChar(255)
+  label       String   @db.VarChar(255)
+  asset_url   String   @db.VarChar(500)
+  alt_text    String?  @db.VarChar(500)
+  updated_at  DateTime @updatedAt
+
+  @@index([page_route, section_key])
+  @@map("page_assets")
+}
+
+model Lead {
+  id          String    @id @default(uuid()) @db.Char(36)
+  name        String    @db.VarChar(255)
+  email       String?   @db.VarChar(255)
+  phone       String?   @db.VarChar(50)
+  message     String?   @db.Text
+  property_id String?   @db.Char(36)
+  source      String?   @db.VarChar(100)
+  created_at  DateTime  @default(now())
+  property    Property? @relation(fields: [property_id], references: [id], onDelete: SetNull)
+
+  @@index([property_id])
+  @@map("leads")
+}
+
+// NextAuth.js required models
+model User {
+  id            String    @id @default(uuid()) @db.Char(36)
+  email         String    @unique @db.VarChar(255)
+  password_hash String    @db.VarChar(255)
+  full_name     String?   @db.VarChar(255)
+  role          String    @default("user") @db.VarChar(50)
+  created_at    DateTime  @default(now())
+  sessions      Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(uuid()) @db.Char(36)
+  sessionToken String   @unique @db.VarChar(255)
+  userId       String   @db.Char(36)
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}

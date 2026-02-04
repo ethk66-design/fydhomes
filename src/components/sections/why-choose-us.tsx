@@ -24,11 +24,11 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="section-padding bg-background w-full">
+    <section className="py-8 sm:py-10 md:py-[40px] bg-background w-full">
       <div className="container">
         {/* Section Header */}
         <div className="mb-[30px] animate-fadeInUp">
-          <h2 className="h2 text-[32px] font-bold font-display mb-0">
+          <h2 className="h2 text-[32px] font-bold mb-0">
             Why choose us
           </h2>
           <div className="h-[20px]"></div>
@@ -37,8 +37,8 @@ const WhyChooseUs = () => {
         {/* Feature Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[30px]">
           {features.map((feature, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="flex flex-col animate-fadeInUp"
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -55,10 +55,10 @@ const WhyChooseUs = () => {
 
               {/* Text Content */}
               <div className="flex flex-col">
-                <h3 className="h3 text-[20px] font-semibold font-sans mb-[15px] leading-[1.4] text-[#000000]">
+                <h3 className="h3 text-[20px] font-semibold mb-[15px] leading-[1.4] text-[#000000]">
                   {feature.title}
                 </h3>
-                <p className="text-[16px] font-normal font-sans leading-[1.7] text-[#333333] m-0">
+                <p className="text-[16px] font-normal leading-[1.7] text-[#333333] m-0">
                   {feature.description}
                 </p>
               </div>

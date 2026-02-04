@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    reactCompiler: true,
+  },
+  output: "standalone",
+  poweredByHeader: false,
+  compress: true,
 };
 
 export default nextConfig;

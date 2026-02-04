@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatPrice } from '@/lib/utils';
 
 interface PropertyOverviewTableProps {
   price?: string;
@@ -24,11 +25,10 @@ const PropertyOverviewTable = ({
   propertyType = "Villa"
 }: PropertyOverviewTableProps) => {
   const propertyData = [
-    { label: 'Price', value: price, secondaryLabel: 'Rooms', secondaryValue: rooms.toString() },
-    { label: 'Property Size', value: size, secondaryLabel: 'Garages', secondaryValue: garages.toString() },
-    { label: 'Land Area', value: landArea, secondaryLabel: 'Property Status', secondaryValue: status },
-    { label: 'Bedrooms', value: beds.toString(), secondaryLabel: 'Property Type', secondaryValue: propertyType },
-    { label: 'Bathrooms', value: baths.toString(), secondaryLabel: '', secondaryValue: '' },
+    { label: 'Price', value: formatPrice(price), secondaryLabel: 'Property Size', secondaryValue: size },
+    { label: 'Bedrooms', value: beds.toString(), secondaryLabel: 'Bathrooms', secondaryValue: baths.toString() },
+    { label: 'Parking Spaces', value: garages.toString(), secondaryLabel: 'Property Type', secondaryValue: propertyType },
+    { label: 'Land Area', value: landArea || 'N/A', secondaryLabel: 'Property Status', secondaryValue: status },
   ];
 
   return (
@@ -53,8 +53,8 @@ const PropertyOverviewTable = ({
                 <table className="w-full border-collapse">
                   <tbody>
                     {propertyData.map((row, index) => (
-                      <tr 
-                        key={index} 
+                      <tr
+                        key={index}
                         className="border-b border-[#EAEAEA] last:border-0"
                       >
                         <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] w-1/4">
@@ -80,22 +80,26 @@ const PropertyOverviewTable = ({
                         </td>
                       </tr>
                     ))}
-                    
+
                     <tr className="md:hidden border-b border-[#EAEAEA]">
-                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Rooms</span></td>
-                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{rooms}</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Rooms</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{rooms}</span></td>
                     </tr>
                     <tr className="md:hidden border-b border-[#EAEAEA]">
-                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Garages</span></td>
-                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{garages}</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Garages</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{garages}</span></td>
                     </tr>
                     <tr className="md:hidden border-b border-[#EAEAEA]">
-                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Property Status</span></td>
-                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{status}</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Property Status</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{status}</span></td>
                     </tr>
                     <tr className="md:hidden">
-                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Property Type</span></td>
-                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{propertyType}</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Property Type</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{propertyType}</span></td>
+                    </tr>
+                    <tr className="md:hidden border-b border-[#EAEAEA]">
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Land Area</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{landArea || 'N/A'}</span></td>
                     </tr>
                   </tbody>
                 </table>

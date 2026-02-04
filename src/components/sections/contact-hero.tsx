@@ -9,7 +9,7 @@ const ContactHero = () => {
         The animation is described as 'fadeInUp' in the HTML structure.
       */}
       <div className="container mx-auto px-[15px] max-w-[1170px]">
-        <div className="pt-[80px] pb-[80px] border-b border-[#e5e5e5]">
+        <div className="pt-[40px] pb-[40px] border-b border-[#e5e5e5]">
           <div className="flex flex-wrap">
             <div className="w-full">
               {/* 
@@ -17,9 +17,9 @@ const ContactHero = () => {
                 fadeInUp is the requested effect from the instructions and HTML data.
               */}
               <div className="animate-in fade-in slide-in-from-bottom-5 duration-700 ease-out fill-mode-forwards">
-                <h1 
+                <h1
                   className="font-serif text-[42px] font-bold leading-[1.2] text-black m-0 p-0"
-                  style={{ 
+                  style={{
                     fontFamily: 'var(--font-serif)',
                     color: '#000000'
                   }}

@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, ChevronDown } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 
 const ContactDetailsForm = () => {
   const [loading, setLoading] = useState(false);
@@ -28,20 +27,19 @@ const ContactDetailsForm = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.from('leads').insert([
-        {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          location: `${formData.city}, ${formData.area}`,
-          property_type: formData.propertyType,
-          expected_price: formData.budget,
-          message: formData.message,
+          message: `Location: ${formData.city}, ${formData.area}. Type: ${formData.propertyType}. Budget: ${formData.budget}. ${formData.message}`,
           source: 'contact'
-        }
-      ]);
+        })
+      });
 
-      if (error) throw error;
+      if (!res.ok) throw new Error('Failed to submit');
 
       setSubmitted(true);
       setFormData({
@@ -62,6 +60,7 @@ const ContactDetailsForm = () => {
     }
   };
 
+
   if (submitted) {
     return (
       <section className="bg-white py-[60px]">
@@ -72,7 +71,7 @@ const ContactDetailsForm = () => {
             </div>
             <h2 className="text-2xl font-bold mb-4">Message Sent!</h2>
             <p className="text-[#5c5c5c] mb-8">Thank you for your interest. Our experts will get back to you within 24 hours.</p>
-            <button 
+            <button
               onClick={() => setSubmitted(false)}
               className="text-[#1db043] font-bold uppercase text-xs tracking-widest hover:underline"
             >
@@ -95,8 +94,8 @@ const ContactDetailsForm = () => {
             </h2>
             <ul className="list-none p-0 flex flex-col gap-[15px]">
               <li>
-                <a 
-                  href="tel:+919544593991" 
+                <a
+                  href="tel:+919544593991"
                   className="flex items-center gap-[12px] text-[15px] text-black hover:text-[#1db043] transition-colors duration-200"
                 >
                   <Phone size={16} fill="currentColor" strokeWidth={0} className="text-black" />
@@ -104,8 +103,8 @@ const ContactDetailsForm = () => {
                 </a>
               </li>
               <li>
-                <a 
-                  href="tel:+919037013117" 
+                <a
+                  href="tel:+919037013117"
                   className="flex items-center gap-[12px] text-[15px] text-black hover:text-[#1db043] transition-colors duration-200"
                 >
                   <Phone size={16} fill="currentColor" strokeWidth={0} className="text-black" />
@@ -113,8 +112,8 @@ const ContactDetailsForm = () => {
                 </a>
               </li>
               <li>
-                <a 
-                  href="mailto:info@fydhomes.in" 
+                <a
+                  href="mailto:info@fydhomes.in"
                   className="flex items-center gap-[12px] text-[15px] text-black hover:text-[#1db043] transition-colors duration-200"
                 >
                   <Mail size={16} className="text-black" />
@@ -175,7 +174,7 @@ const ContactDetailsForm = () => {
 
               {/* Row 2: City Dropdown */}
               <div className="relative">
-                <select 
+                <select
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
@@ -198,7 +197,7 @@ const ContactDetailsForm = () => {
 
               {/* Row 3: Property Type Dropdown */}
               <div className="relative">
-                <select 
+                <select
                   name="propertyType"
                   value={formData.propertyType}
                   onChange={handleChange}
@@ -221,7 +220,7 @@ const ContactDetailsForm = () => {
 
               {/* Row 4: Area Dropdown */}
               <div className="relative">
-                <select 
+                <select
                   name="area"
                   value={formData.area}
                   onChange={handleChange}

@@ -1,4 +1,12 @@
 import React from 'react';
+import { getSeoMetadata } from "@/lib/seo";
+
+export const revalidate = 0;
+
+export async function generateMetadata() {
+  return getSeoMetadata("/projects", "Our Projects | FYD Homes", "Explore our premium ongoing and completed residential projects in Kochi.");
+}
+
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
@@ -29,12 +37,24 @@ const projects = [
   }
 ];
 
-export default function ProjectsPage() {
+import { getPageAsset } from "@/lib/assets";
+
+export default async function ProjectsPage() {
+  const heroBg = await getPageAsset('/projects', 'hero_bg', "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80");
+
   return (
     <main className="min-h-screen bg-white pt-[120px]">
       {/* Hero Section */}
-      <section className="bg-[#1db954] py-[60px] md:py-[80px] text-white">
-        <div className="container mx-auto px-5">
+      <section
+        className="bg-[#1db954] py-[60px] md:py-[80px] text-white relative overflow-hidden"
+        style={heroBg ? {
+          backgroundImage: `url(${heroBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        } : {}}
+      >
+        {heroBg && <div className="absolute inset-0 bg-black/50 z-0"></div>}
+        <div className="container mx-auto px-5 relative z-10">
           <div className="max-w-[800px]">
             <h1 className="text-[40px] md:text-[56px] font-bold leading-tight mb-6">
               Our Premium Projects
@@ -54,16 +74,15 @@ export default function ProjectsPage() {
               <div key={project.id} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}>
                 <div className="w-full lg:w-1/2">
                   <div className="relative overflow-hidden rounded-[20px] shadow-2xl group">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
+                    <img
+                      src={project.image}
+                      alt={project.title}
                       className="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute top-6 left-6">
-                      <span className={`px-4 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-wider text-white ${
-                        project.status === 'Ongoing' ? 'bg-[#2b7489]' : 
+                      <span className={`px-4 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-wider text-white ${project.status === 'Ongoing' ? 'bg-[#2b7489]' :
                         project.status === 'Completed' ? 'bg-[#1db954]' : 'bg-[#eab308]'
-                      }`}>
+                        }`}>
                         {project.status}
                       </span>
                     </div>
@@ -80,7 +99,7 @@ export default function ProjectsPage() {
                   <p className="text-[#5c5c5c] text-[18px] leading-relaxed mb-8">
                     {project.description}
                   </p>
-                  <Link 
+                  <Link
                     href={`/contact?subject=Inquiry about ${project.title}`}
                     className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-[8px] font-bold uppercase text-[13px] tracking-[1.5px] hover:bg-[#2b7489] transition-all"
                   >
@@ -100,7 +119,7 @@ export default function ProjectsPage() {
           <p className="text-[#5c5c5c] text-[18px] max-w-[700px] mx-auto mb-10 leading-relaxed">
             Whether you're looking to invest in our upcoming projects or want us to help launch yours, we're ready to partner with you.
           </p>
-          <Link 
+          <Link
             href="/contact"
             className="inline-block bg-[#1db954] text-white px-10 py-5 rounded-[8px] font-bold uppercase text-[14px] tracking-[2px] hover:shadow-lg transition-all"
           >

@@ -70,22 +70,21 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[1000] w-full transition-all duration-300 border-b border-[#eeeeee] ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-[1000] w-full transition-all duration-300 border-b border-[#eeeeee] ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'
+        }`}
     >
       <div className="container mx-auto px-5 lg:px-0">
         <div className="flex items-center justify-between h-[80px]">
           {/* Logo */}
-            <div className="flex-shrink-0">
-              <Link href="/" className="block">
-                <img
-                  src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459775863.png?width=8000&height=8000&resize=contain"
-                  alt="fyd homes"
-                  className="h-[60px] lg:h-[70px] w-auto transition-transform duration-300"
-                />
-              </Link>
-            </div>
+          <div className="flex-shrink-0">
+            <Link href="/" className="block">
+              <img
+                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459775863.png?width=8000&height=8000&resize=contain"
+                alt="fyd homes"
+                className="h-[60px] lg:h-[80px] w-auto transition-transform duration-300"
+              />
+            </Link>
+          </div>
 
           {/* Desktop Menu - Center Aligned */}
           <div className="hidden lg:flex flex-grow justify-center">
@@ -163,9 +162,8 @@ const Navigation = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-white z-[999] transition-transform duration-500 ease-in-out transform lg:hidden ${
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed inset-0 bg-white z-[999] transition-transform duration-500 ease-in-out transform lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
         style={{ top: '80px' }}
       >
         <div className="flex flex-col p-8 space-y-6">

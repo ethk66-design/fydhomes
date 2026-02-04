@@ -3,11 +3,15 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { motion } from 'framer-motion';
+
+
+
 
 const SearchFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   const [keyword, setKeyword] = useState(searchParams.get('keyword') || '');
   const [type, setType] = useState(searchParams.get('type') || '');
   const [area, setArea] = useState(searchParams.get('area') || '');
@@ -18,15 +22,20 @@ const SearchFilter: React.FC = () => {
     if (keyword) params.set('keyword', keyword);
     if (type) params.set('type', type);
     if (area) params.set('area', area);
-    
+
     router.push(`/listings?${params.toString()}`);
   };
 
   return (
-    <div className="relative z-20 w-full max-w-[1170px] mx-auto px-0">
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative z-20 w-full max-w-[1170px] mx-auto px-0"
+    >
       <div className="bg-white p-4 sm:p-6 md:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-none">
         <form onSubmit={handleSearch} className="flex flex-col lg:flex-row items-end gap-3 sm:gap-4 lg:gap-5">
-          
+
           <div className="w-full lg:flex-[1.2]">
             <label className="block text-[11px] sm:text-[13px] font-semibold text-black mb-2 font-sans uppercase tracking-wide">
               SEARCH
@@ -36,7 +45,7 @@ const SearchFilter: React.FC = () => {
               placeholder="Search keyword"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
-              className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] placeholder:text-[#5c5c5c]/50 font-sans"
+              className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] placeholder:text-[#5c5c5c]/50 font-sans transition-all"
             />
           </div>
 
@@ -45,10 +54,10 @@ const SearchFilter: React.FC = () => {
               LOOKING FOR
             </label>
             <div className="relative">
-              <select 
+              <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans"
+                className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
               >
                 <option value="">Property Type</option>
                 <option value="Commercial">Commercial</option>
@@ -60,7 +69,7 @@ const SearchFilter: React.FC = () => {
               </select>
               <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </div>
@@ -71,10 +80,10 @@ const SearchFilter: React.FC = () => {
               SEARCH BY AREA
             </label>
             <div className="relative">
-              <select 
+              <select
                 value={area}
                 onChange={(e) => setArea(e.target.value)}
-                className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans"
+                className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
               >
                 <option value="">Area</option>
                 <option value="Aluva">ALUVA</option>
@@ -86,24 +95,28 @@ const SearchFilter: React.FC = () => {
               </select>
               <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </div>
           </div>
 
-          <div className="w-full lg:w-auto">
+          <motion.div
+            className="w-full lg:w-auto"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <button
               type="submit"
               className="w-full lg:w-[100px] xl:w-[130px] h-[42px] sm:h-[45px] bg-[#1db954] hover:bg-[#1aa34a] transition-colors duration-200 flex items-center justify-center rounded-[4px]"
             >
               <Search className="text-white w-5 h-5" />
             </button>
-          </div>
+          </motion.div>
 
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

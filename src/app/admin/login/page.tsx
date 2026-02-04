@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,17 +18,19 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const result = await signIn("credentials", {
       email,
       password,
+      redirect: false,
     });
 
-    if (error) {
-      toast.error(error.message);
+    if (result?.error) {
+      toast.error(result.error);
       setLoading(false);
     } else {
       toast.success("Logged in successfully");
       router.push("/admin");
+      router.refresh();
     }
   };
 
@@ -49,7 +51,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-10 sm:h-12 border-[#eeeeee] text-sm sm:text-base"
+                className="h-12 border-[#eeeeee] text-base sm:text-sm"
               />
             </div>
             <div className="space-y-1.5 sm:space-y-2">
@@ -60,12 +62,12 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="h-10 sm:h-12 border-[#eeeeee] text-sm sm:text-base"
+                className="h-12 border-[#eeeeee] text-base sm:text-sm"
               />
             </div>
-            <Button 
-              type="submit" 
-              className="w-full h-10 sm:h-12 bg-[#2d7a8c] hover:bg-[#256a7a] text-white font-bold uppercase tracking-widest mt-3 sm:mt-4 text-xs sm:text-sm"
+            <Button
+              type="submit"
+              className="w-full h-12 bg-[#2d7a8c] hover:bg-[#256a7a] text-white font-bold uppercase tracking-widest mt-3 sm:mt-4 text-xs sm:text-sm"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}

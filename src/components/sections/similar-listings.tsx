@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Bed, Bath, ChevronRight, ChevronLeft } from 'lucide-react';
+import { formatPrice } from '@/lib/utils';
 
 interface SimilarListing {
   id: string;
@@ -69,7 +70,7 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
       </div>
       <div className="absolute top-2 right-2 flex flex-wrap gap-1 max-w-[80%] justify-end">
         {listing.tags.map((tag) => (
-          <span 
+          <span
             key={tag}
             className="bg-[#303030] text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-[2px] tracking-wider"
           >
@@ -78,17 +79,17 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
         ))}
       </div>
     </div>
-    
+
     <div className="p-3 sm:p-4">
       <h3 className="text-[#000000] text-[13px] sm:text-[15px] font-medium leading-[1.4] mb-2 sm:mb-3 line-clamp-2 min-h-[36px] sm:min-h-[42px] group-hover:text-[#D32F2F] transition-colors">
         <a href="#">{listing.title}</a>
       </h3>
-      
+
       <div className="flex items-center justify-between mt-auto pt-2 border-t border-[#EAEAEA]">
         <div className="text-[#000000] text-[14px] sm:text-[16px] font-bold">
-          {listing.price}
+          {formatPrice(listing.price)}
         </div>
-        
+
         <div className="flex items-center gap-2 sm:gap-3">
           {listing.beds && (
             <div className="flex items-center gap-1">

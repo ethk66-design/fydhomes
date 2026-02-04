@@ -1,5 +1,6 @@
 import React from 'react';
-import { Bed, Bath, Car, Maximize } from 'lucide-react';
+import { Bed, Bath, Car, Maximize, Trees } from 'lucide-react';
+import { stripHtml } from '@/lib/utils';
 
 interface GeneralInformationProps {
   propertyType?: string;
@@ -8,6 +9,7 @@ interface GeneralInformationProps {
   garages?: number;
   sqft?: number;
   description?: string;
+  landArea?: string | null;
 }
 
 const GeneralInformation = ({
@@ -16,10 +18,11 @@ const GeneralInformation = ({
   baths = 0,
   garages = 0,
   sqft = 0,
-  description = ""
+  description = "",
+  landArea = null
 }: GeneralInformationProps) => {
   return (
-    <section className="py-8 sm:py-12 md:py-[60px] bg-white">
+    <section className="py-6 sm:py-8 md:py-[40px] bg-white">
       <div className="container mx-auto px-4 sm:px-[20px] max-w-[1200px]">
         <div className="flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-[30px]">
           <div className="md:w-1/3">
@@ -69,13 +72,23 @@ const GeneralInformation = ({
                 </div>
                 <span className="text-[11px] sm:text-[12px] text-[#666666] tracking-tight ml-[22px] sm:ml-[26px]">SQFT</span>
               </div>
+
+              {landArea && (
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <Trees className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#666666]" strokeWidth={1.5} />
+                    <span className="text-[14px] sm:text-[15px] font-bold text-[#000000]">{landArea}</span>
+                  </div>
+                  <span className="text-[11px] sm:text-[12px] text-[#666666] tracking-tight ml-[22px] sm:ml-[26px]">Land Area</span>
+                </div>
+              )}
             </div>
 
             <div className="mt-6 sm:mt-8 border-t border-[#EAEAEA] pt-6 sm:pt-[30px]">
               <h3 className="text-[14px] sm:text-[16px] font-bold text-[#000000] mb-3 sm:mb-[15px]">Description</h3>
               <div className="text-[13px] sm:text-[15px] leading-[1.6] text-[#666666] space-y-4">
                 <p className="whitespace-pre-line">
-                  {description || "No description available for this property."}
+                  {stripHtml(description) || "No description available for this property."}
                 </p>
               </div>
             </div>

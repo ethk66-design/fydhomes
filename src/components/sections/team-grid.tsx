@@ -38,7 +38,7 @@ const teamMembers: TeamMember[] = [
     id: 'akhil',
     name: 'Akhil',
     role: 'Agent',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/ChatGPT-Image-Aug-9-2025-11_24_54-AM-11.png',
+    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
     phone: '+919656637339',
     email: 'akhilejohn805@gmail.com',
   },
@@ -78,10 +78,10 @@ export default function TeamGrid() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                
+
                 {/* Gradient Overlay for Text Legibility */}
                 <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
-                
+
                 {/* Overlay Text Content */}
                 <div className="absolute bottom-6 inset-x-0 text-center px-4">
                   <h3 className="text-white font-sans text-[18px] font-bold leading-tight mb-1">
@@ -95,14 +95,14 @@ export default function TeamGrid() {
 
               {/* Contact Details below the card */}
               <div className="flex flex-col space-y-1.5 px-1">
-                <a 
+                <a
                   href={`tel:${member.phone.replace(/\s/g, '')}`}
                   className="flex items-center text-[#357388] text-[13px] hover:opacity-80 transition-opacity"
                 >
                   <Phone className="w-3.5 h-3.5 mr-2 -rotate-90" />
                   <span className="font-sans font-medium">{member.phone}</span>
                 </a>
-                <a 
+                <a
                   href={`mailto:${member.email}`}
                   className="flex items-center text-[#357388] text-[13px] hover:opacity-80 transition-opacity"
                 >

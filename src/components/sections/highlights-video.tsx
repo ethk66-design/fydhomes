@@ -1,6 +1,19 @@
 import React from 'react';
 
-const HighlightsVideo = () => {
+const HighlightsVideo = ({ videoUrl }: { videoUrl?: string | null }) => {
+  if (!videoUrl) return null;
+
+  // Simple helper to extract video ID from standard YouTube URLs
+  const getEmbedUrl = (url: string) => {
+    try {
+      if (url.includes('embed')) return url;
+      const videoId = url.split('v=')[1]?.split('&')[0] || url.split('/').pop();
+      return `https://www.youtube.com/embed/${videoId}?feature=oembed`;
+    } catch (e) {
+      return url;
+    }
+  };
+
   return (
     <section className="container mx-auto px-[20px] py-[60px]">
       <div className="flex flex-col md:flex-row gap-[30px]">
@@ -26,8 +39,8 @@ const HighlightsVideo = () => {
           <div className="relative w-full aspect-video rounded-[4px] overflow-hidden bg-secondary">
             <iframe
               className="absolute top-0 left-0 w-full h-full"
-              src="https://www.youtube.com/embed/9xyVpYOvP-M?feature=oembed"
-              title="Full of premium features from the gate to the kitchen | Luxury Villa Near Aluva | PUKKATTUPADY | kunjattukara"
+              src={getEmbedUrl(videoUrl)}
+              title="Property Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"

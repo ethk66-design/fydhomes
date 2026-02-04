@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 
@@ -34,9 +36,30 @@ const propertyTypes = [
   }
 ];
 
-export function PropertyTypes() {
+import { motion } from 'framer-motion';
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, scale: 0.9 },
+  show: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+};
+
+interface PropertyTypesProps {
+  images?: Record<string, string>;
+}
+
+export function PropertyTypes({ images }: PropertyTypesProps) {
   return (
-    <section className="bg-white py-12 sm:py-16 md:py-[80px]">
+    <section className="bg-white py-8 sm:py-10 md:py-[40px]">
       <div className="container mx-auto px-4 sm:px-5 max-w-[1170px]">
         <div className="mb-6 sm:mb-[40px]">
           <div className="flex items-center gap-2 mb-2">
@@ -45,36 +68,67 @@ export function PropertyTypes() {
             </div>
             <span className="text-[11px] sm:text-[12px] font-semibold text-primary uppercase tracking-[1px]">Lifestyle</span>
           </div>
-            <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-black font-sans m-0">Explore Property Types</h2>
-          </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-[30px]">
-          {propertyTypes.map((type, index) => (
-            <a 
-              key={index} 
-              href="#" 
-              className="flex items-center bg-white border border-[#eeeeee] p-[10px] rounded-[4px] hover:shadow-card transition-all duration-300 group"
-            >
-              <div className="relative w-[80px] h-[70px] sm:w-[100px] sm:h-[80px] overflow-hidden rounded-[2px] flex-shrink-0">
-                <Image
-                  src={type.image}
-                  alt={type.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-
-              <div className="ml-4 sm:ml-[20px] flex flex-col justify-center">
-                <h3 className="text-[13px] sm:text-[14px] font-bold text-black uppercase mb-[4px] tracking-[0.5px]">
-                  {type.title}
-                </h3>
-                <p className="text-[12px] sm:text-[13px] text-[#5c5c5c] font-medium m-0">
-                  {type.count}
-                </p>
-              </div>
-            </a>
-          ))}
+          <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-black m-0">Explore Property Types</h2>
         </div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-[30px]"
+        >
+          {propertyTypes.map((type, index) => {
+            const imageKey = type.title.toLowerCase();
+            const imageUrl = images?.[imageKey] || type.image;
+
+            // Determine filter based on title
+            let href = `/listings?type=${type.title}`;
+            if (type.title === 'RENT') {
+              href = '/listings?type=Rent'; // This triggers listing_type filter in page.tsx
+            } else if (type.title === 'VILLA') {
+              href = '/listings?type=Villa';
+            } else if (type.title === 'RESIDENTIAL') {
+              href = '/listings?type=Residential';
+            } else if (type.title === 'PLOT') {
+              href = '/listings?type=Plot';
+            } else if (type.title === 'COMMERCIAL') {
+              href = '/listings?type=Commercial';
+            } else if (type.title === 'OFFICE') {
+              href = '/listings?type=Office';
+            } else {
+              // Default capitalize
+              href = `/listings?type=${type.title.charAt(0).toUpperCase() + type.title.slice(1).toLowerCase()}`;
+            }
+
+            return (
+              <motion.a
+                key={index}
+                variants={item}
+                href={href}
+                className="flex items-center bg-white border border-[#eeeeee] p-[10px] rounded-[4px] hover:shadow-card transition-all duration-300 group"
+              >
+                <div className="relative w-[80px] h-[70px] sm:w-[100px] sm:h-[80px] overflow-hidden rounded-[2px] flex-shrink-0">
+                  <Image
+                    src={imageUrl}
+                    alt={type.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+
+                <div className="ml-4 sm:ml-[20px] flex flex-col justify-center">
+                  <h3 className="text-[13px] sm:text-[14px] font-bold text-black uppercase mb-[4px] tracking-[0.5px]">
+                    {type.title}
+                  </h3>
+                  <p className="text-[12px] sm:text-[13px] text-[#5c5c5c] font-medium m-0">
+                    {type.count}
+                  </p>
+                </div>
+              </motion.a>
+            )
+          })}
+        </motion.div>
       </div>
     </section>
   );

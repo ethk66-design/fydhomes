@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "prisma db push && node scripts/hostinger-init.js && next build",
+    "build": "node scripts/debug-env.js && prisma db push && node scripts/hostinger-init.js && next build",
     "start": "next start",
     "lint": "eslint",
     "db:push": "prisma db push",

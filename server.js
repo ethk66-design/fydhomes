@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-// CRITIAL: Limit thread pool to prevent crashes on limited Hostinger containers
+// CRITICAL: Limit thread pool to prevent crashes on limited Hostinger containers
 process.env.UV_THREADPOOL_SIZE = '1';
 
 // Load environment variables immediately
@@ -10,6 +10,7 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 const fs = require('fs');
+const os = require('os');
 
 const dev = process.env.NODE_ENV !== 'production';
 const hostname = 'localhost';
@@ -24,19 +25,20 @@ try {
     console.log("----------------------------------------------------------------");
 
     // 1. OS Info
-    console.log(`[OS-INFO] Platform: ${process.platform} (${process.arch})`);
-    console.log(`[OS-INFO] Node Version: ${process.version}`);
+    console.log(`[OS-INFO] Platform: ${os.platform()} (${os.arch()})`);
+    console.log(`[OS-INFO] Release:  ${os.release()}`);
+    console.log(`[OS-INFO] Node Ver: ${process.version}`);
     try {
         const osRelease = fs.readFileSync('/etc/os-release', 'utf8').split('\n')[0];
-        console.log(`[OS-INFO] Distro: ${osRelease}`);
+        console.log(`[OS-INFO] Distro:   ${osRelease}`);
     } catch (e) {
-        console.log(`[OS-INFO] Distro: (Unavailable - ${e.code})`);
+        console.log(`[OS-INFO] Distro:   (Unavailable - ${e.code})`);
     }
 
     // 2. Environment Variables
     console.log("----------------------------------------------------------------");
     console.log(`[ENV] NODE_ENV: ${process.env.NODE_ENV}`);
-    console.log(`[ENV] DATABASE_URL: ${process.env.DATABASE_URL ? '*******(Set)' : 'MISSING ❌'}`);
+    console.log(`[ENV] DATABASE_URL set: ${!!process.env.DATABASE_URL}`);
     console.log(`[ENV] DOTENV Loaded: ${!!dotenvResult.parsed}`);
     console.log(`[ENV] UV_THREADPOOL_SIZE: ${process.env.UV_THREADPOOL_SIZE}`);
     console.log(`[ENV] PRISMA_CLIENT_ENGINE_TYPE: ${process.env.PRISMA_CLIENT_ENGINE_TYPE || 'default (library)'}`);

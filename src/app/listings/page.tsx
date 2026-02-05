@@ -69,6 +69,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         },
         tags: true,
       },
+      take: 30, // Limit to prevent timeouts
     });
 
     properties = rawProperties.map(p => ({

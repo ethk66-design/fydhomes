@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prisma db push && node scripts/hostinger-init.js && next build",
-    "start": "node server.js",
+    "start": "node app.js",
     "lint": "eslint",
     "db:push": "prisma db push",
     "hostinger:init": "node scripts/hostinger-init.js"
@@ -76,7 +76,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@types/bcryptjs": "^2.4.6",
-    "babel-plugin-react-compiler": "^1.0.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9",
     "eslint-config-next": "^15.5.7"

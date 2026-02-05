@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prisma db push && node scripts/hostinger-init.js && next build",
-    "start": "node app.js",
+    "start": "cross-env UV_THREADPOOL_SIZE=1 node server.js",
     "lint": "eslint",
     "db:push": "prisma db push",
     "hostinger:init": "node scripts/hostinger-init.js"
@@ -45,6 +45,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "cross-env": "^7.0.3",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.24",

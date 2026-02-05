@@ -76,4 +76,5 @@ export const authOptions: NextAuthOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
     debug: true, // Force debug logs in production
+    trustHost: true, // Required for Hostinger/Docker deployments
 };

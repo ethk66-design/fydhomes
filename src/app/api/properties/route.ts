@@ -37,8 +37,15 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json(transformed);
     } catch (error) {
-        console.error('Error fetching properties:', error);
-        return NextResponse.json({ error: 'Failed to fetch properties' }, { status: 500 });
+        const errorId = `ERR-${Date.now()}`;
+        console.error(`[${errorId}] Error fetching properties:`, {
+            error: error instanceof Error ? error.message : 'Unknown',
+            stack: error instanceof Error ? error.stack : undefined,
+        });
+        return NextResponse.json({
+            error: 'Failed to fetch properties',
+            errorId,
+        }, { status: 500 });
     }
 }
 

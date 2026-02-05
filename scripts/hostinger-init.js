@@ -24,7 +24,7 @@ async function main() {
             console.log('⚠️ Admin user already exists. Updating password...');
             await prisma.user.update({
                 where: { email },
-                data: { password: hashedPassword },
+                data: { password_hash: hashedPassword },
             });
             console.log('✅ Admin password updated.');
         } else {
@@ -33,9 +33,9 @@ async function main() {
             await prisma.user.create({
                 data: {
                     email,
-                    password: hashedPassword,
-                    name: 'Super Admin',
-                    role: 'ADMIN',
+                    password_hash: hashedPassword,
+                    full_name: 'Super Admin',
+                    role: 'admin',
                 },
             });
             console.log('✅ Admin user created successfully');

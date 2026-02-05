@@ -12,25 +12,43 @@ export const authOptions: NextAuthOptions = {
                 password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials) {
-                if (!credentials?.email || !credentials?.password) {
+                console.log('[Auth] Attempting login for:', credentials?.email);
+                console.log('[Auth] NEXTAUTH_SECRET Check:', process.env.NEXTAUTH_SECRET ? 'Present' : 'MISSING');
+
+                try {
+                    if (!credentials?.email || !credentials?.password) {
+                        console.log('[Auth] Missing credentials');
+                        return null;
+                    }
+
+                    const user = await db.user.findUnique({
+                        where: { email: credentials.email },
+                    });
+
+                    if (!user) {
+                        console.log('[Auth] User not found in DB');
+                        return null;
+                    }
+
+                    console.log('[Auth] User found, verifying password...');
+                    const isValid = await bcrypt.compare(credentials.password, user.password_hash);
+
+                    if (!isValid) {
+                        console.log('[Auth] Invalid password');
+                        return null;
+                    }
+
+                    console.log('[Auth] Login successful for user:', user.id);
+                    return {
+                        id: user.id,
+                        email: user.email,
+                        name: user.full_name,
+                        role: user.role,
+                    };
+                } catch (error) {
+                    console.error('[Auth] Authorization ERROR:', error);
                     return null;
                 }
-
-                const user = await db.user.findUnique({
-                    where: { email: credentials.email },
-                });
-
-                if (!user) return null;
-
-                const isValid = await bcrypt.compare(credentials.password, user.password_hash);
-                if (!isValid) return null;
-
-                return {
-                    id: user.id,
-                    email: user.email,
-                    name: user.full_name,
-                    role: user.role,
-                };
             },
         }),
     ],
@@ -57,4 +75,5 @@ export const authOptions: NextAuthOptions = {
         strategy: 'jwt',
     },
     secret: process.env.NEXTAUTH_SECRET,
+    debug: true, // Force debug logs in production
 };

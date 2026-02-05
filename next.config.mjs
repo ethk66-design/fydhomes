@@ -21,7 +21,7 @@ const nextConfig = {
     experimental: {
         reactCompiler: true,
     },
-    output: "standalone",
+    // output: "standalone", // Disabled for Hostinger standard deployment
     poweredByHeader: false,
     compress: true,
 };

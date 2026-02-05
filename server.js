@@ -1,3 +1,6 @@
+// CRITIAL: Limit thread pool to prevent crashes on limited Hostinger containers
+process.env.UV_THREADPOOL_SIZE = 1;
+
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');

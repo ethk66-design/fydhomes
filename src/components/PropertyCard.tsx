@@ -15,7 +15,8 @@ interface PropertyCardProps {
 }
 
 export default function PropertyCard({ property }: PropertyCardProps) {
-  const mainImage = property.images[0] || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=800&auto=format&fit=crop';
+  // Fallback to a local placeholder if no images exist
+  const mainImage = property.images[0] || '/assets/placeholder-house.svg';
 
   return (
     <Link

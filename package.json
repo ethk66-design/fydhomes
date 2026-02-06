@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prisma db push && node scripts/hostinger-init.js && next build",
+    "build:prod": "npx prisma generate && next build",
     "start": "cross-env UV_THREADPOOL_SIZE=1 node -r dotenv/config server.js",
     "lint": "eslint",
     "db:push": "prisma db push",

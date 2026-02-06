@@ -4,7 +4,14 @@ process.env.UV_THREADPOOL_SIZE = '1';
 
 // Load environment variables immediately
 const dotenv = require('dotenv');
-const dotenvResult = dotenv.config();
+const path = require('path');
+// Explicitly load .env from current directory
+const dotenvResult = dotenv.config({ path: path.join(__dirname, '.env') });
+if (dotenvResult.error) {
+    console.error("[STARTUP-ERROR] Failed to load .env file:", dotenvResult.error);
+} else {
+    console.log("[STARTUP] .env loaded successfully");
+}
 
 const { createServer } = require('http');
 const { parse } = require('url');

@@ -143,6 +143,9 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
 
     const propertyData = {
       ...formData,
+      beds: Number(formData.beds) || 0,
+      baths: Number(formData.baths) || 0,
+      parkings: Number(formData.parkings) || 0,
       description: stripHtml(formData.description),
       meta_description: stripHtml(formData.meta_description),
       images,

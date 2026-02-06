@@ -52,22 +52,26 @@ export async function PUT(
         const body = await request.json();
         const { images, tags, ...propertyData } = body;
 
-        // Delete existing images and tags, then recreate
-        await db.propertyImage.deleteMany({ where: { property_id: id } });
-        await db.propertyTag.deleteMany({ where: { property_id: id } });
+        // Transactional update to ensure data integrity
+        const property = await db.$transaction(async (tx) => {
+            // Delete existing images and tags
+            await tx.propertyImage.deleteMany({ where: { property_id: id } });
+            await tx.propertyTag.deleteMany({ where: { property_id: id } });
 
-        const property = await db.property.update({
-            where: { id },
-            data: {
-                ...propertyData,
-                images: {
-                    create: (images || []).map((url: string, index: number) => ({ url, order: index })),
+            // Update property with new data
+            return await tx.property.update({
+                where: { id },
+                data: {
+                    ...propertyData,
+                    images: {
+                        create: (images || []).map((url: string, index: number) => ({ url, order: index })),
+                    },
+                    tags: {
+                        create: (tags || []).map((tag: string) => ({ tag })),
+                    },
                 },
-                tags: {
-                    create: (tags || []).map((tag: string) => ({ tag })),
-                },
-            },
-            include: { images: true, tags: true },
+                include: { images: true, tags: true },
+            });
         });
 
         const transformed = {

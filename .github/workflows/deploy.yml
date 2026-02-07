@@ -50,6 +50,8 @@ jobs:
           local-dir: ./
           # Where to upload (usually public_html/ or just / for the root of the FTP user)
           server-dir: ./public_html/
+          # Force fresh sync to fix directory structure mismatches
+          dangerous-clean-slate: true
           # Do not delete these files on the server (User uploads, env, etc)
           exclude: |
             **/.git*

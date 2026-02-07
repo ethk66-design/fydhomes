@@ -55,9 +55,9 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            **/src/**
-            **/scripts/**
-            **/prisma/**
+            # **/src/**  <-- Commented out to allow source upload
+            # **/scripts/** <-- Commented out to allow scripts upload
+            # **/prisma/** <-- Commented out to allow schema upload
             .env
             .env.local
             README.md

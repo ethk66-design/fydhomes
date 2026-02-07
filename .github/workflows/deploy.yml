@@ -2,7 +2,7 @@ name: Build and Deploy to Hostinger
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   workflow_dispatch:
 
 jobs:
@@ -16,8 +16,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: 📦 Install Dependencies
         run: npm ci
@@ -43,13 +43,13 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Protocol needs to be explicitly insecure for some shared hosts if FTPS fails, 
+          # Protocol needs to be explicitly insecure for some shared hosts if FTPS fails,
           # but normally try secure first. Hostinger supports FTPS.
           protocol: ftps
           # What to upload
           local-dir: ./
           # Where to upload (usually public_html/ or just / for the root of the FTP user)
-          server-dir: ./
+          server-dir: ./public_html/public_html/
           # Do not delete these files on the server (User uploads, env, etc)
           exclude: |
             **/.git*

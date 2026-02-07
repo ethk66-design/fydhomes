@@ -77,8 +77,24 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
       images: p.images.map(img => img.url),
       tags: p.tags.map(t => t.tag),
     }));
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching properties:", error);
+    // Return empty array or handle error UI
+    // If it's a critical DB error, we might want to show it in dev/admin mode?
+    // For now, let's return empty array but ensure we log it visibly.
+    return (
+      <main className="min-h-screen bg-white pb-12 sm:pb-20 pt-20">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">System Error</h1>
+          <p className="text-gray-600 mb-4">Unable to load properties. Please try again later.</p>
+          {process.env.NODE_ENV !== 'production' && (
+            <pre className="text-left bg-gray-100 p-4 rounded overflow-auto text-xs">
+              {error.message}
+            </pre>
+          )}
+        </div>
+      </main>
+    );
   }
 
   const pageTitle = finalListingType

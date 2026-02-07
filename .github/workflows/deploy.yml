@@ -27,14 +27,14 @@ jobs:
         run: npx prisma generate
 
       - name: 🏗️ Build Project
-        # We disable linting/typechecking during build to save time/errors
-        # The build artifact will be in .next/
-        run: npm run build
+        # Custom build command to skip 'prisma db push' which requires live DB
+        run: npx next build
         env:
           # Next.js needs these to know how to build, even if they aren't used at runtime
           NEXT_PUBLIC_BASE_URL: https://new.fydhomes.in
-          # If your build needs DB connection (static pages), you might need DATABASE_URL here
-          # For now, assuming static generation doesn't hit DB or fails gracefully
+          # Dummy URL to satisfy Prisma Schema validation during build
+          # We don't verify connection during build time for dynamic pages
+          DATABASE_URL: "mysql://build_mock:mock@localhost:3306/build_mock"
           CI: true
 
       - name: 📂 Sync files (FTP)

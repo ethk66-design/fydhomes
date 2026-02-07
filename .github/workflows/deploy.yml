@@ -50,6 +50,10 @@ jobs:
           local-dir: ./
           # Where to upload (usually public_html/ or just / for the root of the FTP user)
           server-dir: ./public_html/
+          # Reset sync state with new name to fix corruption
+          state-name: .ftp-deploy-sync-state-v2.json
+          # Enable verbose logging for debugging
+          log-level: verbose
           # Do not delete these files on the server (User uploads, env, etc)
           exclude: |
             **/.git*

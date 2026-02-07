@@ -1,49 +1,66 @@
-# Hostinger Deployment Guide
+# Hostinger Deployment: SSH Method
 
-To fix the 503 errors and resource exhaustion, we need to switch from "Development Mode" to "Production Mode".
+Since the "Node.js" menu is missing, we will use the **SSH Access** option (which is visible in your screenshot).
 
-## 1. Update Code on Server
+## Step 1: Open SSH Terminal
 
-If you are pushing code via Git:
+1. In the left sidebar (under "Advanced"), click **SSH Access**.
+2. On the main screen, look for a button that says **"Terminal"** or **"Web Terminal"**.
+    * *If asked to "Enable SSH", click Enable first.*
+3. A black screen (Terminal) will open.
 
-1. Push the latest changes (including `next.config.mjs` and `package.json`).
-2. Pull changes on the Hostinger server.
+## Step 2: Stop Old Process
 
-If you are uploading files manually:
-
-1. Upload `next.config.mjs`, `package.json`, `server.js`, and `.env`.
-
-## 2. Rebuild the Application
-
-Go to your Hostinger Terminal or SSH and run:
+The "dev" server might still be running and crashing. Let's stop it.
+Type this and press Enter:
 
 ```bash
-npm run build:prod
+pkill -f node
 ```
 
-This will run `prisma generate` and `next build`.
-*Note: We use `build:prod` to skip the `hostinger-init` script during the build for cleaner troubleshooting.*
+*(If it says "no process found", that is fine).*
 
-## 3. Configure Startup Command
+## Step 3: Check Directory
 
-**CRITICAL STEP**: You must tell Hostinger to use our optimized server instead of the default `npm run dev`.
+Type this to make sure you are in the right folder:
 
-1. Go to **Hostinger Panel > VPS / Web Hosting > Node.js Application**.
-2. Find the **"Startup Command"** or **"Application Startup File"** setting.
-3. Change it to:
+```bash
+ls -F
+```
+
+* **If you see** `package.json` and `src/`, you are good.
+* **If you see** `public_html/`, type: `cd public_html` then press Enter.
+
+## Step 4: Build for Production
+
+Run these commands one by one:
+
+1. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+2. **Build the app:**
+
+    ```bash
+    npm run build:prod
+    ```
+
+    *(Wait for it to say "Compiled successfully").*
+
+## Step 5: Start in Production
+
+Now, start the server in optimized mode:
 
 ```bash
 npm start
 ```
 
-*Why? `npm start` runs `node server.js` which is optimized for production and limits resource usage.*
+## Step 6: Verify
 
-## 4. Restart Application
-
-Click the **Restart** button in the Hostinger panel.
-
-## 5. Verify
-
-Check the **Application Logs** or `runtime-debug.log` file. You should see:
-`[STARTUP] .env loaded successfully`
-`> Ready on http://localhost:3000`
+1. Keep the terminal open for a moment.
+2. It should say: `> Ready on http://localhost:3000`.
+3. Visit your website `new.fydhomes.in` in a new tab.
+4. **If it works:** You are done!
+5. **If you close the terminal and it stops working:** You might need to run it in the background. let me know if that happens.

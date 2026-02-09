@@ -62,10 +62,18 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lftp
 
-          # Only upload the zip and the php helper (FAST!)
+          # Setup .netrc for robust authentication
+          # Use printf to handle potential special chars in password better than echo
+          printf "machine %s login %s password %s\n" "$FTP_SERVER" "$FTP_USERNAME" "$FTP_PASSWORD" > ~/.netrc
+          chmod 600 ~/.netrc
+
+          # Lftp script
           printf "set ssl:verify-certificate no\n" > lftp_script.txt
+          printf "set net:timeout 20\n" >> lftp_script.txt
+          printf "set net:max-retries 2\n" >> lftp_script.txt
+          printf "debug 3\n" >> lftp_script.txt
           printf "open %s\n" "$FTP_SERVER" >> lftp_script.txt
-          printf "user \"%s\" \"%s\"\n" "$FTP_USERNAME" "$FTP_PASSWORD" >> lftp_script.txt
+          # No user command needed, uses .netrc
           printf "put deployment.zip -o /public_html/deployment.zip\n" >> lftp_script.txt
           printf "put scripts/unzip_helper.php -o /public_html/unzip_helper.php\n" >> lftp_script.txt
           printf "quit\n" >> lftp_script.txt

@@ -66,6 +66,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/.next/cache/**
+            **/.next/diagnostics/**
             **/public/uploads/**
             **/src/**
             **/scripts/**

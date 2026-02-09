@@ -1,4 +1,4 @@
-name: Build and Deploy to Hostinger
+name: Build and Deploy (Zip Speed Mode)
 
 on:
   push:
@@ -28,7 +28,6 @@ jobs:
           echo 'DATABASE_URL="mysql://u187686201_fyddb:OrchidsAdmin2024@localhost:3306/u187686201_fydhomes_db?connection_limit=3"' >> .env
           echo "NEXT_PUBLIC_BASE_URL=https://new.fydhomes.in" >> .env
           echo "NEXTAUTH_URL=https://new.fydhomes.in" >> .env
-          # Note: In a real production setup, these should be GitHub Secrets
 
       - name: 🧬 Generate Prisma Client
         run: npx prisma generate
@@ -40,24 +39,21 @@ jobs:
           DATABASE_URL: "mysql://build_mock:mock@localhost:3306/build_mock"
           CI: true
 
-      - name: 📂 Prepare Standalone Directory
+      - name: 📦 Zip Standalone Build
         run: |
-          echo "Copying public assets..."
+          # Prepare standalone directory
           cp -r public .next/standalone/public
-          echo "Copying static assets..."
           mkdir -p .next/standalone/.next/static
           cp -r .next/static .next/standalone/.next/static
+          if [ -f .env ]; then cp .env .next/standalone/.env; fi
 
-          # Copy .env if it exists (for runtime config)
-          if [ -f .env ]; then
-            cp .env .next/standalone/.env
-          else
-            echo "Warning: .env file not found. Ensure environment variables are set on server."
-          fi
+          # Zip it up!
+          cd .next/standalone
+          zip -r ../../deployment.zip .
+          cd ../..
+          ls -lh deployment.zip
 
-          echo "Standalone build prepared."
-
-      - name: 🚀 Deploy via LFTP
+      - name: 🚀 Upload Zip & Helper via LFTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
@@ -66,16 +62,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lftp
 
-          # Create lftp script using printf for safety (avoids some shell expansion issues)
+          # Only upload the zip and the php helper (FAST!)
           printf "set ssl:verify-certificate no\n" > lftp_script.txt
-          printf "set net:timeout 10\n" >> lftp_script.txt
-          printf "set net:max-retries 2\n" >> lftp_script.txt
-          printf "set net:reconnect-interval-base 5\n" >> lftp_script.txt
-          printf "debug 3\n" >> lftp_script.txt
           printf "open %s\n" "$FTP_SERVER" >> lftp_script.txt
           printf "user \"%s\" \"%s\"\n" "$FTP_USERNAME" "$FTP_PASSWORD" >> lftp_script.txt
-          printf "mirror -R --parallel=2 --verbose --delete .next/standalone/ /public_html/\n" >> lftp_script.txt
+          printf "put deployment.zip -o /public_html/deployment.zip\n" >> lftp_script.txt
+          printf "put scripts/unzip_helper.php -o /public_html/unzip_helper.php\n" >> lftp_script.txt
           printf "quit\n" >> lftp_script.txt
 
-          # Execute
           lftp -f lftp_script.txt
+
+      - name: 🔓 Trigger Unzip on Server
+        run: |
+          echo "Triggering PHP Unzipper..."
+          # This hits the PHP file on the server to unzip locally
+          curl --fail -L https://new.fydhomes.in/unzip_helper.php || exit 1
+          echo "Unzip triggered."

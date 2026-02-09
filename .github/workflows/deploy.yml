@@ -66,17 +66,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lftp
 
-          # Create lftp script using environment variables safely
-          # We use single quotes for the mirror command to avoid shell expansion of the command itself,
-          # but we need the variables to expand.
-          # Actually, best practice is to put credentials in a netrc file or use env vars in the script.
-          # LFTP supports opening via URL with credentials, or distinct user/pass commands.
-
-          echo "set ssl:verify-certificate no" > lftp_script.txt
-          echo "open $FTP_SERVER" >> lftp_script.txt
-          echo "user $FTP_USERNAME $FTP_PASSWORD" >> lftp_script.txt
-          echo "mirror -R --parallel=5 --verbose --delete .next/standalone/ /public_html/" >> lftp_script.txt
-          echo "quit" >> lftp_script.txt
+          # Create lftp script using printf for safety (avoids some shell expansion issues)
+          printf "set ssl:verify-certificate no\n" > lftp_script.txt
+          printf "set net:timeout 10\n" >> lftp_script.txt
+          printf "set net:max-retries 2\n" >> lftp_script.txt
+          printf "set net:reconnect-interval-base 5\n" >> lftp_script.txt
+          printf "debug 3\n" >> lftp_script.txt
+          printf "open %s\n" "$FTP_SERVER" >> lftp_script.txt
+          printf "user \"%s\" \"%s\"\n" "$FTP_USERNAME" "$FTP_PASSWORD" >> lftp_script.txt
+          printf "mirror -R --parallel=2 --verbose --delete .next/standalone/ /public_html/\n" >> lftp_script.txt
+          printf "quit\n" >> lftp_script.txt
 
           # Execute
           lftp -f lftp_script.txt

@@ -46,6 +46,8 @@ jobs:
           # Protocol needs to be explicitly insecure for some shared hosts if FTPS fails,
           # but normally try secure first. Hostinger supports FTPS.
           protocol: ftps
+          # Increase timeout to 5 minutes (300000ms) to handle slow connections
+          timeout: 300000
           # What to upload
           local-dir: ./
           # Where to upload (usually public_html/ or just / for the root of the FTP user)

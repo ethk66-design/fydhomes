@@ -48,8 +48,8 @@ jobs:
           protocol: ftps
           # What to upload
           local-dir: ./
-          # Where to upload (usually public_html/ or just / for the root of the FTP user)
-          server-dir: public_html/
+          # Where to upload - FTP user is chrooted to public_html, so use /
+          server-dir: /
           # Reset sync state with new name to fix corruption
           state-name: .ftp-deploy-sync-state-v2.json
           # Enable verbose logging for debugging

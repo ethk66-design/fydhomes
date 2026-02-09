@@ -22,60 +22,61 @@ jobs:
       - name: 📦 Install Dependencies
         run: npm ci
 
+      - name: 📝 Create Production .env
+        run: |
+          echo "PRISMA_CLIENT_ENGINE_TYPE=library" > .env
+          echo 'DATABASE_URL="mysql://u187686201_fyddb:OrchidsAdmin2024@localhost:3306/u187686201_fydhomes_db?connection_limit=3"' >> .env
+          echo "NEXT_PUBLIC_BASE_URL=https://new.fydhomes.in" >> .env
+          echo "NEXTAUTH_URL=https://new.fydhomes.in" >> .env
+          # Note: In a real production setup, these should be GitHub Secrets
+
       - name: 🧬 Generate Prisma Client
-        # We need the client to build the app
         run: npx prisma generate
 
-      - name: 🏗️ Build Project
-        # Custom build command to skip 'prisma db push' which requires live DB
+      - name: 🏗️ Build Project (Standalone)
         run: npx next build
         env:
-          # Next.js needs these to know how to build, even if they aren't used at runtime
           NEXT_PUBLIC_BASE_URL: https://new.fydhomes.in
-          # Dummy URL to satisfy Prisma Schema validation during build
-          # We don't verify connection during build time for dynamic pages
           DATABASE_URL: "mysql://build_mock:mock@localhost:3306/build_mock"
           CI: true
 
-      - name: 📂 Sync files (FTP)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          # Protocol needs to be explicitly insecure for some shared hosts if FTPS fails,
-          # but normally try secure first. Hostinger supports FTPS.
-          protocol: ftps
-          # Increase timeout to 5 minutes (300000ms) to handle slow connections
-          timeout: 300000
-          # What to upload
-          local-dir: ./
-          # Where to upload (usually public_html/ or just / for the root of the FTP user)
-          server-dir: /public_html/
-          # Reset sync state with new name to fix corruption
-          state-name: .ftp-deploy-sync-state-v2.json
-          # Enable verbose logging for debugging
-          log-level: verbose
-          # Do not delete these files on the server (User uploads, env, etc)
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            # Force include Prisma client and engine (required for EAGAIN fix)
-            !**/node_modules/.prisma/**
-            !**/node_modules/@prisma/**
-            **/.next/cache/**
-            **/src/**
-            **/scripts/**
-            **/prisma/**
-            # .env  <-- Commented out to upload env vars to production
-            .env.local
-            README.md
-            tsconfigs.json
-            tailwind.config.ts
-            postcss.config.js
-            eslint.config.mjs
-            components.json
-            task.md
-            *.sql
-            *.log
+      - name: 📂 Prepare Standalone Directory
+        run: |
+          echo "Copying public assets..."
+          cp -r public .next/standalone/public
+          echo "Copying static assets..."
+          mkdir -p .next/standalone/.next/static
+          cp -r .next/static .next/standalone/.next/static
+
+          # Copy .env if it exists (for runtime config)
+          if [ -f .env ]; then
+            cp .env .next/standalone/.env
+          else
+            echo "Warning: .env file not found. Ensure environment variables are set on server."
+          fi
+
+          echo "Standalone build prepared."
+
+      - name: 🚀 Deploy via LFTP
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+          # Create lftp script using environment variables safely
+          # We use single quotes for the mirror command to avoid shell expansion of the command itself,
+          # but we need the variables to expand.
+          # Actually, best practice is to put credentials in a netrc file or use env vars in the script.
+          # LFTP supports opening via URL with credentials, or distinct user/pass commands.
+
+          echo "set ssl:verify-certificate no" > lftp_script.txt
+          echo "open $FTP_SERVER" >> lftp_script.txt
+          echo "user $FTP_USERNAME $FTP_PASSWORD" >> lftp_script.txt
+          echo "mirror -R --parallel=5 --verbose --delete .next/standalone/ /public_html/" >> lftp_script.txt
+          echo "quit" >> lftp_script.txt
+
+          # Execute
+          lftp -f lftp_script.txt

@@ -21,7 +21,7 @@ const nextConfig = {
     experimental: {
         reactCompiler: true,
     },
-    // output: "standalone", // Disabled for Shared Hosting stability
+    output: "standalone",
     poweredByHeader: false,
     compress: true,
 };

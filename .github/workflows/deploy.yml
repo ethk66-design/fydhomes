@@ -54,10 +54,10 @@ jobs:
           protocol: ftps
           # What to upload
           local-dir: ./
-          # Where to upload - FTP user is chrooted to public_html, so use /
-          server-dir: /
+          # Where to upload - use current directory (FTP user lands in public_html)
+          server-dir: .
           # Reset sync state with new name to fix corruption
-          state-name: .ftp-deploy-sync-state-v2.json
+          state-name: .ftp-deploy-sync-state-v3.json
           # Enable verbose logging for debugging
           log-level: verbose
           # Do not delete these files on the server (User uploads, env, etc)

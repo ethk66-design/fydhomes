@@ -87,9 +87,10 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-2xl font-bold text-red-600 mb-4">System Error</h1>
           <p className="text-gray-600 mb-4">Unable to load properties. Please try again later.</p>
-          {process.env.NODE_ENV !== 'production' && (
+          {true && (
             <pre className="text-left bg-gray-100 p-4 rounded overflow-auto text-xs">
               {error.message}
+              {JSON.stringify(error, null, 2)}
             </pre>
           )}
         </div>

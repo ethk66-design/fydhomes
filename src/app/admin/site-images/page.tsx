@@ -1,218 +1,152 @@
+
 "use client";
 
-export const dynamic = 'force-dynamic';
-
-
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { PageAsset } from "@/lib/types";
-import {
-    Loader2,
-    ArrowLeft,
-    Search,
-    Upload,
-    Image as ImageIcon,
-} from "lucide-react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Loader2, CheckCircle, AlertTriangle, Play, RefreshCw, ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import Image from "next/image";
 
-export default function SiteImagesPage() {
-    const { status } = useSession();
-    const [assets, setAssets] = useState<PageAsset[]>([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [uploadingId, setUploadingId] = useState<string | null>(null);
+export default function ImageMigrationPage() {
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const [analyzing, setAnalyzing] = useState(false);
+    const [stats, setStats] = useState<any>(null);
+    const [logs, setLogs] = useState<string[]>([]);
+    const [migratedCount, setMigratedCount] = useState(0);
 
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            router.push("/admin/login");
-        } else if (status === "authenticated") {
-            fetchAssets();
+    const analyzeImages = async () => {
+        try {
+            setAnalyzing(true);
+            const res = await fetch('/api/admin/migrator', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'analyze' })
+            });
+            const data = await res.json();
+            setStats(data);
+        } catch (error) {
+            toast.error("Failed to analyze images");
+        } finally {
+            setAnalyzing(false);
         }
-    }, [status, router]);
+    };
 
-    const fetchAssets = async () => {
+    const startMigration = async () => {
+        if (!confirm("This will download all external images to the server. This may take a while. Continue?")) return;
+
         try {
             setLoading(true);
-            const res = await fetch("/api/assets");
-            if (!res.ok) throw new Error("Failed to fetch");
+            setLogs(['Starting migration...']);
+
+            const res = await fetch('/api/admin/migrator', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'migrate' })
+            });
+
             const data = await res.json();
-            setAssets(data || []);
+            setStats(data);
+            setLogs(data.logs || []);
+            setMigratedCount(data.migrated);
+
+            if (data.errors > 0) {
+                toast.warning(`Migration complete with ${data.errors} errors.`);
+            } else {
+                toast.success("Migration completed successfully!");
+            }
         } catch (error) {
-            console.error("Error fetching assets:", error);
-            toast.error("Failed to fetch site images");
+            console.error(error);
+            toast.error("Migration failed unexpectedly.");
+            setLogs(prev => [...prev, "CRITICAL ERROR: Request failed."]);
         } finally {
             setLoading(false);
         }
     };
 
-    const handleImageUpload = async (file: File, asset: PageAsset) => {
-        try {
-            setUploadingId(asset.id);
-
-            // Create FormData for file upload
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('folder', 'assets');
-            formData.append('oldUrl', asset.asset_url || '');
-
-            // Upload file to server
-            const uploadRes = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!uploadRes.ok) {
-                const error = await uploadRes.json();
-                throw new Error(error.error || 'Upload failed');
-            }
-
-            const { url } = await uploadRes.json();
-
-            // Update the asset in the database
-            const updateRes = await fetch(`/api/page-assets/${asset.id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ asset_url: url }),
-            });
-
-            if (!updateRes.ok) throw new Error('Failed to update asset');
-
-            // Update local state
-            setAssets(prev => prev.map(a =>
-                a.id === asset.id ? { ...a, asset_url: url } : a
-            ));
-
-            toast.success('Image uploaded successfully!');
-        } catch (error) {
-            console.error("Error uploading image:", error);
-            toast.error("Failed to upload image");
-        } finally {
-            setUploadingId(null);
-        }
-    };
-
-
-    const filteredAssets = assets.filter(asset =>
-        asset.page_route.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        asset.label.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    if (status === "loading" || loading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-white">
-                <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
-            </div>
-        );
-    }
-
-    if (status === "unauthenticated") {
-        return null;
-    }
+    useEffect(() => {
+        analyzeImages();
+    }, []);
 
     return (
-        <div className="min-h-screen bg-[#f4f8fb] pb-12 sm:pb-20">
-            <div className="h-[60px] sm:h-[80px] bg-white border-b border-[#eeeeee]"></div>
+        <div className="min-h-screen bg-[#f4f8fb] pb-12">
+            <div className="h-[60px] bg-white border-b border-[#eeeeee]"></div>
 
-            <div className="container mx-auto px-4 sm:px-5 py-6 sm:py-10">
-                <div className="flex flex-col gap-6 mb-6 sm:mb-10">
-                    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-6">
-                        <div>
-                            <Link href="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#2d7a8c] mb-2">
-                                <ArrowLeft size={16} />
-                                Back to Dashboard
-                            </Link>
-                            <h1 className="text-2xl sm:text-3xl font-bold text-black mb-1 sm:mb-2">Site Images</h1>
-                            <p className="text-[#5c5c5c] text-sm sm:text-base">Manage hero banners and section backgrounds</p>
-                        </div>
+            <div className="container mx-auto px-4 py-10">
+                <Button
+                    variant="ghost"
+                    onClick={() => router.push('/admin')}
+                    className="mb-6 hover:bg-transparent pl-0 text-[#5c5c5c] hover:text-black"
+                >
+                    <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard
+                </Button>
 
-                        <div className="relative w-full lg:w-64">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5c5c5c] h-4 w-4" />
-                            <Input
-                                placeholder="Search images..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="pl-9 bg-white border-[#eeeeee] h-10 text-base sm:text-sm shadow-sm"
-                            />
+                <div className="max-w-3xl mx-auto">
+                    <div className="bg-white rounded-xl shadow-sm border border-[#eeeeee] p-6 mb-6">
+                        <h1 className="text-2xl font-bold mb-2">Image Migration Tool</h1>
+                        <p className="text-[#5c5c5c] mb-6">
+                            Migrate property images from external sources (Supabase, WordPress, etc.) to the local server filesystem.
+                            This ensures you own your data and improves loading speed.
+                        </p>
+
+                        {analyzing ? (
+                            <div className="flex items-center justify-center py-10">
+                                <Loader2 className="animate-spin text-[#2d7a8c] h-8 w-8" />
+                                <span className="ml-3 text-[#5c5c5c]">Analyzing database...</span>
+                            </div>
+                        ) : stats ? (
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                                <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                                    <div className="text-blue-600 text-xs font-bold uppercase tracking-wider mb-1">Total Properties</div>
+                                    <div className="text-2xl font-bold text-blue-900">{stats.totalProperties}</div>
+                                </div>
+                                <div className="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                                    <div className="text-purple-600 text-xs font-bold uppercase tracking-wider mb-1">Total Images</div>
+                                    <div className="text-2xl font-bold text-purple-900">{stats.totalImages}</div>
+                                </div>
+                                <div className={`p-4 rounded-lg border ${stats.needsMigration > 0 ? 'bg-amber-50 border-amber-100' : 'bg-green-50 border-green-100'}`}>
+                                    <div className={`${stats.needsMigration > 0 ? 'text-amber-600' : 'text-green-600'} text-xs font-bold uppercase tracking-wider mb-1`}>
+                                        Needs Migration
+                                    </div>
+                                    <div className={`text-2xl font-bold ${stats.needsMigration > 0 ? 'text-amber-900' : 'text-green-900'}`}>
+                                        {stats.needsMigration}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : null}
+
+                        <div className="flex gap-4">
+                            <Button onClick={analyzeImages} variant="outline" disabled={loading || analyzing}>
+                                <RefreshCw className={`mr-2 h-4 w-4 ${analyzing ? 'animate-spin' : ''}`} />
+                                Re-Analyze
+                            </Button>
+
+                            <Button
+                                onClick={startMigration}
+                                disabled={loading || analyzing || !stats || stats.needsMigration === 0}
+                                className="bg-[#2d7a8c] hover:bg-[#256a7a] text-white flex-1"
+                            >
+                                {loading ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        Migrating ({migratedCount}...)
+                                    </>
+                                ) : (
+                                    <>
+                                        <Play className="mr-2 h-4 w-4" />
+                                        Start Migration
+                                    </>
+                                )}
+                            </Button>
                         </div>
                     </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredAssets.map((asset) => (
-                        <div key={asset.id} className="bg-white rounded-xl shadow-sm border border-[#eeeeee] overflow-hidden group">
-                            {/* Image Preview Area */}
-                            <div className="relative h-48 w-full bg-gray-100 border-b border-[#eeeeee]">
-                                <Image
-                                    src={asset.asset_url || "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
-                                    alt={asset.label}
-                                    fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-
-                                {/* Upload Overlay */}
-                                <label className={`absolute inset-0 bg-black/50 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer ${uploadingId === asset.id ? 'opacity-100 pointer-events-none' : ''}`}>
-                                    {uploadingId === asset.id ? (
-                                        <div className="flex flex-col items-center text-white">
-                                            <Loader2 className="w-8 h-8 animate-spin mb-2" />
-                                            <span className="text-xs font-bold uppercase tracking-wider">Uploading...</span>
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                                                <Upload className="w-5 h-5 text-black" />
-                                            </div>
-                                            <span className="text-white text-xs font-bold uppercase tracking-wider">Change Image</span>
-                                        </>
-                                    )}
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        className="hidden"
-                                        onChange={(e) => {
-                                            const file = e.target.files?.[0];
-                                            if (file) handleImageUpload(file, asset);
-                                        }}
-                                        disabled={!!uploadingId}
-                                    />
-                                </label>
-
-                                {/* Page Badge */}
-                                <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                                    {asset.page_route === '/' ? 'Home Page' : asset.page_route.replace('/', '')}
+                    {logs.length > 0 && (
+                        <div className="bg-black text-white p-4 rounded-xl shadow-sm text-xs font-mono h-64 overflow-y-auto">
+                            <div className="mb-2 text-gray-400 uppercase font-bold tracking-wider">Migration Logs</div>
+                            {logs.map((log, i) => (
+                                <div key={i} className={`mb-1 ${log.includes('ERROR') ? 'text-red-400' : 'text-green-400'}`}>
+                                    {log}
                                 </div>
-                            </div>
-
-                            {/* Details */}
-                            <div className="p-5">
-                                <div className="flex items-start justify-between gap-4 mb-2">
-                                    <div>
-                                        <h3 className="font-bold text-black text-sm sm:text-base line-clamp-1" title={asset.label}>
-                                            {asset.label}
-                                        </h3>
-                                        <p className="text-xs text-[#5c5c5c] font-mono mt-0.5">{asset.section_key}</p>
-                                    </div>
-                                    <div className="bg-[#f0f9ff] text-[#2d7a8c] p-2 rounded-lg">
-                                        <ImageIcon size={18} />
-                                    </div>
-                                </div>
-
-                                <div className="mt-4 pt-4 border-t border-[#eeeeee] flex items-center justify-between text-xs text-[#5c5c5c]">
-                                    <span>Last updated</span>
-                                    <span>{new Date(asset.updated_at).toLocaleDateString()}</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-
-                    {filteredAssets.length === 0 && (
-                        <div className="col-span-full py-12 text-center bg-white rounded-xl border border-[#eeeeee]">
-                            <p className="text-[#5c5c5c]">No images matches your search.</p>
+                            ))}
                         </div>
                     )}
                 </div>

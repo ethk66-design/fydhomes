@@ -60,6 +60,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/.next/cache/**
+            **/public/uploads/**
             **/src/**
             **/scripts/**
             **/prisma/**

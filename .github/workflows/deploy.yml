@@ -37,6 +37,12 @@ jobs:
           DATABASE_URL: "mysql://build_mock:mock@localhost:3306/build_mock"
           CI: true
 
+      - name: 📝 Create Deploy Version File
+        run: |
+          echo "Deployed: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" > public/deploy-version.txt
+          echo "Commit: ${{ github.sha }}" >> public/deploy-version.txt
+          echo "Branch: ${{ github.ref_name }}" >> public/deploy-version.txt
+
       - name: 📂 Sync files (FTP)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -75,3 +81,16 @@ jobs:
             task.md
             *.sql
             *.log
+
+      - name: ⚠️ Reminder - Restart Node.js
+        run: |
+          echo "=============================================="
+          echo "⚠️  IMPORTANT: Deployment Complete!"
+          echo "=============================================="
+          echo ""
+          echo "If the site doesn't update, manually restart Node.js:"
+          echo "  1. Go to Hostinger hPanel → Advanced → Node.js"
+          echo "  2. Click 'Restart' button"
+          echo ""
+          echo "Verify deployment: https://new.fydhomes.in/deploy-version.txt"
+          echo "=============================================="

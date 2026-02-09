@@ -54,8 +54,8 @@ jobs:
           protocol: ftps
           # What to upload
           local-dir: ./
-          # Where to upload - use current directory (FTP user lands in public_html)
-          server-dir: .
+          # Where to upload - use current directory with trailing slash (required)
+          server-dir: ./
           # Reset sync state with new name to fix corruption
           state-name: .ftp-deploy-sync-state-v3.json
           # Enable verbose logging for debugging

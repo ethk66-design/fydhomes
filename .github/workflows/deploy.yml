@@ -1,86 +1,76 @@
 name: Build and Deploy to Hostinger
 
 on:
-  push:
-    branches: ["master"]
-  workflow_dispatch:
+    push:
+        branches: ["master"]
+    workflow_dispatch:
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+    build-and-deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v4
+        steps:
+            - name: 🚚 Get latest code
+              uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
+            - name: 🟢 Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
 
-      - name: 📦 Install Dependencies
-        run: npm ci
+            - name: 📦 Install Dependencies
+              run: npm ci
 
-      - name: 🧬 Generate Prisma Client
-        run: npx prisma generate
+            - name: 🧬 Generate Prisma Client
+              # We need the client to build the app
+              run: npx prisma generate
 
-      - name: 🏗️ Build Project
-        run: npx next build
-        env:
-          NEXT_PUBLIC_BASE_URL: https://new.fydhomes.in
-          DATABASE_URL: "mysql://build_mock:mock@localhost:3306/build_mock"
-          CI: true
+            - name: 🏗️ Build Project
+              # Custom build command to skip 'prisma db push' which requires live DB
+              run: npx next build
+              env:
+                  # Next.js needs these to know how to build, even if they aren't used at runtime
+                  NEXT_PUBLIC_BASE_URL: https://new.fydhomes.in
+                  # Dummy URL to satisfy Prisma Schema validation during build
+                  # We don't verify connection during build time for dynamic pages
+                  DATABASE_URL: "mysql://build_mock:mock@localhost:3306/build_mock"
+                  CI: true
 
-      - name: 📝 Create Deploy Version File
-        run: |
-          echo "Deployed: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" > public/deploy-version.txt
-          echo "Commit: ${{ github.sha }}" >> public/deploy-version.txt
-          echo "Branch: ${{ github.ref_name }}" >> public/deploy-version.txt
-
-      - name: 🧹 Clean up before deploy
-        run: |
-          # Remove files/folders that shouldn't be deployed
-          rm -rf node_modules
-          rm -rf src
-          rm -rf scripts
-          rm -rf prisma
-          rm -rf .git
-          rm -rf .next/cache
-          rm -rf .next/diagnostics
-          rm -f .env .env.local .env.example
-          rm -f README.md tsconfig.json tailwind.config.ts postcss.config.js postcss.config.mjs
-          rm -f eslint.config.mjs components.json task.md
-          rm -f *.sql *.log
-          # List what will be deployed
-          echo "Files to deploy:"
-          find . -type f | head -50
-
-      - name: 📂 Deploy via LFTP
-        run: |
-          sudo apt-get update && sudo apt-get install -y lftp
-          lftp -e "
-            set ssl:verify-certificate no;
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            set mirror:use-pget-n 5;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }};
-            cd public_html;
-            mirror --reverse --delete --verbose --exclude public/uploads/ --parallel=5 ./ ./;
-            bye;
-          "
-
-      - name: ⚠️ Reminder - Restart Node.js
-        run: |
-          echo "=============================================="
-          echo "⚠️  IMPORTANT: Deployment Complete!"
-          echo "=============================================="
-          echo ""
-          echo "Files deployed successfully via LFTP."
-          echo ""
-          echo "If the site doesn't update, manually restart Node.js:"
-          echo "  1. Go to Hostinger hPanel → Advanced → Node.js"
-          echo "  2. Click 'Restart' button"
-          echo ""
-          echo "Verify deployment: https://new.fydhomes.in/deploy-version.txt"
-          echo "=============================================="
+            - name: 📂 Sync files (FTP)
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+              with:
+                  server: ${{ secrets.FTP_SERVER }}
+                  username: ${{ secrets.FTP_USERNAME }}
+                  password: ${{ secrets.FTP_PASSWORD }}
+                  # Protocol needs to be explicitly insecure for some shared hosts if FTPS fails,
+                  # but normally try secure first. Hostinger supports FTPS.
+                  protocol: ftps
+                  # What to upload
+                  local-dir: ./
+                  # Where to upload (usually public_html/ or just / for the root of the FTP user)
+                  server-dir: ./public_html/
+                  # Reset sync state with new name to fix corruption
+                  state-name: .ftp-deploy-sync-state-v2.json
+                  # Enable verbose logging for debugging
+                  log-level: verbose
+                  # Do not delete these files on the server (User uploads, env, etc)
+                  exclude: |
+                      **/.git*
+                      **/.git*/**
+                      **/node_modules/**
+                      **/.next/cache/**
+                      **/src/**
+                      **/scripts/**
+                      **/prisma/**
+                      .env
+                      .env.local
+                      README.md
+                      tsconfigs.json
+                      tailwind.config.ts
+                      postcss.config.js
+                      eslint.config.mjs
+                      components.json
+                      task.md
+                      *.sql
+                      *.log

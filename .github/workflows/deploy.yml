@@ -51,34 +51,23 @@ jobs:
           cd .next/standalone
           zip -r ../../deployment.zip .
           cd ../..
-          ls -lh deployment.zip
 
-      - name: 🚀 Upload Zip & Helper via LFTP
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
+          # Prepare Staging Folder for Upload
+          mkdir upload_stage
+          mv deployment.zip upload_stage/
+          cp scripts/unzip_helper.php upload_stage/
+          ls -lh upload_stage/
 
-          # Setup .netrc for robust authentication
-          # Use printf to handle potential special chars in password better than echo
-          printf "machine %s login %s password %s\n" "$FTP_SERVER" "$FTP_USERNAME" "$FTP_PASSWORD" > ~/.netrc
-          chmod 600 ~/.netrc
-
-          # Lftp script
-          printf "set ssl:verify-certificate no\n" > lftp_script.txt
-          printf "set net:timeout 20\n" >> lftp_script.txt
-          printf "set net:max-retries 2\n" >> lftp_script.txt
-          printf "debug 3\n" >> lftp_script.txt
-          printf "open %s\n" "$FTP_SERVER" >> lftp_script.txt
-          # No user command needed, uses .netrc
-          printf "put deployment.zip -o /public_html/deployment.zip\n" >> lftp_script.txt
-          printf "put scripts/unzip_helper.php -o /public_html/unzip_helper.php\n" >> lftp_script.txt
-          printf "quit\n" >> lftp_script.txt
-
-          lftp -f lftp_script.txt
+      - name: 🚀 Upload Zip & Helper (SamKirkland Action)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./upload_stage/
+          server-dir: /public_html/
+          log-level: verbose
 
       - name: 🔓 Trigger Unzip on Server
         run: |

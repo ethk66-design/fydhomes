@@ -65,7 +65,7 @@ jobs:
             **/src/**
             **/scripts/**
             **/prisma/**
-            .env
+            # .env  <-- Commented out to upload env vars to production
             .env.local
             README.md
             tsconfigs.json

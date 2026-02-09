@@ -58,6 +58,13 @@ jobs:
           cp scripts/unzip_helper.php upload_stage/
           ls -lh upload_stage/
 
+      - name: 📤 Upload Build Artifact (Manual Fallback)
+        uses: actions/upload-artifact@v4
+        with:
+          name: hostinger-build-zip
+          path: upload_stage/deployment.zip
+          retention-days: 1
+
       - name: 🚀 Upload Zip & Helper (SamKirkland Action)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

@@ -9,25 +9,42 @@ export async function GET() {
         // Mask password for safety
         const maskedUrl = url.replace(/:([^:@]+)@/, ':****@');
 
-        const startTime = Date.now();
-        // Test connection
+        // Test 1: Raw Connection
         await db.$queryRaw`SELECT 1`;
-        const duration = Date.now() - startTime;
+        const latencyRaw = Date.now() - startTime;
+
+        // Test 2: Prisma Model Query (The real test)
+        const startTimeModel = Date.now();
+        const propertyCount = await db.property.count();
+        const firstProperty = await db.property.findFirst({
+            select: { id: true, title: true }
+        });
+        const latencyModel = Date.now() - startTimeModel;
 
         return NextResponse.json({
             status: 'success',
-            message: 'Database connection successful',
+            message: 'Full Database Access Successful',
+            checks: {
+                rawConnection: 'OK',
+                modelQuery: 'OK',
+                propertyCount,
+                firstPropertyFound: !!firstProperty
+            },
+            latency: {
+                raw: `${latencyRaw}ms`,
+                model: `${latencyModel}ms`
+            },
             databaseUrlParam: maskedUrl,
-            latency: `${duration}ms`,
             env: process.env.NODE_ENV,
-            timestamp: new Date().toISOString()
         });
     } catch (error: any) {
         console.error('Debug DB Error:', error);
         return NextResponse.json({
             status: 'error',
-            message: 'Database connection failed',
+            message: 'Database Check Failed',
+            step: error.message?.includes('SELECT 1') ? 'Raw Connection' : 'Model Query',
             details: error.message,
+            stack: error.stack,
             code: error.code,
             databaseUrlParam: process.env.DATABASE_URL ? process.env.DATABASE_URL.replace(/:([^:@]+)@/, ':****@') : 'NOT_SET'
         }, { status: 500 });

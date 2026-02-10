@@ -4,12 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "prisma db push && node scripts/hostinger-init.js && next build",
+    "build": "prisma db push && next build",
     "build:prod": "npx prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "db:push": "prisma db push",
-    "hostinger:init": "node scripts/hostinger-init.js"
+    "db:push": "prisma db push"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

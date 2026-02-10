@@ -75,6 +75,6 @@ export const authOptions: NextAuthOptions = {
         strategy: 'jwt',
     },
     secret: process.env.NEXTAUTH_SECRET,
-    debug: true, // Force debug logs in production
-    trustHost: true, // Required for Hostinger/Docker deployments
+    debug: process.env.NODE_ENV === 'development',
+    trustHost: true,
 };

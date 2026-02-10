@@ -1,12 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir, unlink } from 'fs/promises';
-import { join } from 'path';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { createClient } from '@supabase/supabase-js';
 import { randomUUID } from 'crypto';
-import { existsSync } from 'fs';
 
-// POST /api/upload - Upload file (admin only)
+// Initialize Supabase Admin Client (Service Role)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+    console.error("❌ Missing Supabase credentials in .env");
+}
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+    },
+});
+
+const BUCKET_NAME = 'property-images';
+
+// POST /api/upload - Upload file to Supabase Storage
 export async function POST(request: NextRequest) {
     try {
         const session = await getServerSession(authOptions);
@@ -36,30 +51,47 @@ export async function POST(request: NextRequest) {
         // Generate unique filename
         const ext = file.name.split('.').pop();
         const filename = `${randomUUID()}.${ext}`;
-        const uploadDir = join(process.cwd(), 'public', 'uploads', folder);
-        const filepath = join(uploadDir, filename);
+        // Clean folder name to be safe
+        const safeFolder = folder.replace(/[^a-zA-Z0-9-_]/g, '');
+        const storagePath = `${safeFolder}/${filename}`;
 
-        // Create directory if it doesn't exist
-        await mkdir(uploadDir, { recursive: true });
+        // Upload to Supabase
+        const { data, error } = await supabase.storage
+            .from(BUCKET_NAME)
+            .upload(storagePath, buffer, {
+                contentType: file.type,
+                upsert: false
+            });
 
-        // Write new file
-        await writeFile(filepath, buffer);
+        if (error) {
+            console.error('Supabase Upload Error:', error);
+            throw new Error(`Upload failed: ${error.message}`);
+        }
 
-        // Delete old file if provided and exists
-        if (oldUrl && oldUrl.startsWith('/uploads/')) {
-            const oldPath = join(process.cwd(), 'public', oldUrl);
-            if (existsSync(oldPath)) {
-                try {
-                    await unlink(oldPath);
-                } catch (e) {
-                    console.warn('Failed to delete old file:', e);
+        // Get Public URL
+        const { data: publicUrlData } = supabase.storage
+            .from(BUCKET_NAME)
+            .getPublicUrl(storagePath);
+
+        const publicUrl = publicUrlData.publicUrl;
+
+        // Delete old file if provided (and it's a Supabase URL)
+        // We only attempt to delete if it looks like it belongs to our bucket
+        if (oldUrl && oldUrl.includes(BUCKET_NAME)) {
+            try {
+                // Extract path from URL (rough attempt)
+                const urlParts = oldUrl.split(`${BUCKET_NAME}/`);
+                if (urlParts.length > 1) {
+                    const oldPath = urlParts[1];
+                    await supabase.storage.from(BUCKET_NAME).remove([oldPath]);
                 }
+            } catch (e) {
+                console.warn('Failed to delete old remote file:', e);
             }
         }
 
-        const publicUrl = `/uploads/${folder}/${filename}`;
-
         return NextResponse.json({ url: publicUrl });
+
     } catch (error) {
         console.error('Error uploading file:', error);
         return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 });

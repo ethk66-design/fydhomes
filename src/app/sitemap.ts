@@ -5,7 +5,7 @@ import { prisma } from '@/lib/db'
 export const revalidate = 3600 // Revalidate every hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = 'https://fydhomes.in'
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fydhomes.in'
 
     const staticRoutes = [
         {

@@ -12,7 +12,7 @@ const PropertyHeroContent: React.FC = () => {
             <h1 className="font-display text-[28px] font-bold leading-[1.2] text-black mb-[15px] animate-in fade-in duration-700">
               Full of premium features from the gate to the kitchen | Luxury Villa Near Aluva | PUKKATTUPADY | kunjattukara
             </h1>
-            
+
             {/* Meta stats icons row */}
             <div className="flex flex-wrap items-center gap-[20px] text-black">
               <div className="flex items-center gap-[8px]">
@@ -44,8 +44,8 @@ const PropertyHeroContent: React.FC = () => {
         {/* Bottom Row: Status and Tools */}
         <div className="flex flex-row justify-between items-center border-t border-[#e5e5e5] pt-[15px]">
           <div>
-            <a 
-              href="https://fydhomes.in/status/for-sale/" 
+            <a
+              href="/listings?status=for-sale"
               className="bg-[#f5f5f5] text-[#666666] text-[10px] font-bold uppercase py-[4px] px-[10px] rounded-[2px] hover:bg-black hover:text-white transition-colors duration-200"
             >
               For Sale
@@ -53,19 +53,19 @@ const PropertyHeroContent: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-[10px]">
-            <button 
+            <button
               className="w-[30px] h-[30px] flex items-center justify-center border border-[#e5e5e5] rounded-sm hover:border-black transition-colors group"
               aria-label="Add to favorites"
             >
               <Heart className="w-[14px] h-[14px] text-black group-hover:fill-black" />
             </button>
-            <button 
+            <button
               className="w-[30px] h-[30px] flex items-center justify-center border border-[#e5e5e5] rounded-sm hover:border-black transition-colors"
               aria-label="Share property"
             >
               <Share2 className="w-[14px] h-[14px] text-black" />
             </button>
-            <button 
+            <button
               className="w-[30px] h-[30px] flex items-center justify-center border border-[#e5e5e5] rounded-sm hover:border-black transition-colors"
               aria-label="Print details"
             >

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ErrorContent: React.FC = () => {
   return (
-    <section 
+    <section
       style={{
         paddingTop: '80px',
         paddingBottom: '80px',
@@ -12,20 +12,20 @@ const ErrorContent: React.FC = () => {
     >
       <div className="container" style={{ maxWidth: '1170px', margin: '0 auto', paddingLeft: '15px', paddingRight: '15px' }}>
         <div className="row" style={{ display: 'flex', flexWrap: 'wrap', marginRight: '-15px', marginLeft: '-15px' }}>
-          <div 
-            className="col-lg-12 col-md-12" 
-            style={{ 
-              position: 'relative', 
-              width: '100%', 
-              paddingRight: '15px', 
+          <div
+            className="col-lg-12 col-md-12"
+            style={{
+              position: 'relative',
+              width: '100%',
+              paddingRight: '15px',
               paddingLeft: '15px',
               flex: '0 0 100%',
               maxWidth: '100%'
             }}
-          >                      
+          >
             <div className="article-wrap">
               <article className="article-page-wrap">
-                <div 
+                <div
                   className="error-404-page text-center"
                   style={{
                     textAlign: 'center',
@@ -33,7 +33,7 @@ const ErrorContent: React.FC = () => {
                     margin: '0 auto'
                   }}
                 >
-                  <h1 
+                  <h1
                     style={{
                       fontFamily: '"Roboto Slab", ui-serif, Georgia, serif',
                       fontSize: '42px',
@@ -47,7 +47,7 @@ const ErrorContent: React.FC = () => {
                     Oh oh! Page not found.
                   </h1>
 
-                  <p 
+                  <p
                     style={{
                       fontFamily: '"Roboto", ui-sans-serif, system-ui, sans-serif',
                       fontSize: '16px',
@@ -59,9 +59,9 @@ const ErrorContent: React.FC = () => {
                   >
                     We&apos;re sorry, but the page you are looking for doesn&apos;t exist. You can search your topic using the box below or return to the homepage.
                   </p>
-                  
-                  <a 
-                    href="https://fydhomes.in" 
+
+                  <a
+                    href="/"
                     className="btn btn-link"
                     style={{
                       fontFamily: '"Roboto", ui-sans-serif, system-ui, sans-serif',

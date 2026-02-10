@@ -81,9 +81,13 @@ export async function PUT(
         };
 
         return NextResponse.json(transformed);
-    } catch (error) {
+    } catch (error: unknown) {
         console.error('Error updating property:', error);
-        return NextResponse.json({ error: 'Failed to update property' }, { status: 500 });
+        // RETURN THE ACTUAL ERROR FOR DEBUGGING
+        return NextResponse.json(
+            { error: 'Failed to update property', details: error.message || String(error) },
+            { status: 500 }
+        );
     }
 }
 

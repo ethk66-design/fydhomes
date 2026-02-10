@@ -1,19 +1,14 @@
-
-const { createClient } = require('@supabase/supabase-js');
+const { PrismaClient } = require('@prisma/client');
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
 // --- CONFIGURATION ---
 const WP_API_URL = 'https://fydhomes.in/wp-json/wp/v2';
 const MIGRATION_LIMIT = 100; // PRODUCTION LIMIT
 const DRY_RUN = false;
 
-// --- SUPABASE SETUP ---
-const SUPABASE_URL = 'https://cqiwkdfmfhkwqkdqaeyy.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxaXdrZGZtZmhrd3FrZHFhZXl5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODQ1NDc1NiwiZXhwIjoyMDg0MDMwNzU2fQ.ONTAMss7dqcGCEtxHW-B_V3WejBNNDJo0GwctAQzH-k';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
-    auth: { autoRefreshToken: false, persistSession: false }
-});
+const prisma = new PrismaClient();
 
 // --- HELPERS ---
 function fetchJson(url) {
@@ -64,120 +59,125 @@ function mapPropertyType(typeIds) {
 }
 
 async function migrate() {
-    console.log(`\n--- STARTING MIGRATION (Limit: ${MIGRATION_LIMIT}) ---`);
+    console.log(`\n--- STARTING FULL MIGRATION (Prisma) (Limit: ${MIGRATION_LIMIT}) ---`);
 
-    // 0. RESET DATABASE
-    if (!DRY_RUN) {
-        console.log('⚠️  Resetting Database (Deleting all properties)...');
-        // Delete where ID is not null (effectively all)
-        const { error: deleteError } = await supabase.from('properties').delete().neq('id', '00000000-0000-0000-0000-000000000000');
-        if (deleteError) {
-            console.error('Failed to reset database:', deleteError);
+    try {
+        // 0. RESET DATABASE (Optional, but good for clean migration)
+        if (!DRY_RUN) {
+            console.log('⚠️  Resetting Database (Deleting all properties)...');
+            await prisma.propertyImage.deleteMany({});
+            await prisma.propertyTag.deleteMany({});
+            await prisma.property.deleteMany({});
+            console.log('✅ Database Cleared.');
+        }
+
+        // 1. Fetch Properties from WordPress
+        const properties = await fetchJson(`${WP_API_URL}/properties?per_page=${MIGRATION_LIMIT}`);
+
+        if (!properties || properties.length === 0) {
+            console.log('No properties found to migrate.');
             return;
         }
-        console.log('✅ Database Cleared.');
-    }
 
-    // 1. Fetch Properties
-    const properties = await fetchJson(`${WP_API_URL}/properties?per_page=${MIGRATION_LIMIT}`);
+        console.log(`Found ${properties.length} properties. Processing...`);
 
-    if (!properties || properties.length === 0) {
-        console.log('No properties found to migrate.');
-        return;
-    }
+        let successCount = 0;
+        let failCount = 0;
 
-    console.log(`Found ${properties.length} properties. Processing...`);
+        for (const p of properties) {
+            try {
+                const title = decodeHtml(p.title.rendered);
+                console.log(`\nProcessing ID: ${p.id} - ${title}`);
 
-    let successCount = 0;
-    let failCount = 0;
+                const meta = p.property_meta || {};
 
-    for (const p of properties) {
-        try {
-            console.log(`\nProcessing ID: ${p.id} - ${decodeHtml(p.title.rendered)}`);
+                // 2. Fetch Images
+                const imageUrls = [];
 
-            const meta = p.property_meta || {};
-
-            // 2. Fetch Images
-            const images = [];
-
-            // Thumbnail
-            if (p.featured_media) {
-                console.log(`  Fetching Thumbnail (${p.featured_media})...`);
-                const thumbUrl = await getMediaUrl(p.featured_media);
-                if (thumbUrl) images.push(thumbUrl);
-            }
-
-            // Gallery (Limit to 15 for full migration)
-            if (meta.fave_property_images) {
-                const galleryIds = meta.fave_property_images.slice(0, 15);
-                console.log(`  Fetching ${galleryIds.length} Gallery Images...`);
-                for (const imgId of galleryIds) {
-                    const url = await getMediaUrl(imgId);
-                    if (url && !images.includes(url)) images.push(url);
-                }
-            }
-
-            // 3. Construct Payload
-            const priceVal = meta.fave_property_price?.[0] || '';
-            const pricePostfix = meta.fave_property_price_postfix?.[0] || '';
-            const price = priceVal ? `${priceVal} ${pricePostfix}`.trim() : 'Price on Request';
-
-            const areaVal = meta.fave_property_size?.[0] || meta.fave_property_land?.[0] || '';
-            const areaPostfix = meta.fave_property_size_prefix?.[0] || meta.fave_property_land_postfix?.[0] || 'SQFT';
-            const area = areaVal ? `${areaVal} ${areaPostfix}`.trim() : '';
-
-            // Capture Full Description
-            const fullDescription = p.content.rendered;
-
-            const payload = {
-                title: decodeHtml(p.title.rendered),
-                description: fullDescription,
-                price: price,
-                location: 'Kochi, Kerala',
-                beds: parseInt(meta.fave_property_bedrooms?.[0] || 0),
-                baths: parseInt(meta.fave_property_bathrooms?.[0] || 0),
-                area: area,
-                images: images,
-                status: mapStatus(p.property_status, meta.fave_featured?.[0]),
-                type: mapPropertyType(p.property_type),
-                listing_type: mapListingType(p.property_status),
-                youtube_video: meta.fave_video_url?.[0] || null,
-                original_url: p.link, // SAVE ORIGINAL LINK
-                agent_id: null
-            };
-
-            if (!DRY_RUN) {
-                const { error } = await supabase.from('properties').insert(payload);
-                if (error) {
-                    if (error.code === '42703') { // Undefined column
-                        console.error('  ⚠️  COLUMN MISSING: You must run the SQL script matching "original_url" first!');
-                        console.log('  Retrying without original_url...');
-                        delete payload.original_url;
-                        const { error: retryError } = await supabase.from('properties').insert(payload);
-                        if (retryError) throw retryError;
-                        console.log('  ✅ Inserted (Partial - No URL)');
+                // Thumbnail
+                if (p.featured_media) {
+                    process.stdout.write(`  Fetching Thumbnail (${p.featured_media})... `);
+                    const thumbUrl = await getMediaUrl(p.featured_media);
+                    if (thumbUrl) {
+                        imageUrls.push(thumbUrl);
+                        console.log('OK');
                     } else {
-                        throw error;
+                        console.log('Failed');
                     }
-                } else {
-                    console.log('  ✅ Inserted into Supabase');
                 }
-                successCount++;
-            } else {
-                console.log('  [DRY RUN] Skipped insert');
+
+                // Gallery (Limit to 15)
+                if (meta.fave_property_images) {
+                    const galleryIds = meta.fave_property_images.slice(0, 15);
+                    process.stdout.write(`  Fetching ${galleryIds.length} Gallery Images... `);
+                    for (const imgId of galleryIds) {
+                        const url = await getMediaUrl(imgId);
+                        if (url && !imageUrls.includes(url)) imageUrls.push(url);
+                    }
+                    console.log(`Got ${imageUrls.length} total.`);
+                }
+
+                // 3. Construct Payload
+                const priceVal = meta.fave_property_price?.[0] || '';
+                const pricePostfix = meta.fave_property_price_postfix?.[0] || '';
+                const price = priceVal ? `${priceVal} ${pricePostfix}`.trim() : 'Price on Request';
+
+                const areaVal = meta.fave_property_size?.[0] || meta.fave_property_land?.[0] || '';
+                const areaPostfix = meta.fave_property_size_prefix?.[0] || meta.fave_property_land_postfix?.[0] || 'SQFT';
+                const area = areaVal ? `${areaVal} ${areaPostfix}`.trim() : '';
+
+                const fullDescription = p.content.rendered;
+                const landArea = meta.fave_property_land?.[0] ? `${meta.fave_property_land[0]} ${meta.fave_property_land_postfix?.[0] || ''}`.trim() : null;
+
+                const propertyData = {
+                    title: title,
+                    description: fullDescription,
+                    price: price,
+                    location: 'Kochi, Kerala',
+                    beds: parseInt(meta.fave_property_bedrooms?.[0] || 0),
+                    baths: parseInt(meta.fave_property_bathrooms?.[0] || 0),
+                    area: area,
+                    land_area: landArea,
+                    status: mapStatus(p.property_status, meta.fave_featured?.[0]),
+                    type: mapPropertyType(p.property_type),
+                    listing_type: mapListingType(p.property_status),
+                    youtube_video: meta.fave_video_url?.[0] || null,
+                    // Map images to nested create
+                    images: {
+                        create: imageUrls.map((url, index) => ({
+                            url: url,
+                            order: index
+                        }))
+                    }
+                };
+
+                if (!DRY_RUN) {
+                    await prisma.property.create({
+                        data: propertyData
+                    });
+                    console.log('  ✅ Inserted into Database');
+                    successCount++;
+                } else {
+                    console.log('  [DRY RUN] Skipped insert');
+                }
+
+            } catch (err) {
+                console.error(`  ❌ Failed to migrate property ${p.id}:`, err.message);
+                failCount++;
             }
-
-        } catch (err) {
-            console.error(`  ❌ Failed to migrate property ${p.id}:`, err.message);
-            failCount++;
+            // Rate limiting
+            await new Promise(r => setTimeout(r, 500));
         }
-        // Rate limiting
-        await new Promise(r => setTimeout(r, 500));
-    }
 
-    console.log(`\n--- MIGRATION COMPLETE ---`);
-    console.log(`Success: ${successCount}`);
-    console.log(`Failed: ${failCount}`);
+        console.log(`\n--- MIGRATION COMPLETE ---`);
+        console.log(`Success: ${successCount}`);
+        console.log(`Failed: ${failCount}`);
+
+    } catch (e) {
+        console.error("Migration Fatal Error:", e);
+    } finally {
+        await prisma.$disconnect();
+    }
 }
 
 migrate();

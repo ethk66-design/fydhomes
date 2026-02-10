@@ -1,83 +1,87 @@
-const { createClient } = require('@supabase/supabase-js');
-const fs = require('fs');
-const path = require('path');
-
-// Manually parse env file
-const envPath = fs.existsSync(path.join(process.cwd(), '.env.local'))
-    ? path.join(process.cwd(), '.env.local')
-    : path.join(process.cwd(), '.env');
-
-const envContent = fs.readFileSync(envPath, 'utf8');
-const envConfig = {};
-envContent.split('\n').forEach(line => {
-    const parts = line.split('=');
-    if (parts.length >= 2) {
-        const key = parts[0].trim();
-        const value = parts.slice(1).join('=').trim().replace(/"/g, '');
-        envConfig[key] = value;
-    }
-});
-
-const supabaseUrl = envConfig.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = envConfig.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-    console.error("Missing Supabase credentials in .env file");
-    process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 async function auditImages() {
-    console.log("🔍 Auditing Property Images...");
+    console.log("🔍 Auditing Property Images (via Prisma)...");
 
-    const { data: properties, error } = await supabase
-        .from('properties')
-        .select('id, title, images');
+    try {
+        const images = await prisma.propertyImage.findMany({
+            include: {
+                property: {
+                    select: { title: true }
+                }
+            }
+        });
 
-    if (error) {
-        console.error("Error fetching properties:", error);
-        return;
-    }
+        let externalCount = 0;
+        let internalCount = 0;
+        let externalDomains = new Set();
+        let propertiesWithExternalImages = new Map();
 
-    let externalCount = 0;
-    let internalCount = 0;
-    let externalDomains = new Set();
+        for (const img of images) {
+            if (!img.url) continue;
 
-    properties.forEach(p => {
-        if (!p.images || p.images.length === 0) return;
+            // Check if URL is external (not Supabase)
+            const isExternal = !img.url.includes('supabase.co');
 
-        const isExternal = p.images.some(url => !url.includes('supabase.co'));
-
-        if (isExternal) {
-            externalCount++;
-            p.images.forEach(url => {
+            if (isExternal) {
+                externalCount++;
                 try {
-                    const u = new URL(url);
+                    const u = new URL(img.url);
                     if (!u.hostname.includes('supabase.co')) {
                         externalDomains.add(u.hostname);
                     }
                 } catch (e) { }
-            });
-            if (externalCount <= 3) {
-                console.log(`\n⚠️  Property: "${p.title}" has external images:`);
-                console.log(`   - Example: ${p.images[0]}`);
+
+                // Group by property for reporting
+                const propId = img.property_id;
+                const propTitle = img.property?.title || 'Unknown Property';
+
+                if (!propertiesWithExternalImages.has(propId)) {
+                    propertiesWithExternalImages.set(propId, {
+                        title: propTitle,
+                        count: 0,
+                        example: img.url
+                    });
+                }
+                propertiesWithExternalImages.get(propId).count++;
+            } else {
+                internalCount++;
             }
-        } else {
-            internalCount++;
         }
-    });
 
-    console.log("\n---------------------------------------------------");
-    console.log(`📊 Audit Results:`);
-    console.log(`   - Total Properties: ${properties.length}`);
-    console.log(`   - Safe (Supabase Storage): ${internalCount}`);
-    console.log(`   - AT RISK (External/WordPress): ${externalCount}`);
+        console.log("\n---------------------------------------------------");
+        console.log(`📊 Audit Results:`);
+        console.log(`   - Total Images Scanned: ${images.length}`);
+        console.log(`   - Safe (Supabase Storage): ${internalCount}`);
+        console.log(`   - AT RISK (External/WordPress): ${externalCount}`);
 
-    if (externalDomains.size > 0) {
-        console.log(`   - External Domains found: ${Array.from(externalDomains).join(', ')}`);
+        if (propertiesWithExternalImages.size > 0) {
+            console.log(`   - Properties affected: ${propertiesWithExternalImages.size}`);
+            console.log(`\n⚠️  Sample of properties with external images:`);
+
+            let shown = 0;
+            for (const [id, data] of propertiesWithExternalImages) {
+                if (shown >= 5) break;
+                console.log(`   - "${data.title}": ${data.count} external images`);
+                console.log(`     Example: ${data.example}`);
+                shown++;
+            }
+            if (propertiesWithExternalImages.size > 5) {
+                console.log(`   ... and ${propertiesWithExternalImages.size - 5} more.`);
+            }
+        }
+
+        if (externalDomains.size > 0) {
+            console.log(`\n   - External Domains found: ${Array.from(externalDomains).join(', ')}`);
+        }
+        console.log("---------------------------------------------------\n");
+
+    } catch (error) {
+        console.error("Error auditing images:", error);
+    } finally {
+        await prisma.$disconnect();
     }
-    console.log("---------------------------------------------------\n");
 }
 
 auditImages();

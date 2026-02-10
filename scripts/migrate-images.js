@@ -1,13 +1,16 @@
 
+const { PrismaClient } = require('@prisma/client');
 const { createClient } = require('@supabase/supabase-js');
 const fs = require('fs');
 const path = require('path');
 
+const prisma = new PrismaClient();
+
 // --- Configuration ---
 const BUCKET_NAME = 'property-images';
-const CONCURRENCY_LIMIT = 3; // Upload 3 properties in parallel
 
 // --- Env Setup ---
+// We still need env for Supabase Storage
 const envPath = fs.existsSync(path.join(process.cwd(), '.env.local'))
     ? path.join(process.cwd(), '.env.local')
     : path.join(process.cwd(), '.env');
@@ -25,12 +28,10 @@ envContent.split('\n').forEach(line => {
 });
 
 const supabaseUrl = envConfig.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = envConfig.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY || envConfig.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-// Note: Ideally use SERVICE_ROLE_KEY for admin tasks, but ANON might work if RLS allows or is disabled for upload.
-// If typical Row Level Security is on, we might need to authenticate or use service role.
-// Warning logging if only anon key found.
-if (!envConfig.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY) {
-    console.warn("⚠️  WARNING: Using ANON KEY. If RLS is enforced, updates might fail. Please ensure you have a SERVICE_ROLE_KEY in .env if this fails.");
+const supabaseKey = envConfig.SUPABASE_SERVICE_ROLE_KEY || envConfig.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY || envConfig.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!envConfig.SUPABASE_SERVICE_ROLE_KEY && !envConfig.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY) {
+    console.warn("⚠️  WARNING: Using ANON KEY. If RLS is enforced, updates might fail.");
 }
 
 if (!supabaseUrl || !supabaseKey) {
@@ -38,6 +39,7 @@ if (!supabaseUrl || !supabaseKey) {
     process.exit(1);
 }
 
+// Supabase client only for Storage
 const supabase = createClient(supabaseUrl, supabaseKey, {
     auth: { persistSession: false }
 });
@@ -83,99 +85,84 @@ function getFileNameFromUrl(url) {
     }
 }
 
-async function processProperty(property) {
-    const newImages = [];
-    let modified = false;
+async function processImage(imageRecord) {
+    const imgUrl = imageRecord.url;
+    const propertyTitle = imageRecord.property?.title || 'Unknown';
+    const propertyId = imageRecord.property_id;
 
-    console.log(`\nProcessing: ${property.title} (ID: ${property.id})`);
+    console.log(`\nProcessing Image ID: ${imageRecord.id} (Property: ${propertyTitle})`);
+    console.log(`   ⬇️  Migrating: ${imgUrl}`);
 
-    for (const imgUrl of property.images) {
-        // Check if already Supabase
-        if (imgUrl.includes('supabase.co')) {
-            newImages.push(imgUrl);
-            continue;
-        }
-
-        console.log(`   ⬇️  Migrating: ${imgUrl}`);
-
-        const buffer = await downloadImage(imgUrl);
-        if (!buffer) {
-            console.warn(`   ⚠️  Skipping image (download failed), keeping original URL.`);
-            newImages.push(imgUrl);
-            continue; // Keep old URL if download fails, don't break data
-        }
-
-        const fileName = getFileNameFromUrl(imgUrl);
-        // Clean filename to be safe
-        const safeFileName = fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
-        const storagePath = `migrated/${property.id}/${safeFileName}`;
-
-        try {
-            // Setup content type guessing (simple)
-            const ext = path.extname(safeFileName).toLowerCase();
-            let contentType = 'image/jpeg';
-            if (ext === '.png') contentType = 'image/png';
-            if (ext === '.webp') contentType = 'image/webp';
-            if (ext === '.gif') contentType = 'image/gif';
-
-            const publicUrl = await uploadToSupabase(buffer, storagePath, contentType);
-            console.log(`   ✅ Uploaded: ${storagePath}`);
-            newImages.push(publicUrl);
-            modified = true;
-        } catch (err) {
-            console.error(`   ❌ Upload Error: ${err.message}`);
-            newImages.push(imgUrl); // Keep old if upload fails
-        }
+    const buffer = await downloadImage(imgUrl);
+    if (!buffer) {
+        console.warn(`   ⚠️  Skipping image (download failed), keeping original URL.`);
+        return;
     }
 
-    if (modified) {
-        const { error } = await supabase
-            .from('properties')
-            .update({ images: newImages })
-            .eq('id', property.id);
+    const fileName = getFileNameFromUrl(imgUrl);
+    // Clean filename to be safe
+    const safeFileName = fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
+    const storagePath = `migrated/${propertyId}/${safeFileName}`;
 
-        if (error) {
-            console.error(`   ❌ DB Update Failed: ${error.message}`);
-        } else {
-            console.log(`   💾 Database Updated successfully.`);
-        }
-    } else {
-        console.log(`   ✨ No changes needed.`);
+    try {
+        // Setup content type guessing (simple)
+        const ext = path.extname(safeFileName).toLowerCase();
+        let contentType = 'image/jpeg';
+        if (ext === '.png') contentType = 'image/png';
+        if (ext === '.webp') contentType = 'image/webp';
+        if (ext === '.gif') contentType = 'image/gif';
+
+        // Upload to Supabase Storage
+        const publicUrl = await uploadToSupabase(buffer, storagePath, contentType);
+        console.log(`   ✅ Uploaded: ${storagePath}`);
+
+        // Update DB using Prisma
+        await prisma.propertyImage.update({
+            where: { id: imageRecord.id },
+            data: { url: publicUrl }
+        });
+
+        console.log(`   💾 Database Updated successfully.`);
+
+    } catch (err) {
+        console.error(`   ❌ Upload Error: ${err.message}`);
     }
 }
 
 // --- Main Execution ---
 
 async function migrateAll() {
-    console.log("🚀 Starting Critical Image Migration...");
+    console.log("🚀 Starting Critical Image Migration (Prisma + Supabase)...");
 
-    // 1. Fetch all properties
-    const { data: properties, error } = await supabase
-        .from('properties')
-        .select('*');
+    try {
+        // 1. Fetch all images
+        const images = await prisma.propertyImage.findMany({
+            include: {
+                property: { select: { title: true } }
+            }
+        });
 
-    if (error) {
-        console.error("Error fetching properties:", error);
-        return;
+        console.log(`Found ${images.length} total images.`);
+
+        // 2. Filter images that need migration
+        const imagesToMigrate = images.filter(img =>
+            img.url && !img.url.includes('supabase.co')
+        );
+
+        console.log(`Images requiring migration: ${imagesToMigrate.length}`);
+
+        // 3. Process in chunks
+        for (const image of imagesToMigrate) {
+            await processImage(image);
+        }
+
+        console.log("\n🏁 Migration Complete.");
+
+    } catch (error) {
+        console.error("Migration failed:", error);
+    } finally {
+        await prisma.$disconnect();
     }
-
-    console.log(`Found ${properties.length} properties.`);
-
-    // 2. Filter properties that actually need migration
-    const propertiesToMigrate = properties.filter(p =>
-        p.images && p.images.some(url => !url.includes('supabase.co'))
-    );
-
-    console.log(`Properties requiring migration: ${propertiesToMigrate.length}`);
-
-    // 3. Process in chunks
-    // Simple for-loop for now, or Promise.all with concurrency limit
-    // Doing strict sequential for safety and logging clarity
-    for (const property of propertiesToMigrate) {
-        await processProperty(property);
-    }
-
-    console.log("\n🏁 Migration Complete.");
 }
 
 migrateAll();

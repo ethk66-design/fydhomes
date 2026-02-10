@@ -167,14 +167,17 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
         });
       }
 
-      if (!res.ok) throw new Error("Failed to save property");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.details || errorData.error || "Failed to save property");
+      }
 
       toast.success(`Property ${isEditing ? "updated" : "created"} successfully`);
       router.push("/admin");
       router.refresh();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error saving property:", error);
-      toast.error("Failed to save property");
+      toast.error(error.message || "Failed to save property");
     } finally {
       setLoading(false);
     }

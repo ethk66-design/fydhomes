@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Property, PropertyStatus, ListingType } from "@/lib/types";
 import { stripHtml } from "@/lib/utils";

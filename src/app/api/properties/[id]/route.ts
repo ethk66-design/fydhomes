@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -74,6 +75,12 @@ export async function PUT(
             });
         });
 
+        // Revalidate cache to show updates instantly
+        revalidatePath('/');
+        revalidatePath('/listings');
+        revalidatePath(`/listings/${id}`);
+        revalidatePath('/admin');
+
         const transformed = {
             ...property,
             images: property.images.map((img) => img.url),
@@ -81,9 +88,8 @@ export async function PUT(
         };
 
         return NextResponse.json(transformed);
-    } catch (error: unknown) {
+    } catch (error: any) {
         console.error('Error updating property:', error);
-        // RETURN THE ACTUAL ERROR FOR DEBUGGING
         return NextResponse.json(
             { error: 'Failed to update property', details: error.message || String(error) },
             { status: 500 }

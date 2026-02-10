@@ -44,6 +44,31 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
     tags: initialData?.tags || [],
   });
 
+  // Sync state with initialData when it changes (e.g. after router.refresh())
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        title: initialData.title || "",
+        description: initialData.description || "",
+        price: initialData.price || "",
+        location: initialData.location || "",
+        beds: initialData.beds || 0,
+        baths: initialData.baths || 0,
+        area: initialData.area || "",
+        land_area: initialData.land_area || "",
+        type: initialData.type || "Villa",
+        listing_type: initialData.listing_type || "Sale",
+        status: initialData.status || "active",
+        youtube_video: initialData.youtube_video || "",
+        parkings: initialData.parkings || 0,
+        meta_title: initialData.meta_title || "",
+        meta_description: initialData.meta_description || "",
+        tags: initialData.tags || [],
+      });
+      setImages(initialData.images || []);
+    }
+  }, [initialData]);
+
   const handleCheckboxChange = (checked: boolean, tag: string) => {
     setFormData(prev => {
       const currentTags = prev.tags || [];

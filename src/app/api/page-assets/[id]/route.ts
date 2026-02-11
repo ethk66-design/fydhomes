@@ -3,6 +3,34 @@ import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
+// GET /api/page-assets/[id] - Get page asset details (admin only)
+export async function GET(
+    request: NextRequest,
+    paramsObj: { params: Promise<{ id: string }> }
+) {
+    try {
+        const session = await getServerSession(authOptions);
+        if (!session || (session.user as any).role !== 'admin') {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const { id } = await paramsObj.params;
+
+        const asset = await db.pageAsset.findUnique({
+            where: { id },
+        });
+
+        if (!asset) {
+            return NextResponse.json({ error: 'Asset not found' }, { status: 404 });
+        }
+
+        return NextResponse.json(asset);
+    } catch (error) {
+        console.error('Error fetching page asset:', error);
+        return NextResponse.json({ error: 'Failed to fetch page asset' }, { status: 500 });
+    }
+}
+
 // PUT /api/page-assets/[id] - Update page asset (admin only)
 export async function PUT(
     request: NextRequest,

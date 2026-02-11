@@ -71,26 +71,39 @@ export default function EditSiteImagePage({ params }: PageProps) {
         const file = e.target.files?.[0];
         if (!file) return;
 
+        // validation: Max 5MB
+        if (file.size > 5 * 1024 * 1024) {
+            toast.error("File size too large (Max 5MB)");
+            return;
+        }
+
         try {
             setUploading(true);
             const formData = new FormData();
             formData.append('file', file);
+            // Append folder if needed, though route defaults to 'general' or uses randomUUID
 
             const res = await fetch('/api/upload', {
                 method: 'POST',
                 body: formData
             });
 
-            if (!res.ok) throw new Error('Upload failed');
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.error || 'Upload failed');
+            }
+
             const data = await res.json();
 
             setAsset(prev => prev ? { ...prev, asset_url: data.url } : null);
             toast.success("Image uploaded successfully");
-        } catch (error) {
+        } catch (error: any) {
             console.error('Upload error:', error);
-            toast.error("Failed to upload image");
+            toast.error(error.message || "Failed to upload image");
         } finally {
             setUploading(false);
+            // Reset input
+            e.target.value = '';
         }
     };
 
@@ -189,13 +202,15 @@ export default function EditSiteImagePage({ params }: PageProps) {
                                 <label className="text-sm font-bold text-black uppercase tracking-wider">Image Asset</label>
                                 <div className="p-4 border-2 border-dashed border-[#eeeeee] rounded-xl flex flex-col items-center gap-4 hover:bg-gray-50 transition-colors">
                                     {asset.asset_url && (
-                                        <div className="relative w-full h-[200px] sm:h-[300px] rounded-lg overflow-hidden bg-gray-100 shadow-sm">
+                                        <div className="relative w-full h-[200px] sm:h-[300px] rounded-lg overflow-hidden bg-gray-100 shadow-sm group">
                                             <Image
                                                 src={asset.asset_url}
                                                 alt="Preview"
                                                 fill
                                                 className="object-contain"
+                                                unoptimized
                                             />
+                                            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                                         </div>
                                     )}
 
@@ -214,11 +229,11 @@ export default function EditSiteImagePage({ params }: PageProps) {
                                                 className="cursor-pointer relative overflow-hidden"
                                             >
                                                 {uploading ? (
-                                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                                ) : (
-                                                    <Upload className="mr-2 h-4 w-4" />
-                                                )}
-                                                {uploading ? "Uploading..." : "Upload New Image"}
+                                                    <span className="flex items-center">
+                                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                                        Uploading... (please wait)
+                                                    </span>
+                                                ) : "Upload New Image"}
                                                 <input
                                                     type="file"
                                                     accept="image/*"

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { revalidatePath } from 'next/cache';
 
 // GET /api/page-assets/[id] - Get page asset details (admin only)
 export async function GET(
@@ -53,6 +54,10 @@ export async function PUT(
                 alt_text: alt_text || null,
             },
         });
+
+        // Revalidate pages that might use this asset
+        revalidatePath('/'); // Home page
+        revalidatePath('/admin/site-images'); // Admin list
 
         return NextResponse.json(asset);
     } catch (error) {

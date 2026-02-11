@@ -52,21 +52,27 @@ export async function GET(request: Request) {
             }
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('[HEALTH-CHECK-FAILED]', error);
+
+        const errMsg = error instanceof Error ? error.message : String(error);
+        const errCode = (error as Record<string, unknown>)?.code;
+        const errMeta = (error as Record<string, unknown>)?.meta;
+        const errName = error instanceof Error ? error.name : 'UnknownError';
+        const errStack = error instanceof Error ? error.stack : undefined;
 
         // Deep inspection of the error
         return NextResponse.json({
             status: 'critical_failure',
             timestamp: new Date().toISOString(),
             error: {
-                message: error.message,
-                code: error.code,
-                meta: error.meta,
-                name: error.name,
+                message: errMsg,
+                code: errCode,
+                meta: errMeta,
+                name: errName,
                 // In production, stack traces are usually hidden, but for this authenticated
                 // diagnostic route, we explicitly want to see it.
-                stack: error.stack
+                stack: errStack
             },
             environment: {
                 DATABASE_URL_CONFIGURED: !!process.env.DATABASE_URL,

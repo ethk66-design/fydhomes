@@ -3,7 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { PageSeo } from "@/lib/types";
@@ -34,15 +34,7 @@ export default function EditSeoPage({ params }: PageProps) {
     const [saving, setSaving] = useState(false);
     const router = useRouter();
 
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            router.push("/admin/login");
-        } else if (status === "authenticated" && resolvedParams.id) {
-            fetchPage(resolvedParams.id);
-        }
-    }, [status, resolvedParams.id, router]);
-
-    const fetchPage = async (id: string) => {
+    const fetchPage = useCallback(async (id: string) => {
         try {
             setLoading(true);
             const res = await fetch(`/api/page-seo/${id}`);
@@ -56,7 +48,15 @@ export default function EditSeoPage({ params }: PageProps) {
         } finally {
             setLoading(false);
         }
-    };
+    }, [router]);
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/admin/login");
+        } else if (status === "authenticated" && resolvedParams.id) {
+            fetchPage(resolvedParams.id);
+        }
+    }, [status, resolvedParams.id, router, fetchPage]);
 
     const handleSave = async () => {
         if (!page) return;

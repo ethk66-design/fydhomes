@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,11 +78,13 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-[80px]">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="block">
-              <img
+            <Link href="/" className="block relative h-[60px] lg:h-[80px] w-[200px]">
+              <Image
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459775863.png?width=8000&height=8000&resize=contain"
                 alt="fyd homes"
-                className="h-[60px] lg:h-[80px] w-auto transition-transform duration-300"
+                fill
+                className="object-contain object-left transition-transform duration-300"
+                priority
               />
             </Link>
           </div>
@@ -162,9 +165,8 @@ const Navigation = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-white z-[999] transition-transform duration-500 ease-in-out transform lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-0 bg-white z-[999] transition-transform duration-500 ease-in-out transform lg:hidden top-[80px] ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
-        style={{ top: '80px' }}
       >
         <div className="flex flex-col p-8 space-y-6">
           <ul className="space-y-6">

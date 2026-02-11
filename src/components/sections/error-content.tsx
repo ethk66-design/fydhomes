@@ -1,82 +1,31 @@
 import React from 'react';
+import Link from 'next/link';
 
 const ErrorContent: React.FC = () => {
   return (
-    <section
-      style={{
-        paddingTop: '80px',
-        paddingBottom: '80px',
-        backgroundColor: '#ffffff'
-      }}
-      className="page-wrap"
-    >
-      <div className="container" style={{ maxWidth: '1170px', margin: '0 auto', paddingLeft: '15px', paddingRight: '15px' }}>
-        <div className="row" style={{ display: 'flex', flexWrap: 'wrap', marginRight: '-15px', marginLeft: '-15px' }}>
-          <div
-            className="col-lg-12 col-md-12"
-            style={{
-              position: 'relative',
-              width: '100%',
-              paddingRight: '15px',
-              paddingLeft: '15px',
-              flex: '0 0 100%',
-              maxWidth: '100%'
-            }}
-          >
+    <section className="page-wrap py-20 bg-white">
+      <div className="container mx-auto px-[15px] max-w-[1170px]">
+        <div className="row flex flex-wrap -mx-[15px]">
+          <div className="col-lg-12 col-md-12 relative w-full px-[15px] flex-[0_0_100%] max-w-full">
             <div className="article-wrap">
               <article className="article-page-wrap">
-                <div
-                  className="error-404-page text-center"
-                  style={{
-                    textAlign: 'center',
-                    maxWidth: '800px',
-                    margin: '0 auto'
-                  }}
-                >
-                  <h1
-                    style={{
-                      fontFamily: '"Roboto Slab", ui-serif, Georgia, serif',
-                      fontSize: '42px',
-                      fontWeight: 600,
-                      lineHeight: '1.2',
-                      color: '#000000',
-                      letterSpacing: '-0.02em',
-                      marginBottom: '20px'
-                    }}
-                  >
+                <div className="error-404-page text-center max-w-[800px] mx-auto">
+                  <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-black tracking-[-0.02em] mb-5">
                     Oh oh! Page not found.
                   </h1>
 
-                  <p
-                    style={{
-                      fontFamily: '"Roboto", ui-sans-serif, system-ui, sans-serif',
-                      fontSize: '16px',
-                      fontWeight: 400,
-                      lineHeight: '1.6',
-                      color: '#666666',
-                      marginBottom: '30px'
-                    }}
-                  >
+                  <p className="font-sans text-base font-normal leading-[1.6] text-[#666666] mb-[30px]">
                     We&apos;re sorry, but the page you are looking for doesn&apos;t exist. You can search your topic using the box below or return to the homepage.
                   </p>
 
-                  <a
-                    href="/"
-                    className="btn btn-link"
-                    style={{
-                      fontFamily: '"Roboto", ui-sans-serif, system-ui, sans-serif',
-                      fontSize: '16px',
-                      fontWeight: 400,
-                      color: '#0073aa',
-                      textDecoration: 'none',
-                      transition: 'color 0.2s ease',
-                      display: 'inline-block'
-                    }}
-                    onMouseOver={(e) => (e.currentTarget.style.color = '#19a941')}
-                    onMouseOut={(e) => (e.currentTarget.style.color = '#0073aa')}
-                  >
-                    Back to Homepage
-                  </a>
+                  <div className="btn-box">
+                    <Link
+                      href="/"
+                      className="inline-block bg-[#1db954] text-white px-[30px] py-[15px] text-sm font-bold uppercase tracking-[1px] rounded-[50px] transition-all duration-300 hover:bg-[#121212] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
+                    >
+                      Back to Homepage
+                    </Link>
+                  </div>
                 </div>
               </article>
             </div>

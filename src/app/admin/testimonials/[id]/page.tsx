@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import {
@@ -44,15 +44,7 @@ export default function EditTestimonialPage({ params }: PageProps) {
     const [uploading, setUploading] = useState(false);
     const router = useRouter();
 
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            router.push("/admin/login");
-        } else if (status === "authenticated" && resolvedParams.id) {
-            fetchTestimonial(resolvedParams.id);
-        }
-    }, [status, resolvedParams.id, router]);
-
-    const fetchTestimonial = async (id: string) => {
+    const fetchTestimonial = useCallback(async (id: string) => {
         try {
             setLoading(true);
             const res = await fetch(`/api/testimonials/${id}`);
@@ -66,7 +58,15 @@ export default function EditTestimonialPage({ params }: PageProps) {
         } finally {
             setLoading(false);
         }
-    };
+    }, [router]);
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/admin/login");
+        } else if (status === "authenticated" && resolvedParams.id) {
+            fetchTestimonial(resolvedParams.id);
+        }
+    }, [status, resolvedParams.id, router, fetchTestimonial]);
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -214,6 +214,7 @@ export default function EditTestimonialPage({ params }: PageProps) {
                                             type="button"
                                             onClick={() => setTestimonial({ ...testimonial, rating: star })}
                                             className={`p-1 transition-transform hover:scale-110 ${testimonial.rating >= star ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
+                                            aria-label={`Rate ${star} stars`}
                                         >
                                             <Star size={24} fill={testimonial.rating >= star ? "currentColor" : "none"} />
                                         </button>
@@ -269,6 +270,7 @@ export default function EditTestimonialPage({ params }: PageProps) {
                                                     onChange={handleImageUpload}
                                                     disabled={uploading}
                                                     className="absolute inset-0 opacity-0 cursor-pointer"
+                                                    aria-label="Upload client photo"
                                                 />
                                             </Button>
                                         </div>

@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { writeFile, mkdir } from 'fs/promises';
 import { join, dirname, basename } from 'path';
-import { existsSync } from 'fs';
 
 // Force dynamic to avoid static generation
 export const dynamic = 'force-dynamic';
@@ -37,7 +36,7 @@ export async function GET(request: NextRequest) {
         }
 
         let successCount = 0;
-        let errors = [];
+        const errors: Array<{ id: string; error: string }> = [];
 
         for (const img of images) {
             try {
@@ -76,9 +75,9 @@ export async function GET(request: NextRequest) {
                 });
 
                 successCount++;
-            } catch (err: any) {
+            } catch (err: unknown) {
                 console.error(`Migration error for image ${img.id}:`, err);
-                errors.push({ id: img.id, error: err.message });
+                errors.push({ id: img.id, error: err instanceof Error ? err.message : String(err) });
             }
         }
 
@@ -95,8 +94,8 @@ export async function GET(request: NextRequest) {
             str: "Batch processed"
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Migration API Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json({ error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
     }
 }

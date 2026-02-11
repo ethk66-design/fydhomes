@@ -14,7 +14,7 @@ export function FindPerfectHome() {
 
           <div className="lg:w-[40%] flex flex-col items-start">
             <p className="text-[#5c5c5c] text-[14px] sm:text-[15px] md:text-[16px] leading-[1.7] mb-6 sm:mb-8">
-              Whether you're buying, selling, or investing, our expert team is here to guide you every step of the way. Find your perfect place with ease.
+              Whether you&apos;re buying, selling, or investing, our expert team is here to guide you every step of the way. Find your perfect place with ease.
             </p>
             <a
               href="tel:+919544593991"

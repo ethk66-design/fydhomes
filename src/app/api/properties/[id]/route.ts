@@ -45,7 +45,7 @@ export async function PUT(
 ) {
     try {
         const session = await getServerSession(authOptions);
-        if (!session || (session.user as any).role !== 'admin') {
+        if (!session || (session.user as { role?: string })?.role !== 'admin') {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
@@ -54,11 +54,12 @@ export async function PUT(
         const { images, tags, ...propertyData } = body;
 
         // Sanitize propertyData to exclude fields that shouldn't be updated manually
-        const { id: _id, created_at, updated_at, ...cleanPropertyData } = propertyData as any;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { id: _id, created_at, updated_at, ...cleanPropertyData } = propertyData;
 
         // Use array-based transaction for better stability
         // This executes queries sequentially but within a single transaction
-        const [deletedImages, deletedTags, property] = await db.$transaction([
+        const [, , property] = await db.$transaction([
             db.propertyImage.deleteMany({ where: { property_id: id } }),
             db.propertyTag.deleteMany({ where: { property_id: id } }),
             db.property.update({
@@ -84,15 +85,17 @@ export async function PUT(
 
         const transformed = {
             ...property,
-            images: property.images.map((img) => img.url),
-            tags: property.tags.map((t) => t.tag),
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            images: property.images.map((img: any) => img.url),
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            tags: property.tags.map((t: any) => t.tag),
         };
 
         return NextResponse.json(transformed);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Error updating property:', error);
         return NextResponse.json(
-            { error: 'Failed to update property', details: error.message || String(error) },
+            { error: 'Failed to update property', details: error instanceof Error ? error.message : String(error) },
             { status: 500 }
         );
     }
@@ -105,7 +108,7 @@ export async function DELETE(
 ) {
     try {
         const session = await getServerSession(authOptions);
-        if (!session || (session.user as any).role !== 'admin') {
+        if (!session || (session.user as { role?: string })?.role !== 'admin') {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 

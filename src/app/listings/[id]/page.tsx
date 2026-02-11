@@ -79,10 +79,10 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
 
       <PropertyTitleSection
         title={propertyData.title}
-        price={propertyData.price}
-        beds={propertyData.beds}
-        baths={propertyData.baths}
-        sqft={parseInt(propertyData.area) || 0}
+        price={propertyData.price || undefined}
+        beds={propertyData.beds || 0}
+        baths={propertyData.baths || 0}
+        sqft={parseInt(propertyData.area || '0') || 0}
         parkings={propertyData.parkings || 0}
         status={propertyData.status || "For Sale"}
         landArea={propertyData.land_area}
@@ -91,24 +91,24 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
       <PropertyGallery images={propertyData.images} propertyTitle={propertyData.title} />
 
       <GeneralInformation
-        propertyType={propertyData.property_type || "Villa"}
-        beds={propertyData.beds}
-        baths={propertyData.baths}
-        sqft={parseInt(propertyData.area) || 0}
-        description={propertyData.description}
+        propertyType={propertyData.type || "Villa"}
+        beds={propertyData.beds || 0}
+        baths={propertyData.baths || 0}
+        sqft={parseInt(propertyData.area || '0') || 0}
+        description={propertyData.description || undefined}
         garages={propertyData.parkings || 0}
-        landArea={propertyData.land_area}
+        landArea={propertyData.land_area || undefined}
       />
 
       <PropertyOverviewTable
-        price={propertyData.price}
-        size={propertyData.area}
-        beds={propertyData.beds}
-        baths={propertyData.baths}
+        price={propertyData.price || undefined}
+        size={propertyData.area || undefined}
+        beds={propertyData.beds || undefined}
+        baths={propertyData.baths || undefined}
         status={propertyData.status || "For Sale"}
-        propertyType={propertyData.property_type || "Villa"}
+        propertyType={propertyData.type || "Villa"}
         garages={propertyData.parkings || 0}
-        landArea={propertyData.land_area}
+        landArea={propertyData.land_area || undefined}
       />
 
       <HighlightsVideo videoUrl={propertyData.youtube_video} />

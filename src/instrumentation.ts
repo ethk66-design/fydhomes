@@ -16,7 +16,7 @@ export async function register() {
         try {
             const release = fs.readFileSync('/etc/os-release', 'utf8').split('\n')[0];
             console.log(`[INSTRUMENTATION] Distro: ${release}`);
-        } catch (e) {
+        } catch (_e) {
             console.log(`[INSTRUMENTATION] Distro: (Unavailable)`);
         }
         console.log("----------------------------------------");

@@ -76,7 +76,7 @@ export default function AdminDashboard() {
       if (!res.ok) throw new Error("Failed to delete");
       toast.success("Property deleted");
       setProperties(properties.filter(p => p.id !== id));
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to delete property");
     }
   };
@@ -98,7 +98,7 @@ export default function AdminDashboard() {
 
       if (!res.ok) throw new Error("Failed to update");
       toast.success(newStatus === 'featured' ? "Added to Featured" : "Removed from Featured");
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to update status");
       fetchProperties();
     }

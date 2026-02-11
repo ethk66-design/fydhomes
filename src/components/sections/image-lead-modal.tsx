@@ -79,7 +79,7 @@ export default function ImageLeadModal({
 
             setIsSuccess(true);
             toast.success("Inquiry sent successfully!");
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Error submitting lead:', error);
             toast.error("Failed to send message. Please try again.");
         } finally {
@@ -95,6 +95,7 @@ export default function ImageLeadModal({
             <button
                 onClick={onClose}
                 className="absolute top-4 right-4 z-[10000] p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all backdrop-blur-md border border-white/10"
+                aria-label="Close gallery"
             >
                 <X className="w-6 h-6" />
             </button>
@@ -122,6 +123,7 @@ export default function ImageLeadModal({
                             <button
                                 onClick={(e) => { e.stopPropagation(); handlePrev(); }}
                                 className="absolute left-4 p-3 bg-white/5 hover:bg-white/10 border border-white/5 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all active:scale-95 hidden lg:flex items-center justify-center backdrop-blur-sm"
+                                aria-label="Previous image"
                             >
                                 <ChevronLeft className="w-6 h-6" />
                             </button>
@@ -129,13 +131,14 @@ export default function ImageLeadModal({
                             <button
                                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
                                 className="absolute right-4 p-3 bg-white/5 hover:bg-white/10 border border-white/5 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all active:scale-95 hidden lg:flex items-center justify-center backdrop-blur-sm"
+                                aria-label="Next image"
                             >
                                 <ChevronRight className="w-6 h-6" />
                             </button>
 
                             {/* Mobile Navigation Areas (Invisible tap zones) */}
-                            <div className="absolute inset-y-0 left-0 w-1/4 z-10 lg:hidden" onClick={(e) => { e.stopPropagation(); handlePrev(); }} />
-                            <div className="absolute inset-y-0 right-0 w-1/4 z-10 lg:hidden" onClick={(e) => { e.stopPropagation(); handleNext(); }} />
+                            <div className="absolute inset-y-0 left-0 w-1/4 z-10 lg:hidden" onClick={(e) => { e.stopPropagation(); handlePrev(); }} role="button" aria-label="Previous image" />
+                            <div className="absolute inset-y-0 right-0 w-1/4 z-10 lg:hidden" onClick={(e) => { e.stopPropagation(); handleNext(); }} role="button" aria-label="Next image" />
 
                             {/* Image Counter */}
                             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/60 px-4 py-1.5 rounded-full text-white text-xs font-medium border border-white/10 backdrop-blur-md tracking-wider">
@@ -155,7 +158,7 @@ export default function ImageLeadModal({
                             <div>
                                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Request Sent!</h3>
                                 <p className="text-gray-500 max-w-[280px] mx-auto leading-relaxed">
-                                    Thanks for your interest. We'll get back to you with more details shortly.
+                                    Thanks for your interest. We&apos;ll get back to you with more details shortly.
                                 </p>
                             </div>
                             <button
@@ -183,6 +186,7 @@ export default function ImageLeadModal({
                                 <div className="space-y-5">
                                     <div className="relative group">
                                         <input
+                                            id="lead-name"
                                             type="text"
                                             name="name"
                                             placeholder=" "
@@ -191,13 +195,14 @@ export default function ImageLeadModal({
                                             required
                                             className="peer w-full px-4 py-3.5 border border-gray-200 rounded-lg outline-none focus:border-black focus:ring-1 focus:ring-black transition-all bg-gray-50/30 focus:bg-white text-sm"
                                         />
-                                        <label className="absolute left-4 top-3.5 text-gray-400 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-white peer-focus:px-2 peer-focus:text-xs peer-focus:text-black pointer-events-none peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:bg-white peer-not-placeholder-shown:px-2 peer-not-placeholder-shown:text-xs">
+                                        <label htmlFor="lead-name" className="absolute left-4 top-3.5 text-gray-400 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-white peer-focus:px-2 peer-focus:text-xs peer-focus:text-black pointer-events-none peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:bg-white peer-not-placeholder-shown:px-2 peer-not-placeholder-shown:text-xs">
                                             Full Name
                                         </label>
                                     </div>
 
                                     <div className="relative group">
                                         <input
+                                            id="lead-phone"
                                             type="tel"
                                             name="phone"
                                             placeholder=" "
@@ -206,13 +211,14 @@ export default function ImageLeadModal({
                                             required
                                             className="peer w-full px-4 py-3.5 border border-gray-200 rounded-lg outline-none focus:border-black focus:ring-1 focus:ring-black transition-all bg-gray-50/30 focus:bg-white text-sm"
                                         />
-                                        <label className="absolute left-4 top-3.5 text-gray-400 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-white peer-focus:px-2 peer-focus:text-xs peer-focus:text-black pointer-events-none peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:bg-white peer-not-placeholder-shown:px-2 peer-not-placeholder-shown:text-xs">
+                                        <label htmlFor="lead-phone" className="absolute left-4 top-3.5 text-gray-400 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-white peer-focus:px-2 peer-focus:text-xs peer-focus:text-black pointer-events-none peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:bg-white peer-not-placeholder-shown:px-2 peer-not-placeholder-shown:text-xs">
                                             Phone Number
                                         </label>
                                     </div>
 
                                     <div className="relative group">
                                         <input
+                                            id="lead-email"
                                             type="email"
                                             name="email"
                                             placeholder=" "
@@ -221,7 +227,7 @@ export default function ImageLeadModal({
                                             required
                                             className="peer w-full px-4 py-3.5 border border-gray-200 rounded-lg outline-none focus:border-black focus:ring-1 focus:ring-black transition-all bg-gray-50/30 focus:bg-white text-sm"
                                         />
-                                        <label className="absolute left-4 top-3.5 text-gray-400 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-white peer-focus:px-2 peer-focus:text-xs peer-focus:text-black pointer-events-none peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:bg-white peer-not-placeholder-shown:px-2 peer-not-placeholder-shown:text-xs">
+                                        <label htmlFor="lead-email" className="absolute left-4 top-3.5 text-gray-400 text-sm transition-all peer-focus:-top-2.5 peer-focus:bg-white peer-focus:px-2 peer-focus:text-xs peer-focus:text-black pointer-events-none peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:bg-white peer-not-placeholder-shown:px-2 peer-not-placeholder-shown:text-xs">
                                             Email Address
                                         </label>
                                     </div>
@@ -232,6 +238,7 @@ export default function ImageLeadModal({
                                             value={formData.userType}
                                             onChange={handleInputChange}
                                             required
+                                            aria-label="Select user type"
                                             className="w-full px-4 py-3.5 border border-gray-200 rounded-lg outline-none focus:border-black focus:ring-1 focus:ring-black transition-all bg-gray-50/30 focus:bg-white text-sm appearance-none text-gray-700 cursor-pointer"
                                         >
                                             <option value="" disabled>I am a...</option>
@@ -248,6 +255,7 @@ export default function ImageLeadModal({
                                             rows={3}
                                             value={formData.message}
                                             onChange={handleInputChange}
+                                            aria-label="Message"
                                             className="w-full px-4 py-3.5 border border-gray-200 rounded-lg outline-none focus:border-black focus:ring-1 focus:ring-black transition-all bg-gray-50/30 focus:bg-white text-sm resize-none"
                                         ></textarea>
                                     </div>

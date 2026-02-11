@@ -103,6 +103,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                       value={type}
                       onChange={(e) => setType(e.target.value)}
                       className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                      aria-label="Filter by property type"
                     >
                       <option>Property Type</option>
                       <option>Commercial</option>
@@ -127,6 +128,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                       value={area}
                       onChange={(e) => setArea(e.target.value)}
                       className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                      aria-label="Filter by area"
                     >
                       <option>Area</option>
                       <option>Aluva</option>
@@ -151,6 +153,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                     whileTap={{ scale: 0.95 }}
                     onClick={handleSearch}
                     className="w-[140px] lg:w-[160px] h-[46px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
+                    aria-label="Search properties"
                   >
                     <Search size={20} strokeWidth={2.5} />
                   </motion.button>
@@ -187,6 +190,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                     className="w-full h-[44px] px-3 text-[14px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                    aria-label="Filter by property type"
                   >
                     <option>Property Type</option>
                     <option>Commercial</option>
@@ -211,6 +215,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
                     className="w-full h-[44px] px-3 text-[14px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                    aria-label="Filter by area"
                   >
                     <option>Area</option>
                     <option>Aluva</option>

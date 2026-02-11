@@ -8,7 +8,6 @@ import { BedDouble, Bath, Scaling, MapPin, Trees } from 'lucide-react';
 
 import { Property } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
-import { motion } from 'framer-motion';
 
 interface PropertyCardProps {
   property: Property;

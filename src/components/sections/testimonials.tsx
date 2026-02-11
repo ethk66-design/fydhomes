@@ -1,9 +1,10 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+
 
 interface Testimonial {
   id: string;
@@ -71,9 +72,11 @@ export function Testimonials() {
 
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] rounded-full overflow-hidden bg-gray-300 flex-shrink-0">
-                  <img
+                  <Image
                     src={testimonial.image_url}
                     alt={testimonial.name}
+                    width={50}
+                    height={50}
                     className="w-full h-full object-cover"
                   />
                 </div>

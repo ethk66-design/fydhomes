@@ -15,7 +15,7 @@ const supabaseAdmin = createClient(
     }
 );
 
-export async function createAgentAction(prevState: any, formData: FormData) {
+export async function createAgentAction(prevState: unknown, formData: FormData) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const fullName = formData.get("fullName") as string;
@@ -25,7 +25,7 @@ export async function createAgentAction(prevState: any, formData: FormData) {
     }
 
     try {
-        const { data, error } = await supabaseAdmin.auth.admin.createUser({
+        const { error } = await supabaseAdmin.auth.admin.createUser({
             email,
             password,
             email_confirm: true, // Auto-confirm email so they can login immediately
@@ -39,9 +39,9 @@ export async function createAgentAction(prevState: any, formData: FormData) {
 
         revalidatePath("/admin/users");
         return { success: true, message: "Agent created successfully" };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error creating agent:", error);
-        return { error: error.message || "Failed to create agent" };
+        return { error: error instanceof Error ? error.message : "Failed to create agent" };
     }
 }
 
@@ -55,9 +55,9 @@ export async function getAgentsAction() {
         const agents = users.filter(user => user.user_metadata.role === 'agent');
 
         return { users: agents };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error fetching agents:", error);
-        return { error: error.message, users: [] };
+        return { error: error instanceof Error ? error.message : "Failed to fetch agents", users: [] };
     }
 }
 
@@ -68,8 +68,8 @@ export async function deleteAgentAction(userId: string) {
 
         revalidatePath("/admin/users");
         return { success: true };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error deleting agent:", error);
-        return { error: error.message };
+        return { error: error instanceof Error ? error.message : "Failed to delete agent" };
     }
 }

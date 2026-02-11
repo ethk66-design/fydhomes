@@ -59,7 +59,7 @@ export default function AdminTestimonialsPage() {
             if (!res.ok) throw new Error("Failed to delete");
             toast.success("Testimonial deleted");
             setTestimonials(testimonials.filter(t => t.id !== id));
-        } catch (error) {
+        } catch (_error) {
             toast.error("Failed to delete testimonial");
         }
     };
@@ -129,7 +129,7 @@ export default function AdminTestimonialsPage() {
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-4 max-w-lg">
-                                                    <p className="text-sm text-[#5c5c5c] line-clamp-2">"{t.content}"</p>
+                                                    <p className="text-sm text-[#5c5c5c] line-clamp-2">&quot;{t.content}&quot;</p>
                                                 </td>
                                                 <td className="px-6 py-4 text-right">
                                                     <Button
@@ -173,7 +173,7 @@ export default function AdminTestimonialsPage() {
                                             </div>
                                         </div>
                                         <div className="pl-[52px]">
-                                            <p className="text-sm text-[#5c5c5c] leading-relaxed italic">"{t.content}"</p>
+                                            <p className="text-sm text-[#5c5c5c] leading-relaxed italic">&quot;{t.content}&quot;</p>
                                         </div>
                                     </div>
                                 ))}

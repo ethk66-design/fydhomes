@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { Heart, Share2, Printer, BedDouble, Bath, Car, Scaling, Check, Copy, Facebook, Linkedin, Twitter, Mail, Trees } from 'lucide-react';
+import { Heart, Share2, Printer, BedDouble, Bath, Car, Scaling, Facebook, Linkedin, Twitter, Mail, Trees } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { toast } from 'sonner';
 import {
@@ -31,7 +31,7 @@ const PropertyTitleSection = ({
   parkings = 0,
   sqft = 0,
   status = "For Sale",
-  isNegotiable = false,
+  isNegotiable: _isNegotiable = false,
   landArea = null
 }: PropertyTitleSectionProps) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -141,7 +141,7 @@ const PropertyTitleSection = ({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <div className="relative group">
-                    <button className="w-8 h-8 flex items-center justify-center border border-[#EAEAEA] rounded-[2px] transition-colors hover:bg-gray-50">
+                    <button className="w-8 h-8 flex items-center justify-center border border-[#EAEAEA] rounded-[2px] transition-colors hover:bg-gray-50" aria-label="Share property">
                       <Share2 className="w-4 h-4 text-[#000000]" />
                     </button>
                   </div>

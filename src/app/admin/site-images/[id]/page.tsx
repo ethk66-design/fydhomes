@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import {
@@ -10,8 +10,7 @@ import {
     ArrowLeft,
     Save,
     Map,
-    ImageIcon,
-    Upload
+    ImageIcon
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -43,15 +42,7 @@ export default function EditSiteImagePage({ params }: PageProps) {
     const [uploading, setUploading] = useState(false);
     const router = useRouter();
 
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            router.push("/admin/login");
-        } else if (status === "authenticated" && resolvedParams.id) {
-            fetchAsset(resolvedParams.id);
-        }
-    }, [status, resolvedParams.id, router]);
-
-    const fetchAsset = async (id: string) => {
+    const fetchAsset = useCallback(async (id: string) => {
         try {
             setLoading(true);
             const res = await fetch(`/api/page-assets/${id}`);
@@ -65,7 +56,15 @@ export default function EditSiteImagePage({ params }: PageProps) {
         } finally {
             setLoading(false);
         }
-    };
+    }, [router]);
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/admin/login");
+        } else if (status === "authenticated" && resolvedParams.id) {
+            fetchAsset(resolvedParams.id);
+        }
+    }, [status, resolvedParams.id, router, fetchAsset]);
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -97,9 +96,9 @@ export default function EditSiteImagePage({ params }: PageProps) {
 
             setAsset(prev => prev ? { ...prev, asset_url: data.url } : null);
             toast.success("Image uploaded successfully");
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Upload error:', error);
-            toast.error(error.message || "Failed to upload image");
+            toast.error(error instanceof Error ? error.message : "Failed to upload image");
         } finally {
             setUploading(false);
             // Reset input
@@ -240,6 +239,7 @@ export default function EditSiteImagePage({ params }: PageProps) {
                                                     onChange={handleImageUpload}
                                                     disabled={uploading}
                                                     className="absolute inset-0 opacity-0 cursor-pointer"
+                                                    aria-label="Upload new image"
                                                 />
                                             </Button>
                                         </div>

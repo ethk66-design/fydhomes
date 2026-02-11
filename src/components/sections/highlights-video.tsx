@@ -9,7 +9,7 @@ const HighlightsVideo = ({ videoUrl }: { videoUrl?: string | null }) => {
       if (url.includes('embed')) return url;
       const videoId = url.split('v=')[1]?.split('&')[0] || url.split('/').pop();
       return `https://www.youtube.com/embed/${videoId}?feature=oembed`;
-    } catch (e) {
+    } catch (_e) {
       return url;
     }
   };

@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Bed, Bath, ChevronRight, ChevronLeft } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 
@@ -61,10 +62,10 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
       <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button className="bg-black/40 text-white p-1 rounded-sm">
+        <button className="bg-black/40 text-white p-1 rounded-sm" aria-label="Previous listing">
           <ChevronLeft size={18} className="sm:w-5 sm:h-5" />
         </button>
-        <button className="bg-black/40 text-white p-1 rounded-sm">
+        <button className="bg-black/40 text-white p-1 rounded-sm" aria-label="Next listing">
           <ChevronRight size={18} className="sm:w-5 sm:h-5" />
         </button>
       </div>
@@ -82,7 +83,7 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
 
     <div className="p-3 sm:p-4">
       <h3 className="text-[#000000] text-[13px] sm:text-[15px] font-medium leading-[1.4] mb-2 sm:mb-3 line-clamp-2 min-h-[36px] sm:min-h-[42px] group-hover:text-[#D32F2F] transition-colors">
-        <a href="#">{listing.title}</a>
+        <Link href={`/listings/${listing.id}`}>{listing.title}</Link>
       </h3>
 
       <div className="flex items-center justify-between mt-auto pt-2 border-t border-[#EAEAEA]">

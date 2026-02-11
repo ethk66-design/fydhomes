@@ -17,7 +17,7 @@ export async function GET(
         }
 
         return NextResponse.json(testimonial);
-    } catch (error) {
+    } catch (_error) {
         return NextResponse.json({ error: 'Failed to fetch testimonial' }, { status: 500 });
     }
 }
@@ -29,7 +29,7 @@ export async function PUT(
 ) {
     try {
         const session = await getServerSession(authOptions);
-        if (!session || (session.user as any).role !== 'admin') {
+        if (!session || (session.user as { role?: string })?.role !== 'admin') {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
@@ -43,7 +43,7 @@ export async function PUT(
         });
 
         return NextResponse.json(updated);
-    } catch (error) {
+    } catch (_error) {
         return NextResponse.json({ error: 'Failed to update testimonial' }, { status: 500 });
     }
 }
@@ -55,7 +55,7 @@ export async function DELETE(
 ) {
     try {
         const session = await getServerSession(authOptions);
-        if (!session || (session.user as any).role !== 'admin') {
+        if (!session || (session.user as { role?: string })?.role !== 'admin') {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 

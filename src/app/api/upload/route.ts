@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
         const storagePath = `${safeFolder}/${filename}`;
 
         // Upload to Supabase
-        const { data, error } = await supabase.storage
+        const { error } = await supabase.storage
             .from(BUCKET_NAME)
             .upload(storagePath, buffer, {
                 contentType: file.type,
@@ -85,8 +85,8 @@ export async function POST(request: NextRequest) {
                     const oldPath = urlParts[1];
                     await supabase.storage.from(BUCKET_NAME).remove([oldPath]);
                 }
-            } catch (e) {
-                console.warn('Failed to delete old remote file:', e);
+            } catch (_e) {
+                console.warn('Failed to delete old remote file:', _e);
             }
         }
 

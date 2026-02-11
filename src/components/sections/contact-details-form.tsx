@@ -147,6 +147,7 @@ const ContactDetailsForm = () => {
                     onChange={handleChange}
                     placeholder="Full Name"
                     className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none h-[48px]"
+                    aria-label="Full Name"
                   />
                 </div>
                 <div>
@@ -157,6 +158,7 @@ const ContactDetailsForm = () => {
                     onChange={handleChange}
                     placeholder="Email"
                     className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none h-[48px]"
+                    aria-label="Email Address"
                   />
                 </div>
                 <div>
@@ -168,6 +170,7 @@ const ContactDetailsForm = () => {
                     onChange={handleChange}
                     placeholder="Phone number"
                     className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none h-[48px]"
+                    aria-label="Phone Number"
                   />
                 </div>
               </div>
@@ -179,6 +182,7 @@ const ContactDetailsForm = () => {
                   value={formData.city}
                   onChange={handleChange}
                   className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white"
+                  aria-label="Select City"
                 >
                   <option value="">City</option>
                   <option value="kakkanad">Kakkanad</option>
@@ -202,6 +206,7 @@ const ContactDetailsForm = () => {
                   value={formData.propertyType}
                   onChange={handleChange}
                   className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white"
+                  aria-label="Select Property Type"
                 >
                   <option value="">Property Type</option>
                   <option value="commercial">Commercial</option>
@@ -225,6 +230,7 @@ const ContactDetailsForm = () => {
                   value={formData.area}
                   onChange={handleChange}
                   className="w-full p-[12px] pr-[40px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none appearance-none h-[48px] bg-white"
+                  aria-label="Select Area"
                 >
                   <option value="">Area</option>
                   <option value="aluva">ALUVA</option>
@@ -248,6 +254,7 @@ const ContactDetailsForm = () => {
                   onChange={handleChange}
                   placeholder="Your Budget"
                   className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none h-[48px]"
+                  aria-label="Your Budget"
                 />
               </div>
 
@@ -260,6 +267,7 @@ const ContactDetailsForm = () => {
                   placeholder="Enquiry Purpose (Rent/Sale)"
                   rows={4}
                   className="w-full p-[12px] border border-[#ececec] text-[15px] text-[#5c5c5c] focus:border-[#1db043] focus:outline-none transition-colors duration-200 rounded-none resize-none"
+                  aria-label="Message"
                 />
               </div>
 

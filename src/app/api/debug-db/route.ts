@@ -10,6 +10,7 @@ export async function GET() {
         const maskedUrl = url.replace(/:([^:@]+)@/, ':****@');
 
         // Test 1: Raw Connection
+        const startTime = Date.now();
         await db.$queryRaw`SELECT 1`;
         const latencyRaw = Date.now() - startTime;
 
@@ -37,15 +38,18 @@ export async function GET() {
             databaseUrlParam: maskedUrl,
             env: process.env.NODE_ENV,
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Debug DB Error:', error);
+        const errMsg = error instanceof Error ? error.message : String(error);
+        const errCode = (error as Record<string, unknown>)?.code;
+        const errStack = error instanceof Error ? error.stack : undefined;
         return NextResponse.json({
             status: 'error',
             message: 'Database Check Failed',
-            step: error.message?.includes('SELECT 1') ? 'Raw Connection' : 'Model Query',
-            details: error.message,
-            stack: error.stack,
-            code: error.code,
+            step: errMsg?.includes('SELECT 1') ? 'Raw Connection' : 'Model Query',
+            details: errMsg,
+            stack: errStack,
+            code: errCode,
             databaseUrlParam: process.env.DATABASE_URL ? process.env.DATABASE_URL.replace(/:([^:@]+)@/, ':****@') : 'NOT_SET'
         }, { status: 500 });
     }

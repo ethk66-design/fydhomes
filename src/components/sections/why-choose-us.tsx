@@ -1,7 +1,19 @@
-import React from 'react';
+"use client";
+
+import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 const WhyChooseUs = () => {
+  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    itemsRef.current.forEach((el, index) => {
+      if (el) {
+        el.style.animationDelay = `${index * 100}ms`;
+      }
+    });
+  }, []);
+
   const features = [
     {
       title: "Powerful Digital Reach",
@@ -18,20 +30,24 @@ const WhyChooseUs = () => {
     {
       title: "Transparent & Responsible Service",
       description: "From the first inquiry to final handover, we prioritize honesty, clarity, and customer care. Every property we promote is verified, and every client is treated with long-term commitment.",
-      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG-3-FYD-1024x683-4.png",
+      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG-3-FYD-1024x683-2.png",
       alt: "Transparent & Responsible Service"
     }
   ];
 
   return (
-    <section className="py-8 sm:py-10 md:py-[40px] bg-background w-full">
-      <div className="container">
-        {/* Section Header */}
-        <div className="mb-[30px] animate-fadeInUp">
-          <h2 className="h2 text-[32px] font-bold mb-0">
-            Why choose us
+    <section className="py-[60px] md:py-[80px] bg-[#f9f9f9]">
+      <div className="container mx-auto px-5">
+        <div className="text-center mb-[50px]">
+          <span className="text-[#1db954] uppercase tracking-wider font-semibold text-sm mb-2 block animate-fade-in-up">
+            Why Choose Us
+          </span>
+          <h2 className="text-[32px] md:text-[42px] font-bold text-[#222222] mb-4 animate-fade-in-up animation-delay-100">
+            Your Trusted Real Estate Partner
           </h2>
-          <div className="h-[20px]"></div>
+          <p className="max-w-[700px] mx-auto text-[#666666] leading-relaxed animate-fade-in-up animation-delay-200">
+            We bring transparency, expertise, and a digital-first approach to help you find the perfect property in Kochi.
+          </p>
         </div>
 
         {/* Feature Grid */}
@@ -39,8 +55,8 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div
               key={index}
+              ref={el => { itemsRef.current[index] = el; }}
               className="flex flex-col animate-fadeInUp"
-              style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Image Container */}
               <div className="relative mb-[20px] rounded-[8px] overflow-hidden aspect-[1024/683]">

@@ -1,10 +1,9 @@
 import { prisma } from "@/lib/db";
 import { getSeoMetadata } from "@/lib/seo";
-import PropertyCard from "@/components/PropertyCard";
 import SearchFilter from "@/components/sections/SearchFilter";
 import ListingGrid from "@/components/sections/ListingGrid";
 import { Suspense } from "react";
-import Link from "next/link";
+import { Prisma } from "@prisma/client";
 
 export async function generateMetadata() {
   return getSeoMetadata("/listings", "Property Listings | FYD Homes", "Explore our wide range of properties for sale and rent in Kochi and surrounding areas.");
@@ -31,7 +30,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   const listing_type = params.listing_type;
 
   // Build Prisma query filters
-  const where: any = {};
+  const where: Prisma.PropertyWhereInput = {};
 
   if (keyword) {
     where.title = { contains: keyword };
@@ -58,7 +57,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
     where.location = { contains: area };
   }
 
-  let properties: any[] = [];
+  let properties: Array<Record<string, unknown>> = [];
   try {
     const rawProperties = await prisma.property.findMany({
       where,
@@ -77,7 +76,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
       images: p.images.map(img => img.url),
       tags: p.tags.map(t => t.tag),
     }));
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching properties:", error);
     // Return empty array or handle error UI
     // If it's a critical DB error, we might want to show it in dev/admin mode?
@@ -89,7 +88,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
           <p className="text-gray-600 mb-4">Unable to load properties. Please try again later.</p>
           {true && (
             <pre className="text-left bg-gray-100 p-4 rounded overflow-auto text-xs">
-              {error.message}
+              {error instanceof Error ? error.message : 'Unknown error'}
               {JSON.stringify(error, null, 2)}
             </pre>
           )}

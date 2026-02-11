@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const Footer = () => {
   return (
@@ -7,15 +9,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 sm:pb-[50px]">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="footer-logo mb-6">
-              <a href="/">
-                <img
+              <Link href="/">
+                <Image
                   src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459789386.png?width=8000&height=8000&resize=contain"
                   alt="Find Your Dream Home"
                   width={200}
                   height={80}
                   className="object-contain max-w-[160px] sm:max-w-[200px]"
                 />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -23,24 +25,24 @@ const Footer = () => {
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Quick Links</h3>
             <ul className="list-none p-0 m-0">
               <li className="mb-2 sm:mb-3">
-                <a href="/" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
+                <Link href="/" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="mb-2 sm:mb-3">
-                <a href="/about" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
+                <Link href="/about" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
                   About
-                </a>
+                </Link>
               </li>
               <li className="mb-2 sm:mb-3">
-                <a href="/listings" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
+                <Link href="/listings" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
                   Listings
-                </a>
+                </Link>
               </li>
               <li className="mb-2 sm:mb-3">
-                <a href="/contact" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
+                <Link href="/contact" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -102,13 +104,13 @@ const Footer = () => {
               © FYD Media 2025 - All rights reserved
             </div>
             <div className="privacy-links flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
-              <a href="/privacy-policy" className="text-[12px] sm:text-[13px] text-black font-medium hover:text-[#D32F2F] transition-colors">
+              <Link href="/privacy-policy" className="text-[12px] sm:text-[13px] text-black font-medium hover:text-[#D32F2F] transition-colors">
                 Privacy Policy
-              </a>
+              </Link>
               <div className="h-4 w-[1px] bg-[#EAEAEA] hidden sm:block"></div>
-              <a href="/terms-conditions" className="text-[12px] sm:text-[13px] text-black font-medium hover:text-[#D32F2F] transition-colors">
+              <Link href="/terms-conditions" className="text-[12px] sm:text-[13px] text-black font-medium hover:text-[#D32F2F] transition-colors">
                 Terms & Conditions
-              </a>
+              </Link>
               <div className="hidden xl:flex items-center gap-2 bg-[#F7F8F9] px-3 py-1.5 rounded-[4px]">
                 <span className="text-[11px] text-[#666666]">Need Help? <strong className="text-black font-bold">Chat with us</strong></span>
               </div>

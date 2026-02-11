@@ -19,10 +19,6 @@ const ContactHero = () => {
               <div className="animate-in fade-in slide-in-from-bottom-5 duration-700 ease-out fill-mode-forwards">
                 <h1
                   className="font-serif text-[42px] font-bold leading-[1.2] text-black m-0 p-0"
-                  style={{
-                    fontFamily: 'var(--font-serif)',
-                    color: '#000000'
-                  }}
                 >
                   Contact us
                 </h1>

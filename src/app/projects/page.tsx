@@ -8,6 +8,7 @@ export async function generateMetadata() {
 }
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 
 const projects = [
@@ -38,6 +39,7 @@ const projects = [
 ];
 
 import { getPageAsset } from "@/lib/assets";
+import { ProjectsHero } from "@/components/sections/projects-hero";
 
 export default async function ProjectsPage() {
   const heroBg = await getPageAsset('/projects', 'hero_bg', "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80");
@@ -45,26 +47,7 @@ export default async function ProjectsPage() {
   return (
     <main className="min-h-screen bg-white pt-[120px]">
       {/* Hero Section */}
-      <section
-        className="bg-[#1db954] py-[60px] md:py-[80px] text-white relative overflow-hidden"
-        style={heroBg ? {
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        } : {}}
-      >
-        {heroBg && <div className="absolute inset-0 bg-black/50 z-0"></div>}
-        <div className="container mx-auto px-5 relative z-10">
-          <div className="max-w-[800px]">
-            <h1 className="text-[40px] md:text-[56px] font-bold leading-tight mb-6">
-              Our Premium Projects
-            </h1>
-            <p className="text-[18px] opacity-90 leading-relaxed">
-              Discover a curated selection of ongoing, upcoming, and completed developments by FYD Homes and our trusted partners.
-            </p>
-          </div>
-        </div>
-      </section>
+      <ProjectsHero heroBg={heroBg} />
 
       {/* Projects Grid */}
       <section className="py-[80px]">
@@ -73,11 +56,12 @@ export default async function ProjectsPage() {
             {projects.map((project, index) => (
               <div key={project.id} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}>
                 <div className="w-full lg:w-1/2">
-                  <div className="relative overflow-hidden rounded-[20px] shadow-2xl group">
-                    <img
+                  <div className="relative overflow-hidden rounded-[20px] shadow-2xl group h-[400px] md:h-[500px] w-full">
+                    <Image
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute top-6 left-6">
                       <span className={`px-4 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-wider text-white ${project.status === 'Ongoing' ? 'bg-[#2b7489]' :
@@ -117,7 +101,7 @@ export default async function ProjectsPage() {
         <div className="container mx-auto px-5 text-center">
           <h2 className="text-[36px] md:text-[48px] font-bold mb-6">Have a Project in Mind?</h2>
           <p className="text-[#5c5c5c] text-[18px] max-w-[700px] mx-auto mb-10 leading-relaxed">
-            Whether you're looking to invest in our upcoming projects or want us to help launch yours, we're ready to partner with you.
+            Whether you&apos;re looking to invest in our upcoming projects or want us to help launch yours, we&apos;re ready to partner with you.
           </p>
           <Link
             href="/contact"

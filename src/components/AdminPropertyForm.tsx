@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Property, PropertyStatus, ListingType } from "@/lib/types";
+import { Property } from "@/lib/types";
 import { stripHtml } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -200,9 +200,9 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
       toast.success(`Property ${isEditing ? "updated" : "created"} successfully`);
       router.push("/admin");
       router.refresh();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error saving property:", error);
-      toast.error(error.message || "Failed to save property");
+      toast.error(error instanceof Error ? error.message : "Failed to save property");
     } finally {
       setLoading(false);
     }
@@ -438,6 +438,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
                     type="button"
                     onClick={() => setFormData(prev => ({ ...prev, tags: prev.tags.filter(t => t !== tag) }))}
                     className="hover:text-red-500"
+                    aria-label={`Remove tag ${tag}`}
                   >
                     <X size={12} />
                   </button>
@@ -551,8 +552,10 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
             {uploading && (
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-2 overflow-hidden">
                 <div
+                  ref={(el) => {
+                    if (el) el.style.width = `${uploadProgress}%`;
+                  }}
                   className="bg-[#2d7a8c] h-1.5 rounded-full transition-all duration-300"
-                  style={{ width: `${uploadProgress}%` }}
                 />
               </div>
             )}

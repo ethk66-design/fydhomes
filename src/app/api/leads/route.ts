@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 }
 
 // GET /api/leads - List leads (admin only)
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
     try {
         // Note: Add auth check in production
         const leads = await db.lead.findMany({

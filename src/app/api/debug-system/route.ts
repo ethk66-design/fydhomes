@@ -8,8 +8,8 @@ export async function GET() {
     let osRelease = 'Unknown';
     try {
         osRelease = fs.readFileSync('/etc/os-release', 'utf8');
-    } catch (e: any) {
-        osRelease = `Read Error: ${e.message}`;
+    } catch (e: unknown) {
+        osRelease = `Read Error: ${e instanceof Error ? e.message : String(e)}`;
     }
 
     // Checking if Prisma Client is loadable
@@ -17,8 +17,8 @@ export async function GET() {
     try {
         const { prisma } = await import('@/lib/db');
         prismaStatus = prisma ? 'Instance Created' : 'Null';
-    } catch (e: any) {
-        prismaStatus = `Import Error: ${e.message}`;
+    } catch (e: unknown) {
+        prismaStatus = `Import Error: ${e instanceof Error ? e.message : String(e)}`;
     }
 
     return NextResponse.json({

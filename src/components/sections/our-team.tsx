@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Phone, Mail } from 'lucide-react';
 
@@ -18,6 +20,13 @@ const teamMembers = [
     email: 'shyamdio6@gmail.com',
   },
   {
+    name: 'Jose',
+    role: 'Agent',
+    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-02-scaled-6.png',
+    phone: '+919946531317',
+    email: 'josepavoo@gmail.com',
+  },
+  {
     name: 'Akhil',
     role: 'Agent',
     image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
@@ -33,25 +42,38 @@ const teamMembers = [
   },
 ];
 
-const OurTeam = () => {
+export function OurTeam() {
+  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    itemsRef.current.forEach((el, index) => {
+      if (el) {
+        el.style.animationDelay = `${index * 0.1}s`;
+      }
+    });
+  }, []);
+
   return (
-    <section className="section-padding bg-white" id="our-team">
-      <div className="container">
-        <div className="flex flex-col mb-[50px]">
-          <div className="overflow-hidden">
-            <h2 className="text-[32px] font-semibold font-serif text-black leading-[1.3] mb-0 animate-fade-in-up">
-              Our Team
-            </h2>
-          </div>
-          <div className="w-full h-[30px]" aria-hidden="true" />
+    <section className="py-[60px] md:py-[80px] bg-white">
+      <div className="container mx-auto px-5">
+        <div className="text-center mb-[40px] md:mb-[60px]">
+          <span className="text-[#1db954] uppercase tracking-wider font-semibold text-sm mb-2 block animate-fade-in-up">
+            Our Team
+          </span>
+          <h2 className="text-[32px] md:text-[42px] font-bold text-[#222222] mb-4 animate-fade-in-up animation-delay-100">
+            Meet Our Real Estate Agents
+          </h2>
+          <p className="max-w-[700px] mx-auto text-[#666666] leading-relaxed animate-fade-in-up animation-delay-200">
+            Our dedicated team of professionals with years of experience in the Kochi real estate market.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[50px]">
           {teamMembers.map((member, index) => (
             <div
               key={index}
+              ref={el => { itemsRef.current[index] = el; }}
               className="group animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative aspect-[4/5] rounded-[10px] overflow-hidden mb-5">
                 <Image

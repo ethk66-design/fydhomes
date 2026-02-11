@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
 
 export function WhatsAppButton() {
   const phoneNumber = '919544593991';
@@ -16,10 +15,10 @@ export function WhatsAppButton() {
       className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 group flex items-center justify-center"
       aria-label="Chat on WhatsApp"
     >
-      <svg 
-        viewBox="0 0 24 24" 
-        width="28" 
-        height="28" 
+      <svg
+        viewBox="0 0 24 24"
+        width="28"
+        height="28"
         fill="currentColor"
         className="text-white"
       >

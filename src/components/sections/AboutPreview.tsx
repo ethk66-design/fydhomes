@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 /**
  * AboutPreview Component
@@ -24,12 +25,12 @@ const AboutPreview: React.FC = () => {
             <p className="font-sans text-[16px] leading-[1.6] text-[#1a1a1a] mb-[20px] md:text-left">
               At Find Your Dream Home, we help you buy, sell, rent, or build with confidence. From prime plots to luxury villas, our local expertise and personalized service make your real estate journey smooth and successful.
             </p>
-            <a 
-              href="/about" 
+            <Link
+              href="/about"
               className="inline-block bg-[#2b7387] text-white font-sans text-[13px] font-bold tracking-[0.5px] px-[20px] py-[10px] rounded-[4px] uppercase transition-colors hover:bg-[#235d6e]"
             >
               More Information
-            </a>
+            </Link>
           </div>
         </div>
 

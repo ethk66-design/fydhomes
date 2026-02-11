@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface SellPageFormProps {
     heroBg: string;
@@ -18,7 +18,14 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
     });
 
     const [submitted, setSubmitted] = useState(false);
+    const heroRef = useRef<HTMLElement>(null);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (heroRef.current && heroBg) {
+            heroRef.current.style.setProperty('--hero-bg', `url(${heroBg})`);
+        }
+    }, [heroBg]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -65,12 +72,8 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
     return (
         <main className="min-h-screen bg-white pt-[80px] sm:pt-[100px] md:pt-[120px]">
             <section
-                className="bg-[#1db954] py-10 sm:py-16 md:py-[60px] lg:py-[100px] text-white overflow-hidden relative"
-                style={heroBg ? {
-                    backgroundImage: `url(${heroBg})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                } : {}}
+                ref={heroRef}
+                className="bg-[#1db954] py-10 sm:py-16 md:py-[60px] lg:py-[100px] text-white overflow-hidden relative bg-cover bg-center bg-[image:var(--hero-bg)]"
             >
                 {heroBg && <div className="absolute inset-0 bg-black/50 z-0"></div>}
                 <div className="container mx-auto px-4 sm:px-5 relative z-10">
@@ -114,8 +117,9 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                         <div>
-                                            <label className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Full Name *</label>
+                                            <label htmlFor="sell-name" className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Full Name *</label>
                                             <input
+                                                id="sell-name"
                                                 required
                                                 type="text"
                                                 name="name"
@@ -126,8 +130,9 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Phone Number *</label>
+                                            <label htmlFor="sell-phone" className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Phone Number *</label>
                                             <input
+                                                id="sell-phone"
                                                 required
                                                 type="tel"
                                                 name="phone"
@@ -141,8 +146,9 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                         <div>
-                                            <label className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Property Type</label>
+                                            <label htmlFor="sell-type" className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Property Type</label>
                                             <select
+                                                id="sell-type"
                                                 name="propertyType"
                                                 value={formData.propertyType}
                                                 onChange={handleChange}
@@ -156,8 +162,9 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                             </select>
                                         </div>
                                         <div>
-                                            <label className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Location</label>
+                                            <label htmlFor="sell-location" className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Location</label>
                                             <input
+                                                id="sell-location"
                                                 type="text"
                                                 name="location"
                                                 value={formData.location}
@@ -169,8 +176,9 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                     </div>
 
                                     <div>
-                                        <label className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Expected Price (Optional)</label>
+                                        <label htmlFor="sell-price" className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Expected Price (Optional)</label>
                                         <input
+                                            id="sell-price"
                                             type="text"
                                             name="expectedPrice"
                                             value={formData.expectedPrice}
@@ -181,8 +189,9 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                     </div>
 
                                     <div>
-                                        <label className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Description</label>
+                                        <label htmlFor="sell-message" className="block text-[11px] sm:text-[13px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2">Description</label>
                                         <textarea
+                                            id="sell-message"
                                             name="message"
                                             value={formData.message}
                                             onChange={handleChange}

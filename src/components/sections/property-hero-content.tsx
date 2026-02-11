@@ -1,5 +1,5 @@
-thoughtfulness
 import React from 'react';
+import Link from 'next/link';
 import { Heart, Share2, Printer, BedDouble, Bath, Car, Maximize } from 'lucide-react';
 
 const PropertyHeroContent: React.FC = () => {
@@ -44,12 +44,12 @@ const PropertyHeroContent: React.FC = () => {
         {/* Bottom Row: Status and Tools */}
         <div className="flex flex-row justify-between items-center border-t border-[#e5e5e5] pt-[15px]">
           <div>
-            <a
+            <Link
               href="/listings?status=for-sale"
               className="bg-[#f5f5f5] text-[#666666] text-[10px] font-bold uppercase py-[4px] px-[10px] rounded-[2px] hover:bg-black hover:text-white transition-colors duration-200"
             >
               For Sale
-            </a>
+            </Link>
           </div>
 
           <div className="flex items-center gap-[10px]">

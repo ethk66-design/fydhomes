@@ -40,8 +40,8 @@ export async function POST() {
       password: testPassword,
       userId: user.id,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating test user:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }

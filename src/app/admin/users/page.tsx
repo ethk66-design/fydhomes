@@ -5,7 +5,7 @@ import { getAgentsAction, deleteAgentAction } from "@/app/actions/auth";
 import { AgentUser } from "@/lib/types";
 import { CreateAgentDialog } from "@/components/admin/CreateAgentDialog";
 import { Button } from "@/components/ui/button";
-import { Trash2, User, Loader2, Calendar, Lock, ArrowLeft } from "lucide-react";
+import { Trash2, User, Loader2, Calendar, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { format } from "date-fns";

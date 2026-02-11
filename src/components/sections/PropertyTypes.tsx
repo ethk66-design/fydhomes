@@ -55,9 +55,10 @@ const item = {
 
 interface PropertyTypesProps {
   images?: Record<string, string>;
+  counts?: Record<string, number>;
 }
 
-export function PropertyTypes({ images }: PropertyTypesProps) {
+export function PropertyTypes({ images, counts }: PropertyTypesProps) {
   return (
     <section className="bg-white py-8 sm:py-10 md:py-[40px]">
       <div className="container mx-auto px-4 sm:px-5 max-w-[1170px]">
@@ -80,7 +81,11 @@ export function PropertyTypes({ images }: PropertyTypesProps) {
         >
           {propertyTypes.map((type, index) => {
             const imageKey = type.title.toLowerCase();
-            const imageUrl = images?.[imageKey] || type.image;
+            const imageUrl = images?.[imageKey] || type.image; // fallback to default if imageKey not found
+            // Normalize key for counts
+            const countKey = type.title.toLowerCase();
+            const countValue = counts?.[countKey] || 0;
+            const countText = countValue === 1 ? '1 Property' : `${countValue} Properties`;
 
             // Determine filter based on title
             let href = `/listings?type=${type.title}`;
@@ -122,7 +127,7 @@ export function PropertyTypes({ images }: PropertyTypesProps) {
                     {type.title}
                   </h3>
                   <p className="text-[12px] sm:text-[13px] text-[#5c5c5c] font-medium m-0">
-                    {type.count}
+                    {countText}
                   </p>
                 </div>
               </motion.a>

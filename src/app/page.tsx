@@ -18,9 +18,27 @@ const Newsletter = dynamic(() => import("@/components/sections/newsletter").then
 
 import { getPageAsset } from "@/lib/assets";
 
+import { db } from "@/lib/db";
+
 export default async function Home() {
   const heroBg = await getPageAsset('/', 'hero_bg', "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg");
   const ctaBg = await getPageAsset('/', 'cta_bg', "/expert-guidance-bg.png");
+
+  // Fetch Property Counts
+  const properties = await db.property.findMany({
+    select: { type: true, listing_type: true, status: true }
+  });
+
+  const activeProperties = properties.filter(p => p.status === 'active' || p.status === 'featured');
+
+  const counts = {
+    villa: activeProperties.filter(p => p.type?.toLowerCase() === 'villa').length,
+    residential: activeProperties.filter(p => p.type?.toLowerCase() === 'residential').length,
+    plot: activeProperties.filter(p => p.type?.toLowerCase() === 'plot').length,
+    commercial: activeProperties.filter(p => p.type?.toLowerCase() === 'commercial').length,
+    office: activeProperties.filter(p => p.type?.toLowerCase() === 'office').length,
+    rent: activeProperties.filter(p => p.listing_type?.toLowerCase() === 'rent').length,
+  };
 
   // Fetch Property Type Images
   const propertyTypeImages = {
@@ -38,7 +56,7 @@ export default async function Home() {
       <AboutPartner />
       <FeaturedForSale />
       <FeaturedForRent />
-      <PropertyTypes images={propertyTypeImages} />
+      <PropertyTypes images={propertyTypeImages} counts={counts} />
       <ExpertGuidance bgImage={ctaBg} />
       <Testimonials />
       <Newsletter />

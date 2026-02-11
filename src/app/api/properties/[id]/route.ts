@@ -53,17 +53,18 @@ export async function PUT(
         const body = await request.json();
         const { images, tags, ...propertyData } = body;
 
-        // Transactional update to ensure data integrity
-        const property = await db.$transaction(async (tx) => {
-            // Delete existing images and tags
-            await tx.propertyImage.deleteMany({ where: { property_id: id } });
-            await tx.propertyTag.deleteMany({ where: { property_id: id } });
+        // Sanitize propertyData to exclude fields that shouldn't be updated manually
+        const { id: _id, created_at, updated_at, ...cleanPropertyData } = propertyData as any;
 
-            // Update property with new data
-            return await tx.property.update({
+        // Use array-based transaction for better stability
+        // This executes queries sequentially but within a single transaction
+        const [deletedImages, deletedTags, property] = await db.$transaction([
+            db.propertyImage.deleteMany({ where: { property_id: id } }),
+            db.propertyTag.deleteMany({ where: { property_id: id } }),
+            db.property.update({
                 where: { id },
                 data: {
-                    ...propertyData,
+                    ...cleanPropertyData,
                     images: {
                         create: (images || []).map((url: string, index: number) => ({ url, order: index })),
                     },
@@ -72,8 +73,8 @@ export async function PUT(
                     },
                 },
                 include: { images: true, tags: true },
-            });
-        });
+            })
+        ]);
 
         // Revalidate cache to show updates instantly
         revalidatePath('/');

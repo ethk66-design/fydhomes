@@ -146,6 +146,11 @@ export async function DELETE(
 
         await db.property.delete({ where: { id } });
 
+        // Revalidate cache to remove property instantly
+        revalidatePath('/');
+        revalidatePath('/listings');
+        revalidatePath('/admin');
+
         return NextResponse.json({ success: true });
     } catch (error) {
         console.error('Error deleting property:', error);

@@ -52,6 +52,54 @@ export async function generateMetadata({ params }: PropertyPageProps) {
   };
 }
 
+// Helper to parse price string to number for sorting
+function parsePrice(price: string | null): number {
+  if (!price) return 0;
+  const p = price.toLowerCase().replace(/,/g, '').replace(/₹/g, '').trim();
+
+  if (p.includes('cr') || p.includes('crore')) {
+    const num = parseFloat(p.replace(/cr|crore/g, '').trim());
+    return num * 10000000;
+  }
+  if (p.includes('lakh') || p.includes('lac') || p.includes('l')) {
+    const num = parseFloat(p.replace(/lakh|lac|l/g, '').trim());
+    return num * 100000;
+  }
+
+  return parseFloat(p) || 0;
+}
+
+async function getSimilarProperties(currentProperty: any) {
+  // 1. Fetch candidates (Same Type, Same Listing Type, Active)
+  // Fetch a few more than needed to sort by price
+  const candidates = await prisma.property.findMany({
+    where: {
+      id: { not: currentProperty.id },
+      type: currentProperty.type, // Match Villa/Plot
+      listing_type: currentProperty.listing_type, // Match Sale/Rent
+      status: 'active',
+    },
+    include: {
+      images: { take: 1, orderBy: { order: 'asc' } }, // Need one image
+      tags: true,
+    },
+    take: 12, // Take top 12 then sort by price
+    orderBy: { created_at: 'desc' }
+  });
+
+  // 2. Sort by Price Closeness
+  const targetPrice = parsePrice(currentProperty.price);
+
+  const sorted = candidates.sort((a, b) => {
+    const priceA = parsePrice(a.price);
+    const priceB = parsePrice(b.price);
+    return Math.abs(priceA - targetPrice) - Math.abs(priceB - targetPrice);
+  });
+
+  // 3. Return top 4
+  return sorted.slice(0, 4);
+}
+
 export default async function PropertyDetailPage({ params }: PropertyPageProps) {
   const { id } = await params;
 
@@ -72,6 +120,9 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
     images: property.images.map(img => img.url),
     tags: property.tags.map(t => t.tag),
   };
+
+  // Fetch similar listings
+  const similarProperties = await getSimilarProperties(property);
 
   return (
     <main className="min-h-screen bg-white">
@@ -116,7 +167,7 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
 
       <CTABanner />
 
-      <SimilarListings />
+      <SimilarListings listings={similarProperties} />
     </main>
   );
 }

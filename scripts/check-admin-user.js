@@ -7,7 +7,7 @@ async function main() {
     console.log('Checking for Admin User in Hostinger DB...');
     try {
         const user = await prisma.user.findUnique({
-            where: { email: 'admin@fydhomes.com' },
+            where: { email: 'admin@fydhomes.in' },
         });
 
         if (user) {

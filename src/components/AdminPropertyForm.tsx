@@ -176,6 +176,14 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
       images,
     };
 
+    // Prevent accidental deletion of images
+    if (images.length === 0) {
+      if (!confirm("⚠️ Warning: You are about to save this property with NO images.\n\nThis will remove any existing images if this property had them.\n\nAre you sure you want to proceed?")) {
+        setLoading(false);
+        return;
+      }
+    }
+
     try {
       let res;
       if (isEditing && initialData) {

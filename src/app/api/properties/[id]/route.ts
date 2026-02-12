@@ -51,31 +51,61 @@ export async function PUT(
 
         const { id } = await params;
         const body = await request.json();
+
+        // Check if images/tags provide in the body (to distinguish short updates vs full form saves)
+        const hasImages = 'images' in body;
+        const hasTags = 'tags' in body;
+
         const { images, tags, ...propertyData } = body;
 
         // Sanitize propertyData to exclude fields that shouldn't be updated manually
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { id: _id, created_at, updated_at, ...cleanPropertyData } = propertyData;
 
-        // Use array-based transaction for better stability
-        // This executes queries sequentially but within a single transaction
-        const [, , property] = await db.$transaction([
-            db.propertyImage.deleteMany({ where: { property_id: id } }),
-            db.propertyTag.deleteMany({ where: { property_id: id } }),
+        // Build transaction types
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const transactions: any[] = [];
+
+        // 1. Handle Images (Only if provided)
+        if (hasImages) {
+            transactions.push(db.propertyImage.deleteMany({ where: { property_id: id } }));
+        }
+
+        // 2. Handle Tags (Only if provided)
+        if (hasTags) {
+            transactions.push(db.propertyTag.deleteMany({ where: { property_id: id } }));
+        }
+
+        // 3. Prepare Update Data
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const updateData: any = { ...cleanPropertyData };
+
+        if (hasImages) {
+            updateData.images = {
+                create: (images || []).map((url: string, index: number) => ({ url, order: index })),
+            };
+        }
+
+        if (hasTags) {
+            updateData.tags = {
+                create: (tags || []).map((tag: string) => ({ tag })),
+            };
+        }
+
+        // Add the update query
+        transactions.push(
             db.property.update({
                 where: { id },
-                data: {
-                    ...cleanPropertyData,
-                    images: {
-                        create: (images || []).map((url: string, index: number) => ({ url, order: index })),
-                    },
-                    tags: {
-                        create: (tags || []).map((tag: string) => ({ tag })),
-                    },
-                },
+                data: updateData,
                 include: { images: true, tags: true },
             })
-        ]);
+        );
+
+        // Execute transaction
+        const results = await db.$transaction(transactions);
+
+        // The property result is always the last item in the transaction results
+        const property = results[results.length - 1];
 
         // Revalidate cache to show updates instantly
         revalidatePath('/');

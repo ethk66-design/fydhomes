@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
+import PropertyImageSlider from '@/components/ui/property-image-slider';
 import { BedDouble, Bath, Scaling, MapPin, Trees } from 'lucide-react';
 
 
@@ -14,24 +15,26 @@ interface PropertyCardProps {
 }
 
 export default function PropertyCard({ property }: PropertyCardProps) {
-  // Fallback to a local placeholder if no images exist
-  const mainImage = property.images[0] || '/assets/placeholder-house.svg';
+  // Use PropertyImageSlider for the image section
+  // Fallback handled inside the slider if images array is empty
+  const images = property.images && property.images.length > 0
+    ? property.images
+    : ['/assets/placeholder-house.svg'];
 
   return (
-    <Link
-      href={`/listings/${property.id}`}
-      className="bg-white border border-[#eeeeee] flex flex-col hover:shadow-card transition-grow group cursor-pointer h-full"
+    <div
+      className="bg-white border border-[#eeeeee] flex flex-col hover:shadow-card transition-grow group h-full relative"
     >
+      {/* Image Slider Section - Handles its own internal clicks/swipes */}
       <div className="relative aspect-[4/3] overflow-hidden">
-        <ImageWithFallback
-          src={mainImage}
-          fallbackSrc="/assets/placeholder-house.svg"
+        <PropertyImageSlider
+          images={images}
           alt={property.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          aspectRatio="aspect-[4/3]"
         />
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
+
+        {/* Overlays (Tags) - Pointer events none so they don't block slider */}
+        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10 pointer-events-none">
           {property.status === 'featured' && (
             <span className="text-[10px] font-bold px-2 py-1 uppercase rounded-sm bg-[#1db954] text-white">
               FEATURED
@@ -59,44 +62,47 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         </div>
       </div>
 
-      <div className="p-5 flex flex-col flex-grow">
-        <h3 className="text-[14px] font-bold text-black mb-2 line-clamp-2 leading-tight uppercase tracking-wide">
-          {property.title}
-        </h3>
+      {/* Content Section - Wrapped in Link for navigation */}
+      <Link href={`/listings/${property.id}`} className="flex flex-col flex-grow text-inherit no-underline">
+        <div className="p-5 flex flex-col flex-grow">
+          <h3 className="text-[14px] font-bold text-black mb-2 line-clamp-2 leading-tight uppercase tracking-wide group-hover:text-[#2d7a8c] transition-colors">
+            {property.title}
+          </h3>
 
-        <div className="flex items-center gap-1 text-[#5c5c5c] text-[12px] mb-3">
-          <MapPin size={12} />
-          <span>{property.location}</span>
-        </div>
-
-        <div className="text-[16px] font-bold text-[#2d7a8c] mb-4">
-          {formatPrice(property.price)}
-        </div>
-
-        <div className="mt-auto pt-4 border-t border-[#eeeeee] flex items-center justify-between text-[#5c5c5c]">
-          <div className="flex items-center gap-1.5">
-            <BedDouble size={16} className="text-[#5c5c5c]/60" />
-            <span className="text-[13px] font-medium">{property.beds || 0}</span>
+          <div className="flex items-center gap-1 text-[#5c5c5c] text-[12px] mb-3">
+            <MapPin size={12} />
+            <span>{property.location}</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <Bath size={16} className="text-[#5c5c5c]/60" />
-            <span className="text-[13px] font-medium">{property.baths || 0}</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Scaling size={16} className="text-[#5c5c5c]/60" />
-            <span className="text-[13px] font-medium">{property.area || 'N/A'}</span>
-          </div>
-        </div>
 
-        {property.land_area && (
-          <div className="pt-3 mt-3 border-t border-dashed border-[#eeeeee] flex items-center gap-2 text-[#5c5c5c]">
+          <div className="text-[16px] font-bold text-[#2d7a8c] mb-4">
+            {formatPrice(property.price)}
+          </div>
+
+          <div className="mt-auto pt-4 border-t border-[#eeeeee] flex items-center justify-between text-[#5c5c5c]">
             <div className="flex items-center gap-1.5">
-              <Trees size={14} className="text-[#2d7a8c]" />
-              <span className="text-[13px] font-medium">{property.land_area}</span>
+              <BedDouble size={16} className="text-[#5c5c5c]/60" />
+              <span className="text-[13px] font-medium">{property.beds || 0}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Bath size={16} className="text-[#5c5c5c]/60" />
+              <span className="text-[13px] font-medium">{property.baths || 0}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Scaling size={16} className="text-[#5c5c5c]/60" />
+              <span className="text-[13px] font-medium">{property.area || 'N/A'}</span>
             </div>
           </div>
-        )}
-      </div>
-    </Link >
+
+          {property.land_area && (
+            <div className="pt-3 mt-3 border-t border-dashed border-[#eeeeee] flex items-center gap-2 text-[#5c5c5c]">
+              <div className="flex items-center gap-1.5">
+                <Trees size={14} className="text-[#2d7a8c]" />
+                <span className="text-[13px] font-medium">{property.land_area}</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </Link>
+    </div>
   );
 }

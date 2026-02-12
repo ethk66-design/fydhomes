@@ -166,6 +166,12 @@ export default function AdminDashboard() {
                     <DropdownMenuLabel>Admin Tools</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
+                      <Link href="/admin/leads" className="w-full cursor-pointer">
+                        <Mail size={14} className="mr-2" />
+                        Leads (Inquiries)
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                       <Link href="/admin/testimonials" className="w-full cursor-pointer">
                         <MessageSquareQuote size={14} className="mr-2" />
                         Testimonials

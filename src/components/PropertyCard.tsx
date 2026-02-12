@@ -1,8 +1,8 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { BedDouble, Bath, Scaling, MapPin, Trees } from 'lucide-react';
 
 
@@ -23,8 +23,9 @@ export default function PropertyCard({ property }: PropertyCardProps) {
       className="bg-white border border-[#eeeeee] flex flex-col hover:shadow-card transition-grow group cursor-pointer h-full"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
-        <Image
+        <ImageWithFallback
           src={mainImage}
+          fallbackSrc="/assets/placeholder-house.svg"
           alt={property.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

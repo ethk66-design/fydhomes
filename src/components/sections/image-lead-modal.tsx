@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { X, ChevronLeft, ChevronRight, Check, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -108,7 +108,7 @@ export default function ImageLeadModal({
                         <>
                             <div className="absolute inset-0 flex items-center justify-center p-4 lg:p-12">
                                 <div className="relative w-full h-full">
-                                    <Image
+                                    <ImageWithFallback
                                         src={images[currentIndex]}
                                         alt={`Property image ${currentIndex + 1}`}
                                         fill

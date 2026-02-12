@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 
 import ImageLeadModal from './image-lead-modal';
 
@@ -60,7 +60,7 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-[10px] items-stretch">
             <div className="md:col-span-2 overflow-hidden rounded-[4px] relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[564px] cursor-pointer" onClick={() => openModal(0)}>
-              <Image
+              <ImageWithFallback
                 src={displayImages[0]}
                 alt="Property Main View"
                 fill
@@ -71,7 +71,7 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
 
             <div className="flex flex-row md:flex-col gap-2 sm:gap-[10px] h-[120px] sm:h-[150px] md:h-[450px] lg:h-[564px]">
               <div className="flex-1 overflow-hidden rounded-[4px] relative cursor-pointer" onClick={() => openModal(1)}>
-                <Image
+                <ImageWithFallback
                   src={displayImages[1] || displayImages[0]}
                   alt="Property Secondary View 1"
                   fill
@@ -79,7 +79,7 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
                 />
               </div>
               <div className="flex-1 overflow-hidden rounded-[4px] relative cursor-pointer" onClick={() => openModal(2)}>
-                <Image
+                <ImageWithFallback
                   src={displayImages[2] || displayImages[0]}
                   alt="Property Secondary View 2"
                   fill

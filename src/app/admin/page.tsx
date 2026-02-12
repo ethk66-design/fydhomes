@@ -22,7 +22,8 @@ import {
   Globe,
   Image as ImageIcon,
   Settings,
-  ChevronDown
+  ChevronDown,
+  Mail
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

@@ -8,6 +8,7 @@ import PropertyOverviewTable from "@/components/sections/property-overview-table
 import HighlightsVideo from "@/components/sections/highlights-video";
 import CTABanner from "@/components/sections/cta-banner";
 import SimilarListings from "@/components/sections/similar-listings";
+import PropertyAmenities from "@/components/sections/property-amenities";
 
 interface PropertyPageProps {
   params: Promise<{
@@ -141,6 +142,8 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
       />
 
       <PropertyGallery images={propertyData.images} propertyTitle={propertyData.title} />
+
+      <PropertyAmenities amenities={propertyData.tags} />
 
       <GeneralInformation
         propertyType={propertyData.type || "Villa"}

@@ -7,8 +7,8 @@ const Footer = () => {
     <footer className="footer-container bg-white pt-10 sm:pt-[60px] pb-0 font-sans border-t border-[#EAEAEA]">
       <div className="container mx-auto px-4 sm:px-5 max-w-[1200px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 sm:pb-[50px]">
-          <div className="sm:col-span-2 lg:col-span-1">
-            <div className="footer-logo mb-6">
+          <div className="sm:col-span-2 lg:col-span-1 text-center sm:text-left">
+            <div className="footer-logo mb-6 flex justify-center sm:justify-start">
               <Link href="/">
                 <Image
                   src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459789386.png?width=8000&height=8000&resize=contain"
@@ -21,7 +21,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
+          <div className="text-center sm:text-left">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Quick Links</h3>
             <ul className="list-none p-0 m-0">
               <li className="mb-2 sm:mb-3">
@@ -47,7 +47,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="text-center sm:text-left">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Social Profiles</h3>
             <ul className="list-none p-0 m-0">
               <li className="mb-2 sm:mb-3">
@@ -83,7 +83,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="text-center sm:text-left">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Contact Us</h3>
             <div className="contact-details">
               <p className="text-[13px] sm:text-[14px] text-[#666666] mb-2 sm:mb-3 leading-relaxed">

@@ -21,6 +21,7 @@ const nextConfig = {
     experimental: {
         reactCompiler: true,
     },
+    output: 'standalone',
     poweredByHeader: false,
 };
 

@@ -74,6 +74,11 @@ export async function POST(request: NextRequest) {
             include: { images: true, tags: true },
         });
 
+        // Revalidate cache to show new property instantly
+        revalidatePath('/');
+        revalidatePath('/listings');
+        revalidatePath('/admin');
+
         // Transform response
         const transformed = {
             ...property,

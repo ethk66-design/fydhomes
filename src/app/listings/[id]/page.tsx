@@ -16,7 +16,8 @@ interface PropertyPageProps {
 }
 
 // Enable Incremental Static Regeneration (ISR)
-export const revalidate = 60; // Revalidate every 60 seconds
+// Disable caching for instant updates (Debug Mode)
+export const revalidate = 0;
 
 export async function generateStaticParams() {
   // Return empty array to make pages dynamic (no static pre-generation)

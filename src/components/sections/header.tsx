@@ -97,52 +97,63 @@ export default function Header() {
 
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden absolute top-[80px] sm:top-[100px] left-0 right-0 bg-white/95 backdrop-blur-md border-b border-[#EAEAEA] shadow-xl z-50"
-          >
-            <nav className="container mx-auto px-6 py-6">
-              <ul className="flex flex-col gap-4">
-                {['Home', 'About', 'Listings', 'Contact'].map((item) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <Link
-                      href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                      className="block text-[18px] font-bold text-black hover:text-[#D32F2F] tracking-wide transition-colors py-2 border-b border-gray-100"
-                      onClick={() => setMobileMenuOpen(false)}
+          <>
+            {/* Backdrop for click-outside */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="lg:hidden fixed inset-0 bg-black/20 z-40"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="lg:hidden absolute top-[80px] sm:top-[100px] left-0 right-0 bg-white/95 backdrop-blur-md border-b border-[#EAEAEA] shadow-xl z-50"
+            >
+              <nav className="container mx-auto px-6 py-6">
+                <ul className="flex flex-col gap-4">
+                  {['Home', 'About', 'Listings', 'Contact'].map((item) => (
+                    <motion.li
+                      key={item}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 }}
                     >
-                      {item}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-              <div className="flex items-center gap-4 mt-6">
-                <a
-                  href="https://www.instagram.com/findyourdreamhome_/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
-                >
-                  <Instagram size={20} />
-                </a>
-                <a
-                  href="https://www.youtube.com/@findyourdreamhome6667"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
-                >
-                  <Youtube size={20} />
-                </a>
-              </div>
-            </nav>
-          </motion.div>
+                      <Link
+                        href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                        className="block text-[18px] font-bold text-black hover:text-[#D32F2F] tracking-wide transition-colors py-2 border-b border-gray-100"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item}
+                      </Link>
+                    </motion.li>
+                  ))}
+                </ul>
+                <div className="flex items-center gap-4 mt-6">
+                  <a
+                    href="https://www.instagram.com/findyourdreamhome_/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
+                  >
+                    <Instagram size={20} />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@findyourdreamhome6667"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
+                  >
+                    <Youtube size={20} />
+                  </a>
+                </div>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

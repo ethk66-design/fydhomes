@@ -1,13 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
+
 
 const Footer = () => {
   return (
     <footer className="footer-container bg-white pt-10 sm:pt-[60px] pb-0 font-sans border-t border-[#EAEAEA]">
       <div className="container mx-auto px-4 sm:px-5 max-w-[1200px]">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pb-10 sm:pb-[50px]">
-          <div className="sm:col-span-2 lg:col-span-1 text-center sm:text-left">
+          {/* LOGO & CONTACT COLUMN */}
+          <div className="col-span-1 lg:col-span-1 text-center sm:text-left">
             <div className="footer-logo mb-6 flex justify-center sm:justify-start">
               <Link href="/">
                 <Image
@@ -19,11 +22,39 @@ const Footer = () => {
                 />
               </Link>
             </div>
+
+            <div className="text-center sm:text-left block sm:hidden mb-6">
+              <h3 className="text-[13px] font-[700] uppercase mb-3 text-black tracking-wider">Contact Us</h3>
+              <div className="contact-details">
+                <p className="text-[13px] text-[#666666] mb-2 leading-relaxed">
+                  +91 9544593991
+                </p>
+                <p className="text-[13px] text-[#666666] mb-2 leading-relaxed">
+                  info@fydhomes.com
+                </p>
+              </div>
+            </div>
+
+
+
+            {/* Moved Contact Us Here for Mobile */}
+            <div className="col-span-2 sm:col-span-1 lg:col-span-1 text-center sm:text-left">
+              <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-3 sm:mb-6 text-black tracking-wider block sm:hidden">Contact Us</h3>
+              <div className="contact-details">
+                <p className="text-[13px] sm:text-[14px] text-[#666666] mb-2 sm:mb-3 leading-relaxed">
+                  +91 9544593991
+                </p>
+                <p className="text-[13px] sm:text-[14px] text-[#666666] mb-2 sm:mb-3 leading-relaxed">
+                  info@fydhomes.com
+                </p>
+              </div>
+            </div>
           </div>
 
+          {/* QUICK LINKS COLUMN */}
           <div className="text-center sm:text-left">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Quick Links</h3>
-            <ul className="list-none p-0 m-0">
+            <ul className="list-none p-0 m-0 flex sm:block justify-center gap-4 sm:gap-0">
               <li className="mb-2 sm:mb-3">
                 <Link href="/" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
                   Home
@@ -47,16 +78,23 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="text-center sm:text-left">
+          {/* SOCIAL PROFILES COLUMN */}
+          <div className="col-span-2 sm:col-span-1 lg:col-span-1 text-center sm:text-left">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Social Profiles</h3>
-            <ul className="list-none p-0 m-0">
+            <ul className="list-none p-0 m-0 flex sm:block justify-center gap-4 sm:gap-0">
               <li className="mb-2 sm:mb-3">
                 <a
                   href="https://www.facebook.com/people/FIND-YOUR-DREAM-HOME/100077314248446/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200"
+                  className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200 flex items-center justify-center sm:justify-start"
                 >
+                  {/* Icon only on mobile if needed, but text gives context. User asked for ONLY ICON on mobile. */}
+                  {/* Simulating icon with text hidden on mobile if I had icons here. But previous code didn't have icons in the listing. */}
+                  {/* I will stick to text as "Facebook" unless I import icons?
+                       Wait, header has Lucide icons. Footer didn't import them.
+                       Let's check imports.
+                   */}
                   Facebook
                 </a>
               </li>
@@ -65,9 +103,12 @@ const Footer = () => {
                   href="https://www.instagram.com/findyourdreamhome_/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200"
+                  className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200 flex items-center justify-center sm:justify-start group"
                 >
-                  Instagram
+                  <span className="sm:hidden block p-2 bg-gray-100 rounded-full group-hover:bg-[#205c6d] group-hover:text-white transition-colors">
+                    <Instagram size={18} />
+                  </span>
+                  <span className="hidden sm:inline">Instagram</span>
                 </a>
               </li>
               <li className="mb-2 sm:mb-3">
@@ -75,15 +116,19 @@ const Footer = () => {
                   href="https://www.youtube.com/@findyourdreamhome6667"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200"
+                  className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200 flex items-center justify-center sm:justify-start group"
                 >
-                  Youtube
+                  <span className="sm:hidden block p-2 bg-gray-100 rounded-full group-hover:bg-[#205c6d] group-hover:text-white transition-colors">
+                    <Youtube size={18} />
+                  </span>
+                  <span className="hidden sm:inline">Youtube</span>
                 </a>
               </li>
             </ul>
           </div>
 
-          <div className="text-center sm:text-left">
+          {/* DESKTOP CONTACT COLUMN (Hidden on Mobile) */}
+          <div className="text-center sm:text-left hidden sm:block">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Contact Us</h3>
             <div className="contact-details">
               <p className="text-[13px] sm:text-[14px] text-[#666666] mb-2 sm:mb-3 leading-relaxed">

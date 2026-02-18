@@ -206,7 +206,7 @@ export default function EditSiteImagePage({ params }: PageProps) {
                                                 src={asset.asset_url}
                                                 alt="Preview"
                                                 fill
-                                                className="object-contain"
+                                                className="object-cover"
                                                 unoptimized
                                             />
                                             <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />

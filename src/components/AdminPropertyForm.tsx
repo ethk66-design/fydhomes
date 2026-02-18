@@ -9,8 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 import { Loader2, X, Upload, Star } from "lucide-react";
-import Image from "next/image";
 import imageCompression from 'browser-image-compression';
 
 interface AdminPropertyFormProps {
@@ -517,7 +517,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-3 max-h-[400px] overflow-y-auto pr-1">
               {images.map((img, idx) => (
                 <div key={idx} className="relative aspect-square rounded-md overflow-hidden border border-[#eeeeee] group touch-none">
-                  <Image src={img} alt={`Property ${idx}`} fill sizes="(max-width: 768px) 50vw, 20vw" className="object-cover" />
+                  <ImageWithFallback src={img} alt={`Property ${idx}`} fill sizes="(max-width: 768px) 50vw, 20vw" className="object-cover" />
 
                   {/* Actions Overlay */}
                   <div className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-2 transition-opacity duration-200 ${idx === 0 ? 'opacity-0 group-hover:opacity-100' : 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100'}`}>

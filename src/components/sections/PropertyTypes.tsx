@@ -1,5 +1,6 @@
 'use client';
 
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 import React from 'react';
 import Image from 'next/image';
 

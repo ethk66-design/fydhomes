@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 
 import { motion } from 'framer-motion';
 
@@ -13,7 +13,7 @@ export function ExpertGuidance({ bgImage }: { bgImage?: string }) {
       <div className="container mx-auto px-4 sm:px-5">
         <div className="relative w-full min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[550px] rounded-[10px] overflow-hidden shadow-2xl">
           <div className="absolute inset-0 z-0">
-            <Image
+            <ImageWithFallback
               src={backgroundImage}
               alt="Looking To Buy Or Sell? Get Expert Guidance Today!"
               fill

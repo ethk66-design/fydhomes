@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 import { Search, Phone } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -66,7 +66,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="rounded-[4px] overflow-hidden"
           >
-            <Image
+            <ImageWithFallback
               src={bgImage || "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg"}
               alt="Modern Luxury Villa"
               width={1170}

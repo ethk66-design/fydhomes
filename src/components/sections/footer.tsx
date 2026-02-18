@@ -54,7 +54,7 @@ const Footer = () => {
           {/* QUICK LINKS COLUMN */}
           <div className="text-center sm:text-left">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Quick Links</h3>
-            <ul className="list-none p-0 m-0 flex sm:block justify-center gap-4 sm:gap-0">
+            <ul className="list-none p-0 m-0 flex flex-col items-center sm:items-start">
               <li className="mb-2 sm:mb-3">
                 <Link href="/" className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200">
                   Home
@@ -87,15 +87,12 @@ const Footer = () => {
                   href="https://www.facebook.com/people/FIND-YOUR-DREAM-HOME/100077314248446/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200 flex items-center justify-center sm:justify-start"
+                  className="text-[13px] sm:text-[14px] text-[#666666] hover:text-black transition-colors duration-200 flex items-center justify-center sm:justify-start group"
                 >
-                  {/* Icon only on mobile if needed, but text gives context. User asked for ONLY ICON on mobile. */}
-                  {/* Simulating icon with text hidden on mobile if I had icons here. But previous code didn't have icons in the listing. */}
-                  {/* I will stick to text as "Facebook" unless I import icons?
-                       Wait, header has Lucide icons. Footer didn't import them.
-                       Let's check imports.
-                   */}
-                  Facebook
+                  <span className="sm:hidden block p-2 bg-gray-100 rounded-full group-hover:bg-[#205c6d] group-hover:text-white transition-colors">
+                    <Facebook size={18} />
+                  </span>
+                  <span className="hidden sm:inline">Facebook</span>
                 </a>
               </li>
               <li className="mb-2 sm:mb-3">
@@ -128,7 +125,7 @@ const Footer = () => {
           </div>
 
           {/* DESKTOP CONTACT COLUMN (Hidden on Mobile) */}
-          <div className="text-center sm:text-left hidden sm:block">
+          <div className="text-center sm:text-left hidden lg:block">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Contact Us</h3>
             <div className="contact-details">
               <p className="text-[13px] sm:text-[14px] text-[#666666] mb-2 sm:mb-3 leading-relaxed">

@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'slelguoygbfzlpylpxfs.supabase.co', // Old Project
+                hostname: '**.supabase.co', // All Supabase projects (Wildcard)
             },
             {
                 protocol: 'https',

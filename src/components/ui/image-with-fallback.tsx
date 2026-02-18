@@ -14,10 +14,12 @@ const ImageWithFallback = ({
     ...props
 }: ImageWithFallbackProps) => {
     const [imgSrc, setImgSrc] = useState(src);
+    const [useUnoptimized, setUseUnoptimized] = useState(false);
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
         setImgSrc(src);
+        setUseUnoptimized(false);
         setHasError(false);
     }, [src]);
 
@@ -30,8 +32,15 @@ const ImageWithFallback = ({
             {...props}
             src={hasError ? fallbackSrc : imgSrc}
             alt={alt || "Property Image"}
+            unoptimized={useUnoptimized}
             onError={() => {
-                setHasError(true);
+                if (!useUnoptimized) {
+                    // First failure: Try unoptimized (bypassing next.config.mjs domain check)
+                    setUseUnoptimized(true);
+                } else {
+                    // Second failure: Show placeholder
+                    setHasError(true);
+                }
             }}
         />
     );

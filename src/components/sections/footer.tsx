@@ -23,23 +23,13 @@ const Footer = () => {
               </Link>
             </div>
 
-            <div className="text-center sm:text-left block sm:hidden mb-6">
-              <h3 className="text-[13px] font-[700] uppercase mb-3 text-black tracking-wider">Contact Us</h3>
-              <div className="contact-details">
-                <p className="text-[13px] text-[#666666] mb-2 leading-relaxed">
-                  +91 9544593991
-                </p>
-                <p className="text-[13px] text-[#666666] mb-2 leading-relaxed">
-                  info@fydhomes.com
-                </p>
-              </div>
-            </div>
 
 
 
-            {/* Moved Contact Us Here for Mobile */}
-            <div className="col-span-2 sm:col-span-1 lg:col-span-1 text-center sm:text-left">
-              <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-3 sm:mb-6 text-black tracking-wider block sm:hidden">Contact Us</h3>
+
+            {/* Mobile Contact Info */}
+            <div className="text-center sm:text-left block sm:hidden">
+              <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-3 sm:mb-6 text-black tracking-wider">Contact Us</h3>
               <div className="contact-details">
                 <p className="text-[13px] sm:text-[14px] text-[#666666] mb-2 sm:mb-3 leading-relaxed">
                   +91 9544593991
@@ -124,7 +114,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* DESKTOP CONTACT COLUMN (Hidden on Mobile) */}
+          {/* DESKTOP CONTACT COLUMN (Hidden on Mobile/Tablet) */}
           <div className="text-center sm:text-left hidden lg:block">
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-black tracking-wider">Contact Us</h3>
             <div className="contact-details">

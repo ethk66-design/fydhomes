@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer-container bg-white pt-10 sm:pt-[60px] pb-0 font-sans border-t border-[#EAEAEA]">
       <div className="container mx-auto px-4 sm:px-5 max-w-[1200px]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 sm:pb-[50px]">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pb-10 sm:pb-[50px]">
           <div className="sm:col-span-2 lg:col-span-1 text-center sm:text-left">
             <div className="footer-logo mb-6 flex justify-center sm:justify-start">
               <Link href="/">
@@ -99,7 +99,7 @@ const Footer = () => {
 
       <div className="sub-footer bg-white border-t border-[#EAEAEA] py-4 sm:py-[25px]">
         <div className="container mx-auto px-4 sm:px-5 max-w-[1200px]">
-          <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
+          <div className="flex flex-col-reverse gap-4 md:flex-row md:justify-between md:items-center">
             <div className="copyright text-[12px] sm:text-[13px] text-[#666666] text-center md:text-left">
               © FYD Media 2025 - All rights reserved
             </div>

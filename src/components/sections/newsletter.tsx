@@ -39,18 +39,18 @@ export function Newsletter() {
           </p>
 
           <form
-            className="flex flex-col sm:flex-row gap-0 max-w-[550px] mx-auto"
+            className="flex flex-col sm:flex-row items-center sm:items-stretch gap-3 sm:gap-0 max-w-[550px] mx-auto"
             onSubmit={(e) => e.preventDefault()}
           >
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-grow bg-white border-0 py-3 sm:py-[12px] px-4 sm:px-[20px] text-[14px] sm:text-[15px] text-[#5c5c5c] rounded-t-sm sm:rounded-l-sm sm:rounded-tr-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="flex-grow w-full sm:w-auto bg-white border-0 py-3 sm:py-[12px] px-4 sm:px-[20px] text-[14px] sm:text-[15px] text-[#5c5c5c] rounded-sm sm:rounded-l-sm sm:rounded-r-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
               required
             />
             <button
               type="submit"
-              className="bg-[#1db954] text-white font-semibold text-[13px] sm:text-[14px] px-6 sm:px-[35px] py-3 sm:py-[14px] uppercase tracking-[0.5px] rounded-b-sm sm:rounded-r-sm sm:rounded-bl-none transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+              className="bg-[#1db954] text-white font-semibold text-[13px] sm:text-[14px] px-8 sm:px-[35px] py-3 sm:py-[14px] uppercase tracking-[0.5px] rounded-sm sm:rounded-l-none sm:rounded-r-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98] w-auto sm:w-auto"
             >
               SIGN UP
             </button>

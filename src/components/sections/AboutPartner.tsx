@@ -10,7 +10,7 @@ const AnimatedCounter = ({ value, suffix = "" }: { value: number; suffix?: strin
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(0);
   const springValue = useSpring(motionValue, { damping: 50, stiffness: 400 });
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-10px" });
 
   useEffect(() => {
     if (isInView) {

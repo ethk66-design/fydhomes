@@ -81,25 +81,22 @@ const PropertyOverviewTable = ({
                       </tr>
                     ))}
 
+                    {/* Mobile Only: Restore hidden secondary columns */}
                     <tr className="md:hidden border-b border-[#EAEAEA]">
-                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Rooms</span></td>
-                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{rooms}</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Property Size</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{size}</span></td>
                     </tr>
                     <tr className="md:hidden border-b border-[#EAEAEA]">
-                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Garages</span></td>
-                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{garages}</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Bathrooms</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{baths}</span></td>
                     </tr>
                     <tr className="md:hidden border-b border-[#EAEAEA]">
-                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Property Status</span></td>
-                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{status}</span></td>
-                    </tr>
-                    <tr className="md:hidden">
                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Property Type</span></td>
                       <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{propertyType}</span></td>
                     </tr>
                     <tr className="md:hidden border-b border-[#EAEAEA]">
-                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Land Area</span></td>
-                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{landArea || 'N/A'}</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px]"><span className="font-sans text-[12px] sm:text-[13px] font-medium text-[#000000]">Property Status</span></td>
+                      <td className="py-2.5 sm:py-[12px] px-2 sm:px-[16px] text-right"><span className="font-sans text-[12px] sm:text-[13px] text-[#666666]">{status}</span></td>
                     </tr>
                   </tbody>
                 </table>

@@ -91,8 +91,8 @@ const SimilarListings = ({ listings = [] }: SimilarListingsProps) => {
     title: prop.title,
     price: prop.price || 'Price on Request',
     image: prop.images && prop.images.length > 0 ? prop.images[0].url : '/assets/placeholder-house.svg',
-    beds: prop.beds,
-    baths: prop.baths,
+    beds: prop.beds ?? undefined,
+    baths: prop.baths ?? undefined,
     tags: [
       prop.status === 'active' ? 'For Sale' : prop.status,
       ...(prop.tags || []).map((t) => t.tag)

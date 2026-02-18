@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import AdminPropertyForm from "@/components/AdminPropertyForm";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { Property } from "@/lib/types";
 
 interface EditPropertyPageProps {
   params: Promise<{
@@ -30,7 +31,9 @@ export default async function EditPropertyPage({ params }: EditPropertyPageProps
     ...property,
     images: property.images.map((img) => img.url),
     tags: property.tags.map((t) => t.tag),
-  };
+    created_at: property.created_at.toISOString(),
+    updated_at: property.updated_at.toISOString(),
+  } as unknown as Property;
 
   return (
     <div className="min-h-screen bg-[#f4f8fb] pb-12 sm:pb-20">

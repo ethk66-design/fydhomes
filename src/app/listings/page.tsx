@@ -4,6 +4,7 @@ import SearchFilter from "@/components/sections/SearchFilter";
 import ListingGrid from "@/components/sections/ListingGrid";
 import { Suspense } from "react";
 import { Prisma } from "@prisma/client";
+import { Property } from "@/lib/types";
 
 export async function generateMetadata() {
   return getSeoMetadata("/listings", "Property Listings | FYD Homes", "Explore our wide range of properties for sale and rent in Kochi and surrounding areas.");
@@ -57,7 +58,9 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
     where.location = { contains: area };
   }
 
-  let properties: Array<Record<string, unknown>> = [];
+  // import { Property } from "@/lib/types"; // Removed nested import
+
+  let properties: Property[] = [];
   try {
     const rawProperties = await prisma.property.findMany({
       where,
@@ -71,11 +74,19 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
       take: 100, // Increased limit
     });
 
-    properties = rawProperties.map(p => ({
+    const formattedProperties = rawProperties.map(p => ({
       ...p,
       images: p.images.map(img => img.url),
       tags: p.tags.map(t => t.tag),
+      created_at: p.created_at.toISOString(),
+      updated_at: p.updated_at.toISOString(),
+      // Ensure null compatibility if needed, though ...p covers it mostly
+      // Explicitly matching the interface structure:
     }));
+
+    // We need to ensure this matches Property interface.
+    // Prisma types are slightly different (Dates).
+    properties = formattedProperties as unknown as Property[]; // Cast is safe after formatting dates
   } catch (error: unknown) {
     console.error("Error fetching properties:", error);
     // Return empty array or handle error UI

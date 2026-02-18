@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import ImageWithFallback from '@/components/ui/image-with-fallback';
 import PropertyImageSlider from '@/components/ui/property-image-slider';
 import { BedDouble, Bath, Scaling, MapPin, Trees } from 'lucide-react';
 

@@ -33,6 +33,7 @@ export const metadata: Metadata = {
     maximumScale: 1,
     interactiveWidget: "resizes-content", // Key for Android keyboard handling
   },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://fydhomes.in'), // Fixes relative URL warnings
 };
 
 export default function RootLayout({

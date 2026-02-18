@@ -2,8 +2,9 @@ import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
 export default withAuth(
-    function middleware(req) {
-        // Custom logic if needed, e.g. role check
+    // `withAuth` augments your `Request` with the user's token.
+    function middleware(_req) {
+        // middleware logic if needed
         // The `withAuth` wrapper automatically checks for a valid session token
         // and redirects to the sign-in page if missing.
         return NextResponse.next();

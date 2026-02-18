@@ -1,9 +1,20 @@
 import React from 'react';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
 import Link from 'next/link';
-import { Bed, Bath, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Bed, Bath } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
-import { Property } from '@/lib/types';
+
+// Define the shape of the data coming from Prisma (relations are objects)
+interface RawProperty {
+  id: string;
+  title: string;
+  price: string | null;
+  images: { url: string }[]; // Prisma relation
+  beds: number | null;
+  baths: number | null;
+  status: string;
+  tags: { tag: string }[]; // Prisma relation
+}
 
 interface SimilarListing {
   id: string;
@@ -26,14 +37,6 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
-      {/* <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button className="bg-black/40 text-white p-1 rounded-sm" aria-label="Previous listing">
-          <ChevronLeft size={18} className="sm:w-5 sm:h-5" />
-        </button>
-        <button className="bg-black/40 text-white p-1 rounded-sm" aria-label="Next listing">
-          <ChevronRight size={18} className="sm:w-5 sm:h-5" />
-        </button>
-      </div> */}
       <div className="absolute top-2 right-2 flex flex-wrap gap-1 max-w-[80%] justify-end">
         {listing.tags.map((tag) => (
           <span
@@ -76,7 +79,7 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
 );
 
 interface SimilarListingsProps {
-  listings: any[]; // Using any[] temporarily for flexibility, ideally Property[] mapped
+  listings: RawProperty[];
 }
 
 const SimilarListings = ({ listings = [] }: SimilarListingsProps) => {
@@ -90,7 +93,10 @@ const SimilarListings = ({ listings = [] }: SimilarListingsProps) => {
     image: prop.images && prop.images.length > 0 ? prop.images[0].url : '/assets/placeholder-house.svg',
     beds: prop.beds,
     baths: prop.baths,
-    tags: [prop.status === 'active' ? 'For Sale' : prop.status, ...(prop.tags || []).map((t: any) => t.tag)].filter(Boolean) as string[]
+    tags: [
+      prop.status === 'active' ? 'For Sale' : prop.status,
+      ...(prop.tags || []).map((t) => t.tag)
+    ].filter(Boolean) as string[]
   }));
 
   return (
@@ -121,3 +127,4 @@ const SimilarListings = ({ listings = [] }: SimilarListingsProps) => {
 };
 
 export default SimilarListings;
+

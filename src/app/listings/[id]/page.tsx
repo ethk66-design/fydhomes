@@ -70,7 +70,13 @@ function parsePrice(price: string | null): number {
   return parseFloat(p) || 0;
 }
 
-async function getSimilarProperties(currentProperty: any) {
+import { Prisma } from "@prisma/client";
+
+type PropertyWithRelations = Prisma.PropertyGetPayload<{
+  include: { images: true; tags: true };
+}>;
+
+async function getSimilarProperties(currentProperty: PropertyWithRelations) {
   // 1. Fetch candidates (Same Type, Same Listing Type, Active)
   // Fetch a few more than needed to sort by price
   const candidates = await prisma.property.findMany({

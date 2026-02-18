@@ -1,52 +1,51 @@
+import { MetadataRoute } from 'next';
+import { prisma } from '@/lib/db';
 
-import { MetadataRoute } from 'next'
-import { prisma } from '@/lib/db'
-
-export const revalidate = 3600 // Revalidate every hour
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://fydhomes.in';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fydhomes.in'
-
+    // 1. Static Routes
     const staticRoutes = [
-        {
-            url: baseUrl,
-            lastModified: new Date(),
-            changeFrequency: 'daily' as const,
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/listings`,
-            lastModified: new Date(),
-            changeFrequency: 'daily' as const,
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/contact`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly' as const,
-            priority: 0.5,
-        },
-    ]
+        '',
+        '/listings',
+        '/projects',
+        '/about',
+        '/contact',
+        '/privacy-policy', // Added privacy policy
+        '/terms',          // Added terms if it exists, otherwise just privacy
+    ].map((route) => ({
+        url: `${BASE_URL}${route}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: route === '' ? 1.0 : 0.8,
+    }));
+
+    // 2. Dynamic Property Routes
+    let propertyRoutes: MetadataRoute.Sitemap = [];
 
     try {
-        // Fetch all properties using Prisma
         const properties = await prisma.property.findMany({
+            where: {
+                status: 'active', // Only index active properties
+            },
             select: {
                 id: true,
                 updated_at: true,
             },
-        })
+            orderBy: {
+                updated_at: 'desc',
+            },
+        });
 
-        const propertyUrls = properties.map((property) => ({
-            url: `${baseUrl}/listings/${property.id}`,
-            lastModified: new Date(property.updated_at || Date.now()),
-            changeFrequency: 'weekly' as const,
-            priority: 0.8,
-        }))
-
-        return [...staticRoutes, ...propertyUrls]
+        propertyRoutes = properties.map((property) => ({
+            url: `${BASE_URL}/listings/${property.id}`,
+            lastModified: property.updated_at,
+            changeFrequency: 'daily' as const,
+            priority: 0.9, // High priority for individual listings
+        }));
     } catch (error) {
-        console.warn('Database connection failed during sitemap generation. Returning only static routes.', error)
-        return staticRoutes
+        console.error("Error generating sitemap for properties:", error);
     }
+
+    return [...staticRoutes, ...propertyRoutes];
 }

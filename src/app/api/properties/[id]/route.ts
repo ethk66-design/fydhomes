@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
@@ -63,8 +64,8 @@ export async function PUT(
         const { id: _id, created_at, updated_at, ...cleanPropertyData } = propertyData;
 
         // Build transaction types
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const transactions: any[] = [];
+        // Build transaction types
+        const transactions: Prisma.PrismaPromise<unknown>[] = [];
 
         // 1. Handle Images (Only if provided)
         if (hasImages) {
@@ -77,8 +78,7 @@ export async function PUT(
         }
 
         // 3. Prepare Update Data
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const updateData: any = { ...cleanPropertyData };
+        const updateData: Prisma.PropertyUpdateInput = { ...cleanPropertyData };
 
         if (hasImages) {
             updateData.images = {
@@ -105,7 +105,10 @@ export async function PUT(
         const results = await db.$transaction(transactions);
 
         // The property result is always the last item in the transaction results
-        const property = results[results.length - 1];
+        // We cast it to the expected return type of the update query
+        const property = results[results.length - 1] as Prisma.PropertyGetPayload<{
+            include: { images: true; tags: true };
+        }>;
 
         // Revalidate cache to show updates instantly
         revalidatePath('/');
@@ -115,10 +118,8 @@ export async function PUT(
 
         const transformed = {
             ...property,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            images: property.images.map((img: any) => img.url),
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            tags: property.tags.map((t: any) => t.tag),
+            images: property.images.map((img) => img.url),
+            tags: property.tags.map((t) => t.tag),
         };
 
         return NextResponse.json(transformed);

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,7 +36,10 @@ export async function POST(request: NextRequest) {
 // GET /api/leads - List leads (admin only)
 export async function GET(_request: NextRequest) {
     try {
-        // Note: Add auth check in production
+        const session = await getServerSession(authOptions);
+        if (!session || (session.user as { role?: string })?.role !== 'admin') {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
         const leads = await db.lead.findMany({
             include: {
                 property: {

@@ -1,14 +1,14 @@
+import { MetadataRoute } from 'next';
 
-import { MetadataRoute } from 'next'
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://fydhomes.in';
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fydhomes.in'
     return {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: '/admin/',
+            disallow: ['/admin/', '/api/'],
         },
-        sitemap: `${baseUrl}/sitemap.xml`,
-    }
+        sitemap: `${BASE_URL}/sitemap.xml`,
+    };
 }

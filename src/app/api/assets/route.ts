@@ -3,7 +3,7 @@ import { prisma } from '@/lib/db';
 
 export async function GET() {
     try {
-        const assets = await prisma.page_asset.findMany({
+        const assets = await prisma.pageAsset.findMany({
             orderBy: { page_route: 'asc' },
         });
         return NextResponse.json(assets);

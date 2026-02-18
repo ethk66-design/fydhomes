@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { propertySchema } from '@/lib/validations/property';
 
 // GET /api/properties - List properties with optional filters
 export async function GET(request: NextRequest) {
@@ -64,22 +65,31 @@ export async function POST(request: NextRequest) {
         }
 
         const body = await request.json();
-        const { images, tags, ...propertyData } = body;
+        const parseResult = propertySchema.safeParse(body);
 
+        if (!parseResult.success) {
+            return NextResponse.json({ error: 'Validation failed', details: parseResult.error.flatten() }, { status: 400 });
+        }
+
+        const { images, tags, ...propertyData } = parseResult.data;
+
+        // Ensure status and listing_type are valid explicitly to satisfy Prisma strict types if needed, 
+        // though Zod handles the string validation.
         const property = await db.property.create({
             data: {
                 ...propertyData,
+                // Prisma expects strings for these, Zod ensures they match the enum values if provided
+                status: propertyData.status,
+                listing_type: propertyData.listing_type,
                 images: {
-                    create: (images || []).map((url: string, index: number) => ({ url, order: index })),
+                    create: (images || []).map((url, index) => ({ url, order: index })),
                 },
                 tags: {
-                    create: (tags || []).map((tag: string) => ({ tag })),
+                    create: (tags || []).map((tag) => ({ tag })),
                 },
             },
             include: { images: true, tags: true },
         });
-
-
 
         // Transform response
         const transformed = {

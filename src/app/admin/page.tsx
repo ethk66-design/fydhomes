@@ -112,7 +112,7 @@ export default function AdminDashboard() {
 
   const filteredProperties = properties.filter(property =>
     property.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    property.location.toLowerCase().includes(searchQuery.toLowerCase())
+    (property.location && property.location.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   if (status === "loading" || loading) {

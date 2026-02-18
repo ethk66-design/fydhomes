@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+ 
 // CRITICAL: Limit thread pool to prevent crashes on limited Hostinger containers
 process.env.UV_THREADPOOL_SIZE = '1';
 

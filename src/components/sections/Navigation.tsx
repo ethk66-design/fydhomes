@@ -189,7 +189,7 @@ const Navigation = () => {
                 href={social.href}
                 className="text-black hover:text-[#1db954] transition-colors"
               >
-                {React.cloneElement(social.icon as React.ReactElement, {
+                {React.cloneElement(social.icon as React.ReactElement<{ className?: string }>, {
                   className: 'w-8 h-8',
                 })}
               </a>

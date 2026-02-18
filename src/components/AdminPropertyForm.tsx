@@ -25,7 +25,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
   const [uploadProgress, setUploadProgress] = useState(0);
   const [newImageUrl, setNewImageUrl] = useState("");
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Partial<Property>>({
     title: initialData?.title || "",
     description: initialData?.description || "",
     price: initialData?.price || "",
@@ -225,7 +225,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
             <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Property Title</label>
             <Input
               name="title"
-              value={formData.title}
+              value={formData.title ?? ""}
               onChange={handleInputChange}
               required
               placeholder="e.g. Luxury 4BHK Villa in Kakkanad"
@@ -237,7 +237,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
             <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Description</label>
             <Textarea
               name="description"
-              value={formData.description}
+              value={formData.description ?? ""}
               onChange={handleInputChange}
               placeholder="Detailed description of the property..."
               className="min-h-[120px] sm:min-h-[150px] border-[#eeeeee] text-base sm:text-sm"
@@ -248,7 +248,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
             <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">YouTube Video Link</label>
             <Input
               name="youtube_video"
-              value={formData.youtube_video}
+              value={formData.youtube_video ?? ""}
               onChange={handleInputChange}
               placeholder="e.g. https://www.youtube.com/watch?v=..."
               className="border-[#eeeeee] text-base sm:text-sm h-11"
@@ -262,24 +262,24 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <label className="text-xs sm:text-sm font-medium text-[#5c5c5c]">Meta Title</label>
               <Input
                 name="meta_title"
-                value={formData.meta_title}
+                value={formData.meta_title ?? ""}
                 onChange={handleInputChange}
                 placeholder="Custom title for search engines"
                 className="border-[#eeeeee] text-base sm:text-sm h-11"
               />
-              <div className="text-[10px] text-[#5c5c5c] text-right">{formData.meta_title.length}/60</div>
+              <div className="text-[10px] text-[#5c5c5c] text-right">{(formData.meta_title ?? "").length}/60</div>
             </div>
 
             <div className="space-y-1.5 sm:space-y-2">
               <label className="text-xs sm:text-sm font-medium text-[#5c5c5c]">Meta Description</label>
               <Textarea
                 name="meta_description"
-                value={formData.meta_description}
+                value={formData.meta_description ?? ""}
                 onChange={handleInputChange}
                 placeholder="Custom description for search engines"
                 className="min-h-[80px] border-[#eeeeee] text-base sm:text-sm"
               />
-              <div className="text-[10px] text-[#5c5c5c] text-right">{formData.meta_description.length}/160</div>
+              <div className="text-[10px] text-[#5c5c5c] text-right">{(formData.meta_description ?? "").length}/160</div>
             </div>
           </div>
 
@@ -289,7 +289,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <div className="space-y-2">
                 <Input
                   name="price"
-                  value={formData.price}
+                  value={formData.price ?? ""}
                   onChange={handleInputChange}
                   placeholder="₹ 1.25 CR"
                   className="border-[#eeeeee] text-base sm:text-sm h-11"
@@ -300,7 +300,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Location</label>
               <Input
                 name="location"
-                value={formData.location}
+                value={formData.location ?? ""}
                 onChange={handleInputChange}
                 placeholder="Kakkanad, Kochi"
                 className="border-[#eeeeee] text-base sm:text-sm h-11"
@@ -314,7 +314,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <Input
                 type="number"
                 name="beds"
-                value={formData.beds}
+                value={formData.beds ?? 0}
                 onChange={handleInputChange}
                 className="border-[#eeeeee] text-base sm:text-sm h-11"
               />
@@ -324,7 +324,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <Input
                 type="number"
                 name="baths"
-                value={formData.baths}
+                value={formData.baths ?? 0}
                 onChange={handleInputChange}
                 className="border-[#eeeeee] text-base sm:text-sm h-11"
               />
@@ -333,7 +333,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Area</label>
               <Input
                 name="area"
-                value={formData.area}
+                value={formData.area ?? ""}
                 onChange={handleInputChange}
                 placeholder="2500 sqft"
                 className="border-[#eeeeee] text-base sm:text-sm h-11"
@@ -343,7 +343,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Land Area</label>
               <Input
                 name="land_area"
-                value={formData.land_area}
+                value={formData.land_area ?? ""}
                 onChange={handleInputChange}
                 placeholder="e.g. 5 Cents"
                 className="border-[#eeeeee] text-base sm:text-sm h-11"
@@ -354,7 +354,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <Input
                 type="number"
                 name="parkings"
-                value={formData.parkings}
+                value={formData.parkings ?? 0}
                 onChange={handleInputChange}
                 className="border-[#eeeeee] text-base sm:text-sm h-11"
               />
@@ -366,7 +366,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-1.5 sm:space-y-2">
               <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Property Type</label>
-              <Select value={formData.type} onValueChange={(v) => handleSelectChange("type", v)}>
+              <Select value={formData.type ?? undefined} onValueChange={(v) => handleSelectChange("type", v)}>
                 <SelectTrigger className="border-[#eeeeee] text-base sm:text-sm h-11">
                   <SelectValue placeholder="Select Type" />
                 </SelectTrigger>
@@ -382,7 +382,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
             </div>
             <div className="space-y-1.5 sm:space-y-2">
               <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Listing Type</label>
-              <Select value={formData.listing_type} onValueChange={(v) => handleSelectChange("listing_type", v)}>
+              <Select value={formData.listing_type ?? undefined} onValueChange={(v) => handleSelectChange("listing_type", v)}>
                 <SelectTrigger className="border-[#eeeeee] text-base sm:text-sm h-11">
                   <SelectValue placeholder="Select Type" />
                 </SelectTrigger>
@@ -396,7 +396,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
 
           <div className="space-y-1.5 sm:space-y-2">
             <label className="text-xs sm:text-sm font-bold text-black uppercase tracking-wider">Status</label>
-            <Select value={formData.status} onValueChange={(v) => handleSelectChange("status", v)}>
+            <Select value={formData.status ?? "active"} onValueChange={(v) => handleSelectChange("status", v)}>
               <SelectTrigger className="border-[#eeeeee] text-base sm:text-sm h-11">
                 <SelectValue placeholder="Select Status" />
               </SelectTrigger>
@@ -444,7 +444,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
                   {tag}
                   <button
                     type="button"
-                    onClick={() => setFormData(prev => ({ ...prev, tags: prev.tags.filter(t => t !== tag) }))}
+                    onClick={() => setFormData(prev => ({ ...prev, tags: (prev.tags || []).filter(t => t !== tag) }))}
                     className="hover:text-red-500"
                     aria-label={`Remove tag ${tag}`}
                   >

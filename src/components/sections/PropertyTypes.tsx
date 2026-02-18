@@ -112,9 +112,9 @@ export function PropertyTypes({ images, counts }: PropertyTypesProps) {
                 key={index}
                 variants={item}
                 href={href}
-                className="flex items-center bg-white border border-[#eeeeee] p-[10px] rounded-[4px] hover:shadow-card transition-all duration-300 group"
+                className="flex flex-col sm:flex-row items-center sm:items-start bg-white border border-[#eeeeee] p-[10px] rounded-[4px] hover:shadow-card transition-all duration-300 group text-center sm:text-left"
               >
-                <div className="relative w-[80px] h-[70px] sm:w-[100px] sm:h-[80px] overflow-hidden rounded-[2px] flex-shrink-0">
+                <div className="relative w-full h-[100px] sm:w-[100px] sm:h-[80px] overflow-hidden rounded-[2px] flex-shrink-0 mb-3 sm:mb-0">
                   <ImageWithFallback
                     src={imageUrl}
                     alt={type.title}
@@ -123,11 +123,11 @@ export function PropertyTypes({ images, counts }: PropertyTypesProps) {
                   />
                 </div>
 
-                <div className="ml-4 sm:ml-[20px] flex flex-col justify-center">
-                  <h3 className="text-[13px] sm:text-[14px] font-bold text-black uppercase mb-[4px] tracking-[0.5px]">
+                <div className="sm:ml-[20px] flex flex-col justify-center w-full">
+                  <h3 className="text-[13px] sm:text-[14px] font-bold text-black uppercase mb-[2px] sm:mb-[4px] tracking-[0.5px] truncate w-full">
                     {type.title}
                   </h3>
-                  <p className="text-[12px] sm:text-[13px] text-[#5c5c5c] font-medium m-0">
+                  <p className="text-[11px] sm:text-[13px] text-[#5c5c5c] font-medium m-0 whitespace-nowrap">
                     {countText}
                   </p>
                 </div>

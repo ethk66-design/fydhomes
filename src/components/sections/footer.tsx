@@ -97,23 +97,27 @@ const Footer = () => {
         </div>
       </div>
 
+      <div className="container mx-auto px-4 sm:px-5 max-w-[1200px] pb-6 sm:pb-8">
+        <div className="privacy-links flex flex-row items-center justify-center sm:justify-start gap-4 sm:gap-6 border-t border-transparent sm:border-transparent pt-4 sm:pt-0">
+          <Link href="/privacy-policy" className="text-[12px] sm:text-[13px] text-black font-medium hover:text-[#D32F2F] transition-colors">
+            Privacy Policy
+          </Link>
+          <div className="h-4 w-[1px] bg-[#EAEAEA]"></div>
+          <Link href="/terms-conditions" className="text-[12px] sm:text-[13px] text-black font-medium hover:text-[#D32F2F] transition-colors">
+            Terms & Conditions
+          </Link>
+        </div>
+      </div>
+
       <div className="sub-footer bg-white border-t border-[#EAEAEA] py-4 sm:py-[25px]">
         <div className="container mx-auto px-4 sm:px-5 max-w-[1200px]">
-          <div className="flex flex-col-reverse gap-4 md:flex-row md:justify-between md:items-center">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
             <div className="copyright text-[12px] sm:text-[13px] text-[#666666] text-center md:text-left">
               © FYD Media 2025 - All rights reserved
             </div>
-            <div className="privacy-links flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
-              <Link href="/privacy-policy" className="text-[12px] sm:text-[13px] text-black font-medium hover:text-[#D32F2F] transition-colors">
-                Privacy Policy
-              </Link>
-              <div className="h-4 w-[1px] bg-[#EAEAEA] hidden sm:block"></div>
-              <Link href="/terms-conditions" className="text-[12px] sm:text-[13px] text-black font-medium hover:text-[#D32F2F] transition-colors">
-                Terms & Conditions
-              </Link>
-              <div className="hidden xl:flex items-center gap-2 bg-[#F7F8F9] px-3 py-1.5 rounded-[4px]">
-                <span className="text-[11px] text-[#666666]">Need Help? <strong className="text-black font-bold">Chat with us</strong></span>
-              </div>
+
+            <div className="hidden xl:flex items-center gap-2 bg-[#F7F8F9] px-3 py-1.5 rounded-[4px]">
+              <span className="text-[11px] text-[#666666]">Need Help? <strong className="text-black font-bold">Chat with us</strong></span>
             </div>
           </div>
         </div>

@@ -122,18 +122,18 @@ export default function ImageLeadModal({
                             {/* Navigation Arrows - Styled */}
                             <button
                                 onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                                className="absolute left-4 p-3 bg-white/5 hover:bg-white/10 border border-white/5 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all active:scale-95 hidden lg:flex items-center justify-center backdrop-blur-sm"
+                                className="absolute left-2 sm:left-4 p-2 sm:p-3 bg-black/30 lg:bg-white/5 hover:bg-black/50 lg:hover:bg-white/10 border border-white/10 lg:border-white/5 text-white rounded-full opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all active:scale-95 flex items-center justify-center backdrop-blur-md z-20"
                                 aria-label="Previous image"
                             >
-                                <ChevronLeft className="w-6 h-6" />
+                                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                             </button>
 
                             <button
                                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                                className="absolute right-4 p-3 bg-white/5 hover:bg-white/10 border border-white/5 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all active:scale-95 hidden lg:flex items-center justify-center backdrop-blur-sm"
+                                className="absolute right-2 sm:right-4 p-2 sm:p-3 bg-black/30 lg:bg-white/5 hover:bg-black/50 lg:hover:bg-white/10 border border-white/10 lg:border-white/5 text-white rounded-full opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all active:scale-95 flex items-center justify-center backdrop-blur-md z-20"
                                 aria-label="Next image"
                             >
-                                <ChevronRight className="w-6 h-6" />
+                                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                             </button>
 
                             {/* Mobile Navigation Areas (Invisible tap zones) */}

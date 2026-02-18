@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 
 /**
  * AboutHero Section Component
@@ -34,7 +34,7 @@ const AboutHero: React.FC<{ heroImage?: string }> = ({ heroImage }) => {
       <div className="container mx-auto px-6 max-w-[1140px]">
         <div className="relative w-full overflow-hidden rounded-[8px] animate-in fade-in duration-1000 ease-in-out">
           <div className="relative aspect-[16/6] md:aspect-[21/8] w-full">
-            <Image
+            <ImageWithFallback
               src={heroImageUrl}
               alt="Modern Kochi property architecture"
               fill

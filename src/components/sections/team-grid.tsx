@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 import { Phone, Mail } from 'lucide-react';
 
 /**
@@ -71,7 +71,7 @@ export default function TeamGrid() {
               {/* Member Card Container */}
               <div className="relative aspect-[3/4] overflow-hidden rounded-[8px] mb-4">
                 {/* Image */}
-                <Image
+                <ImageWithFallback
                   src={member.image}
                   alt={member.name}
                   fill

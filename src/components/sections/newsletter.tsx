@@ -4,13 +4,24 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 
-export function Newsletter() {
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 
+export function Newsletter() {
+  const bgImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-12-at-1_41_55-PM-758x564-28.jpeg";
 
   return (
     <section
-      className="relative w-full py-12 sm:py-16 md:py-[80px] lg:py-[100px] flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat bg-[image:linear-gradient(rgba(0,0,0,0.45),_rgba(0,0,0,0.45)),_url('https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-12-at-1_41_55-PM-758x564-28.jpeg')]"
+      className="relative w-full py-12 sm:py-16 md:py-[80px] lg:py-[100px] flex items-center justify-center overflow-hidden"
     >
+      <div className="absolute inset-0 z-0">
+        <ImageWithFallback
+          src={bgImage}
+          alt="Newsletter Background"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/45" />
+      </div>
       <div className="container relative z-10 px-4 sm:px-5 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

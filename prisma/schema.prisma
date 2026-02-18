@@ -36,6 +36,9 @@ model Property {
   leads  Lead[]
 
   @@map("properties")
+  @@index([created_at])
+  @@index([status, listing_type])
+  @@index([location])
 }
 
 model PropertyImage {

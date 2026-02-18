@@ -4,12 +4,20 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: '**',
+                hostname: 'slelguoygbfzlpylpxfs.supabase.co', // Supabase Storage
             },
             {
-                protocol: 'http',
-                hostname: '**',
+                protocol: 'https',
+                hostname: 'lh3.googleusercontent.com', // Google Auth (Future proofing)
             },
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com', // Common backup
+            },
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com', // Placeholder images
+            }
         ],
     },
     typescript: {

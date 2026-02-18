@@ -115,7 +115,7 @@ export function PropertyTypes({ images, counts }: PropertyTypesProps) {
                 className="flex items-center bg-white border border-[#eeeeee] p-[10px] rounded-[4px] hover:shadow-card transition-all duration-300 group"
               >
                 <div className="relative w-[80px] h-[70px] sm:w-[100px] sm:h-[80px] overflow-hidden rounded-[2px] flex-shrink-0">
-                  <Image
+                  <ImageWithFallback
                     src={imageUrl}
                     alt={type.title}
                     fill

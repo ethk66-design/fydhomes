@@ -1,3 +1,8 @@
+
+// Force dynamic to ensure fresh data always
+export const dynamic = 'force-dynamic';
+
+
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
@@ -74,10 +79,7 @@ export async function POST(request: NextRequest) {
             include: { images: true, tags: true },
         });
 
-        // Revalidate cache to show new property instantly
-        revalidatePath('/');
-        revalidatePath('/listings');
-        revalidatePath('/admin');
+
 
         // Transform response
         const transformed = {

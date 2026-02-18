@@ -1,30 +1,26 @@
 import { prisma } from '@/lib/db';
 
-export async function getPageAsset(
-    pageRoute: string,
-    sectionKey: string,
-    defaultUrl: string
-): Promise<string> {
-    const cacheKey = `${pageRoute}:${sectionKey}`;
+import { unstable_cache } from 'next/cache';
 
-    try {
-        const asset = await prisma.pageAsset.findFirst({
-            where: {
-                page_route: pageRoute,
-                section_key: sectionKey,
-            },
-            select: {
-                asset_url: true,
-            },
-        });
+export const getPageAsset = unstable_cache(
+    async (pageRoute: string, sectionKey: string, defaultUrl: string) => {
+        try {
+            const asset = await prisma.pageAsset.findFirst({
+                where: {
+                    page_route: pageRoute,
+                    section_key: sectionKey,
+                },
+                select: {
+                    asset_url: true,
+                },
+            });
 
-        if (asset?.asset_url) {
-            return asset.asset_url;
+            return asset?.asset_url || defaultUrl;
+        } catch (error) {
+            console.warn(`Failed to fetch asset for ${pageRoute}:${sectionKey}`, error);
+            return defaultUrl;
         }
-    } catch (error) {
-        // Silent fail to default
-        console.warn(`Failed to fetch asset for ${cacheKey}`, error);
-    }
-
-    return defaultUrl;
-}
+    },
+    ['page-assets'],
+    { revalidate: 3600, tags: ['page-assets'] }
+);

@@ -1,7 +1,7 @@
 import { Hero } from "@/components/sections/hero";
 import { getSeoMetadata } from "@/lib/seo";
 
-export const revalidate = 0;
+export const revalidate = 3600; // Revalidate every hour
 
 export async function generateMetadata() {
   return getSeoMetadata("/", "FYD Homes | Find Your Dream Home in Kochi", "Your Trusted Real Estate Partner in Kochi. Find beautiful villas, residential homes, and commercial spaces.");
@@ -24,20 +24,33 @@ export default async function Home() {
   const heroBg = await getPageAsset('/', 'hero_bg', "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg");
   const ctaBg = await getPageAsset('/', 'cta_bg', "/expert-guidance-bg.png");
 
-  // Fetch Property Counts
-  const properties = await db.property.findMany({
-    select: { type: true, listing_type: true, status: true }
+  // Fetch Property Counts using Database Aggregation (High Performance)
+  const typeGroups = await db.property.groupBy({
+    by: ['type'],
+    where: {
+      status: { in: ['active', 'featured'] }
+    },
+    _count: true,
   });
 
-  const activeProperties = properties.filter(p => p.status === 'active' || p.status === 'featured');
+  const rentCount = await db.property.count({
+    where: {
+      status: { in: ['active', 'featured'] },
+      listing_type: 'Rent'
+    }
+  });
+
+  // Helper to safely get count from groups
+  const getCount = (typeName: string) =>
+    typeGroups.find(g => g.type === typeName)?._count || 0;
 
   const counts = {
-    villa: activeProperties.filter(p => p.type?.toLowerCase() === 'villa').length,
-    residential: activeProperties.filter(p => p.type?.toLowerCase() === 'residential').length,
-    plot: activeProperties.filter(p => p.type?.toLowerCase() === 'plot').length,
-    commercial: activeProperties.filter(p => p.type?.toLowerCase() === 'commercial').length,
-    office: activeProperties.filter(p => p.type?.toLowerCase() === 'office').length,
-    rent: activeProperties.filter(p => p.listing_type?.toLowerCase() === 'rent').length,
+    villa: getCount('Villa'),
+    residential: getCount('Residential'),
+    plot: getCount('Plot'),
+    commercial: getCount('Commercial'),
+    office: getCount('Office'),
+    rent: rentCount,
   };
 
   // Fetch Property Type Images

@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { createClient } from '@supabase/supabase-js';
 
 // GET /api/properties/[id] - Get single property
 export async function GET(
@@ -144,6 +145,45 @@ export async function DELETE(
         }
 
         const { id } = await params;
+
+        // 1. Fetch images to delete from Storage
+        const property = await db.property.findUnique({
+            where: { id },
+            include: { images: true }
+        });
+
+        if (property && property.images.length > 0) {
+            try {
+                const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+                const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+                if (supabaseUrl && supabaseServiceKey) {
+                    const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+                        auth: { persistSession: false }
+                    });
+
+                    const BUCKET_NAME = 'property-images';
+                    const pathsToDelete: string[] = [];
+
+                    for (const img of property.images) {
+                        if (img.url.includes(BUCKET_NAME)) {
+                            const urlParts = img.url.split(`${BUCKET_NAME}/`);
+                            if (urlParts.length > 1) {
+                                pathsToDelete.push(urlParts[1]);
+                            }
+                        }
+                    }
+
+                    if (pathsToDelete.length > 0) {
+                        await supabase.storage.from(BUCKET_NAME).remove(pathsToDelete);
+                        console.log(`Deleted ${pathsToDelete.length} images from storage for property ${id}`);
+                    }
+                }
+            } catch (err) {
+                console.error('Error deleting images from storage:', err);
+                // Continue to delete property from DB even if storage cleanup fails
+            }
+        }
 
         await db.property.delete({ where: { id } });
 

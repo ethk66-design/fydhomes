@@ -41,7 +41,13 @@ export async function POST(request: NextRequest) {
         // Validate file type
         const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
         if (!allowedTypes.includes(file.type)) {
-            return NextResponse.json({ error: 'Invalid file type' }, { status: 400 });
+            return NextResponse.json({ error: 'Invalid file type. Only JPG, PNG, WebP, and GIF are allowed.' }, { status: 400 });
+        }
+
+        // Validate file size (Max 5MB)
+        const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+        if (file.size > MAX_SIZE) {
+            return NextResponse.json({ error: 'File size exceeds 5MB limit.' }, { status: 400 });
         }
 
         // Read file content

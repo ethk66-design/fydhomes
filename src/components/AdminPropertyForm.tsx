@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { Loader2, X, Upload, Star } from "lucide-react";
 import Image from "next/image";
+import imageCompression from 'browser-image-compression';
 
 interface AdminPropertyFormProps {
   initialData?: Property;
@@ -101,8 +102,25 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
     try {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
+
+        // Compress image
+        console.log(`Original size: ${file.size / 1024 / 1024} MB`);
+        let compressedFile = file;
+        try {
+          const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+          };
+          compressedFile = await imageCompression(file, options);
+          console.log(`Compressed size: ${compressedFile.size / 1024 / 1024} MB`);
+        } catch (error) {
+          console.error("Compression failed:", error);
+          // Fallback to original file
+        }
+
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', compressedFile);
         formData.append('folder', 'properties');
 
         const res = await fetch('/api/upload', {

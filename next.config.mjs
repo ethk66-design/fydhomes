@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        unoptimized: true, // Disables Vercel Image Optimization to prevent 402 errors
         remotePatterns: [
             {
                 protocol: 'https',

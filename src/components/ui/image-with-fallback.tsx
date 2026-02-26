@@ -27,12 +27,14 @@ const ImageWithFallback = ({
         return null;
     }
 
+    const isSupabase = typeof imgSrc === 'string' && imgSrc.includes('supabase.co');
+
     return (
         <Image
             {...props}
             src={hasError ? fallbackSrc : imgSrc}
             alt={alt || "Property Image"}
-            unoptimized={useUnoptimized}
+            unoptimized={isSupabase || useUnoptimized}
             onError={() => {
                 if (!useUnoptimized) {
                     // First failure: Try unoptimized (bypassing next.config.mjs domain check)

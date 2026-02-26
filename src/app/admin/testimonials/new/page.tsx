@@ -127,7 +127,7 @@ export default function NewTestimonialPage() {
                         <div className="flex items-center gap-4">
                             {image ? (
                                 <div className="relative w-24 h-24 rounded-full overflow-hidden border border-[#eeeeee]">
-                                    <Image src={image} alt="Preview" fill className="object-cover" unoptimized />
+                                    <Image src={image} alt="Preview" fill className="object-cover" />
                                     <button
                                         type="button"
                                         onClick={() => setImage(null)}

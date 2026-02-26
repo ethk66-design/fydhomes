@@ -126,7 +126,6 @@ export default function AdminSiteImagesPage() {
                                                     alt={asset.alt_text || asset.label}
                                                     fill
                                                     className="object-cover"
-                                                    unoptimized // Fix for .blob extension images from Supabase
                                                 />
                                             </div>
                                         </td>
@@ -163,7 +162,6 @@ export default function AdminSiteImagesPage() {
                                             alt={asset.alt_text || asset.label}
                                             fill
                                             className="object-cover"
-                                            unoptimized // Fix for .blob extension images from Supabase
                                         />
                                     </div>
                                     <div className="flex-1 min-w-0">

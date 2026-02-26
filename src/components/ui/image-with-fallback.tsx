@@ -14,12 +14,10 @@ const ImageWithFallback = ({
     ...props
 }: ImageWithFallbackProps) => {
     const [imgSrc, setImgSrc] = useState(src);
-    const [useUnoptimized, setUseUnoptimized] = useState(false);
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
         setImgSrc(src);
-        setUseUnoptimized(false);
         setHasError(false);
     }, [src]);
 
@@ -27,20 +25,13 @@ const ImageWithFallback = ({
         return null;
     }
 
-    const isSupabase = typeof imgSrc === 'string' && imgSrc.includes('supabase.co');
-
     return (
         <Image
             {...props}
             src={hasError ? fallbackSrc : imgSrc}
             alt={alt || "Property Image"}
-            unoptimized={isSupabase || useUnoptimized}
             onError={() => {
-                if (!useUnoptimized) {
-                    // First failure: Try unoptimized (bypassing next.config.mjs domain check)
-                    setUseUnoptimized(true);
-                } else {
-                    // Second failure: Show placeholder
+                if (!hasError) {
                     setHasError(true);
                 }
             }}
@@ -49,3 +40,4 @@ const ImageWithFallback = ({
 };
 
 export default ImageWithFallback;
+

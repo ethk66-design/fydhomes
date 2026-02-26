@@ -245,7 +245,6 @@ export default function AdminDashboard() {
                             alt={property.title}
                             fill
                             className="object-cover"
-                            unoptimized // Fix for .blob extension images from Supabase
                           />
                         </div>
                         <div className="max-w-[150px] lg:max-w-[250px]">
@@ -319,7 +318,6 @@ export default function AdminDashboard() {
                       alt={property.title}
                       fill
                       className="object-cover"
-                      unoptimized // Fix for .blob extension images from Supabase
                     />
                   </div>
                   <div className="flex-1 min-w-0">

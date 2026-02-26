@@ -242,7 +242,6 @@ export default function EditTestimonialPage({ params }: PageProps) {
                                             alt="Preview"
                                             fill
                                             className="object-cover"
-                                            unoptimized
                                         />
                                     </div>
                                     <div className="flex-1 space-y-2">

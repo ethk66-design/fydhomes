@@ -120,7 +120,7 @@ export default function AdminTestimonialsPage() {
                                                 <td className="px-6 py-4">
                                                     <div className="flex items-center gap-3">
                                                         <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
-                                                            <Image src={t.image_url || '/placeholder-user.jpg'} alt={t.name} width={40} height={40} className="object-cover w-full h-full" unoptimized />
+                                                            <Image src={t.image_url || '/placeholder-user.jpg'} alt={t.name} width={40} height={40} className="object-cover w-full h-full" />
                                                         </div>
                                                         <div>
                                                             <div className="font-bold text-sm text-black">{t.name}</div>
@@ -153,7 +153,7 @@ export default function AdminTestimonialsPage() {
                                     <div key={t.id} className="p-4 hover:bg-gray-50">
                                         <div className="flex items-start gap-3 mb-3">
                                             <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
-                                                <Image src={t.image_url || '/placeholder-user.jpg'} alt={t.name} width={40} height={40} className="object-cover w-full h-full" unoptimized />
+                                                <Image src={t.image_url || '/placeholder-user.jpg'} alt={t.name} width={40} height={40} className="object-cover w-full h-full" />
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex justify-between items-start">

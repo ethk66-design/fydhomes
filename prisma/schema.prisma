@@ -10,35 +10,33 @@ datasource db {
 }
 
 model Property {
-  id               String    @id @default(uuid()) @db.Char(36)
-  title            String    @db.VarChar(255)
-  description      String?   @db.Text
-  price            String?   @db.VarChar(100)
-  location         String?   @db.VarChar(255)
+  id               String          @id @default(uuid()) @db.Char(36)
+  title            String          @db.VarChar(255)
+  description      String?
+  price            String?         @db.VarChar(100)
+  location         String?         @db.VarChar(255)
   beds             Int?
   baths            Int?
-  area             String?   @db.VarChar(100)
-  land_area        String?   @db.VarChar(100)
-  status           String    @default("active") @db.VarChar(50)
-  type             String?   @db.VarChar(100)
-  listing_type     String?   @db.VarChar(50)
-  agent_id         String?   @db.Char(36)
-  youtube_video    String?   @db.VarChar(500)
+  area             String?         @db.VarChar(100)
+  land_area        String?         @db.VarChar(100)
+  status           String          @default("active") @db.VarChar(50)
+  type             String?         @db.VarChar(100)
+  listing_type     String?         @db.VarChar(50)
+  agent_id         String?         @db.Char(36)
+  youtube_video    String?         @db.VarChar(500)
   parkings         Int?
-  meta_title       String?   @db.VarChar(255)
-  meta_description String?   @db.Text
-  created_at       DateTime  @default(now())
-  updated_at       DateTime  @updatedAt
+  meta_title       String?         @db.VarChar(255)
+  meta_description String?
+  created_at       DateTime        @default(now())
+  updated_at       DateTime        @updatedAt
+  leads            Lead[]
+  images           PropertyImage[]
+  tags             PropertyTag[]
 
-  // Relations for array fields (converted from TEXT[])
-  images PropertyImage[]
-  tags   PropertyTag[]
-  leads  Lead[]
-
-  @@map("properties")
   @@index([created_at])
   @@index([status, listing_type])
   @@index([location])
+  @@map("properties")
 }
 
 model PropertyImage {
@@ -66,7 +64,7 @@ model Testimonial {
   id         String   @id @default(uuid()) @db.Char(36)
   name       String   @db.VarChar(255)
   role       String   @db.VarChar(255)
-  content    String   @db.Text
+  content    String
   rating     Int
   image_url  String?  @db.VarChar(500)
   created_at DateTime @default(now())
@@ -78,7 +76,7 @@ model PageSeo {
   id          String   @id @default(uuid()) @db.Char(36)
   route       String   @unique @db.VarChar(255)
   title       String   @db.VarChar(255)
-  description String?  @db.Text
+  description String?
   og_image    String?  @db.VarChar(500)
   updated_at  DateTime @updatedAt
 
@@ -103,17 +101,16 @@ model Lead {
   name        String    @db.VarChar(255)
   email       String?   @db.VarChar(255)
   phone       String?   @db.VarChar(50)
-  message     String?   @db.Text
+  message     String?
   property_id String?   @db.Char(36)
   source      String?   @db.VarChar(100)
   created_at  DateTime  @default(now())
-  property    Property? @relation(fields: [property_id], references: [id], onDelete: SetNull)
+  property    Property? @relation(fields: [property_id], references: [id])
 
   @@index([property_id])
   @@map("leads")
 }
 
-// NextAuth.js required models
 model User {
   id            String    @id @default(uuid()) @db.Char(36)
   email         String    @unique @db.VarChar(255)

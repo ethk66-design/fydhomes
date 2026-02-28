@@ -84,6 +84,7 @@ const Navigation = () => {
                 alt="fyd homes"
                 fill
                 className="object-contain transition-transform duration-300"
+                unoptimized={true}
                 priority
               />
             </Link>

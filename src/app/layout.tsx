@@ -25,6 +25,15 @@ const robotoSlab = Roboto_Slab({
 });
 
 export const metadata: Metadata = {
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://fydhomes.com", // Will be updated to canonical domain later
+    siteName: "FYD Homes",
+  },
+  icons: {
+    icon: '/favicon.png',
+  },
   title: "FYD Homes | Find Your Dream Home in Kochi",
   description: "Your Trusted Real Estate Partner in Kochi. Find beautiful villas, residential homes, and commercial spaces.",
   viewport: {

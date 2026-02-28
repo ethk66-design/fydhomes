@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="footer-logo mb-6 flex justify-center sm:justify-start">
               <Link href="/">
                 <Image
-                  src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459789386.png?width=8000&height=8000&resize=contain"
+                  src="/assets/fyd-logo.png"
                   alt="Find Your Dream Home"
                   width={200}
                   height={80}

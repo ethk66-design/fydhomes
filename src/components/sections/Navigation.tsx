@@ -80,7 +80,7 @@ const Navigation = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="block relative h-[60px] lg:h-[80px] w-[200px]">
               <Image
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459775863.png?width=8000&height=8000&resize=contain"
+                src="/assets/fyd-logo.png"
                 alt="fyd homes"
                 fill
                 className="object-contain object-left transition-transform duration-300"

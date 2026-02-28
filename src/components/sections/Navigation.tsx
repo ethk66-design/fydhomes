@@ -78,12 +78,12 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-[80px]">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="block relative h-[60px] lg:h-[80px] w-[200px]">
+            <Link href="/" className="block relative h-[50px] lg:h-[60px] w-[100px] lg:w-[120px]">
               <Image
                 src="/assets/fyd-logo.png"
                 alt="fyd homes"
                 fill
-                className="object-contain object-left transition-transform duration-300"
+                className="object-contain transition-transform duration-300"
                 priority
               />
             </Link>

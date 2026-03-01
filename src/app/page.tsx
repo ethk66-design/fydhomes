@@ -21,7 +21,7 @@ import { getPageAsset } from "@/lib/assets";
 import { db } from "@/lib/db";
 
 export default async function Home() {
-  const heroBg = await getPageAsset('/', 'hero_bg', "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/IMG_7368-758x564-2.jpg");
+  const heroBg = await getPageAsset('/', 'hero_bg', "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg");
   const ctaBg = await getPageAsset('/', 'cta_bg', "/expert-guidance-bg.png");
 
   // Fetch Property Counts using Database Aggregation (High Performance)
@@ -55,12 +55,12 @@ export default async function Home() {
 
   // Fetch Property Type Images
   const propertyTypeImages = {
-    villa: await getPageAsset('/', 'property_type_villa', "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg"),
-    residential: await getPageAsset('/', 'property_type_residential', "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg"),
-    plot: await getPageAsset('/', 'property_type_plot', "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg"),
-    commercial: await getPageAsset('/', 'property_type_commercial', "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg"),
-    office: await getPageAsset('/', 'property_type_office', "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg"),
-    rent: await getPageAsset('/', 'property_type_rent', "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg"),
+    villa: await getPageAsset('/', 'property_type_villa', "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg"),
+    residential: await getPageAsset('/', 'property_type_residential', "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg"),
+    plot: await getPageAsset('/', 'property_type_plot', "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg"),
+    commercial: await getPageAsset('/', 'property_type_commercial', "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg"),
+    office: await getPageAsset('/', 'property_type_office', "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg"),
+    rent: await getPageAsset('/', 'property_type_rent', "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg"),
   };
 
   return (

@@ -6,7 +6,7 @@ import ImageWithFallback from "@/components/ui/image-with-fallback";
 import { motion } from 'framer-motion';
 
 export function ExpertGuidance({ bgImage }: { bgImage?: string }) {
-  const backgroundImage = bgImage || "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2025-12-26-at-12_46_13-PM-758x564-27.jpeg";
+  const backgroundImage = bgImage || "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_46_13-PM-758x564-27.jpeg";
 
   return (
     <section className="relative w-full py-12 sm:py-16 md:py-[80px] lg:py-[100px] overflow-hidden bg-white">

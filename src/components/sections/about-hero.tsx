@@ -15,7 +15,7 @@ import ImageWithFallback from "@/components/ui/image-with-fallback";
  */
 const AboutHero: React.FC<{ heroImage?: string }> = ({ heroImage }) => {
   // Asset link from provided list
-  const heroImageUrl = heroImage || "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/ChatGPT-Image-Aug-9-2025-11_24_54-AM-11.png";
+  const heroImageUrl = heroImage || "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/ChatGPT-Image-Aug-9-2025-11_24_54-AM-11.png";
 
   return (
     <section className="relative overflow-hidden bg-white">

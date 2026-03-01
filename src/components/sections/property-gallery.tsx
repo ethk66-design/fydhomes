@@ -15,9 +15,9 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
   const [initialImageIndex, setInitialImageIndex] = useState(0);
 
   const displayImages = images.length > 0 ? images : [
-    "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2026-01-14-at-11_14_25-AM-758x564-2.jpeg",
-    "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2026-01-14-at-11_14_09-AM-758x564-3.jpeg",
-    "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/WhatsApp-Image-2026-01-14-at-11_14_10-AM-758x564-4.jpeg"
+    "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2026-01-14-at-11_14_25-AM-758x564-2.jpeg",
+    "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2026-01-14-at-11_14_09-AM-758x564-3.jpeg",
+    "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2026-01-14-at-11_14_10-AM-758x564-4.jpeg"
   ];
 
   const moreCount = displayImages.length > 3 ? displayImages.length - 3 : 0;

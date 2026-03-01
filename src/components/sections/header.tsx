@@ -16,11 +16,12 @@ export default function Header() {
         <div className="flex-shrink-0">
           <Link href="/" className="block">
             <Image
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/0149254b-b2ea-40e6-ad6a-70e092f9e191/image-1768459775863.png?width=8000&height=8000&resize=contain"
+              src="/assets/fyd-logo.png"
               alt="fyd homes"
               width={240}
               height={90}
               className="h-[60px] sm:h-[90px] w-auto object-contain"
+              unoptimized={true}
               priority
             />
           </Link>

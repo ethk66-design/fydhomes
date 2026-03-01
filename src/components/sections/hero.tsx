@@ -67,7 +67,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
             className="rounded-[4px] overflow-hidden"
           >
             <ImageWithFallback
-              src={bgImage || "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg"}
+              src={bgImage || "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/IMG_7368-758x564-2.jpg"}
               alt="Modern Luxury Villa"
               width={1170}
               height={564}

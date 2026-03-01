@@ -17,7 +17,7 @@ import FAQAccordion from '@/components/sections/faq-accordion';
 import { getPageAsset } from "@/lib/assets";
 
 export default async function AboutPage() {
-  const heroBg = await getPageAsset('/about', 'hero_bg', "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/ChatGPT-Image-Aug-9-2025-11_24_54-AM-11.png");
+  const heroBg = await getPageAsset('/about', 'hero_bg', "https://oxcvbyprrvbnmoyanpgu.supabase.co/storage/v1/object/public/property-images/general/ChatGPT-Image-Aug-9-2025-11_24_54-AM-11.png");
 
   return (
     <main className="min-h-screen bg-white pt-[70px] sm:pt-[90px]">

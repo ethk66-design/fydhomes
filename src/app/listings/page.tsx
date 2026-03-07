@@ -114,11 +114,11 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
 
   return (
     <main className="min-h-screen bg-white pb-12 sm:pb-20">
-      <div className="h-[60px] sm:h-[80px] bg-[#f4f8fb]"></div>
+      <div className="h-[20px] sm:h-[40px] bg-[#f4f8fb]"></div>
 
-      <div className="bg-[#f4f8fb] pt-8 sm:pt-12 pb-16 sm:pb-24">
+      <div className="bg-[#f4f8fb] pt-4 sm:pt-6 pb-8 sm:pb-12">
         <div className="container mx-auto px-4 sm:px-5">
-          <h1 className="text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl font-bold text-black uppercase tracking-tight">
+          <h1 className="text-center mb-6 sm:mb-8 text-2xl sm:text-3xl md:text-4xl font-bold text-black uppercase tracking-tight">
             {pageTitle}
           </h1>
           <Suspense fallback={<div className="text-center">Loading filters...</div>}>

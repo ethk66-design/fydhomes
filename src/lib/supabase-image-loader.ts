@@ -18,22 +18,13 @@ interface ImageLoaderParams {
     quality?: number;
 }
 
-export default function supabaseImageLoader({ src, width, quality }: ImageLoaderParams): string {
+export default function supabaseImageLoader({ src, width: _width, quality: _quality }: ImageLoaderParams): string {
     // Only transform Supabase Storage URLs
     if (src.includes('supabase.co/storage/')) {
-        // Supabase image transformation API:
-        // /storage/v1/object/public/bucket/path → /storage/v1/render/image/public/bucket/path
-        const transformedUrl = src.replace(
-            '/storage/v1/object/public/',
-            '/storage/v1/render/image/public/'
-        );
-
-        const params = new URLSearchParams();
-        params.set('width', String(width));
-        params.set('quality', String(quality || 75));
-        params.set('resize', 'contain');
-
-        return `${transformedUrl}?${params.toString()}`;
+        // Since Supabase Image Transformation isn't fully enabled on this project tier,
+        // we bypass the /render/image/ endpoint and just return the direct public URL.
+        // This prevents the "400 Bad Request" errors from the Next.js `next/image` component.
+        return src;
     }
 
     // For non-Supabase URLs (e.g., local assets), return as-is

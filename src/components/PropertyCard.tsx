@@ -77,29 +77,26 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             {formatPrice(property.price)}
           </div>
 
-          <div className="mt-auto pt-4 border-t border-[#eeeeee] flex items-center justify-between text-[#5c5c5c]">
-            <div className="flex items-center gap-1.5">
-              <BedDouble size={16} className="text-[#5c5c5c]/60" />
-              <span className="text-[13px] font-medium">{property.beds || 0}</span>
+          <div className="mt-auto pt-4 border-t border-[#eeeeee] flex items-center justify-between gap-1 text-[#5c5c5c] overflow-hidden">
+            <div className="flex items-center gap-1 shrink-0">
+              <BedDouble size={14} className="text-[#5c5c5c]/60" />
+              <span className="text-[11px] font-medium whitespace-nowrap">{property.beds || 0}</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Bath size={16} className="text-[#5c5c5c]/60" />
-              <span className="text-[13px] font-medium">{property.baths || 0}</span>
+            <div className="flex items-center gap-1 shrink-0">
+              <Bath size={14} className="text-[#5c5c5c]/60" />
+              <span className="text-[11px] font-medium whitespace-nowrap">{property.baths || 0}</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Scaling size={16} className="text-[#5c5c5c]/60" />
-              <span className="text-[13px] font-medium">{property.area || 'N/A'}</span>
+            <div className="flex items-center gap-1 shrink-0">
+              <Scaling size={14} className="text-[#5c5c5c]/60" />
+              <span className="text-[11px] font-medium whitespace-nowrap">{property.area || 'N/A'}</span>
             </div>
-          </div>
-
-          {property.land_area && (
-            <div className="pt-3 mt-3 border-t border-dashed border-[#eeeeee] flex items-center gap-2 text-[#5c5c5c]">
-              <div className="flex items-center gap-1.5">
+            {property.land_area && (
+              <div className="flex items-center gap-1 shrink-0">
                 <Trees size={14} className="text-[#2d7a8c]" />
-                <span className="text-[13px] font-medium">{property.land_area}</span>
+                <span className="text-[11px] font-medium whitespace-nowrap">{property.land_area}</span>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </Link>
     </div>

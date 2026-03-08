@@ -6,8 +6,8 @@ import { motion } from 'framer-motion';
 
 import ImageWithFallback from "@/components/ui/image-with-fallback";
 
-export function Newsletter() {
-  const bgImage = "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-12-at-1_41_55-PM-758x564-28.jpeg";
+export function Newsletter({ bgImage }: { bgImage?: string }) {
+  const finalBgImage = bgImage || "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-12-at-1_41_55-PM-758x564-28.jpeg";
 
   return (
     <section
@@ -15,7 +15,7 @@ export function Newsletter() {
     >
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
-          src={bgImage}
+          src={finalBgImage}
           alt="Newsletter Background"
           fill
           className="object-cover"

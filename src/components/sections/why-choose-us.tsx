@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
-const WhyChooseUs = () => {
+const WhyChooseUs = ({ featureImages = [] }: { featureImages?: string[] }) => {
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -18,19 +18,19 @@ const WhyChooseUs = () => {
     {
       title: "Powerful Digital Reach",
       description: "With a growing influence across YouTube and Instagram, FYD Homes connects with thousands daily — showcasing property walkthroughs, expert tips, and real-time updates that help you make informed decisions.",
-      image: "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG-FYD-1024x683-2.png",
+      image: featureImages[0] || "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG-FYD-1024x683-2.png",
       alt: "Powerful Digital Reach"
     },
     {
       title: "Kochi-Focused, Widely Connected",
       description: "We specialize in Kochi's real estate landscape, with access to top properties across the city. Whether you're buying, selling, or investing, our local knowledge ensures you get the right options at the right time.",
-      image: "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG-2-FYD-1024x683-3.png",
+      image: featureImages[1] || "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG-2-FYD-1024x683-3.png",
       alt: "Kochi-Focused, Widely Connected"
     },
     {
       title: "Transparent & Responsible Service",
       description: "From the first inquiry to final handover, we prioritize honesty, clarity, and customer care. Every property we promote is verified, and every client is treated with long-term commitment.",
-      image: "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG-3-FYD-1024x683-2.png",
+      image: featureImages[2] || "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG-3-FYD-1024x683-2.png",
       alt: "Transparent & Responsible Service"
     }
   ];

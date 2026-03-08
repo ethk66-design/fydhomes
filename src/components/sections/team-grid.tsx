@@ -22,7 +22,7 @@ const teamMembers: TeamMember[] = [
     id: 'jomon',
     name: 'Jomon',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-03-1-scaled-7.png',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-03-1-scaled-7.png',
     phone: '+919037013117',
     email: 'findyourdreamhome8@gmail.com',
   },
@@ -30,7 +30,7 @@ const teamMembers: TeamMember[] = [
     id: 'shyam',
     name: 'Shyam',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-02-scaled-8.png',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-02-scaled-8.png',
     phone: '+919544593991',
     email: 'shyamdio6@gmail.com',
   },
@@ -38,7 +38,7 @@ const teamMembers: TeamMember[] = [
     id: 'akhil',
     name: 'Akhil',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
     phone: '+919656637339',
     email: 'akhilejohn805@gmail.com',
   },
@@ -46,13 +46,13 @@ const teamMembers: TeamMember[] = [
     id: 'anandakrishnan',
     name: 'Anandakrishnan',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/FYDS-ANANDU-6.jpg',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/FYDS-ANANDU-6.jpg',
     phone: '+9170120 38201',
     email: 'anandan989511791@gmail.com',
   },
 ];
 
-export default function TeamGrid() {
+export default function TeamGrid({ agentImages = [] }: { agentImages?: string[] }) {
   return (
     <section className="bg-white py-[80px]">
       <div className="container mx-auto px-6 max-w-[1140px]">
@@ -66,13 +66,13 @@ export default function TeamGrid() {
 
         {/* Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
-          {teamMembers.map((member) => (
+          {teamMembers.map((member, index) => (
             <div key={member.id} className="flex flex-col group mb-8 lg:mb-0">
               {/* Member Card Container */}
               <div className="relative aspect-[3/4] overflow-hidden rounded-[8px] mb-4">
                 {/* Image */}
                 <ImageWithFallback
-                  src={member.image}
+                  src={agentImages[index] || member.image}
                   alt={member.name}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"

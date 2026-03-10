@@ -31,10 +31,23 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   const listing_type = params.listing_type;
 
   // Build Prisma query filters
-  const where: Prisma.PropertyWhereInput = {};
+  const where: Prisma.PropertyWhereInput = {
+    AND: [
+      { status: 'active' } // Always only show active listings
+    ]
+  };
+
+  const andConditions = where.AND as Prisma.PropertyWhereInput[];
 
   if (keyword) {
-    where.title = { contains: keyword };
+    const keywordCondition = { contains: keyword, mode: 'insensitive' as const };
+    andConditions.push({
+      OR: [
+        { title: keywordCondition },
+        { location: keywordCondition },
+        { description: keywordCondition }
+      ]
+    });
   }
 
   let finalListingType = listing_type;
@@ -46,16 +59,18 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   }
 
   if (finalPropertyType && finalPropertyType !== "Property Type") {
-    where.type = finalPropertyType;
+    andConditions.push({ type: finalPropertyType });
   }
 
   if (finalListingType) {
     const formattedListingType = finalListingType.charAt(0).toUpperCase() + finalListingType.slice(1).toLowerCase();
-    where.listing_type = formattedListingType;
+    andConditions.push({ listing_type: formattedListingType });
   }
 
   if (area && area !== "Area") {
-    where.location = { contains: area };
+    andConditions.push({
+      location: { contains: area, mode: 'insensitive' as const }
+    });
   }
 
   // import { Property } from "@/lib/types"; // Removed nested import

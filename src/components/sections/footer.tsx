@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 
 
@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="col-span-1 lg:col-span-1 text-center sm:text-left">
             <div className="footer-logo mb-6 flex justify-center sm:justify-start">
               <Link href="/">
-                <Image
+                <ImageWithFallback 
                   src="/assets/fyd-logo.png"
                   alt="Find Your Dream Home"
                   width={200}

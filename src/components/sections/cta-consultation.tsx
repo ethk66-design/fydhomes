@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import Link from 'next/link';
 
 const CTAConsultation = () => {
@@ -7,7 +7,7 @@ const CTAConsultation = () => {
   // Using the fallback background from metadata or provided assets list 
   // The asset list contains one image which seems to be a villa, so I'll use it as the background
   // and apply a dark overlay to mimic the "sunset" aesthetic if specified or visible in screenshots.
-  const backgroundImage = "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2026-01-14-at-11_37_40-AM-758x564-16.jpeg";
+  const backgroundImage = "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2026-01-14-at-11_37_40-AM-758x564-16.jpeg";
 
   return (
     <section className="relative w-full overflow-hidden">
@@ -15,7 +15,7 @@ const CTAConsultation = () => {
       <div className="relative w-full h-[600px] flex items-center">
         {/* Actual Image Background */}
         <div className="absolute inset-0 z-0">
-          <Image
+          <ImageWithFallback 
             src={backgroundImage}
             alt="Consultation background"
             fill

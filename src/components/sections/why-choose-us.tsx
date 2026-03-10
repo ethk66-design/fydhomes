@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from 'react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 
 const WhyChooseUs = ({ featureImages = [] }: { featureImages?: string[] }) => {
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -60,7 +60,7 @@ const WhyChooseUs = ({ featureImages = [] }: { featureImages?: string[] }) => {
             >
               {/* Image Container */}
               <div className="relative mb-[20px] rounded-[8px] overflow-hidden aspect-[1024/683]">
-                <Image
+                <ImageWithFallback 
                   src={feature.image}
                   alt={feature.alt}
                   fill

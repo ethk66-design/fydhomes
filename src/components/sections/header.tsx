@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import Link from 'next/link';
 import { Instagram, Youtube, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,7 +15,7 @@ export default function Header() {
 
         <div className="flex-shrink-0">
           <Link href="/" className="block">
-            <Image
+            <ImageWithFallback 
               src="/assets/fyd-logo.png"
               alt="fyd homes"
               width={240}

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from 'react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 
 const PageTitle = ({ bgImage }: { bgImage?: string }) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -16,7 +16,7 @@ const PageTitle = ({ bgImage }: { bgImage?: string }) => {
     <section className="relative overflow-hidden pt-[70px] sm:pt-[90px]">
       {bgImage && (
         <div className="absolute inset-0">
-          <Image src={bgImage} alt="Page Title Background" fill className="object-cover" priority />
+          <ImageWithFallback src={bgImage} alt="Page Title Background" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-black/40" />
         </div>
       )}

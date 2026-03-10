@@ -8,7 +8,7 @@ export async function generateMetadata() {
 }
 
 import Link from 'next/link';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { ArrowRight } from 'lucide-react';
 
 const projects = [
@@ -57,7 +57,7 @@ export default async function ProjectsPage() {
               <div key={project.id} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}>
                 <div className="w-full lg:w-1/2">
                   <div className="relative overflow-hidden rounded-[20px] shadow-2xl group h-[400px] md:h-[500px] w-full">
-                    <Image
+                    <ImageWithFallback 
                       src={project.image}
                       alt={project.title}
                       fill

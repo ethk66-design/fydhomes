@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -72,8 +72,7 @@ export function Testimonials() {
 
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] rounded-full overflow-hidden bg-gray-300 flex-shrink-0">
-                  <Image
-                    src={testimonial.image_url}
+                  <ImageWithFallback                     src={testimonial.image_url}
                     alt={testimonial.name}
                     width={50}
                     height={50}

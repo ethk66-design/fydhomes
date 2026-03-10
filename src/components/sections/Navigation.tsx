@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -79,7 +79,7 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="block relative h-[50px] lg:h-[60px] w-[100px] lg:w-[120px]">
-              <Image
+              <ImageWithFallback 
                 src="/assets/fyd-logo.png"
                 alt="fyd homes"
                 fill

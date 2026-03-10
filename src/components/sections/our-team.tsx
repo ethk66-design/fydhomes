@@ -1,42 +1,42 @@
 "use client";
 
 import React, { useRef, useEffect } from 'react';
-import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { Phone, Mail } from 'lucide-react';
 
 const teamMembers = [
   {
     name: 'Jomon',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
     phone: '+919037013117',
     email: 'findyourdreamhome8@gmail.com',
   },
   {
     name: 'Shyam',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-03-1-scaled-7.png',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-03-1-scaled-7.png',
     phone: '+919544593991',
     email: 'shyamdio6@gmail.com',
   },
   {
     name: 'Jose',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-02-scaled-6.png',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-02-scaled-6.png',
     phone: '+919946531317',
     email: 'josepavoo@gmail.com',
   },
   {
     name: 'Akhil',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-01-scaled-5.png',
     phone: '+919656637339',
     email: 'akhilejohn805@gmail.com',
   },
   {
     name: 'Anandakrishnan',
     role: 'Agent',
-    image: 'https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/FYDS-ANANDU-6.jpg',
+    image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/FYDS-ANANDU-6.jpg',
     phone: '+9170120 38201',
     email: 'anandan989511791@gmail.com',
   },
@@ -76,7 +76,7 @@ export function OurTeam() {
               className="group animate-fade-in-up"
             >
               <div className="relative aspect-[4/5] rounded-[10px] overflow-hidden mb-5">
-                <Image
+                <ImageWithFallback 
                   src={member.image}
                   alt={member.name}
                   fill

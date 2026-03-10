@@ -66,7 +66,7 @@ const ImageWithFallback = ({
                     setHasError(true);
                 }
             }}
-            style={fill ? { width: '100%', height: '100%', objectFit: 'cover' } : props.style}
+            style={fill ? { width: '100%', height: '100%', objectFit: 'cover', ...props.style } : props.style}
         />
     );
 };

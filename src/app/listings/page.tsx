@@ -5,6 +5,7 @@ import ListingGrid from "@/components/sections/ListingGrid";
 import { Suspense } from "react";
 import { Prisma } from "@prisma/client";
 import { Property } from "@/lib/types";
+import { parsePrice, parseArea } from "@/lib/searchUtils";
 
 export async function generateMetadata() {
   return getSeoMetadata("/listings", "Property Listings | FYD Homes", "Explore our wide range of properties for sale and rent in Kochi and surrounding areas.");
@@ -20,6 +21,12 @@ interface ListingsPageProps {
     type?: string;
     area?: string;
     listing_type?: string;
+    minPrice?: string;
+    maxPrice?: string;
+    beds?: string;
+    baths?: string;
+    minArea?: string;
+    maxArea?: string;
   }>;
 }
 
@@ -29,6 +36,14 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   const type = params.type;
   const area = params.area;
   const listing_type = params.listing_type;
+
+  // New Advanced Filters
+  const minPrice = params.minPrice ? parseFloat(params.minPrice) : null;
+  const maxPrice = params.maxPrice ? parseFloat(params.maxPrice) : null;
+  const bedsParam = params.beds ? parseInt(params.beds, 10) : null;
+  const bathsParam = params.baths ? parseInt(params.baths, 10) : null;
+  const minArea = params.minArea ? parseFloat(params.minArea) : null;
+  const maxArea = params.maxArea ? parseFloat(params.maxArea) : null;
 
   // Build Prisma query filters
   const where: Prisma.PropertyWhereInput = {
@@ -73,6 +88,14 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
     });
   }
 
+  // Exact Integers can be Prisma queried safely
+  if (bedsParam !== null && !isNaN(bedsParam)) {
+    andConditions.push({ beds: { gte: bedsParam } });
+  }
+  if (bathsParam !== null && !isNaN(bathsParam)) {
+    andConditions.push({ baths: { gte: bathsParam } });
+  }
+
   // import { Property } from "@/lib/types"; // Removed nested import
 
   let properties: Property[] = [];
@@ -86,22 +109,44 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         },
         tags: true,
       },
-      take: 100, // Increased limit
+      take: 1000, // Maximized limit to ensure we grab all valid properties before string parsing math
     });
 
-    const formattedProperties = rawProperties.map(p => ({
-      ...p,
-      images: p.images.map(img => img.url),
-      tags: p.tags.map(t => t.tag),
-      created_at: p.created_at.toISOString(),
-      updated_at: p.updated_at.toISOString(),
-      // Ensure null compatibility if needed, though ...p covers it mostly
-      // Explicitly matching the interface structure:
-    }));
+    const parsedProperties = rawProperties.map(p => {
+      const numericPrice = parsePrice(p.price);
+      const nArea1 = parseArea(p.area);
+      const nArea2 = parseArea(p.land_area);
+      const maxNumericArea = Math.max(nArea1 || 0, nArea2 || 0);
+      const numericArea = maxNumericArea > 0 ? maxNumericArea : null;
 
-    // We need to ensure this matches Property interface.
-    // Prisma types are slightly different (Dates).
-    properties = formattedProperties as unknown as Property[]; // Cast is safe after formatting dates
+      return {
+        ...p,
+        images: p.images.map(img => img.url),
+        tags: p.tags.map(t => t.tag),
+        created_at: p.created_at.toISOString(),
+        updated_at: p.updated_at.toISOString(),
+        _numericPrice: numericPrice,
+        _numericArea: numericArea
+      }
+    });
+
+    let filtered = parsedProperties;
+
+    // Apply strict numeric boundary filters based on the parsed strings
+    if (minPrice !== null && !isNaN(minPrice)) {
+      filtered = filtered.filter(p => p._numericPrice !== null && p._numericPrice >= minPrice);
+    }
+    if (maxPrice !== null && !isNaN(maxPrice)) {
+      filtered = filtered.filter(p => p._numericPrice !== null && p._numericPrice <= maxPrice);
+    }
+    if (minArea !== null && !isNaN(minArea)) {
+      filtered = filtered.filter(p => p._numericArea !== null && p._numericArea >= minArea);
+    }
+    if (maxArea !== null && !isNaN(maxArea)) {
+      filtered = filtered.filter(p => p._numericArea !== null && p._numericArea <= maxArea);
+    }
+
+    properties = filtered as unknown as Property[];
   } catch (error: unknown) {
     console.error("Error fetching properties:", error);
     // Return empty array or handle error UI

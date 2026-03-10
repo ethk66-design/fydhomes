@@ -67,7 +67,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
             className="rounded-[4px] overflow-hidden"
           >
             <ImageWithFallback
-              src={bgImage || "https://fydhomes.jiobase.com/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg"}
+              src={bgImage || "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg"}
               alt="Modern Luxury Villa"
               width={1170}
               height={564}
@@ -76,91 +76,92 @@ export function Hero({ bgImage }: { bgImage?: string }) {
             />
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-6 lg:bottom-10 w-[calc(100%-48px)] max-w-[1000px] z-10"
-          >
-            <div className="bg-white p-5 md:p-6 rounded-[4px] shadow-[0_5px_30px_rgba(0,0,0,0.12)]">
-              <div className="flex flex-row gap-0">
-                <div className="flex-1 border-r border-[#e8e8e8] pr-4">
-                  <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH</label>
-                  <input
-                    type="text"
-                    placeholder="Search keyword"
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                    className="w-full h-[46px] px-3 text-[15px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
-                  />
-                </div>
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-6 lg:bottom-10 w-[calc(100%-48px)] max-w-[1000px] z-30">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <div className="bg-white p-5 md:p-6 rounded-[4px] shadow-[0_5px_30px_rgba(0,0,0,0.12)] pointer-events-auto">
+                <div className="flex flex-row gap-0">
+                  <div className="flex-1 border-r border-[#e8e8e8] pr-4">
+                    <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH</label>
+                    <input
+                      type="text"
+                      placeholder="Search keyword"
+                      value={keyword}
+                      onChange={(e) => setKeyword(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                      className="w-full h-[46px] px-3 text-[15px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
+                    />
+                  </div>
 
-                <div className="flex-1 border-r border-[#e8e8e8] px-4">
-                  <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">LOOKING FOR</label>
-                  <div className="relative">
-                    <select
-                      value={type}
-                      onChange={(e) => setType(e.target.value)}
-                      className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
-                      aria-label="Filter by property type"
-                    >
-                      <option>Property Type</option>
-                      <option>Commercial</option>
-                      <option>Office</option>
-                      <option>Plot</option>
-                      <option>Rent</option>
-                      <option>Residential</option>
-                      <option>Villa</option>
-                    </select>
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L5 5L9 1" stroke="#999999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                  <div className="flex-1 border-r border-[#e8e8e8] px-4">
+                    <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">LOOKING FOR</label>
+                    <div className="relative">
+                      <select
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
+                        className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                        aria-label="Filter by property type"
+                      >
+                        <option>Property Type</option>
+                        <option>Commercial</option>
+                        <option>Office</option>
+                        <option>Plot</option>
+                        <option>Rent</option>
+                        <option>Residential</option>
+                        <option>Villa</option>
+                      </select>
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 1L5 5L9 1" stroke="#999999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="flex-1 border-r border-[#e8e8e8] px-4">
-                  <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH BY AREA</label>
-                  <div className="relative">
-                    <select
-                      value={area}
-                      onChange={(e) => setArea(e.target.value)}
-                      className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
-                      aria-label="Filter by area"
-                    >
-                      <option>Area</option>
-                      <option>Aluva</option>
-                      <option>Infopark</option>
-                      <option>Kakkanad</option>
-                      <option>Kizhakkambalam</option>
-                      <option>Pukkattupady</option>
-                      <option>Pattimattom</option>
-                    </select>
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L5 5L9 1" stroke="#999999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                  <div className="flex-1 border-r border-[#e8e8e8] px-4">
+                    <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block">SEARCH BY AREA</label>
+                    <div className="relative">
+                      <select
+                        value={area}
+                        onChange={(e) => setArea(e.target.value)}
+                        className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                        aria-label="Filter by area"
+                      >
+                        <option>Area</option>
+                        <option>Aluva</option>
+                        <option>Infopark</option>
+                        <option>Kakkanad</option>
+                        <option>Kizhakkambalam</option>
+                        <option>Pukkattupady</option>
+                        <option>Pattimattom</option>
+                      </select>
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 1L5 5L9 1" stroke="#999999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="pl-4 flex flex-col justify-end">
-                  <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block opacity-0">&nbsp;</label>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleSearch}
-                    className="w-[140px] lg:w-[160px] h-[46px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
-                    aria-label="Search properties"
-                  >
-                    <Search size={20} strokeWidth={2.5} />
-                  </motion.button>
+                  <div className="pl-4 flex flex-col justify-end">
+                    <label className="text-[11px] font-bold text-[#333333] uppercase tracking-[1px] mb-2 block opacity-0">&nbsp;</label>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleSearch}
+                      className="w-[140px] lg:w-[160px] h-[46px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
+                      aria-label="Search properties"
+                    >
+                      <Search size={20} strokeWidth={2.5} />
+                    </motion.button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
         <motion.div

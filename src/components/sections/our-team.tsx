@@ -75,15 +75,14 @@ export function OurTeam() {
               ref={el => { itemsRef.current[index] = el; }}
               className="group animate-fade-in-up"
             >
-              <div className="relative aspect-square rounded-[10px] overflow-hidden mb-5">
+              <div className="overflow-hidden rounded-[10px] mb-5 bg-[#1a1a1a]">
                 <ImageWithFallback
                   src={member.image}
                   alt={member.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 team-card-overlay flex flex-col justify-end p-6 text-center">
+                <div className="bg-gradient-to-t from-black/90 via-black/70 to-black/50 px-4 py-3 text-center -mt-[60px] relative z-10">
                   <h3 className="text-white text-[18px] font-semibold mb-1 leading-tight">
                     {member.name}
                   </h3>

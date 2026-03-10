@@ -69,17 +69,22 @@ export default function TeamGrid({ agentImages = [] }: { agentImages?: string[] 
           {teamMembers.map((member, index) => (
             <div key={member.id} className="flex flex-col group mb-8 lg:mb-0">
               {/* Member Card Container */}
-              <div className="overflow-hidden rounded-[8px] mb-4 bg-[#1a1a1a]">
-                {/* Image - full natural proportions, zero cropping */}
+              <div className="relative aspect-square overflow-hidden rounded-[8px] mb-4 bg-[#111111]">
+                {/* Image - object-contain shows full image, dark bg fills gaps */}
                 <ImageWithFallback
                   src={agentImages[index] || member.image}
                   alt={member.name}
-                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  className="transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
 
-                {/* Name / Role bar */}
-                <div className="bg-gradient-to-t from-black/90 via-black/70 to-black/50 px-4 py-3 text-center -mt-[60px] relative z-10">
+                {/* Gradient Overlay for Text */}
+                <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
+
+                {/* Name / Role */}
+                <div className="absolute bottom-4 inset-x-0 text-center px-4 z-10">
                   <h3 className="text-white font-sans text-[18px] font-bold leading-tight mb-1">
                     {member.name}
                   </h3>

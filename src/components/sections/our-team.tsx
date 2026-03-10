@@ -75,12 +75,14 @@ export function OurTeam() {
               ref={el => { itemsRef.current[index] = el; }}
               className="group animate-fade-in-up"
             >
-              <div className="overflow-hidden rounded-[10px] mb-5">
-                {/* Sharp full image - using natural proportions to prevent gaps/crops */}
+              <div className="relative aspect-[3/4] overflow-hidden rounded-[10px] mb-5">
+                {/* Sharp full image - fills box via object-cover, anchored to top to see face */}
                 <ImageWithFallback
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
+                  className="transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>

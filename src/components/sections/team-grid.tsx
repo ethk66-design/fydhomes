@@ -69,14 +69,12 @@ export default function TeamGrid({ agentImages = [] }: { agentImages?: string[] 
           {teamMembers.map((member, index) => (
             <div key={member.id} className="flex flex-col group mb-8 lg:mb-0">
               {/* Member Card Container */}
-              <div className="relative aspect-square overflow-hidden rounded-[8px] mb-4 bg-white border border-gray-100">
-                {/* Sharp full image on top */}
+              <div className="overflow-hidden rounded-[8px] mb-4">
+                {/* Sharp full image - using natural proportions to prevent gaps/crops */}
                 <ImageWithFallback
                   src={agentImages[index] || member.image}
                   alt={member.name}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  className="transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>

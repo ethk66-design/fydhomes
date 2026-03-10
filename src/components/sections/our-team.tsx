@@ -75,17 +75,27 @@ export function OurTeam() {
               ref={el => { itemsRef.current[index] = el; }}
               className="group animate-fade-in-up"
             >
-              <div className="relative aspect-square overflow-hidden rounded-[10px] mb-5 bg-[#111111]">
+              <div className="relative aspect-square overflow-hidden rounded-[10px] mb-5">
+                {/* Blurred background fill */}
+                <ImageWithFallback
+                  src={member.image}
+                  alt=""
+                  fill
+                  className="object-cover scale-110 blur-xl brightness-75"
+                  aria-hidden="true"
+                  sizes="1px"
+                />
+                {/* Sharp full image */}
                 <ImageWithFallback
                   src={member.image}
                   alt={member.name}
                   fill
                   style={{ objectFit: 'contain' }}
-                  className="transition-transform duration-500 group-hover:scale-105"
+                  className="relative z-[1] transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
-                <div className="absolute bottom-4 inset-x-0 text-center px-4 z-10">
+                <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black/80 to-transparent pointer-events-none z-[2]"></div>
+                <div className="absolute bottom-4 inset-x-0 text-center px-4 z-[3]">
                   <h3 className="text-white text-[18px] font-semibold mb-1 leading-tight">
                     {member.name}
                   </h3>

@@ -75,7 +75,7 @@ export default function TeamGrid({ agentImages = [] }: { agentImages?: string[] 
                   src={agentImages[index] || member.image}
                   alt={member.name}
                   fill
-                  style={{ objectFit: 'contain', backgroundColor: '#f8f9fa' }}
+                  style={{ objectFit: 'cover', objectPosition: 'top center' }}
                   className="transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />

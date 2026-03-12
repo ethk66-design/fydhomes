@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { Star } from 'lucide-react';
-import { motion } from 'framer-motion';
-
+import { optimizeSupabaseUrl } from '@/components/ui/image-with-fallback';
 
 interface Testimonial {
   id: string;
@@ -51,13 +49,10 @@ export function Testimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-[30px]">
           {testimonials.map((testimonial, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="bg-[#F4F8FB] p-5 sm:p-[30px] rounded-[8px] border border-[#EEEEEE] transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between"
+              className="bg-[#F4F8FB] p-5 sm:p-[30px] rounded-[8px] border border-[#EEEEEE] transition-all duration-500 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between animate-fadeInUp"
+              style={{ animationDelay: `${index * 150}ms` }}
             >
               <div>
                 <div className="flex mb-3 sm:mb-4">
@@ -72,11 +67,15 @@ export function Testimonials() {
 
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] rounded-full overflow-hidden bg-gray-300 flex-shrink-0">
-                  <ImageWithFallback                     src={testimonial.image_url}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={testimonial.image_url ? optimizeSupabaseUrl(testimonial.image_url, 100, 75) : '/assets/placeholder-house.svg'}
                     alt={testimonial.name}
                     width={50}
                     height={50}
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    onError={(e) => { e.currentTarget.src = '/assets/placeholder-house.svg'; }}
                   />
                 </div>
                 <div>
@@ -88,7 +87,7 @@ export function Testimonials() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

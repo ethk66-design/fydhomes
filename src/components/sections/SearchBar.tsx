@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 /**
  * SearchBar Component
@@ -8,11 +9,28 @@ import { Search, ChevronDown } from 'lucide-react';
  * Contains fields for Keyword search, Property Type dropdown, and Area selection.
  */
 const SearchBar = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [keyword, setKeyword] = useState(searchParams.get('keyword') || '');
+  const [type, setType] = useState(searchParams.get('type') || '');
+  const [area, setArea] = useState(searchParams.get('area') || '');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (keyword) params.set('keyword', keyword);
+    if (type) params.set('type', type);
+    if (area) params.set('area', area);
+
+    router.push(`/listings?${params.toString()}`);
+  };
+
   return (
     <div className="relative z-10 -mt-16 md:-mt-20 px-4">
       <div className="container mx-auto max-w-[1170px]">
         <div className="bg-white p-6 md:p-[30px] rounded-[4px] shadow-[0_2px_10px_rgba(0,0,0,0.05)]">
-          <form className="flex flex-wrap items-end gap-y-4 md:gap-x-4">
+          <form onSubmit={handleSearch} className="flex flex-wrap items-end gap-y-4 md:gap-x-4">
             {/* Keyword Search Field */}
             <div className="w-full md:flex-1 lg:basis-[30%]">
               <label 
@@ -26,6 +44,8 @@ const SearchBar = () => {
                   id="keyword"
                   type="text"
                   placeholder="Search keyword"
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
                   className="w-full h-[50px] px-[15px] border border-[#EEEEEE] rounded-[4px] text-[16px] text-[#5F6973] focus:outline-none focus:border-[#2b6e83] transition-colors placeholder:text-[#999999]"
                 />
               </div>
@@ -42,8 +62,9 @@ const SearchBar = () => {
               <div className="relative">
                 <select
                   id="property-type"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
                   className="w-full h-[50px] appearance-none px-[15px] border border-[#EEEEEE] rounded-[4px] text-[16px] text-[#5F6973] bg-white focus:outline-none focus:border-[#2b6e83] cursor-pointer pr-10"
-                  defaultValue=""
                 >
                   <option value="" disabled>Property Type</option>
                   <option value="commercial">Commercial</option>
@@ -69,8 +90,9 @@ const SearchBar = () => {
               <div className="relative">
                 <select
                   id="area"
+                  value={area}
+                  onChange={(e) => setArea(e.target.value)}
                   className="w-full h-[50px] appearance-none px-[15px] border border-[#EEEEEE] rounded-[4px] text-[16px] text-[#5F6973] bg-white focus:outline-none focus:border-[#2b6e83] cursor-pointer pr-10"
-                  defaultValue=""
                 >
                   <option value="" disabled>Area</option>
                   <option value="aluva">ALUVA</option>

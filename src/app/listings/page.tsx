@@ -74,7 +74,12 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   }
 
   if (finalPropertyType && finalPropertyType !== "Property Type") {
-    andConditions.push({ type: finalPropertyType });
+    andConditions.push({
+      OR: [
+        { type: { equals: finalPropertyType, mode: 'insensitive' as const } },
+        { title: { contains: finalPropertyType, mode: 'insensitive' as const } }
+      ]
+    });
   }
 
   if (finalListingType) {
@@ -84,7 +89,10 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
 
   if (area && area !== "Area") {
     andConditions.push({
-      location: { contains: area, mode: 'insensitive' as const }
+      OR: [
+        { location: { contains: area, mode: 'insensitive' as const } },
+        { title: { contains: area, mode: 'insensitive' as const } }
+      ]
     });
   }
 

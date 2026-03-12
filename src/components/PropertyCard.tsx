@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import Link from 'next/link';
 import PropertyImageSlider from '@/components/ui/property-image-slider';

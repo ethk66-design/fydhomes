@@ -1,6 +1,5 @@
-"use client";
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { preload } from 'react-dom';
 
 // Supabase Native Image Transformation Interceptor
 export function optimizeSupabaseUrl(url: string, width = 800, quality = 75): string {
@@ -17,7 +16,7 @@ export function optimizeSupabaseUrl(url: string, width = 800, quality = 75): str
 
 interface ImageWithFallbackProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     fallbackSrc?: string;
-    src: string;
+    src?: string;
     // We keep these for TypeScript compatibility with old Next.js props, but they are mostly ignored by raw <img>
     fill?: boolean;
     priority?: boolean;
@@ -39,20 +38,21 @@ const ImageWithFallback = ({
     width,
     ...props
 }: ImageWithFallbackProps) => {
-    const [imgSrc, setImgSrc] = useState(src);
-    const [hasError, setHasError] = useState(false);
+    
+    // Determine the source to use. If `src` is falsy, immediately fallback.
+    const activeSrc = src || fallbackSrc;
 
-    useEffect(() => {
-        setImgSrc(src);
-        setHasError(false);
-    }, [src]);
-
-    if (!src && !fallbackSrc) {
+    if (!activeSrc) {
         return null;
     }
 
     // Apply Supabase compression
-    const finalSrc = hasError ? fallbackSrc : optimizeSupabaseUrl(imgSrc, Number(width) || 800, Number(quality));
+    const finalSrc = optimizeSupabaseUrl(activeSrc, Number(width) || 800, Number(quality));
+
+    // Force browser to fetch LCP images eagerly before the DOM is fully parsed
+    if (priority) {
+        preload(finalSrc, { as: 'image', fetchPriority: 'high' });
+    }
 
     return (
         // eslint-disable-next-line @next/next/no-img-element
@@ -65,11 +65,6 @@ const ImageWithFallback = ({
             decoding={decoding}
             fetchPriority={priority ? "high" : "auto"}
             className={`${className || ""} ${fill ? "absolute inset-0 w-full h-full object-cover" : ""}`.trim()}
-            onError={() => {
-                if (!hasError) {
-                    setHasError(true);
-                }
-            }}
             style={props.style}
         />
     );

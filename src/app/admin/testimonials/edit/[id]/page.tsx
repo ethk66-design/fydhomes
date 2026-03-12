@@ -2,8 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
@@ -13,11 +12,14 @@ import { toast } from "sonner";
 import { Loader2, Upload, X, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { use } from "react";
 
-export default function NewTestimonialPage() {
+export default function EditTestimonialPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = use(params);
     const { status } = useSession();
     const router = useRouter();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [image, setImage] = useState<string | null>(null);
 
@@ -31,8 +33,46 @@ export default function NewTestimonialPage() {
     // Redirect if not authenticated
     if (status === "unauthenticated") {
         router.push("/admin/login");
-        return null;
+        return null; // Return null instead of executing hooks while redirecting
     }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        if (status === "authenticated") {
+            const fetchTestimonial = async () => {
+                try {
+                    const res = await fetch(`/api/testimonials/${id}`);
+                    if (!res.ok) {
+                        if (res.status === 404) {
+                            toast.error("Testimonial not found.");
+                            router.push("/admin/testimonials");
+                            return;
+                        }
+                        throw new Error("Failed to fetch testimonial");
+                    }
+                    const data = await res.json();
+                    
+                    setFormData({
+                        name: data.name || "",
+                        role: data.role || "",
+                        content: data.content || "",
+                        rating: data.rating || 5
+                    });
+                    
+                    if (data.image_url) {
+                        setImage(data.image_url);
+                    }
+                } catch (error) {
+                    console.error("Error fetching testimonial:", error);
+                    toast.error("An error occurred while loading this testimonial.");
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchTestimonial();
+        }
+    }, [id, status, router]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -46,18 +86,18 @@ export default function NewTestimonialPage() {
         setUploading(true);
 
         try {
-            const formData = new FormData();
-            formData.append('file', files[0]);
-            formData.append('folder', 'testimonials');
+            const uploadFormData = new FormData();
+            uploadFormData.append('file', files[0]);
+            uploadFormData.append('folder', 'testimonials');
 
             const res = await fetch('/api/upload', {
                 method: 'POST',
-                body: formData,
+                body: uploadFormData,
             });
 
             if (!res.ok) {
-                const error = await res.json();
-                throw new Error(error.error || 'Upload failed');
+                const errorData = await res.json();
+                throw new Error(errorData.error || 'Upload failed');
             }
 
             const { url } = await res.json();
@@ -68,6 +108,8 @@ export default function NewTestimonialPage() {
             toast.error('Failed to upload image. You can also paste an external image URL below.');
         } finally {
             setUploading(false);
+            // reset file input
+            e.target.value = '';
         }
     };
 
@@ -75,11 +117,11 @@ export default function NewTestimonialPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        setLoading(true);
+        setSaving(true);
 
         try {
-            const res = await fetch("/api/testimonials", {
-                method: "POST",
+            const res = await fetch(`/api/testimonials/${id}`, {
+                method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...formData,
@@ -87,20 +129,20 @@ export default function NewTestimonialPage() {
                 })
             });
 
-            if (!res.ok) throw new Error("Failed to create testimonial");
+            if (!res.ok) throw new Error("Failed to update testimonial");
 
-            toast.success("Testimonial added successfully!");
+            toast.success("Testimonial updated successfully!");
             router.push("/admin/testimonials");
             router.refresh();
         } catch (error) {
-            console.error("Error creating testimonial:", error);
-            toast.error("Failed to create testimonial");
+            console.error("Error updating testimonial:", error);
+            toast.error("Failed to update testimonial");
         } finally {
-            setLoading(false);
+            setSaving(false);
         }
     };
 
-    if (status === "loading") {
+    if (status === "loading" || loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-white">
                 <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
@@ -117,7 +159,7 @@ export default function NewTestimonialPage() {
                     <ArrowLeft size={14} /> Back to Testimonials
                 </Link>
 
-                <h1 className="text-2xl font-bold text-black mb-6">Add New Testimonial</h1>
+                <h1 className="text-2xl font-bold text-black mb-6">Edit Testimonial</h1>
 
                 <form onSubmit={handleSubmit} className="bg-white p-6 sm:p-8 rounded-xl border border-[#eeeeee] shadow-sm space-y-6">
 
@@ -204,9 +246,9 @@ export default function NewTestimonialPage() {
 
                     <div className="pt-4 border-t border-[#eeeeee] flex justify-end gap-3">
                         <Button type="button" variant="outline" onClick={() => router.back()}>Cancel</Button>
-                        <Button type="submit" className="bg-[#2d7a8c] text-white hover:bg-[#256a7a]" disabled={loading || uploading}>
-                            {loading && <Loader2 className="animate-spin mr-2 w-4 h-4" />}
-                            Save Testimonial
+                        <Button type="submit" className="bg-[#2d7a8c] text-white hover:bg-[#256a7a]" disabled={saving || uploading}>
+                            {saving && <Loader2 className="animate-spin mr-2 w-4 h-4" />}
+                            Update Testimonial
                         </Button>
                     </div>
 

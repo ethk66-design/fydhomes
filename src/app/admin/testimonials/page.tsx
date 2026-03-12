@@ -2,11 +2,10 @@
 
 export const dynamic = 'force-dynamic';
 
-
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2, ArrowLeft, Loader2 } from "lucide-react";
+import { Plus, Trash2, ArrowLeft, Loader2, Pencil } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -131,7 +130,16 @@ export default function AdminTestimonialsPage() {
                                                 <td className="px-6 py-4 max-w-lg">
                                                     <p className="text-sm text-[#5c5c5c] line-clamp-2">&quot;{t.content}&quot;</p>
                                                 </td>
-                                                <td className="px-6 py-4 text-right">
+                                                <td className="px-6 py-4 text-right flex justify-end gap-2">
+                                                    <Link href={`/admin/testimonials/edit/${t.id}`}>
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="icon"
+                                                            className="text-[#5c5c5c] hover:text-[#2d7a8c]"
+                                                        >
+                                                            <Pencil size={16} />
+                                                        </Button>
+                                                    </Link>
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
@@ -161,14 +169,25 @@ export default function AdminTestimonialsPage() {
                                                         <div className="font-bold text-sm text-black">{t.name}</div>
                                                         <div className="text-xs text-[#5c5c5c]">{t.role}</div>
                                                     </div>
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        className="h-10 w-10 text-[#5c5c5c] hover:text-red-600 -mt-2 -mr-2"
-                                                        onClick={() => handleDelete(t.id)}
-                                                    >
-                                                        <Trash2 size={18} />
-                                                    </Button>
+                                                    <div className="flex gap-1 -mt-2 -mr-2">
+                                                        <Link href={`/admin/testimonials/edit/${t.id}`}>
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                className="h-10 w-10 text-[#5c5c5c] hover:text-[#2d7a8c]"
+                                                            >
+                                                                <Pencil size={18} />
+                                                            </Button>
+                                                        </Link>
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="icon"
+                                                            className="h-10 w-10 text-[#5c5c5c] hover:text-red-600"
+                                                            onClick={() => handleDelete(t.id)}
+                                                        >
+                                                            <Trash2 size={18} />
+                                                        </Button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

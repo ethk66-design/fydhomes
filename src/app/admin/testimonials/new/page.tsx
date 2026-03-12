@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Loader2, Upload, X, ArrowLeft } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function NewTestimonialPage() {
@@ -127,7 +126,12 @@ export default function NewTestimonialPage() {
                         <div className="flex items-center gap-4">
                             {image ? (
                                 <div className="relative w-24 h-24 rounded-full overflow-hidden border border-[#eeeeee]">
-                                    <Image src={image} alt="Preview" fill className="object-cover" />
+                                    <img 
+                                        src={image} 
+                                        alt="Preview" 
+                                        className="object-cover w-full h-full" 
+                                        onError={(e) => { e.currentTarget.src = '/assets/placeholder-house.svg'; }}
+                                    />
                                     <button
                                         type="button"
                                         onClick={() => setImage(null)}

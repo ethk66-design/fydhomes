@@ -78,21 +78,21 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             {formatPrice(property.price)}
           </div>
 
-          <div className="mt-auto pt-4 border-t border-[#eeeeee] flex items-center justify-between gap-2 sm:gap-1 text-[#5c5c5c] overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-            <div className="flex items-center gap-1 shrink-0">
+          <div className="mt-auto pt-4 border-t border-[#eeeeee] flex items-center justify-between gap-2 sm:gap-1 text-[#5c5c5c] overflow-x-auto [-webkit-overflow-scrolling:touch] snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="flex items-center gap-1 shrink-0 snap-start">
               <BedDouble size={14} className="text-[#5c5c5c]/60" />
               <span className="text-[11px] font-medium whitespace-nowrap">{property.beds || 0}</span>
             </div>
-            <div className="flex items-center gap-1 shrink-0">
+            <div className="flex items-center gap-1 shrink-0 snap-start">
               <Bath size={14} className="text-[#5c5c5c]/60" />
               <span className="text-[11px] font-medium whitespace-nowrap">{property.baths || 0}</span>
             </div>
-            <div className="flex items-center gap-1 shrink-0">
+            <div className="flex items-center gap-1 shrink-0 snap-start">
               <Scaling size={14} className="text-[#5c5c5c]/60" />
               <span className="text-[11px] font-medium whitespace-nowrap">{property.area || 'N/A'}</span>
             </div>
             {property.land_area && (
-              <div className="flex items-center gap-1 shrink-0">
+              <div className="flex items-center gap-1 shrink-0 snap-start">
                 <Trees size={14} className="text-[#2d7a8c]" />
                 <span className="text-[11px] font-medium whitespace-nowrap">{property.land_area}</span>
               </div>

@@ -59,7 +59,7 @@ const SearchFilter: React.FC = () => {
                 placeholder="Search keyword"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] placeholder:text-[#5c5c5c]/50 font-sans transition-all"
+                className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] placeholder:text-[#5c5c5c]/50 font-sans transition-all"
               />
             </div>
 
@@ -72,7 +72,7 @@ const SearchFilter: React.FC = () => {
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                   title="Property Type"
-                  className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
+                  className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                 >
                   <option value="">Property Type</option>
                   <option value="Commercial">Commercial</option>
@@ -99,7 +99,7 @@ const SearchFilter: React.FC = () => {
                   value={area}
                   onChange={(e) => setArea(e.target.value)}
                   title="Area"
-                  className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
+                  className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                 >
                   <option value="">Area</option>
                   <option value="Aluva">ALUVA</option>
@@ -138,9 +138,9 @@ const SearchFilter: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowAdvanced(!showAdvanced)}
-              className="text-[#1db954] text-[12px] sm:text-[13px] font-bold uppercase tracking-wide flex items-center gap-2 transition-opacity hover:opacity-80 mt-1 sm:mt-0"
+              className="text-[#1db954] text-[13px] font-bold uppercase tracking-wide flex items-center gap-2 transition-opacity hover:opacity-80 mt-1 sm:mt-0 py-3 sm:py-2 px-2 -mr-2 sm:-mr-0 touch-manipulation"
             >
-              <SlidersHorizontal size={14} />
+              <SlidersHorizontal size={16} />
               {showAdvanced ? 'Hide Advanced Filters' : 'Show Advanced Filters'}
             </button>
           </div>
@@ -162,7 +162,7 @@ const SearchFilter: React.FC = () => {
                     value={minPrice}
                     onChange={(e) => setMinPrice(e.target.value)}
                     title="Minimum Price"
-                    className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
+                    className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                   >
                     <option value="">Any</option>
                     <option value="5000000">₹ 50 Lakhs</option>
@@ -188,7 +188,7 @@ const SearchFilter: React.FC = () => {
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                     title="Maximum Price"
-                    className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
+                    className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                   >
                     <option value="">Any</option>
                     <option value="7500000">₹ 75 Lakhs</option>
@@ -216,7 +216,7 @@ const SearchFilter: React.FC = () => {
                       value={beds}
                       onChange={(e) => setBeds(e.target.value)}
                       title="Bedrooms"
-                      className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
+                      className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                     >
                       <option value="">Any</option>
                       <option value="1">1+</option>
@@ -242,7 +242,7 @@ const SearchFilter: React.FC = () => {
                       value={baths}
                       onChange={(e) => setBaths(e.target.value)}
                       title="Bathrooms"
-                      className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
+                      className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                     >
                       <option value="">Any</option>
                       <option value="1">1+</option>

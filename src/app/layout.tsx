@@ -32,7 +32,6 @@ export const metadata: Metadata = {
   viewport: {
     width: "device-width",
     initialScale: 1,
-    maximumScale: 1,
     interactiveWidget: "resizes-content", // Key for Android keyboard handling
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://fydhomes.in'), // Fixes relative URL warnings

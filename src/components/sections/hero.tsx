@@ -92,7 +92,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                       value={keyword}
                       onChange={(e) => setKeyword(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                      className="w-full h-[46px] px-3 text-[15px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
+                      className="w-full h-[46px] px-3 text-base md:text-[15px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
                     />
                   </div>
 
@@ -102,7 +102,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                       <select
                         value={type}
                         onChange={(e) => setType(e.target.value)}
-                        className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                        className="w-full h-[46px] px-3 text-base md:text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
                         aria-label="Filter by property type"
                       >
                         <option>Property Type</option>
@@ -127,7 +127,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                       <select
                         value={area}
                         onChange={(e) => setArea(e.target.value)}
-                        className="w-full h-[46px] px-3 text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                        className="w-full h-[46px] px-3 text-base md:text-[15px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
                         aria-label="Filter by area"
                       >
                         <option>Area</option>
@@ -180,7 +180,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                   value={keyword}
                   onChange={(e) => setKeyword(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                  className="w-full h-[44px] px-3 text-[14px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
+                  className="w-full h-[44px] px-3 text-[16px] border border-[#dddddd] rounded-[4px] focus:outline-none focus:border-[#1db954] placeholder:text-[#999999] transition-all bg-white"
                 />
               </div>
 
@@ -190,7 +190,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                   <select
                     value={type}
                     onChange={(e) => setType(e.target.value)}
-                    className="w-full h-[44px] px-3 text-[14px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                    className="w-full h-[44px] px-3 text-[16px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
                     aria-label="Filter by property type"
                   >
                     <option>Property Type</option>
@@ -215,7 +215,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                   <select
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
-                    className="w-full h-[44px] px-3 text-[14px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
+                    className="w-full h-[44px] px-3 text-[16px] bg-white border border-[#dddddd] rounded-[4px] appearance-none cursor-pointer focus:outline-none focus:border-[#1db954] text-[#555555] transition-all"
                     aria-label="Filter by area"
                   >
                     <option>Area</option>

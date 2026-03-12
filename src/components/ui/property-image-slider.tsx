@@ -90,16 +90,27 @@ export default function PropertyImageSlider({
                         <ChevronRight size={16} />
                     </button>
 
-                    {/* Pagination Dots (Visible on Mobile) */}
-                    <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-10 pointer-events-none">
+                    {/* Pagination Dots (Interactive on Mobile/Desktop) */}
+                    <div className="absolute bottom-1 left-0 right-0 flex justify-center gap-0 z-10 pointer-events-auto">
                         {slideImages.map((_, index) => (
-                            <div
+                            <button
                                 key={index}
-                                className={cn(
-                                    "w-1.5 h-1.5 rounded-full transition-all duration-300 shadow-sm",
-                                    index === selectedIndex ? "bg-white scale-110" : "bg-white/50"
-                                )}
-                            />
+                                type="button"
+                                aria-label={`Go to image ${index + 1}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (emblaApi) emblaApi.scrollTo(index);
+                                }}
+                                className="p-3 touch-manipulation focus:outline-none"
+                            >
+                                <div
+                                    className={cn(
+                                        "w-2 h-2 rounded-full transition-all duration-300 shadow-sm",
+                                        index === selectedIndex ? "bg-white scale-125" : "bg-white/60"
+                                    )}
+                                />
+                            </button>
                         ))}
                     </div>
                 </>

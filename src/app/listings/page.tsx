@@ -4,7 +4,7 @@ import SearchFilter from "@/components/sections/SearchFilter";
 import ListingGrid from "@/components/sections/ListingGrid";
 import { Suspense } from "react";
 import { Prisma } from "@prisma/client";
-import { Property } from "@/lib/types";
+import { Property, ListingType, PropertyStatus } from "@/lib/types";
 import { parsePrice, parseArea } from "@/lib/searchUtils";
 
 export async function generateMetadata() {
@@ -33,10 +33,10 @@ interface ListingsPageProps {
 
 export default async function ListingsPage({ searchParams }: ListingsPageProps) {
   const params = await searchParams;
-  const keyword = params.keyword;
-  const type = params.type;
-  const area = params.area;
-  const listing_type = params.listing_type;
+  const keyword = params.keyword?.trim();
+  const type = params.type?.trim();
+  const area = params.area?.trim();
+  const listing_type = params.listing_type?.trim();
 
   // New Advanced Filters
   const minPrice = params.minPrice ? parseFloat(params.minPrice) : null;
@@ -71,21 +71,25 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   let finalListingType = listing_type;
   let finalPropertyType = type;
 
-  if (type === "Rent" || type === "Sale" || type === "rent" || type === "sale") {
-    finalListingType = type;
-    finalPropertyType = undefined;
+  // Handle case where "Rent" or "Sale" is sent in the 'type' field
+  if (type) {
+    const typeLower = type.toLowerCase();
+    if (typeLower === "rent" || typeLower === "sale") {
+      finalListingType = typeLower.charAt(0).toUpperCase() + typeLower.slice(1);
+      finalPropertyType = undefined;
+    }
   }
 
   if (finalPropertyType && finalPropertyType !== "Property Type") {
     andConditions.push({
       OR: [
-        { type: { equals: finalPropertyType, mode: 'insensitive' as const } },
+        { type: { contains: finalPropertyType, mode: 'insensitive' as const } },
         { title: { contains: finalPropertyType, mode: 'insensitive' as const } }
       ]
     });
   }
 
-  if (finalListingType) {
+  if (finalListingType && finalListingType !== "Listing Type") {
     const formattedListingType = finalListingType.charAt(0).toUpperCase() + finalListingType.slice(1).toLowerCase();
     andConditions.push({ listing_type: formattedListingType });
   }
@@ -181,13 +185,18 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
       const propertyMap = new Map(fullProperties.map(p => [p.id, p]));
       const hydratedProperties = paginatedIds.map(id => propertyMap.get(id)).filter(Boolean);
 
-      properties = hydratedProperties.map(p => ({
-        ...p,
-        images: p!.images.map((img: { url: string }) => img.url),
-        tags: p!.tags.map((t: { tag: string }) => t.tag),
-        created_at: p!.created_at.toISOString(),
-        updated_at: p!.updated_at.toISOString(),
-      })) as unknown as Property[];
+      properties = hydratedProperties.map(p => {
+        if (!p) return null;
+        return {
+          ...p,
+          images: p.images?.map((img: { url: string }) => img.url) || [],
+          tags: p.tags?.map((t: { tag: string }) => t.tag) || [],
+          listing_type: (p.listing_type as ListingType) || null,
+          status: (p.status as PropertyStatus) || 'active',
+          created_at: p.created_at?.toISOString() || new Date().toISOString(),
+          updated_at: p.updated_at?.toISOString() || new Date().toISOString(),
+        };
+      }).filter(Boolean) as Property[];
     }
 
   } catch (error: unknown) {

@@ -13,7 +13,8 @@ const SearchFilter: React.FC = () => {
   const searchParams = useSearchParams();
 
   const [keyword, setKeyword] = useState(searchParams.get('keyword') || '');
-  const [type, setType] = useState(searchParams.get('type') || '');
+  const rawType = searchParams.get('type') || '';
+  const [type, setType] = useState(rawType.toLowerCase() === 'rent' ? 'Rent' : rawType.toLowerCase() === 'sale' ? 'Sale' : rawType);
   const [area, setArea] = useState(searchParams.get('area') || '');
 
   // Advanced filters state
@@ -26,7 +27,8 @@ const SearchFilter: React.FC = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (keyword) params.set('keyword', keyword);
+    const trimmedKeyword = keyword.trim();
+    if (trimmedKeyword) params.set('keyword', trimmedKeyword);
     if (type) params.set('type', type);
     if (area) params.set('area', area);
     if (minPrice) params.set('minPrice', minPrice);

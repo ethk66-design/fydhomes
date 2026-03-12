@@ -163,9 +163,9 @@ export default function EditTestimonialPage({ params }: { params: Promise<{ id: 
 
                 <form onSubmit={handleSubmit} className="bg-white p-6 sm:p-8 rounded-xl border border-[#eeeeee] shadow-sm space-y-6">
 
-                    {/* Image Upload / URL */}
+                    {/* Image Upload */}
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-black uppercase">Client Photo URL</label>
+                        <label className="text-sm font-bold text-black uppercase">Client Photo</label>
                         <div className="flex items-center gap-4">
                             {image ? (
                                 <div className="relative w-24 h-24 rounded-full overflow-hidden border border-[#eeeeee]">
@@ -198,13 +198,9 @@ export default function EditTestimonialPage({ params }: { params: Promise<{ id: 
                                 </label>
                             )}
                             <div className="flex-1">
-                                <Input
-                                    placeholder="Paste image URL here..."
-                                    value={image || ""}
-                                    onChange={(e) => setImage(e.target.value)}
-                                    className="border-[#eeeeee] text-base sm:text-sm h-11"
-                                />
-                                <p className="text-xs text-[#5c5c5c] mt-1">Use an external image URL (e.g., from Unsplash)</p>
+                                <p className="text-sm text-[#5c5c5c]">
+                                    {image ? "Image uploaded successfully." : "Click the placeholder to upload an image directly from your device."}
+                                </p>
                             </div>
                         </div>
                     </div>

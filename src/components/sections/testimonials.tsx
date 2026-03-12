@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
-import { optimizeSupabaseUrl } from '@/components/ui/image-with-fallback';
 
 interface Testimonial {
   id: string;
@@ -69,7 +68,7 @@ export function Testimonials() {
                 <div className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] rounded-full overflow-hidden bg-gray-300 flex-shrink-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={testimonial.image_url ? optimizeSupabaseUrl(testimonial.image_url, 100, 75) : '/assets/placeholder-house.svg'}
+                    src={testimonial.image_url || '/assets/placeholder-house.svg'}
                     alt={testimonial.name}
                     width={50}
                     height={50}

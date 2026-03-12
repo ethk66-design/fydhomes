@@ -32,13 +32,16 @@ export default async function AboutPage() {
   const feature3 = await getPageAsset('/about', 'about_feature_img_3', "https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1024&q=80");
   const featureImages = [feature1, feature2, feature3];
 
+  // Fetch CTA Banner Background
+  const ctaBg = await getPageAsset('/about', 'about_cta_bg', "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80");
+
   return (
     <main className="min-h-screen bg-white pt-[70px] sm:pt-[90px]">
       <AboutHero heroImage={heroBg} />
       <MissionStatement />
       <WhyChooseUs featureImages={featureImages} />
       <TeamGrid agentImages={teamImages} />
-      <CTAConsultation />
+      <CTAConsultation backgroundImage={ctaBg} />
       <FAQAccordion />
     </main>
   );

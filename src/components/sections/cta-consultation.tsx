@@ -2,13 +2,13 @@ import React from 'react';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
 import Link from 'next/link';
 
-const CTAConsultation = () => {
-  // Background image based on the sunset over water description and assets
-  // Using the fallback background from metadata or provided assets list 
-  // The asset list contains one image which seems to be a villa, so I'll use it as the background
-  // and apply a dark overlay to mimic the "sunset" aesthetic if specified or visible in screenshots.
-  const backgroundImage = "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2026-01-14-at-11_37_40-AM-758x564-16.jpeg";
+interface CTAConsultationProps {
+  backgroundImage?: string;
+}
 
+const CTAConsultation: React.FC<CTAConsultationProps> = ({ 
+  backgroundImage = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+}) => {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Background Container */}
@@ -59,6 +59,5 @@ const CTAConsultation = () => {
     </section>
   );
 };
-
 
 export default CTAConsultation;

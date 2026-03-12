@@ -51,7 +51,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   // Build Prisma query filters
   const where: Prisma.PropertyWhereInput = {
     AND: [
-      { status: 'active' } // Always only show active listings
+      { status: { in: ['active', 'featured'] } } // Include both active and featured listings
     ]
   };
 

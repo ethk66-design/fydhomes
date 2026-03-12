@@ -83,7 +83,7 @@ async function getSimilarProperties(currentProperty: PropertyWithRelations) {
       id: { not: currentProperty.id },
       type: currentProperty.type, // Match Villa/Plot
       listing_type: currentProperty.listing_type, // Match Sale/Rent
-      status: 'active',
+      status: { in: ['active', 'featured'] },
     },
     include: {
       images: { take: 1, orderBy: { order: 'asc' } }, // Need one image

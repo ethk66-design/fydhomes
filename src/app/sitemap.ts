@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     try {
         const properties = await prisma.property.findMany({
             where: {
-                status: 'active', // Only index active properties
+                status: { in: ['active', 'featured'] }, // Index active and featured properties
             },
             select: {
                 id: true,

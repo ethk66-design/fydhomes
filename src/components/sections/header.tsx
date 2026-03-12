@@ -142,6 +142,7 @@ export default function Header() {
                     className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
                   >
                     <Instagram size={20} />
+                    <span className="sr-only">Instagram</span>
                   </a>
                   <a
                     href="https://www.youtube.com/@findyourdreamhome6667"
@@ -150,6 +151,7 @@ export default function Header() {
                     className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
                   >
                     <Youtube size={20} />
+                    <span className="sr-only">Youtube</span>
                   </a>
                 </div>
               </nav>

@@ -69,6 +69,7 @@ const SearchFilter: React.FC = () => {
                 <select
                   value={type}
                   onChange={(e) => setType(e.target.value)}
+                  title="Property Type"
                   className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                 >
                   <option value="">Property Type</option>
@@ -95,6 +96,7 @@ const SearchFilter: React.FC = () => {
                 <select
                   value={area}
                   onChange={(e) => setArea(e.target.value)}
+                  title="Area"
                   className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                 >
                   <option value="">Area</option>
@@ -120,6 +122,7 @@ const SearchFilter: React.FC = () => {
             >
               <button
                 type="submit"
+                aria-label="Search"
                 className="w-full lg:w-[100px] xl:w-[130px] h-[42px] sm:h-[45px] bg-[#1db954] hover:bg-[#1aa34a] transition-colors duration-200 flex items-center justify-center rounded-[4px]"
               >
                 <Search className="text-white w-5 h-5" />
@@ -156,6 +159,7 @@ const SearchFilter: React.FC = () => {
                   <select
                     value={minPrice}
                     onChange={(e) => setMinPrice(e.target.value)}
+                    title="Minimum Price"
                     className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                   >
                     <option value="">Any</option>
@@ -181,6 +185,7 @@ const SearchFilter: React.FC = () => {
                   <select
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
+                    title="Maximum Price"
                     className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                   >
                     <option value="">Any</option>
@@ -208,6 +213,7 @@ const SearchFilter: React.FC = () => {
                     <select
                       value={beds}
                       onChange={(e) => setBeds(e.target.value)}
+                      title="Bedrooms"
                       className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                     >
                       <option value="">Any</option>
@@ -233,6 +239,7 @@ const SearchFilter: React.FC = () => {
                     <select
                       value={baths}
                       onChange={(e) => setBaths(e.target.value)}
+                      title="Bathrooms"
                       className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[13px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#2d7a8c] bg-white font-sans cursor-pointer transition-all"
                     >
                       <option value="">Any</option>

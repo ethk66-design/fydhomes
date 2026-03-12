@@ -60,13 +60,13 @@ const ImageWithFallback = ({
             loading={loading}
             decoding={decoding}
             fetchPriority={priority ? "high" : "auto"}
-            className={className}
+            className={`${className || ""} ${fill ? "absolute inset-0 w-full h-full object-cover" : ""}`.trim()}
             onError={() => {
                 if (!hasError) {
                     setHasError(true);
                 }
             }}
-            style={fill ? { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', ...props.style } : props.style}
+            style={props.style}
         />
     );
 };

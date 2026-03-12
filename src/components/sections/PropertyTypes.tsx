@@ -118,6 +118,7 @@ export function PropertyTypes({ images, counts }: PropertyTypesProps) {
                     src={imageUrl}
                     alt={type.title}
                     fill
+                    width={200}
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>

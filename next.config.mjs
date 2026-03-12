@@ -1,8 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        loader: 'custom',
-        loaderFile: './src/lib/supabase-image-loader.ts',
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'vexsmxrfxbatpyelugch.supabase.co',
+                port: '',
+                pathname: '/storage/v1/object/public/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com',
+                port: '',
+                pathname: '/**',
+            }
+        ],
     },
     typescript: {
         ignoreBuildErrors: false,

@@ -22,7 +22,7 @@ export default function ClientLayout({
             {children}
             {!isAdmin && <WhatsAppButton />}
             {!isAdmin && <Footer />}
-            <VisualEditsMessenger />
+            {(process.env.NODE_ENV === 'development' || isAdmin) && <VisualEditsMessenger />}
             <Toaster richColors position="bottom-right" />
         </SessionProvider>
     );

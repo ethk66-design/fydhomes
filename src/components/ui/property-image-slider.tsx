@@ -11,13 +11,15 @@ interface PropertyImageSliderProps {
     alt: string;
     aspectRatio?: string;
     className?: string;
+    width?: number | string;
 }
 
 export default function PropertyImageSlider({
     images,
     alt,
     aspectRatio = "aspect-[4/3]",
-    className
+    className,
+    width
 }: PropertyImageSliderProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -61,7 +63,8 @@ export default function PropertyImageSlider({
                                 src={src}
                                 alt={`${alt} - Image ${index + 1}`}
                                 fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                width={width}
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                 className="object-cover"
                             />
                         </div>

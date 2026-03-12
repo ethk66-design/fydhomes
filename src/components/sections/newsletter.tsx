@@ -18,6 +18,7 @@ export function Newsletter({ bgImage }: { bgImage?: string }) {
           src={finalBgImage}
           alt="Newsletter Background"
           fill
+          width={1200}
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/45" />

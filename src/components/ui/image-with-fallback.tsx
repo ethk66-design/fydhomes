@@ -7,8 +7,10 @@ export function optimizeSupabaseUrl(url: string, width = 800, quality = 75): str
     if (!url) return '';
     // If it's a Supabase storage URL, rewrite it to use their native /render/image/ endpoint
     if (url.includes('/storage/v1/object/public/')) {
+        // Ensure width is a number even if passed as string-hint
+        const w = typeof width === 'string' ? parseInt(width) : width;
         return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')
-            + `?width=${width}&quality=${quality}`;
+            + `?width=${w || 800}&quality=${quality}`;
     }
     return url;
 }
@@ -21,6 +23,7 @@ interface ImageWithFallbackProps extends React.ImgHTMLAttributes<HTMLImageElemen
     priority?: boolean;
     quality?: number | string;
     unoptimized?: boolean;
+    width?: number | string; // Explicitly re-declare to ensure it's captured
 }
 
 const ImageWithFallback = ({
@@ -33,7 +36,7 @@ const ImageWithFallback = ({
     decoding = "async",
     fill,
     quality = 75,
-    unoptimized,
+    width,
     ...props
 }: ImageWithFallbackProps) => {
     const [imgSrc, setImgSrc] = useState(src);
@@ -49,13 +52,14 @@ const ImageWithFallback = ({
     }
 
     // Apply Supabase compression
-    const finalSrc = hasError ? fallbackSrc : optimizeSupabaseUrl(imgSrc, 800, Number(quality));
+    const finalSrc = hasError ? fallbackSrc : optimizeSupabaseUrl(imgSrc, Number(width) || 800, Number(quality));
 
     return (
         // eslint-disable-next-line @next/next/no-img-element
         <img
             {...props}
             src={finalSrc}
+            width={width}
             alt={alt || "Property Image"}
             loading={loading}
             decoding={decoding}

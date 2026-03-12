@@ -30,6 +30,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           images={images}
           alt={property.title}
           aspectRatio="aspect-[4/3]"
+          width={500}
         />
 
         {/* Overlays (Tags) - Pointer events none so they don't block slider */}

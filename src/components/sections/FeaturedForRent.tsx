@@ -7,11 +7,17 @@ import PropertyCard from "@/components/PropertyCard";
 import { Skeleton } from '@/components/ui/skeleton';
 import { motion } from 'framer-motion';
 
-export function FeaturedForRent() {
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [loading, setLoading] = useState(true);
+interface FeaturedForRentProps {
+  initialProperties?: Property[];
+}
+
+export function FeaturedForRent({ initialProperties }: FeaturedForRentProps) {
+  const [properties, setProperties] = useState<Property[]>(initialProperties || []);
+  const [loading, setLoading] = useState(!initialProperties);
 
   useEffect(() => {
+    if (initialProperties) return;
+
     async function fetchProperties() {
       try {
         const res = await fetch('/api/properties?listing_type=Rent&status=featured&limit=4');
@@ -26,7 +32,7 @@ export function FeaturedForRent() {
     }
 
     fetchProperties();
-  }, []);
+  }, [initialProperties]);
 
   return (
     <section className="bg-white py-8 sm:py-10 md:py-[40px] overflow-hidden">

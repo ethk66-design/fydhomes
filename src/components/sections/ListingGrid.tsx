@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import PropertyCard from "@/components/PropertyCard";
 import { Property } from "@/lib/types";
 import Link from "next/link";
+import Pagination from "@/components/ui/pagination";
 
 interface ListingGridProps {
     properties: Property[];
@@ -11,14 +12,17 @@ interface ListingGridProps {
     type?: string;
     area?: string;
     listing_type?: string;
+    totalCount: number;
+    currentPage: number;
+    totalPages: number;
 }
 
-export default function ListingGrid({ properties, keyword, type, area, listing_type }: ListingGridProps) {
+export default function ListingGrid({ properties, keyword, type, area, listing_type, totalCount, currentPage, totalPages }: ListingGridProps) {
     return (
         <div className="container mx-auto mt-10 sm:mt-16 md:mt-20 px-4 sm:px-5">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-10 border-b border-[#eeeeee] pb-4 gap-2">
                 <p className="text-[#5c5c5c] font-medium text-sm sm:text-base">
-                    Showing <span className="text-black font-bold">{properties?.length || 0}</span> properties
+                    Showing <span className="text-black font-bold">{totalCount}</span> properties
                     {(keyword || type || area || listing_type) && (
                         <span className="ml-2 text-xs uppercase tracking-widest text-[#2d7a8c]"> (Filtered)</span>
                     )}
@@ -66,6 +70,11 @@ export default function ListingGrid({ properties, keyword, type, area, listing_t
                         Clear all filters
                     </Link>
                 </motion.div>
+            )}
+
+            {/* Pagination Controls */}
+            {totalCount > 0 && totalPages > 1 && (
+                <Pagination currentPage={currentPage} totalPages={totalPages} />
             )}
         </div>
     );

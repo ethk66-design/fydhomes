@@ -1,127 +1,120 @@
-import * as React from "react"
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MoreHorizontalIcon,
-} from "lucide-react"
+"use client";
 
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
-  return (
-    <nav
-      role="navigation"
-      aria-label="pagination"
-      data-slot="pagination"
-      className={cn("mx-auto flex w-full justify-center", className)}
-      {...props}
-    />
-  )
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
 }
 
-function PaginationContent({
-  className,
-  ...props
-}: React.ComponentProps<"ul">) {
+export default function Pagination({ currentPage, totalPages }: PaginationProps) {
+  const searchParams = useSearchParams();
+
+  if (totalPages <= 1) return null;
+
+  const createPageUrl = (pageNumber: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('page', pageNumber.toString());
+    return `/listings?${params.toString()}`;
+  };
+
+  const pages = [];
+  const maxVisiblePages = 5;
+
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = startPage + maxVisiblePages - 1;
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+
   return (
-    <ul
-      data-slot="pagination-content"
-      className={cn("flex flex-row items-center gap-1", className)}
-      {...props}
-    />
-  )
-}
-
-function PaginationItem({ ...props }: React.ComponentProps<"li">) {
-  return <li data-slot="pagination-item" {...props} />
-}
-
-type PaginationLinkProps = {
-  isActive?: boolean
-} & Pick<React.ComponentProps<typeof Button>, "size"> &
-  React.ComponentProps<"a">
-
-function PaginationLink({
-  className,
-  isActive,
-  size = "icon",
-  ...props
-}: PaginationLinkProps) {
-  return (
-    <a
-      aria-current={isActive ? "page" : undefined}
-      data-slot="pagination-link"
-      data-active={isActive}
-      className={cn(
-        buttonVariants({
-          variant: isActive ? "outline" : "ghost",
-          size,
-        }),
-        className
+    <div className="flex items-center justify-center space-x-2 mt-12 mb-8">
+      {/* Previous Button */}
+      {currentPage > 1 ? (
+        <Link
+          href={createPageUrl(currentPage - 1)}
+          className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:bg-[#2d7a8c] hover:text-white hover:border-[#2d7a8c] transition-all"
+          aria-label="Previous page"
+        >
+          <ChevronLeft size={18} />
+        </Link>
+      ) : (
+        <button
+          className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-100 text-gray-300 cursor-not-allowed"
+          disabled
+          aria-label="Previous page (disabled)"
+        >
+          <ChevronLeft size={18} />
+        </button>
       )}
-      {...props}
-    />
-  )
-}
 
-function PaginationPrevious({
-  className,
-  ...props
-}: React.ComponentProps<typeof PaginationLink>) {
-  return (
-    <PaginationLink
-      aria-label="Go to previous page"
-      size="default"
-      className={cn("gap-1 px-2.5 sm:pl-2.5", className)}
-      {...props}
-    >
-      <ChevronLeftIcon />
-      <span className="hidden sm:block">Previous</span>
-    </PaginationLink>
-  )
-}
+      {/* Page Numbers */}
+      {startPage > 1 && (
+        <>
+          <Link
+            href={createPageUrl(1)}
+            className="flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium text-gray-600 hover:bg-[#2d7a8c] hover:text-white transition-all"
+          >
+            1
+          </Link>
+          {startPage > 2 && <span className="text-gray-400 px-1">...</span>}
+        </>
+      )}
 
-function PaginationNext({
-  className,
-  ...props
-}: React.ComponentProps<typeof PaginationLink>) {
-  return (
-    <PaginationLink
-      aria-label="Go to next page"
-      size="default"
-      className={cn("gap-1 px-2.5 sm:pr-2.5", className)}
-      {...props}
-    >
-      <span className="hidden sm:block">Next</span>
-      <ChevronRightIcon />
-    </PaginationLink>
-  )
-}
+      {pages.map((page) => (
+        <Link
+          key={page}
+          href={createPageUrl(page)}
+          className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-bold transition-all ${
+            currentPage === page
+              ? 'bg-[#1db954] text-white shadow-md'
+              : 'text-gray-600 hover:bg-[#2d7a8c] hover:text-white'
+          }`}
+          aria-current={currentPage === page ? "page" : undefined}
+        >
+          {page}
+        </Link>
+      ))}
 
-function PaginationEllipsis({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
-  return (
-    <span
-      aria-hidden
-      data-slot="pagination-ellipsis"
-      className={cn("flex size-9 items-center justify-center", className)}
-      {...props}
-    >
-      <MoreHorizontalIcon className="size-4" />
-      <span className="sr-only">More pages</span>
-    </span>
-  )
-}
+      {endPage < totalPages && (
+        <>
+          {endPage < totalPages - 1 && <span className="text-gray-400 px-1">...</span>}
+          <Link
+            href={createPageUrl(totalPages)}
+            className="flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium text-gray-600 hover:bg-[#2d7a8c] hover:text-white transition-all"
+          >
+            {totalPages}
+          </Link>
+        </>
+      )}
 
-export {
-  Pagination,
-  PaginationContent,
-  PaginationLink,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
+      {/* Next Button */}
+      {currentPage < totalPages ? (
+        <Link
+          href={createPageUrl(currentPage + 1)}
+          className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:bg-[#2d7a8c] hover:text-white hover:border-[#2d7a8c] transition-all"
+          aria-label="Next page"
+        >
+          <ChevronRight size={18} />
+        </Link>
+      ) : (
+        <button
+          className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-100 text-gray-300 cursor-not-allowed"
+          disabled
+          aria-label="Next page (disabled)"
+        >
+          <ChevronRight size={18} />
+        </button>
+      )}
+    </div>
+  );
 }

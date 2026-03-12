@@ -27,6 +27,7 @@ interface ListingsPageProps {
     baths?: string;
     minArea?: string;
     maxArea?: string;
+    page?: string;
   }>;
 }
 
@@ -44,6 +45,8 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   const bathsParam = params.baths ? parseInt(params.baths, 10) : null;
   const minArea = params.minArea ? parseFloat(params.minArea) : null;
   const maxArea = params.maxArea ? parseFloat(params.maxArea) : null;
+  const currentPage = params.page ? parseInt(params.page, 10) : 1;
+  const pageSize = 24;
 
   // Build Prisma query filters
   const where: Prisma.PropertyWhereInput = {
@@ -107,17 +110,22 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
   // import { Property } from "@/lib/types"; // Removed nested import
 
   let properties: Property[] = [];
+  let totalCount = 0;
+  let totalPages = 0;
+
   try {
+    // STEP 1: Fast Scan (Fetch only fields needed for URL param filtering, NO JOINS)
+    // This reduces the DB payload from thousands of massive objects down to tiny lightweight primitive records.
     const rawProperties = await prisma.property.findMany({
       where,
       orderBy: { created_at: 'desc' },
-      include: {
-        images: {
-          orderBy: { order: 'asc' },
-        },
-        tags: true,
+      select: {
+        id: true,
+        price: true,
+        area: true,
+        land_area: true
       },
-      take: 1000, // Maximized limit to ensure we grab all valid properties before string parsing math
+      take: 2000, 
     });
 
     const parsedProperties = rawProperties.map(p => {
@@ -128,11 +136,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
       const numericArea = maxNumericArea > 0 ? maxNumericArea : null;
 
       return {
-        ...p,
-        images: p.images.map(img => img.url),
-        tags: p.tags.map(t => t.tag),
-        created_at: p.created_at.toISOString(),
-        updated_at: p.updated_at.toISOString(),
+        id: p.id,
         _numericPrice: numericPrice,
         _numericArea: numericArea
       }
@@ -154,7 +158,38 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
       filtered = filtered.filter(p => p._numericArea !== null && p._numericArea <= maxArea);
     }
 
-    properties = filtered as unknown as Property[];
+    // Pagination boundaries
+    totalCount = filtered.length;
+    totalPages = Math.ceil(totalCount / pageSize);
+
+    const paginatedIds = filtered
+      .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+      .map(p => p.id);
+
+    // STEP 2: Hydration (Fetch FULL massive details ONLY for the specific IDs on this current page)
+    if (paginatedIds.length > 0) {
+      const fullProperties = await prisma.property.findMany({
+        where: { id: { in: paginatedIds } },
+        include: {
+          images: { orderBy: { order: 'asc' } },
+          tags: true,
+        }
+      });
+
+      // Prisma `in` is unordered. We must map them back to the original `paginatedIds` order 
+      // (which was sorted by `created_at desc` in Step 1)
+      const propertyMap = new Map(fullProperties.map(p => [p.id, p]));
+      const hydratedProperties = paginatedIds.map(id => propertyMap.get(id)).filter(Boolean);
+
+      properties = hydratedProperties.map(p => ({
+        ...p,
+        images: p!.images.map((img: { url: string }) => img.url),
+        tags: p!.tags.map((t: { tag: string }) => t.tag),
+        created_at: p!.created_at.toISOString(),
+        updated_at: p!.updated_at.toISOString(),
+      })) as unknown as Property[];
+    }
+
   } catch (error: unknown) {
     console.error("Error fetching properties:", error);
     // Return empty array or handle error UI
@@ -201,6 +236,9 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         type={type}
         area={area}
         listing_type={listing_type}
+        totalCount={totalCount}
+        currentPage={currentPage}
+        totalPages={totalPages}
       />
     </main>
   );

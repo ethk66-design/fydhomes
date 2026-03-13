@@ -17,7 +17,7 @@ interface PropertyImageSliderProps {
 export default function PropertyImageSlider({
     images,
     alt,
-    aspectRatio = "aspect-[4/3]",
+    aspectRatio = "aspect-video",
     className,
     width
 }: PropertyImageSliderProps) {
@@ -66,7 +66,7 @@ export default function PropertyImageSlider({
                                     fill
                                     width={width}
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="object-[fill] relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02] w-full h-full"
+                                    className="object-cover relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
                                 />
                             </div>
                         );

@@ -23,11 +23,11 @@ export default function PropertyCard({ property }: PropertyCardProps) {
       className="bg-white border border-[#eeeeee] flex flex-col hover:shadow-card transition-grow group h-full relative"
     >
       {/* Image Slider Section - Handles its own internal clicks/swipes */}
-      <div className="relative aspect-video overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <PropertyImageSlider
           images={images}
           alt={property.title}
-          aspectRatio="aspect-video"
+          aspectRatio="aspect-[4/3]"
           width={500}
         />
 

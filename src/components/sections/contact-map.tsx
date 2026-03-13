@@ -64,7 +64,7 @@ const ContactMap = () => {
                   }}
                 >
                   <iframe 
-                    src="https://maps.google.com/maps?q=FYD%20Homes&t=m&z=14&output=embed&iwloc=near" 
+                    src="https://maps.google.com/maps?q=FYD%20Homes%20Pukkattupady&t=m&z=15&output=embed&iwloc=near" 
                     aria-label="FYD Homes"
                     style={{
                       width: '100%',

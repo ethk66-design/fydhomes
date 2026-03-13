@@ -59,14 +59,14 @@ export default function PropertyImageSlider({
                 <div className="flex h-full touch-pan-y">
                     {slideImages.map((src, index) => {
                         return (
-                            <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden group/slide" key={index}>
+                            <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden bg-[#f4f5f7] group/slide" key={index}>
                                 <ImageWithFallback
                                     src={src}
                                     alt={`${alt} - Image ${index + 1}`}
                                     fill
                                     width={width}
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="object-cover relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
+                                    className="object-contain relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
                                 />
                             </div>
                         );

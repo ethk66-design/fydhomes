@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import ImageWithFallback, { optimizeSupabaseUrl } from '@/components/ui/image-with-fallback';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -58,14 +58,8 @@ export default function PropertyImageSlider({
             <div className="overflow-hidden h-full" ref={emblaRef}>
                 <div className="flex h-full touch-pan-y">
                     {slideImages.map((src, index) => {
-                        const blurUrl = optimizeSupabaseUrl(src, 100, 20);
                         return (
-                            <div className="relative flex-[0_0_100%] min-w-0 h-full bg-black/5 overflow-hidden group/slide" key={index}>
-                                {/* Transparent Vignette Area (Using larger scale inset) */}
-                                <div 
-                                    className="absolute inset-[-10%] bg-cover bg-center blur-xl opacity-60 pointer-events-none transition-transform duration-500 group-hover/slide:scale-[1.02]" 
-                                    style={{ backgroundImage: `url(${blurUrl})` }} 
-                                />
+                            <div className="relative flex-[0_0_100%] min-w-0 h-full bg-[#f8f9fa] overflow-hidden group/slide" key={index}>
                                 <ImageWithFallback
                                     src={src}
                                     alt={`${alt} - Image ${index + 1}`}

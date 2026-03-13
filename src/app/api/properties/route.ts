@@ -8,9 +8,14 @@ import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { propertySchema } from '@/lib/validations/property';
+import { rateLimit } from '@/lib/rate-limit';
 
 // GET /api/properties - List properties with optional filters
 export async function GET(request: NextRequest) {
+    // Rate limit: 60 requests per minute
+    const limitResponse = await rateLimit(request, 60, 60 * 1000);
+    if (limitResponse) return limitResponse;
+
     try {
         const { searchParams } = new URL(request.url);
         const listing_type = searchParams.get('listing_type');

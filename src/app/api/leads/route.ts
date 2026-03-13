@@ -2,11 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { rateLimit } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // POST /api/leads - Create new lead (public)
 export async function POST(request: NextRequest) {
+    // Rate limit: Max 5 inquiries per minute per IP to prevent spam
+    const limitResponse = await rateLimit(request, 5, 60 * 1000);
+    if (limitResponse) return limitResponse;
+
     try {
         const body = await request.json();
         const { name, email, phone, message, property_id, source } = body;

@@ -17,7 +17,7 @@ interface PropertyImageSliderProps {
 export default function PropertyImageSlider({
     images,
     alt,
-    aspectRatio = "aspect-[4/3]",
+    aspectRatio = "aspect-video",
     className,
     width
 }: PropertyImageSliderProps) {
@@ -59,14 +59,14 @@ export default function PropertyImageSlider({
                 <div className="flex h-full touch-pan-y">
                     {slideImages.map((src, index) => {
                         return (
-                            <div className="relative flex-[0_0_100%] min-w-0 h-full bg-[#f8f9fa] overflow-hidden group/slide" key={index}>
+                            <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden group/slide" key={index}>
                                 <ImageWithFallback
                                     src={src}
                                     alt={`${alt} - Image ${index + 1}`}
                                     fill
                                     width={width}
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="object-contain relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
+                                    className="object-cover relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
                                 />
                             </div>
                         );

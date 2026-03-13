@@ -58,32 +58,32 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-[10px] items-stretch">
-            <div className="md:col-span-2 overflow-hidden rounded-[4px] relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[564px] cursor-pointer bg-[#f8f9fa] group/main" onClick={() => openModal(0)}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-[10px]">
+            <div className="md:col-span-2 overflow-hidden rounded-[4px] relative aspect-video cursor-pointer group/main" onClick={() => openModal(0)}>
               <ImageWithFallback
                 src={displayImages[0]}
                 alt="Property Main View"
                 fill
                 priority
-                className="object-contain relative z-10 transition-transform duration-500 group-hover/main:scale-[1.02]"
+                className="object-cover transition-transform duration-500 group-hover/main:scale-[1.02]"
               />
             </div>
 
-            <div className="flex flex-row md:flex-col gap-2 sm:gap-[10px] h-[120px] sm:h-[150px] md:h-[450px] lg:h-[564px]">
-              <div className="flex-1 overflow-hidden rounded-[4px] relative cursor-pointer bg-[#f8f9fa] group/sub1" onClick={() => openModal(1)}>
+            <div className="flex flex-row md:flex-col gap-2 sm:gap-[10px]">
+              <div className="flex-1 overflow-hidden rounded-[4px] relative aspect-video md:aspect-auto md:h-full cursor-pointer group/sub1" onClick={() => openModal(1)}>
                 <ImageWithFallback
                   src={displayImages[1] || displayImages[0]}
                   alt="Property Secondary View 1"
                   fill
-                  className="object-contain relative z-10 transition-transform duration-500 group-hover/sub1:scale-[1.02]"
+                  className="object-cover transition-transform duration-500 group-hover/sub1:scale-[1.02]"
                 />
               </div>
-              <div className="flex-1 overflow-hidden rounded-[4px] relative cursor-pointer bg-[#f8f9fa] group/sub2" onClick={() => openModal(2)}>
+              <div className="flex-1 overflow-hidden rounded-[4px] relative aspect-video md:aspect-auto md:h-full cursor-pointer group/sub2" onClick={() => openModal(2)}>
                 <ImageWithFallback
                   src={displayImages[2] || displayImages[0]}
                   alt="Property Secondary View 2"
                   fill
-                  className="object-contain relative z-10 transition-transform duration-500 group-hover/sub2:scale-[1.02]"
+                  className="object-cover transition-transform duration-500 group-hover/sub2:scale-[1.02]"
                 />
               </div>
             </div>

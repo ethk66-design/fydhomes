@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import ImageWithFallback from '@/components/ui/image-with-fallback';
+import ImageWithFallback, { optimizeSupabaseUrl } from '@/components/ui/image-with-fallback';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -57,18 +57,26 @@ export default function PropertyImageSlider({
         <div className={cn("relative group overflow-hidden", aspectRatio, className)}>
             <div className="overflow-hidden h-full" ref={emblaRef}>
                 <div className="flex h-full touch-pan-y">
-                    {slideImages.map((src, index) => (
-                        <div className="relative flex-[0_0_100%] min-w-0 h-full" key={index}>
-                            <ImageWithFallback
-                                src={src}
-                                alt={`${alt} - Image ${index + 1}`}
-                                fill
-                                width={width}
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                className="object-cover"
-                            />
-                        </div>
-                    ))}
+                    {slideImages.map((src, index) => {
+                        const blurUrl = optimizeSupabaseUrl(src, 100, 20);
+                        return (
+                            <div className="relative flex-[0_0_100%] min-w-0 h-full bg-black/5 overflow-hidden group/slide" key={index}>
+                                {/* Transparent Vignette Area (Using larger scale inset) */}
+                                <div 
+                                    className="absolute inset-[-10%] bg-cover bg-center blur-xl opacity-60 pointer-events-none transition-transform duration-500 group-hover/slide:scale-[1.02]" 
+                                    style={{ backgroundImage: `url(${blurUrl})` }} 
+                                />
+                                <ImageWithFallback
+                                    src={src}
+                                    alt={`${alt} - Image ${index + 1}`}
+                                    fill
+                                    width={width}
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                    className="object-contain relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 

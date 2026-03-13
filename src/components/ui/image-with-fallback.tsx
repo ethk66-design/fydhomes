@@ -64,7 +64,7 @@ const ImageWithFallback = ({
             loading={loading}
             decoding={decoding}
             fetchPriority={priority ? "high" : "auto"}
-            className={`${className || ""} ${fill ? "absolute inset-0 w-full h-full object-cover" : ""}`.trim()}
+            className={`${className || ""} ${fill ? "absolute inset-0 w-full h-full" : ""} ${fill && !className?.includes("object-") ? "object-cover" : ""}`.replace(/\s+/g, ' ').trim()}
             style={props.style}
         />
     );

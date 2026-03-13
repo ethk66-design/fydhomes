@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import ImageWithFallback from '@/components/ui/image-with-fallback';
+import ImageWithFallback, { optimizeSupabaseUrl } from '@/components/ui/image-with-fallback';
 
 import ImageLeadModal from './image-lead-modal';
 
@@ -59,31 +59,43 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-[10px] items-stretch">
-            <div className="md:col-span-2 overflow-hidden rounded-[4px] relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[564px] cursor-pointer" onClick={() => openModal(0)}>
+            <div className="md:col-span-2 overflow-hidden rounded-[4px] relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[564px] cursor-pointer bg-black/5 group/main" onClick={() => openModal(0)}>
+              <div 
+                  className="absolute inset-[-10%] bg-cover bg-center blur-xl opacity-60 pointer-events-none transition-transform duration-500 group-hover/main:scale-[1.02]" 
+                  style={{ backgroundImage: `url(${optimizeSupabaseUrl(displayImages[0], 100, 20)})` }} 
+              />
               <ImageWithFallback
                 src={displayImages[0]}
                 alt="Property Main View"
                 fill
                 priority
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                className="object-contain relative z-10 transition-transform duration-500 group-hover/main:scale-[1.02]"
               />
             </div>
 
             <div className="flex flex-row md:flex-col gap-2 sm:gap-[10px] h-[120px] sm:h-[150px] md:h-[450px] lg:h-[564px]">
-              <div className="flex-1 overflow-hidden rounded-[4px] relative cursor-pointer" onClick={() => openModal(1)}>
+              <div className="flex-1 overflow-hidden rounded-[4px] relative cursor-pointer bg-black/5 group/sub1" onClick={() => openModal(1)}>
+                <div 
+                    className="absolute inset-[-10%] bg-cover bg-center blur-xl opacity-60 pointer-events-none transition-transform duration-500 group-hover/sub1:scale-[1.02]" 
+                    style={{ backgroundImage: `url(${optimizeSupabaseUrl(displayImages[1] || displayImages[0], 100, 20)})` }} 
+                />
                 <ImageWithFallback
                   src={displayImages[1] || displayImages[0]}
                   alt="Property Secondary View 1"
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="object-contain relative z-10 transition-transform duration-500 group-hover/sub1:scale-[1.02]"
                 />
               </div>
-              <div className="flex-1 overflow-hidden rounded-[4px] relative cursor-pointer" onClick={() => openModal(2)}>
+              <div className="flex-1 overflow-hidden rounded-[4px] relative cursor-pointer bg-black/5 group/sub2" onClick={() => openModal(2)}>
+                <div 
+                    className="absolute inset-[-10%] bg-cover bg-center blur-xl opacity-60 pointer-events-none transition-transform duration-500 group-hover/sub2:scale-[1.02]" 
+                    style={{ backgroundImage: `url(${optimizeSupabaseUrl(displayImages[2] || displayImages[0], 100, 20)})` }} 
+                />
                 <ImageWithFallback
                   src={displayImages[2] || displayImages[0]}
                   alt="Property Secondary View 2"
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="object-contain relative z-10 transition-transform duration-500 group-hover/sub2:scale-[1.02]"
                 />
               </div>
             </div>

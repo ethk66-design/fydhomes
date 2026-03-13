@@ -39,9 +39,14 @@ const ContactForm = () => {
                 <span className="text-[#1db345] mt-[3px]">
                   <MapPin size={14} className="sm:w-4 sm:h-4" />
                 </span>
-                <span className="text-[#222222] text-[13px] sm:text-[14px]">
+                <a 
+                  href="https://share.google/tF8bnCOkQn1AlbGIW"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#222222] text-[13px] sm:text-[14px] hover:text-[#1db345] transition-colors"
+                >
                   Pukkattupady, Kerala 683561
-                </span>
+                </a>
               </li>
             </ul>
           </div>

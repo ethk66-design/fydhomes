@@ -64,8 +64,8 @@ const ContactMap = () => {
                   }}
                 >
                   <iframe 
-                    src="https://maps.google.com/maps?q=FYD%20MEDIA&t=m&z=14&output=embed&iwloc=near" 
-                    aria-label="FYD MEDIA"
+                    src="https://maps.google.com/maps?q=FYD%20Homes&t=m&z=14&output=embed&iwloc=near" 
+                    aria-label="FYD Homes"
                     style={{
                       width: '100%',
                       height: '400px',
@@ -74,7 +74,7 @@ const ContactMap = () => {
                     }}
                     allowFullScreen={true}
                     loading="lazy"
-                    title="FYD MEDIA Location"
+                    title="FYD Homes Location"
                   />
                 </div>
               </div>

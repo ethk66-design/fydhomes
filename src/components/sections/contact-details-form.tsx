@@ -122,7 +122,14 @@ const ContactDetailsForm = () => {
               </li>
               <li className="flex items-start gap-[12px] text-[15px] text-black">
                 <MapPin size={16} className="text-black mt-1 flex-shrink-0" />
-                <span>Pukkattupady, Kerala 683561</span>
+                <a 
+                  href="https://share.google/tF8bnCOkQn1AlbGIW"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#1db043] transition-colors duration-200"
+                >
+                  Pukkattupady, Kerala 683561
+                </a>
               </li>
             </ul>
           </div>

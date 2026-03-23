@@ -66,7 +66,7 @@ const ImageWithFallback = ({
         preload(finalSrc, { as: 'image', fetchPriority: 'high' });
     }
 
-    const baseClassName = `${className || ""} ${fill ? "absolute inset-0 w-full h-full" : ""} ${fill && !className?.includes("object-") ? "object-cover" : ""}`.replace(/\s+/g, ' ').trim();
+    const baseClassName = `${className || ""} ${fill ? "absolute inset-0 w-full h-full" : ""} ${fill && !className?.includes("object-") ? "object-contain" : ""}`.replace(/\s+/g, ' ').trim();
 
     return (
         // eslint-disable-next-line @next/next/no-img-element
@@ -83,7 +83,7 @@ const ImageWithFallback = ({
                 setIsLoaded(true);
                 if (onLoad) onLoad(e);
             }}
-            className={`${baseClassName} ${!isLoaded ? "bg-[#f1f5f9] animate-pulse text-transparent" : "transition-opacity duration-500 opacity-100"}`}
+            className={`${baseClassName} bg-[#f8f9fa] ${!isLoaded ? "animate-pulse text-transparent" : "transition-opacity duration-500 opacity-100"}`}
             style={props.style}
         />
     );

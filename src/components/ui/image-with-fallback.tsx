@@ -11,7 +11,7 @@ export function optimizeSupabaseUrl(url: string, width = 800, quality = 75): str
         // Ensure width is a number even if passed as string-hint
         const w = typeof width === 'string' ? parseInt(width) : width;
         return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')
-            + `?width=${w || 800}&quality=${quality}&format=webp`;
+            + `?width=${w || 800}&quality=${quality}`;
     }
     return url;
 }

@@ -29,12 +29,15 @@ export const metadata: Metadata = {
   },
   title: "FYD Homes | Find Your Dream Home in Kochi",
   description: "Your Trusted Real Estate Partner in Kochi. Find beautiful villas, residential homes, and commercial spaces.",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    interactiveWidget: "resizes-content", // Key for Android keyboard handling
-  },
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://fydhomes.in'), // Fixes relative URL warnings
+};
+
+import type { Viewport } from 'next';
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  interactiveWidget: "resizes-content", // Key for Android keyboard handling
 };
 
 export default function RootLayout({

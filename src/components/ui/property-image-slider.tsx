@@ -59,7 +59,18 @@ export default function PropertyImageSlider({
                 <div className="flex h-full touch-pan-y">
                     {slideImages.map((src, index) => {
                         return (
-                            <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden bg-transparent group/slide" key={index}>
+                            <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden bg-black group/slide" key={index}>
+                                {/* Blurred Backdrop for Vertical Images */}
+                                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                                    <ImageWithFallback
+                                        src={src}
+                                        alt=""
+                                        fill
+                                        className="object-cover w-full h-full opacity-60 blur-2xl scale-125 select-none"
+                                        aria-hidden="true"
+                                    />
+                                </div>
+                                {/* Main Image Content */}
                                 <ImageWithFallback
                                     src={src}
                                     alt={`${alt} - Image ${index + 1}`}

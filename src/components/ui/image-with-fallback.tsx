@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useRef, useEffect } from 'react';
 import { preload } from 'react-dom';
 
 // Supabase Native Image Transformation Interceptor
@@ -9,7 +11,7 @@ export function optimizeSupabaseUrl(url: string, width = 800, quality = 75): str
         // Ensure width is a number even if passed as string-hint
         const w = typeof width === 'string' ? parseInt(width) : width;
         return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')
-            + `?width=${w || 800}&quality=${quality}`;
+            + `?width=${w || 800}&quality=${quality}&format=webp`;
     }
     return url;
 }
@@ -36,9 +38,19 @@ const ImageWithFallback = ({
     fill,
     quality = 75,
     width,
+    onLoad,
     ...props
 }: ImageWithFallbackProps) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const imgRef = useRef<HTMLImageElement>(null);
     
+    // Check if image is already cached/loaded
+    useEffect(() => {
+        if (imgRef.current?.complete) {
+            setIsLoaded(true);
+        }
+    }, [src]);
+
     // Determine the source to use. If `src` is falsy, immediately fallback.
     const activeSrc = src || fallbackSrc;
 
@@ -54,17 +66,24 @@ const ImageWithFallback = ({
         preload(finalSrc, { as: 'image', fetchPriority: 'high' });
     }
 
+    const baseClassName = `${className || ""} ${fill ? "absolute inset-0 w-full h-full" : ""} ${fill && !className?.includes("object-") ? "object-cover" : ""}`.replace(/\s+/g, ' ').trim();
+
     return (
         // eslint-disable-next-line @next/next/no-img-element
         <img
             {...props}
+            ref={imgRef}
             src={finalSrc}
             width={width}
             alt={alt || "Property Image"}
             loading={loading}
             decoding={decoding}
             fetchPriority={priority ? "high" : "auto"}
-            className={`${className || ""} ${fill ? "absolute inset-0 w-full h-full" : ""} ${fill && !className?.includes("object-") ? "object-cover" : ""}`.replace(/\s+/g, ' ').trim()}
+            onLoad={(e) => {
+                setIsLoaded(true);
+                if (onLoad) onLoad(e);
+            }}
+            className={`${baseClassName} ${!isLoaded ? "bg-[#f1f5f9] animate-pulse text-transparent" : "transition-opacity duration-500 opacity-100"}`}
             style={props.style}
         />
     );

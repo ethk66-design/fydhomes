@@ -35,7 +35,7 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
         alt={listing.title}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-fill w-full h-full transition-transform duration-500 group-hover:scale-105"
+        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
       />
       <div className="absolute top-2 right-2 flex flex-wrap gap-1 max-w-[80%] justify-end">
         {listing.tags.map((tag) => (

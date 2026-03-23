@@ -45,7 +45,7 @@ const ContactForm = () => {
                   rel="noopener noreferrer"
                   className="text-[#222222] text-[13px] sm:text-[14px] hover:text-[#1db345] transition-colors"
                 >
-                  Pukkattupady, Kerala 683561
+                  9/490T, Chandanathil Square Complex Pukkattupady, Edathala, Ernakulam, Kerala 683561
                 </a>
               </li>
             </ul>

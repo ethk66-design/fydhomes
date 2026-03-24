@@ -60,13 +60,22 @@ export default function PropertyImageSlider({
                     {slideImages.map((src, index) => {
                         return (
                             <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden bg-transparent group/slide" key={index}>
+                                {/* Background Blurred Layer */}
+                                <ImageWithFallback
+                                    src={src}
+                                    alt=""
+                                    fill
+                                    sizes="(max-width: 640px) 100vw, 50vw"
+                                    className="object-cover w-full h-full absolute inset-0 z-0 blur-xl scale-110 opacity-60"
+                                />
+                                {/* Foreground Uncropped Layer */}
                                 <ImageWithFallback
                                     src={src}
                                     alt={`${alt} - Image ${index + 1}`}
                                     fill
                                     width={width}
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="object-cover w-full h-full relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
+                                    className="object-contain w-full h-full relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
                                 />
                             </div>
                         );

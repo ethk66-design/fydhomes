@@ -60,30 +60,55 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-[10px]">
             <div className="md:col-span-2 overflow-hidden rounded-[4px] relative aspect-video cursor-pointer bg-transparent group/main" onClick={() => openModal(0)}>
+              {/* Background Blurred Layer */}
+              <ImageWithFallback
+                src={displayImages[0]}
+                alt=""
+                fill
+                priority
+                className="object-cover w-full h-full absolute inset-0 z-0 blur-xl scale-110 opacity-70"
+              />
+              {/* Foreground Uncropped Layer */}
               <ImageWithFallback
                 src={displayImages[0]}
                 alt="Property Main View"
                 fill
                 priority
-                className="object-cover w-full h-full transition-transform duration-500 group-hover/main:scale-[1.02]"
+                className="object-contain w-full h-full relative z-10 transition-transform duration-500 group-hover/main:scale-[1.02]"
               />
             </div>
 
             <div className="flex flex-row md:flex-col gap-2 sm:gap-[10px]">
               <div className="flex-1 overflow-hidden rounded-[4px] relative aspect-video md:aspect-auto md:h-full cursor-pointer bg-transparent group/sub1" onClick={() => openModal(1)}>
+                {/* Background Blurred Layer */}
+                <ImageWithFallback
+                  src={displayImages[1] || displayImages[0]}
+                  alt=""
+                  fill
+                  className="object-cover w-full h-full absolute inset-0 z-0 blur-xl scale-110 opacity-70"
+                />
+                {/* Foreground Uncropped Layer */}
                 <ImageWithFallback
                   src={displayImages[1] || displayImages[0]}
                   alt="Property Secondary View 1"
                   fill
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover/sub1:scale-[1.02]"
+                  className="object-contain w-full h-full relative z-10 transition-transform duration-500 group-hover/sub1:scale-[1.02]"
                 />
               </div>
               <div className="flex-1 overflow-hidden rounded-[4px] relative aspect-video md:aspect-auto md:h-full cursor-pointer bg-transparent group/sub2" onClick={() => openModal(2)}>
+                {/* Background Blurred Layer */}
+                <ImageWithFallback
+                  src={displayImages[2] || displayImages[0]}
+                  alt=""
+                  fill
+                  className="object-cover w-full h-full absolute inset-0 z-0 blur-xl scale-110 opacity-70"
+                />
+                {/* Foreground Uncropped Layer */}
                 <ImageWithFallback
                   src={displayImages[2] || displayImages[0]}
                   alt="Property Secondary View 2"
                   fill
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover/sub2:scale-[1.02]"
+                  className="object-contain w-full h-full relative z-10 transition-transform duration-500 group-hover/sub2:scale-[1.02]"
                 />
               </div>
             </div>

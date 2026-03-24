@@ -97,7 +97,7 @@ const ImageWithFallback = ({
                 setIsLoaded(true);
                 if (onLoad) onLoad(e);
             }}
-            className={`${baseClassName} bg-[#f8f9fa] ${!isLoaded ? "animate-pulse text-transparent" : "transition-opacity duration-500 opacity-100"}`}
+            className={`${baseClassName} ${!isLoaded ? "animate-pulse bg-[#f8f9fa] text-transparent" : "transition-opacity duration-500 opacity-100"}`}
             style={props.style}
         />
     );

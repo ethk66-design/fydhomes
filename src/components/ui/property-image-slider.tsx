@@ -61,12 +61,9 @@ export default function PropertyImageSlider({
                         return (
                             <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden bg-transparent group/slide" key={index}>
                                 {/* Background Blurred Layer */}
-                                <ImageWithFallback
-                                    src={src}
-                                    alt=""
-                                    fill
-                                    sizes="(max-width: 640px) 100vw, 50vw"
-                                    className="object-cover w-full h-full absolute inset-0 z-0 blur-xl scale-110 opacity-60"
+                                <div 
+                                    className="absolute inset-0 z-0 blur-xl scale-110 opacity-60 bg-cover bg-center"
+                                    style={{ backgroundImage: `url(${src})` }}
                                 />
                                 {/* Foreground Uncropped Layer */}
                                 <ImageWithFallback

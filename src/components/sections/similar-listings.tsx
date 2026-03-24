@@ -30,12 +30,9 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
   <div className="group bg-white border border-[#EAEAEA] rounded-[4px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
     <div className="relative aspect-[4/3] overflow-hidden bg-transparent">
       {/* Background Blurred Layer */}
-      <ImageWithFallback
-        src={listing.image}
-        alt=""
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-cover w-full h-full absolute inset-0 z-0 blur-xl scale-110 opacity-70"
+      <div 
+        className="absolute inset-0 z-0 blur-xl scale-110 opacity-70 bg-cover bg-center"
+        style={{ backgroundImage: `url(${listing.image})` }}
       />
       {/* Foreground Uncropped Layer */}
       <ImageWithFallback

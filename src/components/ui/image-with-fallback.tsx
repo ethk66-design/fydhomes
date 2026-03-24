@@ -3,6 +3,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { preload } from 'react-dom';
 
+// Runtime URL normalizer — rewrites dead proxy domains back to the correct Supabase host
+const CORRECT_SUPABASE_HOST = 'vexsmxrfxbatpyelugch.supabase.co';
+
+export function normalizeImageUrl(url: string): string {
+    if (!url) return url;
+    // Full path rewrite: jiobase proxy → correct Supabase bucket path
+    const normalized = url.replace(
+        /https?:\/\/fydhomes\.jiobase\.com/g,
+        `https://${CORRECT_SUPABASE_HOST}`
+    );
+    return normalized;
+}
+
 // Supabase Native Image Transformation Interceptor
 export function optimizeSupabaseUrl(url: string, width = 800, quality = 75): string {
     if (!url) return '';
@@ -58,8 +71,9 @@ const ImageWithFallback = ({
         return null;
     }
 
-    // Apply Supabase compression
-    const finalSrc = optimizeSupabaseUrl(activeSrc, Number(width) || 800, Number(quality));
+    // Normalize dead proxy URLs, then apply Supabase compression
+    const normalizedSrc = normalizeImageUrl(activeSrc);
+    const finalSrc = optimizeSupabaseUrl(normalizedSrc, Number(width) || 800, Number(quality));
 
     // Force browser to fetch LCP images eagerly before the DOM is fully parsed
     if (priority) {

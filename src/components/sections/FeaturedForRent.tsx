@@ -103,7 +103,7 @@ export function FeaturedForRent({ initialProperties }: FeaturedForRentProps) {
                     show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
                   }}
                 >
-                  <PropertyCard property={property} />
+                  <PropertyCard property={property} disableSlider={true} />
                 </motion.div>
               ))
             ) : (

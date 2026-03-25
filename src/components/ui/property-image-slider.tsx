@@ -12,6 +12,7 @@ interface PropertyImageSliderProps {
     aspectRatio?: string;
     className?: string;
     width?: number | string;
+    disabled?: boolean;
 }
 
 export default function PropertyImageSlider({
@@ -19,9 +20,14 @@ export default function PropertyImageSlider({
     alt,
     aspectRatio = "aspect-video",
     className,
-    width
+    width,
+    disabled = false
 }: PropertyImageSliderProps) {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+    const [emblaRef, emblaApi] = useEmblaCarousel({ 
+        loop: true,
+        watchDrag: !disabled,
+        active: !disabled
+    });
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     const scrollPrev = useCallback((e: React.MouseEvent) => {
@@ -42,22 +48,23 @@ export default function PropertyImageSlider({
     }, [emblaApi]);
 
     React.useEffect(() => {
-        if (!emblaApi) return;
+        if (!emblaApi || disabled) return;
         onSelect();
         emblaApi.on('select', onSelect);
         return () => {
             emblaApi.off('select', onSelect);
         };
-    }, [emblaApi, onSelect]);
+    }, [emblaApi, onSelect, disabled]);
 
-    // Ensure we always have at least one image (fallback handled by ImageWithFallback, but logic here helps slider)
+    // Ensure we always have at least one image
     const slideImages = images.length > 0 ? images : ['/assets/placeholder-house.svg'];
+    const displayImages = disabled ? [slideImages[0]] : slideImages;
 
     return (
         <div className={cn("relative group overflow-hidden", aspectRatio, className)}>
-            <div className="overflow-hidden h-full" ref={emblaRef}>
+            <div className="overflow-hidden h-full" ref={disabled ? null : emblaRef}>
                 <div className="flex h-full touch-pan-y">
-                    {slideImages.map((src, index) => {
+                    {displayImages.map((src, index) => {
                         return (
                             <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden bg-white group/slide" key={index}>
                                 <ImageWithFallback
@@ -75,7 +82,7 @@ export default function PropertyImageSlider({
             </div>
 
             {/* Navigation Arrows (Desktop: Hover Only / Mobile: Always Hidden - Swipe Only) */}
-            {slideImages.length > 1 && (
+            {!disabled && displayImages.length > 1 && (
                 <>
                     <button
                         className="hidden md:flex absolute top-1/2 left-2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/30 text-white items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/50 z-10"
@@ -94,7 +101,7 @@ export default function PropertyImageSlider({
 
                     {/* Pagination Dots (Interactive on Mobile/Desktop) */}
                     <div className="absolute bottom-1 left-0 right-0 flex justify-center gap-0 z-10 pointer-events-auto">
-                        {slideImages.map((_, index) => (
+                        {displayImages.map((_, index) => (
                             <button
                                 key={index}
                                 type="button"

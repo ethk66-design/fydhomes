@@ -9,9 +9,10 @@ import { formatPrice } from '@/lib/utils';
 
 interface PropertyCardProps {
   property: Property;
+  disableSlider?: boolean;
 }
 
-export default function PropertyCard({ property }: PropertyCardProps) {
+export default function PropertyCard({ property, disableSlider = false }: PropertyCardProps) {
   // Use PropertyImageSlider for the image section
   // Fallback handled inside the slider if images array is empty
   const images = property.images && property.images.length > 0
@@ -29,6 +30,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           alt={property.title}
           aspectRatio="aspect-video"
           width={500}
+          disabled={disableSlider}
         />
 
         {/* Overlays (Tags) - Pointer events none so they don't block slider */}

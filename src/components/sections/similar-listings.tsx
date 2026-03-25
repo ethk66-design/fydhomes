@@ -28,14 +28,14 @@ interface SimilarListing {
 
 const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
   <div className="group bg-white border border-[#EAEAEA] rounded-[4px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
-    <div className="relative aspect-video overflow-hidden bg-gray-900">
+    <div className="relative aspect-video overflow-hidden bg-white">
       <ImageWithFallback
         src={listing.image}
         fallbackSrc="/assets/placeholder-house.svg"
         alt={listing.title}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-cover w-full h-full scale-[0.75] transition-transform duration-500 group-hover:scale-[0.78]"
+        className="object-cover w-full h-full scale-[0.90] transition-transform duration-500 group-hover:scale-[0.92]"
       />
       <div className="absolute top-2 right-2 flex flex-wrap gap-1 max-w-[80%] justify-end">
         {listing.tags.map((tag) => (

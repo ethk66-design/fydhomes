@@ -20,7 +20,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
       className="bg-white border border-[#eeeeee] flex flex-col hover:shadow-card transition-grow group h-full relative"
     >
       {/* Static Image - First image only, full display */}
-      <div className="relative w-full max-h-[220px] min-h-[160px] h-[200px] overflow-hidden bg-white">
+      <div className="relative w-full aspect-[16/9] overflow-hidden bg-white">
         <ImageWithFallback
           src={firstImage}
           alt={property.title}

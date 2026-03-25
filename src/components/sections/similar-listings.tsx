@@ -28,7 +28,7 @@ interface SimilarListing {
 
 const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
   <div className="group bg-white border border-[#EAEAEA] rounded-[4px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
-    <div className="relative w-full max-h-[220px] min-h-[160px] h-[200px] overflow-hidden bg-white">
+    <div className="relative w-full aspect-[16/9] overflow-hidden bg-white">
       <ImageWithFallback
         src={listing.image}
         fallbackSrc="/assets/placeholder-house.svg"

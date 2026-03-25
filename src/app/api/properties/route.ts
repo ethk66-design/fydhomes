@@ -85,6 +85,7 @@ export async function POST(request: NextRequest) {
                 ...propertyData,
                 // Prisma expects strings for these, Zod ensures they match the enum values if provided
                 status: propertyData.status,
+                sold_at: propertyData.status === 'sold' ? new Date() : null,
                 listing_type: propertyData.listing_type,
                 images: {
                     create: (images || []).map((url, index) => ({ url, order: index })),

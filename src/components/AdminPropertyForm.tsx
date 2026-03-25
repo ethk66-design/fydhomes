@@ -98,10 +98,26 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
     setUploading(true);
     setUploadProgress(0);
     const uploadedUrls: string[] = [];
+    let warningCount = 0;
 
     try {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
+
+        // Aspect Ratio Check
+        const isAspectRatioValid = await new Promise<boolean>((resolve) => {
+          const img = new Image();
+          img.src = URL.createObjectURL(file);
+          img.onload = () => {
+            const ratio = img.width / img.height;
+            URL.revokeObjectURL(img.src);
+            // 16:9 is 1.77, tolerance 1.72 to 1.83
+            resolve(ratio >= 1.70 && ratio <= 1.85);
+          };
+          img.onerror = () => resolve(true); // Skip if can't read
+        });
+
+        if (!isAspectRatioValid) warningCount++;
 
         // Compress image
         console.log(`Original size: ${file.size / 1024 / 1024} MB`);
@@ -116,7 +132,6 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
           console.log(`Compressed size: ${compressedFile.size / 1024 / 1024} MB`);
         } catch (error) {
           console.error("Compression failed:", error);
-          // Fallback to original file
         }
 
         const formData = new FormData();
@@ -136,12 +151,17 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
         const { url } = await res.json();
         uploadedUrls.push(url);
 
-        // Update progress
         setUploadProgress(Math.round(((i + 1) / files.length) * 100));
       }
 
-      // Add new images to the list
       setImages(prev => [...prev, ...uploadedUrls]);
+      
+      if (warningCount > 0) {
+        toast.warning(`${warningCount} image(s) are not 16:9. They may be cropped on property cards.`, {
+          duration: 6000,
+        });
+      }
+      
       toast.success(`Successfully uploaded ${uploadedUrls.length} images`);
     } catch (error) {
       console.error("Error uploading images:", error);
@@ -149,13 +169,32 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
     } finally {
       setUploading(false);
       setUploadProgress(0);
-      e.target.value = ''; // Reset file input
+      e.target.value = '';
     }
   };
 
-  const addImageByUrl = () => {
+  const addImageByUrl = async () => {
     if (newImageUrl.trim()) {
-      setImages([...images, newImageUrl.trim()]);
+      const url = newImageUrl.trim();
+      
+      // Aspect Ratio Check
+      const isAspectRatioValid = await new Promise<boolean>((resolve) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => {
+          const ratio = img.width / img.height;
+          resolve(ratio >= 1.70 && ratio <= 1.85);
+        };
+        img.onerror = () => resolve(true); // Skip if can't read
+      });
+
+      if (!isAspectRatioValid) {
+        toast.warning("This image is not 16:9. It may be cropped on property cards.", {
+          duration: 6000,
+        });
+      }
+
+      setImages([...images, url]);
       setNewImageUrl("");
       toast.success("Image added!");
     }

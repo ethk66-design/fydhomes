@@ -60,19 +60,13 @@ export default function PropertyImageSlider({
                     {slideImages.map((src, index) => {
                         return (
                             <div className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden bg-transparent group/slide" key={index}>
-                                {/* Background Blurred Layer */}
-                                <div 
-                                    className="absolute inset-0 z-0 blur-xl scale-110 opacity-60 bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${src})` }}
-                                />
-                                {/* Foreground Uncropped Layer */}
                                 <ImageWithFallback
                                     src={src}
                                     alt={`${alt} - Image ${index + 1}`}
                                     fill
                                     width={width}
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="object-contain w-full h-full relative z-10 transition-transform duration-500 group-hover/slide:scale-[1.02]"
+                                    className="object-cover w-full h-full transition-transform duration-500 group-hover/slide:scale-[1.02]"
                                 />
                             </div>
                         );

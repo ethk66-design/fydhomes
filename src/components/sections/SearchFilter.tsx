@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -23,6 +23,7 @@ const SearchFilter: React.FC = () => {
   const [beds, setBeds] = useState(searchParams.get('beds') || '');
   const [baths, setBaths] = useState(searchParams.get('baths') || '');
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [isSearching, startSearchTransition] = useTransition();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +37,9 @@ const SearchFilter: React.FC = () => {
     if (beds) params.set('beds', beds);
     if (baths) params.set('baths', baths);
 
-    router.push(`/listings?${params.toString()}`);
+    startSearchTransition(() => {
+      router.push(`/listings?${params.toString()}`);
+    });
   };
 
   return (
@@ -125,9 +128,17 @@ const SearchFilter: React.FC = () => {
               <button
                 type="submit"
                 aria-label="Search"
-                className="w-full lg:w-[100px] xl:w-[130px] h-[42px] sm:h-[45px] bg-[#1db954] hover:bg-[#1aa34a] transition-colors duration-200 flex items-center justify-center rounded-[4px]"
+                disabled={isSearching}
+                className="w-full lg:w-[100px] xl:w-[130px] h-[42px] sm:h-[45px] bg-[#1db954] hover:bg-[#1aa34a] disabled:opacity-70 transition-colors duration-200 flex items-center justify-center rounded-[4px]"
               >
-                <Search className="text-white w-5 h-5" />
+                {isSearching ? (
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                ) : (
+                  <Search className="text-white w-5 h-5" />
+                )}
               </button>
             </motion.div>
 

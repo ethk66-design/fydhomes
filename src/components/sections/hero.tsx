@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import ImageWithFallback from "@/components/ui/image-with-fallback";
 import { Search, Phone } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -12,6 +12,7 @@ export function Hero({ bgImage }: { bgImage?: string }) {
   const [keyword, setKeyword] = useState('');
   const [type, setType] = useState('Property Type');
   const [area, setArea] = useState('Area');
+  const [isSearching, startSearchTransition] = useTransition();
 
   const handleSearch = () => {
     const params = new URLSearchParams();
@@ -19,7 +20,9 @@ export function Hero({ bgImage }: { bgImage?: string }) {
     if (type !== 'Property Type') params.append('type', type);
     if (area !== 'Area') params.append('area', area);
 
-    router.push(`/listings?${params.toString()}`);
+    startSearchTransition(() => {
+      router.push(`/listings?${params.toString()}`);
+    });
   };
 
   return (
@@ -152,10 +155,18 @@ export function Hero({ bgImage }: { bgImage?: string }) {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={handleSearch}
-                      className="w-[140px] lg:w-[160px] h-[46px] bg-[#1db954] hover:bg-[#1aa34a] text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
+                      disabled={isSearching}
+                      className="w-[140px] lg:w-[160px] h-[46px] bg-[#1db954] hover:bg-[#1aa34a] disabled:opacity-70 text-white flex items-center justify-center rounded-[4px] transition-colors duration-200"
                       aria-label="Search properties"
                     >
-                      <Search size={20} strokeWidth={2.5} />
+                      {isSearching ? (
+                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                      ) : (
+                        <Search size={20} strokeWidth={2.5} />
+                      )}
                     </motion.button>
                   </div>
                 </div>

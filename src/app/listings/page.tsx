@@ -11,9 +11,8 @@ export async function generateMetadata() {
   return getSeoMetadata("/listings", "Property Listings | FYD Homes", "Explore our wide range of properties for sale and rent in Kochi and surrounding areas.");
 }
 
-// Force dynamic rendering - never cache this page
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// Revalidate every 60 seconds — cached pages serve instantly, fresh data within 1 minute
+export const revalidate = 60;
 
 interface ListingsPageProps {
   searchParams: Promise<{
@@ -129,7 +128,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         area: true,
         land_area: true
       },
-      take: 2000, 
+      take: 500, 
     });
 
     const parsedProperties = rawProperties.map(p => {

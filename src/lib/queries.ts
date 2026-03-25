@@ -38,5 +38,5 @@ export const getFeaturedProperties = unstable_cache(
         }));
     },
     ['featured-properties'],
-    { revalidate: 3600, tags: ['properties', 'featured-properties'] }
+    { revalidate: 300, tags: ['properties', 'featured-properties'] }
 );

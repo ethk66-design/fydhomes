@@ -157,7 +157,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
       setImages(prev => [...prev, ...uploadedUrls]);
       
       if (warningCount > 0) {
-        toast.warning(`${warningCount} image(s) are not 16:9. They may be cropped on property cards.`, {
+        toast.warning(`${warningCount} image(s) are not the target 1824x1026 (16:9) size. They will be fit with borders on property cards.`, {
           duration: 6000,
         });
       }
@@ -189,7 +189,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
       });
 
       if (!isAspectRatioValid) {
-        toast.warning("This image is not 16:9. It may be cropped on property cards.", {
+        toast.warning("This image is not the target 1824x1026 (16:9) size. It will be fit with borders on property cards.", {
           duration: 6000,
         });
       }

@@ -64,6 +64,16 @@ export async function PUT(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { id: _id, created_at, updated_at, ...cleanPropertyData } = propertyData;
 
+        // Fetch existing property to check status boundaries
+        const existingProperty = await db.property.findUnique({
+            where: { id },
+            select: { status: true, sold_at: true }
+        });
+
+        if (!existingProperty) {
+            return NextResponse.json({ error: 'Property not found' }, { status: 404 });
+        }
+
         // Build transaction types
         // Build transaction types
         const transactions: Prisma.PrismaPromise<unknown>[] = [];
@@ -80,6 +90,15 @@ export async function PUT(
 
         // 3. Prepare Update Data
         const updateData: Prisma.PropertyUpdateInput = { ...cleanPropertyData };
+
+        if ('status' in cleanPropertyData) {
+            const newStatus = cleanPropertyData.status;
+            if (newStatus === 'sold' && existingProperty.status !== 'sold') {
+                updateData.sold_at = new Date();
+            } else if (newStatus !== 'sold') {
+                updateData.sold_at = null;
+            }
+        }
 
         if (hasImages) {
             updateData.images = {

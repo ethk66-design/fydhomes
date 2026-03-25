@@ -20,6 +20,7 @@ model Property {
   area             String?         @db.VarChar(100)
   land_area        String?         @db.VarChar(100)
   status           String          @default("active") @db.VarChar(50)
+  sold_at          DateTime?       // Records when status changes to 'sold'
   type             String?         @db.VarChar(100)
   listing_type     String?         @db.VarChar(50)
   agent_id         String?         @db.Char(36)

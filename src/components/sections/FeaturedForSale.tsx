@@ -103,7 +103,7 @@ export function FeaturedForSale({ initialProperties }: FeaturedForSaleProps) {
                     show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
                   }}
                 >
-                  <PropertyCard property={property} disableSlider={true} />
+                  <PropertyCard property={property} />
                 </motion.div>
               ))
             ) : (

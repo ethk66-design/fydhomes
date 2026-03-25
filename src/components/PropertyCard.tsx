@@ -1,36 +1,32 @@
 import React from 'react';
 import Link from 'next/link';
-import PropertyImageSlider from '@/components/ui/property-image-slider';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { BedDouble, Bath, Scaling, MapPin, Trees } from 'lucide-react';
-
 
 import { Property } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
 
 interface PropertyCardProps {
   property: Property;
-  disableSlider?: boolean;
 }
 
-export default function PropertyCard({ property, disableSlider = false }: PropertyCardProps) {
-  // Use PropertyImageSlider for the image section
-  // Fallback handled inside the slider if images array is empty
-  const images = property.images && property.images.length > 0
-    ? property.images
-    : ['/assets/placeholder-house.svg'];
+export default function PropertyCard({ property }: PropertyCardProps) {
+  const firstImage = property.images && property.images.length > 0
+    ? property.images[0]
+    : '/assets/placeholder-house.svg';
 
   return (
     <div
       className="bg-white border border-[#eeeeee] flex flex-col hover:shadow-card transition-grow group h-full relative"
     >
-      {/* Image Slider Section - Handles its own internal clicks/swipes */}
-      <div className="relative aspect-video overflow-hidden">
-        <PropertyImageSlider
-          images={images}
+      {/* Static Image - First image only */}
+      <div className="relative aspect-video overflow-hidden bg-white">
+        <ImageWithFallback
+          src={firstImage}
           alt={property.title}
-          aspectRatio="aspect-video"
-          width={500}
-          disabled={disableSlider}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-contain w-full h-full object-center"
         />
 
         {/* Overlays (Tags) - Pointer events none so they don't block slider */}

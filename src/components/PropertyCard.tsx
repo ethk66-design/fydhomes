@@ -25,6 +25,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           src={firstImage}
           alt={property.title}
           fill
+          width={400}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-contain w-full h-full object-center"
         />

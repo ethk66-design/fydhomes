@@ -16,15 +16,14 @@ export function normalizeImageUrl(url: string): string {
     return normalized;
 }
 
-// Supabase Native Image Transformation Interceptor
+// External CDN Image Optimization Interceptor (wsrv.nl proxy)
 export function optimizeSupabaseUrl(url: string, width = 800, quality = 75): string {
     if (!url) return '';
-    // If it's a Supabase storage URL, rewrite it to use their native /render/image/ endpoint
+    // Use wsrv.nl proxy to dynamically resize and convert to WebP
     if (url.includes('/storage/v1/object/public/')) {
-        // Ensure width is a number even if passed as string-hint
         const w = typeof width === 'string' ? parseInt(width) : width;
-        return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')
-            + `?width=${w || 800}&quality=${quality}`;
+        const encodedUrl = encodeURIComponent(url);
+        return `https://wsrv.nl/?url=${encodedUrl}&w=${w || 800}&q=${quality}&output=webp`;
     }
     return url;
 }

@@ -73,7 +73,7 @@ export default function PropertyImageSlider({
                                     fill
                                     width={width}
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="object-contain w-full h-full object-center"
+                                    className="object-cover w-full h-full object-center"
                                 />
                             </div>
                         );

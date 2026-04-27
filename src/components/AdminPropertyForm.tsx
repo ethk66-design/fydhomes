@@ -10,8 +10,101 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import ImageWithFallback from "@/components/ui/image-with-fallback";
+import ImageCropPreview from "@/components/ui/ImageCropPreview";
 import { Loader2, X, Upload, Star } from "lucide-react";
 import imageCompression from 'browser-image-compression';
+
+/**
+ * Returns the aspect ratio (width/height) of an image file.
+ */
+function getAspectRatio(file: File): Promise<number> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const ratio = img.width / img.height;
+      URL.revokeObjectURL(img.src);
+      resolve(ratio);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(img.src);
+      resolve(16 / 9); // Assume valid on error
+    };
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+/**
+ * Auto-crops an image file to 16:9 aspect ratio from the center.
+ * If the image is already 16:9 (within tolerance), returns it unchanged.
+ */
+async function cropTo16by9(file: File): Promise<File> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const { width, height } = img;
+      const currentRatio = width / height;
+      const targetRatio = 16 / 9;
+
+      // If already 16:9 (tolerance ±0.08), skip cropping
+      if (Math.abs(currentRatio - targetRatio) < 0.08) {
+        URL.revokeObjectURL(img.src);
+        resolve(file);
+        return;
+      }
+
+      // Calculate the largest 16:9 crop from the center
+      let cropWidth: number, cropHeight: number, offsetX: number, offsetY: number;
+
+      if (currentRatio > targetRatio) {
+        // Image is wider than 16:9 — crop sides
+        cropHeight = height;
+        cropWidth = Math.round(height * targetRatio);
+        offsetX = Math.round((width - cropWidth) / 2);
+        offsetY = 0;
+      } else {
+        // Image is taller than 16:9 — crop top/bottom
+        cropWidth = width;
+        cropHeight = Math.round(width / targetRatio);
+        offsetX = 0;
+        offsetY = Math.round((height - cropHeight) / 2);
+      }
+
+      // Draw the cropped region onto a canvas
+      const canvas = document.createElement('canvas');
+      canvas.width = cropWidth;
+      canvas.height = cropHeight;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        URL.revokeObjectURL(img.src);
+        resolve(file); // Fallback: return original
+        return;
+      }
+
+      ctx.drawImage(img, offsetX, offsetY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+      URL.revokeObjectURL(img.src);
+
+      // Export canvas back to a File
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          resolve(file); // Fallback
+          return;
+        }
+        const croppedFile = new File([blob], file.name, {
+          type: 'image/jpeg',
+          lastModified: Date.now(),
+        });
+        resolve(croppedFile);
+      }, 'image/jpeg', 0.92);
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(img.src);
+      resolve(file); // Fallback: return original on error
+    };
+
+    img.src = URL.createObjectURL(file);
+  });
+}
 
 interface AdminPropertyFormProps {
   initialData?: Property;
@@ -25,6 +118,8 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [newImageUrl, setNewImageUrl] = useState("");
+  const [currentCropFile, setCurrentCropFile] = useState<File | null>(null);
+  const [cropResolve, setCropResolve] = useState<((file: File) => void) | null>(null);
 
   const [formData, setFormData] = useState<Partial<Property>>({
     title: initialData?.title || "",
@@ -98,28 +193,26 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
     setUploading(true);
     setUploadProgress(0);
     const uploadedUrls: string[] = [];
-    let warningCount = 0;
+    let croppedCount = 0;
 
     try {
       for (let i = 0; i < files.length; i++) {
-        const file = files[i];
+        let file = files[i];
 
-        // Aspect Ratio Check
-        const isAspectRatioValid = await new Promise<boolean>((resolve) => {
-          const img = new Image();
-          img.src = URL.createObjectURL(file);
-          img.onload = () => {
-            const ratio = img.width / img.height;
-            URL.revokeObjectURL(img.src);
-            // 16:9 is 1.77, tolerance 1.72 to 1.83
-            resolve(ratio >= 1.70 && ratio <= 1.85);
-          };
-          img.onerror = () => resolve(true); // Skip if can't read
-        });
+        // Step 1: Auto-crop to 16:9 if needed
+        const ratio = await getAspectRatio(file);
+        const isCropNeeded = ratio < 1.70 || ratio > 1.85;
 
-        if (!isAspectRatioValid) warningCount++;
+        if (isCropNeeded) {
+          // Show interactive crop preview and wait for user to confirm
+          file = await new Promise<File>((resolve) => {
+            setCurrentCropFile(file);
+            setCropResolve(() => resolve);
+          });
+          croppedCount++;
+        }
 
-        // Compress image
+        // Step 2: Compress image
         console.log(`Original size: ${file.size / 1024 / 1024} MB`);
         let compressedFile = file;
         try {
@@ -134,6 +227,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
           console.error("Compression failed:", error);
         }
 
+        // Step 3: Upload to Supabase
         const formData = new FormData();
         formData.append('file', compressedFile);
         formData.append('folder', 'properties');
@@ -156,9 +250,9 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
 
       setImages(prev => [...prev, ...uploadedUrls]);
       
-      if (warningCount > 0) {
-        toast.warning(`${warningCount} image(s) are not the target 1824x1026 (16:9) size. They will be fit with borders on property cards.`, {
-          duration: 6000,
+      if (croppedCount > 0) {
+        toast.info(`${croppedCount} image(s) were auto-cropped to 16:9 format.`, {
+          duration: 4000,
         });
       }
       
@@ -176,23 +270,6 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
   const addImageByUrl = async () => {
     if (newImageUrl.trim()) {
       const url = newImageUrl.trim();
-      
-      // Aspect Ratio Check
-      const isAspectRatioValid = await new Promise<boolean>((resolve) => {
-        const img = new Image();
-        img.src = url;
-        img.onload = () => {
-          const ratio = img.width / img.height;
-          resolve(ratio >= 1.70 && ratio <= 1.85);
-        };
-        img.onerror = () => resolve(true); // Skip if can't read
-      });
-
-      if (!isAspectRatioValid) {
-        toast.warning("This image is not the target 1824x1026 (16:9) size. It will be fit with borders on property cards.", {
-          duration: 6000,
-        });
-      }
 
       setImages([...images, url]);
       setNewImageUrl("");
@@ -647,6 +724,25 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
           {isEditing ? "Update Property" : "Create Property"}
         </Button>
       </div>
+      {/* Crop Preview Modal */}
+      {currentCropFile && (
+        <ImageCropPreview
+          file={currentCropFile}
+          onConfirm={(croppedFile) => {
+            if (cropResolve) cropResolve(croppedFile);
+            setCurrentCropFile(null);
+            setCropResolve(null);
+          }}
+          onCancel={() => {
+            // Use auto center-crop as fallback when user skips
+            cropTo16by9(currentCropFile).then((cropped) => {
+              if (cropResolve) cropResolve(cropped);
+              setCurrentCropFile(null);
+              setCropResolve(null);
+            });
+          }}
+        />
+      )}
     </form >
   );
 }

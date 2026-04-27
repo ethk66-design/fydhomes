@@ -20,14 +20,14 @@ export default function PropertyCard({ property }: PropertyCardProps) {
       className="bg-white border border-[#eeeeee] flex flex-col hover:shadow-card transition-grow group h-full relative"
     >
       {/* Static Image - First image only, full display */}
-      <div className="relative w-full h-[200px] overflow-hidden bg-white flex items-center justify-center">
+      <div className="relative w-full aspect-video overflow-hidden bg-[#f8f9fa]">
         <ImageWithFallback
           src={firstImage}
           alt={property.title}
           fill
           width={400}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-contain w-full h-full object-center"
+          className="object-cover w-full h-full object-center"
         />
 
         {/* Overlays (Tags) - Pointer events none so they don't block slider */}

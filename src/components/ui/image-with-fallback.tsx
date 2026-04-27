@@ -79,7 +79,7 @@ const ImageWithFallback = ({
         preload(finalSrc, { as: 'image', fetchPriority: 'high' });
     }
 
-    const baseClassName = `${className || ""} ${fill ? "absolute inset-0 w-full h-full" : ""} ${fill && !className?.includes("object-") ? "object-contain" : ""}`.replace(/\s+/g, ' ').trim();
+    const baseClassName = `${className || ""} ${fill ? "absolute inset-0 w-full h-full" : ""} ${fill && !className?.includes("object-") ? "object-cover" : ""}`.replace(/\s+/g, ' ').trim();
 
     return (
         // eslint-disable-next-line @next/next/no-img-element

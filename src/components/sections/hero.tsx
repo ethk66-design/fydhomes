@@ -176,7 +176,7 @@ export function Hero({ slides }: { slides?: string[] }) {
                 whileTap={{ scale: 0.98 }}
                 onClick={handleSearch}
                 disabled={isSearching}
-                className="h-14 px-8 bg-[#E3572D] hover:bg-[#ff693e] text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors disabled:opacity-70 whitespace-nowrap"
+                className="w-full md:w-auto h-14 px-8 bg-[#E3572D] hover:bg-[#ff693e] text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors disabled:opacity-70 whitespace-nowrap"
               >
                 {isSearching ? (
                   <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

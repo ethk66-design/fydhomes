@@ -39,7 +39,14 @@ export function Hero({ slides }: { slides?: string[] }) {
 
   return (
     <>
-      <section className="relative h-[60vh] md:h-[75vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden bg-[#0A192F]">
+      <section
+        className="relative h-[60vh] md:h-[75vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden bg-[#0A192F]"
+        style={{
+          backgroundImage: `url('${heroImages[0]}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         {/* Dynamic Background Slider */}
         <AnimatePresence initial={false}>
           <motion.div
@@ -55,6 +62,7 @@ export function Hero({ slides }: { slides?: string[] }) {
               src={heroImages[currentImage]}
               alt="Premium Real Estate"
               fill
+              width={1920}
               className="object-cover w-full h-full"
               priority
             />

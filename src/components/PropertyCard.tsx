@@ -2,96 +2,84 @@ import React from 'react';
 import Link from 'next/link';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
 import { BedDouble, Bath, Scaling, MapPin, Trees } from 'lucide-react';
-
 import { Property } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
 
 interface PropertyCardProps {
   property: Property;
+  theme?: 'light' | 'dark';
 }
 
-export default function PropertyCard({ property }: PropertyCardProps) {
+export default function PropertyCard({ property, theme = 'dark' }: PropertyCardProps) {
+  const isLight = theme === 'light';
   const firstImage = property.images && property.images.length > 0
     ? property.images[0]
     : '/assets/placeholder-house.svg';
 
   return (
     <div
-      className="bg-white border border-[#eeeeee] flex flex-col hover:shadow-card transition-grow group h-full relative"
+      className="bg-white border-[#EAEAEA] shadow-md border flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group h-full relative rounded-xl overflow-hidden"
     >
-      {/* Static Image - First image only, full display */}
-      <div className="relative w-full aspect-video overflow-hidden bg-[#f8f9fa]">
+      {/* Image Section */}
+      <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#0A192F]">
         <ImageWithFallback
           src={firstImage}
           alt={property.title}
           fill
-          width={400}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover w-full h-full object-center"
+          className="object-cover w-full h-full object-center group-hover:scale-110 transition-transform duration-700 ease-in-out"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 to-transparent opacity-60 pointer-events-none" />
 
-        {/* Overlays (Tags) - Pointer events none so they don't block slider */}
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10 pointer-events-none">
+        {/* Overlays (Tags) */}
+        <div className="absolute top-4 left-4 flex flex-wrap gap-2 z-10 pointer-events-none">
           {property.status === 'featured' && (
-            <span className="text-[10px] font-bold px-2 py-1 uppercase rounded-sm bg-[#1db954] text-white">
+            <span className="text-[10px] sm:text-xs font-bold px-3 py-1 uppercase rounded-md bg-[#E3572D] text-white shadow-lg tracking-wider">
               FEATURED
             </span>
           )}
-          {property.tags?.map(tag => {
-            if (tag === 'budget-friendly') {
-              return (
-                <span key={tag} className="text-[10px] font-bold px-2 py-1 uppercase rounded-sm bg-[#00AEEF] text-white">
-                  BUDGET FRIENDLY
-                </span>
-              );
-            }
-            return (
-              <span key={tag} className="text-[10px] font-bold px-2 py-1 uppercase rounded-sm bg-gray-800 text-white">
-                {tag}
-              </span>
-            );
-          })}
           {property.listing_type && (
-            <span className="text-[10px] font-bold px-2 py-1 uppercase rounded-sm bg-black/60 text-white backdrop-blur-sm">
-              FOR {property.listing_type.toUpperCase()}
+            <span className="text-[10px] sm:text-xs font-bold px-3 py-1 uppercase rounded-md bg-[#0A192F]/90 text-white backdrop-blur-md shadow-lg tracking-wider">
+              FOR {property.listing_type}
             </span>
           )}
         </div>
       </div>
 
-      {/* Content Section - Wrapped in Link for navigation */}
+      {/* Content Section */}
       <Link href={`/listings/${property.id}`} className="flex flex-col flex-grow text-inherit no-underline">
-        <div className="p-5 flex flex-col flex-grow">
-          <h3 className="text-[14px] font-bold text-black mb-2 line-clamp-2 leading-tight uppercase tracking-wide group-hover:text-[#2d7a8c] transition-colors">
+        <div className="p-6 flex flex-col flex-grow relative z-10">
+          <div className="flex items-center gap-2 text-gray-400 text-xs sm:text-sm mb-3">
+            <MapPin size={14} className="text-[#E3572D]" />
+            <span className="truncate">{property.location}</span>
+          </div>
+
+          <h3 className="text-[16px] sm:text-[18px] font-semibold text-[#222222] mb-3 line-clamp-2 leading-snug group-hover:text-[#E3572D] transition-colors">
             {property.title}
           </h3>
 
-          <div className="flex items-center gap-1 text-[#5c5c5c] text-[12px] mb-3">
-            <MapPin size={12} />
-            <span>{property.location}</span>
-          </div>
-
-          <div className="text-[16px] font-bold text-[#2d7a8c] mb-4">
+          <div className="text-[20px] font-bold text-[#E3572D] mb-6">
             {formatPrice(property.price)}
           </div>
 
-          <div className="mt-auto pt-4 border-t border-[#eeeeee] flex items-center justify-between gap-2 sm:gap-1 text-[#5c5c5c] overflow-x-auto [-webkit-overflow-scrolling:touch] snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-            <div className="flex items-center gap-1 shrink-0 snap-start">
-              <BedDouble size={14} className="text-[#5c5c5c]/60" />
-              <span className="text-[11px] font-medium whitespace-nowrap">{property.beds || 0}</span>
+          {/* Amenities Footer */}
+          <div className="mt-auto pt-4 border-t flex items-center justify-between gap-4 overflow-x-auto [-webkit-overflow-scrolling:touch] snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [scrollbar-width:none] border-[#EAEAEA] text-[#555555]">
+            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-gray-50 border-[#EAEAEA]">
+              <BedDouble size={16} className="text-[#E3572D]" />
+              <span className="text-xs font-medium">{property.beds || 0}</span>
             </div>
-            <div className="flex items-center gap-1 shrink-0 snap-start">
-              <Bath size={14} className="text-[#5c5c5c]/60" />
-              <span className="text-[11px] font-medium whitespace-nowrap">{property.baths || 0}</span>
+            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-gray-50 border-[#EAEAEA]">
+              <Bath size={16} className="text-[#E3572D]" />
+              <span className="text-xs font-medium">{property.baths || 0}</span>
             </div>
-            <div className="flex items-center gap-1 shrink-0 snap-start">
-              <Scaling size={14} className="text-[#5c5c5c]/60" />
-              <span className="text-[11px] font-medium whitespace-nowrap">{property.area || 'N/A'}</span>
+            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-gray-50 border-[#EAEAEA]">
+              <Scaling size={16} className="text-[#E3572D]" />
+              <span className="text-xs font-medium">{property.area || 'N/A'}</span>
             </div>
             {property.land_area && (
-              <div className="flex items-center gap-1 shrink-0 snap-start">
-                <Trees size={14} className="text-[#2d7a8c]" />
-                <span className="text-[11px] font-medium whitespace-nowrap">{property.land_area}</span>
+              <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-gray-50 border-[#EAEAEA]">
+                <Trees size={16} className="text-[#E3572D]" />
+                <span className="text-xs font-medium">{property.land_area}</span>
               </div>
             )}
           </div>

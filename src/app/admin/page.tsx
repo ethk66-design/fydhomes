@@ -118,7 +118,7 @@ export default function AdminDashboard() {
   if (status === "loading" || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
       </div>
     );
   }
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
                 {/* Management Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="flex-1 sm:flex-none border-[#2d7a8c] text-[#2d7a8c] hover:bg-[#2d7a8c]/10 font-bold text-xs sm:text-sm">
+                    <Button variant="outline" className="flex-1 sm:flex-none border-[#E3572D] text-[#E3572D] hover:bg-[#E3572D]/10 font-bold text-xs sm:text-sm">
                       <Settings size={14} className="mr-1 sm:mr-2" />
                       Manage
                       <ChevronDown size={14} className="ml-1 sm:ml-2 opacity-50" />
@@ -191,6 +191,12 @@ export default function AdminDashboard() {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
+                      <Link href="/admin/hero-slider" className="w-full cursor-pointer">
+                        <ImageIcon size={14} className="mr-2" />
+                        Hero Slider
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                       <Link href="/admin/site-images" className="w-full cursor-pointer">
                         <ImageIcon size={14} className="mr-2" />
                         Site Images
@@ -201,7 +207,7 @@ export default function AdminDashboard() {
 
                 {/* Add Property */}
                 <Link href="/admin/properties/new" className="flex-1 sm:flex-none">
-                  <Button className="w-full bg-[#2d7a8c] hover:bg-[#256a7a] text-white font-bold text-xs sm:text-sm">
+                  <Button className="w-full bg-[#E3572D] hover:bg-[#256a7a] text-white font-bold text-xs sm:text-sm">
                     <Plus size={14} className="mr-1 sm:mr-2" />
                     Add Property
                   </Button>
@@ -255,8 +261,8 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-4 lg:px-6 py-3 lg:py-4">
                       <div className="flex flex-col gap-1">
-                        <span className="text-[10px] lg:text-xs font-bold text-[#2d7a8c] uppercase tracking-wider">{property.type || 'N/A'}</span>
-                        <span className={`text-[9px] lg:text-[10px] font-bold px-1.5 py-0.5 rounded-sm w-fit uppercase ${property.status === 'featured' ? 'bg-[#1db954] text-white' :
+                        <span className="text-[10px] lg:text-xs font-bold text-[#E3572D] uppercase tracking-wider">{property.type || 'N/A'}</span>
+                        <span className={`text-[9px] lg:text-[10px] font-bold px-1.5 py-0.5 rounded-sm w-fit uppercase ${property.status === 'featured' ? 'bg-[#E3572D] text-white' :
                           property.status === 'sold' ? 'bg-black text-white' :
                             'bg-[#f4f8fb] text-[#5c5c5c]'
                           }`}>
@@ -275,7 +281,7 @@ export default function AdminDashboard() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className={`h-7 w-7 lg:h-8 lg:w-8 hover:bg-[#1db954]/10 ${property.status === 'featured' ? 'text-[#1db954]' : 'text-[#5c5c5c] hover:text-[#1db954]'}`}
+                          className={`h-7 w-7 lg:h-8 lg:w-8 hover:bg-[#E3572D]/10 ${property.status === 'featured' ? 'text-[#E3572D]' : 'text-[#5c5c5c] hover:text-[#E3572D]'}`}
                           onClick={() => toggleFeatured(property)}
                           title={property.status === 'featured' ? "Remove from Featured" : "Add to Featured"}
                         >
@@ -283,12 +289,12 @@ export default function AdminDashboard() {
                         </Button>
 
                         <Link href={`/listings/${property.id}`} target="_blank" title="View in App">
-                          <Button variant="ghost" size="icon" className="h-7 w-7 lg:h-8 lg:w-8 text-[#5c5c5c] hover:text-[#2d7a8c]">
+                          <Button variant="ghost" size="icon" className="h-7 w-7 lg:h-8 lg:w-8 text-[#5c5c5c] hover:text-[#E3572D]">
                             <ExternalLink size={14} />
                           </Button>
                         </Link>
                         <Link href={`/admin/properties/${property.id}/edit`}>
-                          <Button variant="ghost" size="icon" className="h-7 w-7 lg:h-8 lg:w-8 text-[#5c5c5c] hover:text-[#2d7a8c]">
+                          <Button variant="ghost" size="icon" className="h-7 w-7 lg:h-8 lg:w-8 text-[#5c5c5c] hover:text-[#E3572D]">
                             <Pencil size={14} />
                           </Button>
                         </Link>
@@ -323,8 +329,8 @@ export default function AdminDashboard() {
                   <div className="flex-1 min-w-0">
                     <div className="font-bold text-black text-sm line-clamp-2 mb-1">{property.title}</div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-[#2d7a8c] uppercase">{property.type || 'N/A'}</span>
-                      <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-sm uppercase ${property.status === 'featured' ? 'bg-[#1db954] text-white' :
+                      <span className="text-xs font-bold text-[#E3572D] uppercase">{property.type || 'N/A'}</span>
+                      <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-sm uppercase ${property.status === 'featured' ? 'bg-[#E3572D] text-white' :
                         property.status === 'sold' ? 'bg-black text-white' :
                           'bg-[#f4f8fb] text-[#5c5c5c]'
                         }`}>
@@ -342,18 +348,18 @@ export default function AdminDashboard() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className={`h-11 w-11 hover:bg-[#1db954]/10 ${property.status === 'featured' ? 'text-[#1db954]' : 'text-[#5c5c5c] hover:text-[#1db954]'}`}
+                      className={`h-11 w-11 hover:bg-[#E3572D]/10 ${property.status === 'featured' ? 'text-[#E3572D]' : 'text-[#5c5c5c] hover:text-[#E3572D]'}`}
                       onClick={() => toggleFeatured(property)}
                     >
                       <Star size={18} className={property.status === 'featured' ? "fill-current" : ""} />
                     </Button>
                     <Link href={`/listings/${property.id}`} target="_blank">
-                      <Button variant="ghost" size="icon" className="h-11 w-11 text-[#5c5c5c] hover:text-[#2d7a8c]">
+                      <Button variant="ghost" size="icon" className="h-11 w-11 text-[#5c5c5c] hover:text-[#E3572D]">
                         <ExternalLink size={18} />
                       </Button>
                     </Link>
                     <Link href={`/admin/properties/${property.id}/edit`}>
-                      <Button variant="ghost" size="icon" className="h-11 w-11 text-[#5c5c5c] hover:text-[#2d7a8c]">
+                      <Button variant="ghost" size="icon" className="h-11 w-11 text-[#5c5c5c] hover:text-[#E3572D]">
                         <Pencil size={18} />
                       </Button>
                     </Link>

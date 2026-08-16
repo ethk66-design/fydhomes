@@ -43,7 +43,7 @@ export default async function EditPropertyPage({ params }: EditPropertyPageProps
         <div className="mb-6 sm:mb-10">
           <Link
             href="/admin"
-            className="flex items-center gap-1.5 sm:gap-2 text-[#5c5c5c] hover:text-[#2d7a8c] transition-colors text-xs sm:text-sm font-medium mb-3 sm:mb-4"
+            className="flex items-center gap-1.5 sm:gap-2 text-[#5c5c5c] hover:text-[#E3572D] transition-colors text-xs sm:text-sm font-medium mb-3 sm:mb-4"
           >
             <ChevronLeft size={14} className="sm:w-4 sm:h-4" />
             Back to Dashboard

@@ -315,7 +315,7 @@ export default function ImageCropPreview({ file, onConfirm, onCancel }: ImageCro
         <button
           onClick={handleConfirm}
           disabled={isProcessing}
-          className="px-6 py-2.5 bg-[#2d7a8c] hover:bg-[#256a7a] text-white rounded-lg text-sm font-bold transition-all flex items-center gap-2 disabled:opacity-60"
+          className="px-6 py-2.5 bg-[#E3572D] hover:bg-[#256a7a] text-white rounded-lg text-sm font-bold transition-all flex items-center gap-2 disabled:opacity-60"
         >
           {isProcessing ? (
             <>

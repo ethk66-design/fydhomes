@@ -134,3 +134,12 @@ model Session {
   @@index([userId])
   @@map("sessions")
 }
+
+model HeroSlide {
+  id         String   @id @default(uuid()) @db.Char(36)
+  image_url  String   @db.VarChar(500)
+  order      Int      @default(0)
+  created_at DateTime @default(now())
+
+  @@map("hero_slides")
+}

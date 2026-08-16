@@ -57,7 +57,7 @@ export default function AdminSeoPage() {
     if (status === "loading" || loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-white">
-                <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
             </div>
         );
     }
@@ -75,7 +75,7 @@ export default function AdminSeoPage() {
                     {/* Header & Controls */}
                     <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-6">
                         <div>
-                            <Link href="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#2d7a8c] mb-2">
+                            <Link href="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#E3572D] mb-2">
                                 <ArrowLeft size={16} />
                                 Back to Dashboard
                             </Link>
@@ -112,7 +112,7 @@ export default function AdminSeoPage() {
                                 {filteredPages.map((page) => (
                                     <tr key={page.id} className="hover:bg-gray-50 transition-colors">
                                         <td className="px-4 lg:px-6 py-3 lg:py-4">
-                                            <div className="flex items-center gap-2 font-mono text-sm text-[#2d7a8c] bg-blue-50/50 px-2 py-1 rounded w-fit">
+                                            <div className="flex items-center gap-2 font-mono text-sm text-[#E3572D] bg-blue-50/50 px-2 py-1 rounded w-fit">
                                                 <Globe size={14} />
                                                 {page.route}
                                             </div>
@@ -125,7 +125,7 @@ export default function AdminSeoPage() {
                                         </td>
                                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-right">
                                             <Link href={`/admin/seo/${page.id}`}>
-                                                <Button variant="ghost" size="icon" className="h-8 w-8 text-[#5c5c5c] hover:text-[#2d7a8c]">
+                                                <Button variant="ghost" size="icon" className="h-8 w-8 text-[#5c5c5c] hover:text-[#E3572D]">
                                                     <Pencil size={14} />
                                                 </Button>
                                             </Link>
@@ -140,12 +140,12 @@ export default function AdminSeoPage() {
                         {filteredPages.map((page) => (
                             <div key={page.id} className="p-4 hover:bg-gray-50">
                                 <div className="flex items-center justify-between mb-3">
-                                    <div className="flex items-center gap-2 font-mono text-sm text-[#2d7a8c] bg-blue-50/50 px-2 py-1 rounded w-fit">
+                                    <div className="flex items-center gap-2 font-mono text-sm text-[#E3572D] bg-blue-50/50 px-2 py-1 rounded w-fit">
                                         <Globe size={14} />
                                         {page.route}
                                     </div>
                                     <Link href={`/admin/seo/${page.id}`}>
-                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-[#5c5c5c] hover:text-[#2d7a8c]">
+                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-[#5c5c5c] hover:text-[#E3572D]">
                                             <Pencil size={16} />
                                         </Button>
                                     </Link>

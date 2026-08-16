@@ -42,7 +42,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       {currentPage > 1 ? (
         <Link
           href={createPageUrl(currentPage - 1)}
-          className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:bg-[#2d7a8c] hover:text-white hover:border-[#2d7a8c] transition-all"
+          className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:bg-[#E3572D] hover:text-white hover:border-[#E3572D] transition-all"
           aria-label="Previous page"
         >
           <ChevronLeft size={18} />
@@ -62,7 +62,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
         <>
           <Link
             href={createPageUrl(1)}
-            className="flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium text-gray-600 hover:bg-[#2d7a8c] hover:text-white transition-all"
+            className="flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium text-gray-600 hover:bg-[#E3572D] hover:text-white transition-all"
           >
             1
           </Link>
@@ -76,8 +76,8 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
           href={createPageUrl(page)}
           className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-bold transition-all ${
             currentPage === page
-              ? 'bg-[#1db954] text-white shadow-md'
-              : 'text-gray-600 hover:bg-[#2d7a8c] hover:text-white'
+              ? 'bg-[#E3572D] text-white shadow-md'
+              : 'text-gray-600 hover:bg-[#E3572D] hover:text-white'
           }`}
           aria-current={currentPage === page ? "page" : undefined}
         >
@@ -90,7 +90,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
           {endPage < totalPages - 1 && <span className="text-gray-400 px-1">...</span>}
           <Link
             href={createPageUrl(totalPages)}
-            className="flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium text-gray-600 hover:bg-[#2d7a8c] hover:text-white transition-all"
+            className="flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium text-gray-600 hover:bg-[#E3572D] hover:text-white transition-all"
           >
             {totalPages}
           </Link>
@@ -101,7 +101,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       {currentPage < totalPages ? (
         <Link
           href={createPageUrl(currentPage + 1)}
-          className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:bg-[#2d7a8c] hover:text-white hover:border-[#2d7a8c] transition-all"
+          className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:bg-[#E3572D] hover:text-white hover:border-[#E3572D] transition-all"
           aria-label="Next page"
         >
           <ChevronRight size={18} />

@@ -22,7 +22,7 @@ const PrivacyPolicyPage = () => {
                     <h2 className="text-2xl font-bold mb-4 text-black">1. Information We Collect</h2>
                     <p className="mb-4">We may collect the following types of information when you interact with our website:</p>
 
-                    <h3 className="text-xl font-semibold mb-2 mt-4 text-[#2d7a8c]">a) Personal Information</h3>
+                    <h3 className="text-xl font-semibold mb-2 mt-4 text-[#E3572D]">a) Personal Information</h3>
                     <ul className="list-disc pl-5 space-y-2 mb-4">
                         <li>Name</li>
                         <li>Email address</li>
@@ -31,7 +31,7 @@ const PrivacyPolicyPage = () => {
                         <li>Any information you voluntarily submit via forms, inquiries, or registrations</li>
                     </ul>
 
-                    <h3 className="text-xl font-semibold mb-2 mt-4 text-[#2d7a8c]">b) Non-Personal Information</h3>
+                    <h3 className="text-xl font-semibold mb-2 mt-4 text-[#E3572D]">b) Non-Personal Information</h3>
                     <ul className="list-disc pl-5 space-y-2 mb-4">
                         <li>Browser type and version</li>
                         <li>IP address</li>
@@ -41,7 +41,7 @@ const PrivacyPolicyPage = () => {
                         <li>Referring websites</li>
                     </ul>
 
-                    <h3 className="text-xl font-semibold mb-2 mt-4 text-[#2d7a8c]">c) Transaction & Service Information</h3>
+                    <h3 className="text-xl font-semibold mb-2 mt-4 text-[#E3572D]">c) Transaction & Service Information</h3>
                     <ul className="list-disc pl-5 space-y-2">
                         <li>Details of real estate inquiries, property interests, and communications</li>
                         <li>Any other data related to the services you request</li>
@@ -140,8 +140,8 @@ const PrivacyPolicyPage = () => {
                     <p className="mb-4">For any questions about this Privacy Policy or how your data is handled, please contact us:</p>
                     <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
                         <p className="font-bold text-lg mb-1">FYD Homes</p>
-                        <p className="mb-1"><span className="font-medium text-black">Email:</span> <a href="mailto:info@fydhomes.com" className="text-[#2d7a8c] hover:underline">info@fydhomes.com</a></p>
-                        <p><span className="font-medium text-black">Phone:</span> <a href="tel:+919544593991" className="text-[#2d7a8c] hover:underline">+91 9544593991</a></p>
+                        <p className="mb-1"><span className="font-medium text-black">Email:</span> <a href="mailto:info@fydhomes.com" className="text-[#E3572D] hover:underline">info@fydhomes.com</a></p>
+                        <p><span className="font-medium text-black">Phone:</span> <a href="tel:+919544593991" className="text-[#E3572D] hover:underline">+91 9544593991</a></p>
                     </div>
                 </section>
             </div>

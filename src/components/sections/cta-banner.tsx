@@ -29,7 +29,7 @@ const CTABanner: React.FC = () => {
 
               <Link
                 href="/contact"
-                className="inline-block bg-[#D32F2F] text-white font-bold text-[12px] sm:text-[13px] tracking-[0.1em] py-3 sm:py-[14px] px-5 sm:px-[28px] rounded-[4px] hover:opacity-90 transition-opacity uppercase"
+                className="inline-block bg-[#E3572D] text-white font-bold text-[12px] sm:text-[13px] tracking-[0.1em] py-3 sm:py-[14px] px-5 sm:px-[28px] rounded-[4px] hover:opacity-90 transition-opacity uppercase"
               >
                 CONTACT US
               </Link>

@@ -27,7 +27,7 @@ const GeneralInformation = ({
         <div className="flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-[30px]">
           <div className="md:w-1/3">
             <div className="section-marker mb-2 sm:mb-[12px]">
-              <span className="text-[10px] font-bold tracking-[0.1em] text-[#00AEEF]">PROPERTY</span>
+              <span className="text-[10px] font-bold tracking-[0.1em] text-[#16243E]">PROPERTY</span>
             </div>
             <h2 className="font-display text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.3] text-[#000000] mb-4 sm:mb-[20px]">
               General Information

@@ -16,37 +16,37 @@ const ContactInfoForm = () => {
               <li className="flex items-center gap-3">
                 <a 
                   href="tel:+919544593991" 
-                  className="flex items-center gap-3 text-[14px] text-black hover:text-[#1db945] transition-colors"
+                  className="flex items-center gap-3 text-[14px] text-black hover:text-[#E3572D] transition-colors"
                 >
-                  <Phone className="w-[18px] h-[18px] text-[#1db945]" />
+                  <Phone className="w-[18px] h-[18px] text-[#E3572D]" />
                   <span>+91 9544593991</span>
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <a 
                   href="tel:+919037013117" 
-                  className="flex items-center gap-3 text-[14px] text-black hover:text-[#1db945] transition-colors"
+                  className="flex items-center gap-3 text-[14px] text-black hover:text-[#E3572D] transition-colors"
                 >
-                  <Phone className="w-[18px] h-[18px] text-[#1db945]" />
+                  <Phone className="w-[18px] h-[18px] text-[#E3572D]" />
                   <span>+91 9037013117</span>
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <a 
                   href="mailto:info@fydhomes.in" 
-                  className="flex items-center gap-3 text-[14px] text-black hover:text-[#1db945] transition-colors"
+                  className="flex items-center gap-3 text-[14px] text-black hover:text-[#E3572D] transition-colors"
                 >
-                  <Mail className="w-[18px] h-[18px] text-[#1db945]" />
+                  <Mail className="w-[18px] h-[18px] text-[#E3572D]" />
                   <span>info@fydhomes.in</span>
                 </a>
               </li>
               <li className="flex items-start gap-3 text-[14px] text-black">
-                <MapPin className="w-[18px] h-[18px] text-[#1db945] mt-0.5 shrink-0" />
+                <MapPin className="w-[18px] h-[18px] text-[#E3572D] mt-0.5 shrink-0" />
                 <a 
                   href="https://share.google/tF8bnCOkQn1AlbGIW"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#1db945] transition-colors"
+                  className="hover:text-[#E3572D] transition-colors"
                 >
                   9/490T, Chandanathil Square Complex Pukkattupady, Edathala, Ernakulam, Kerala 683561
                 </a>
@@ -68,7 +68,7 @@ const ContactInfoForm = () => {
                   <input 
                     type="text" 
                     placeholder="Full Name" 
-                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#1db945] outline-none transition-colors"
+                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#E3572D] outline-none transition-colors"
                     required
                   />
                 </div>
@@ -76,7 +76,7 @@ const ContactInfoForm = () => {
                   <input 
                     type="email" 
                     placeholder="Email" 
-                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#1db945] outline-none transition-colors"
+                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#E3572D] outline-none transition-colors"
                     required
                   />
                 </div>
@@ -84,14 +84,14 @@ const ContactInfoForm = () => {
                   <input 
                     type="tel" 
                     placeholder="Phone number" 
-                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#1db945] outline-none transition-colors"
+                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#E3572D] outline-none transition-colors"
                     required
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1">
-                <select className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans text-gray-500 focus:border-[#1db945] outline-none appearance-none cursor-pointer transition-colors">
+                <select className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans text-gray-500 focus:border-[#E3572D] outline-none appearance-none cursor-pointer transition-colors">
                   <option value="">City</option>
                   <option value="kakkanad">Kakkanad</option>
                   <option value="kochi">Kochi</option>
@@ -104,7 +104,7 @@ const ContactInfoForm = () => {
                   Property Details
                 </h3>
                 <div className="space-y-4">
-                  <select className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans text-gray-500 focus:border-[#1db945] outline-none appearance-none cursor-pointer transition-colors">
+                  <select className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans text-gray-500 focus:border-[#E3572D] outline-none appearance-none cursor-pointer transition-colors">
                     <option value="">Property Type</option>
                     <option value="commercial">Commercial</option>
                     <option value="office">- Office</option>
@@ -116,7 +116,7 @@ const ContactInfoForm = () => {
                     <option value="villa">- Villa</option>
                   </select>
 
-                  <select className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans text-gray-500 focus:border-[#1db945] outline-none appearance-none cursor-pointer transition-colors">
+                  <select className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans text-gray-500 focus:border-[#E3572D] outline-none appearance-none cursor-pointer transition-colors">
                     <option value="">Area</option>
                     <option value="aluva">ALUVA</option>
                     <option value="edapally">Edapally</option>
@@ -128,13 +128,13 @@ const ContactInfoForm = () => {
                   <input 
                     type="text" 
                     placeholder="Your Budget" 
-                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#1db945] outline-none transition-colors"
+                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#E3572D] outline-none transition-colors"
                   />
 
                   <textarea 
                     placeholder="Enquiry Purpose (Rent/Sale)" 
                     rows={4}
-                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#1db945] outline-none transition-colors resize-none"
+                    className="w-full bg-white border border-[#e5e5e5] rounded-[4px] px-[15px] py-3 text-[14px] font-sans focus:border-[#E3572D] outline-none transition-colors resize-none"
                   />
                 </div>
               </div>
@@ -142,7 +142,7 @@ const ContactInfoForm = () => {
               <div className="pt-2">
                 <button 
                   type="submit" 
-                  className="w-full bg-[#1db945] text-white font-bold text-[14px] uppercase tracking-wider py-[14px] rounded-[4px] hover:bg-[#17a33d] transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-[#1db945] outline-none"
+                  className="w-full bg-[#E3572D] text-white font-bold text-[14px] uppercase tracking-wider py-[14px] rounded-[4px] hover:bg-[#16243E] transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-[#E3572D] outline-none"
                 >
                   SUBMIT
                 </button>

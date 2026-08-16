@@ -171,7 +171,7 @@ export default function ImageLeadModal({
                     ) : (
                         <>
                             <div className="mb-8">
-                                <span className="inline-block px-3 py-1 bg-blue-50 text-[#00AEEF] text-[10px] font-bold uppercase tracking-widest rounded-full mb-3">
+                                <span className="inline-block px-3 py-1 bg-blue-50 text-[#16243E] text-[10px] font-bold uppercase tracking-widest rounded-full mb-3">
                                     Interested?
                                 </span>
                                 <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3 tracking-tight">

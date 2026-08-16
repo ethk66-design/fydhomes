@@ -102,7 +102,7 @@ export default function NewTestimonialPage() {
     if (status === "loading") {
         return (
             <div className="min-h-screen flex items-center justify-center bg-white">
-                <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
             </div>
         );
     }
@@ -112,7 +112,7 @@ export default function NewTestimonialPage() {
             <div className="h-[60px] sm:h-[80px] bg-white border-b border-[#eeeeee]"></div>
 
             <div className="container mx-auto px-4 sm:px-5 py-6 sm:py-10 max-w-2xl">
-                <Link href="/admin/testimonials" className="flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#2d7a8c] mb-4">
+                <Link href="/admin/testimonials" className="flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#E3572D] mb-4">
                     <ArrowLeft size={14} /> Back to Testimonials
                 </Link>
 
@@ -146,7 +146,7 @@ export default function NewTestimonialPage() {
                             ) : (
                                 <label className="w-24 h-24 rounded-full border-2 border-dashed border-[#eeeeee] flex flex-col items-center justify-center bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors relative">
                                     {uploading ? (
-                                        <Loader2 className="w-6 h-6 animate-spin text-[#2d7a8c]" />
+                                        <Loader2 className="w-6 h-6 animate-spin text-[#E3572D]" />
                                     ) : (
                                         <Upload className="text-[#5c5c5c] w-6 h-6" />
                                     )}
@@ -204,7 +204,7 @@ export default function NewTestimonialPage() {
 
                     <div className="pt-4 border-t border-[#eeeeee] flex justify-end gap-3">
                         <Button type="button" variant="outline" onClick={() => router.back()}>Cancel</Button>
-                        <Button type="submit" className="bg-[#2d7a8c] text-white hover:bg-[#256a7a]" disabled={loading || uploading}>
+                        <Button type="submit" className="bg-[#E3572D] text-white hover:bg-[#256a7a]" disabled={loading || uploading}>
                             {loading && <Loader2 className="animate-spin mr-2 w-4 h-4" />}
                             Save Testimonial
                         </Button>

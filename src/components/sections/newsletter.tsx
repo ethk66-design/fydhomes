@@ -46,12 +46,12 @@ export function Newsletter({ bgImage }: { bgImage?: string }) {
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-grow w-full sm:w-auto bg-white border-0 py-3 sm:py-[12px] px-4 sm:px-[20px] text-[14px] sm:text-[15px] text-[#5c5c5c] rounded-sm sm:rounded-l-sm sm:rounded-r-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="flex-grow w-full sm:w-auto bg-white/10 backdrop-blur-md border border-white/20 py-3 sm:py-[12px] px-4 sm:px-[20px] text-[14px] sm:text-[15px] text-white placeholder-gray-400 rounded-sm sm:rounded-l-sm sm:rounded-r-none focus:outline-none focus:border-[#E3572D]"
               required
             />
             <button
               type="submit"
-              className="bg-[#1db954] text-white font-semibold text-[13px] sm:text-[14px] px-8 sm:px-[35px] py-3 sm:py-[14px] uppercase tracking-[0.5px] rounded-sm sm:rounded-l-none sm:rounded-r-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98] w-auto sm:w-auto"
+              className="bg-[#E3572D] text-white font-semibold text-[13px] sm:text-[14px] px-8 sm:px-[35px] py-3 sm:py-[14px] uppercase tracking-[0.5px] rounded-sm sm:rounded-l-none sm:rounded-r-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98] w-auto sm:w-auto"
             >
               SIGN UP
             </button>

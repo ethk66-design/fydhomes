@@ -22,7 +22,7 @@ export default function PropertyDetailLoading() {
           <div className="lg:col-span-2 space-y-6">
             <div className="h-8 bg-gray-100 animate-pulse rounded w-3/4" />
             <div className="h-4 bg-gray-100 animate-pulse rounded w-1/2" />
-            <div className="h-6 bg-[#2d7a8c]/20 animate-pulse rounded w-1/4" />
+            <div className="h-6 bg-[#E3572D]/20 animate-pulse rounded w-1/4" />
             <div className="flex gap-6 pt-4 border-t border-[#eeeeee]">
               <div className="h-4 bg-gray-100 animate-pulse rounded w-16" />
               <div className="h-4 bg-gray-100 animate-pulse rounded w-16" />

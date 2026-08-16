@@ -65,7 +65,7 @@ export default function AdminTestimonialsPage() {
     if (status === "loading" || loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-white">
-                <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
             </div>
         );
     }
@@ -81,14 +81,14 @@ export default function AdminTestimonialsPage() {
             <div className="container mx-auto px-4 sm:px-5 py-6 sm:py-10">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 mb-6 sm:mb-10">
                     <div>
-                        <Link href="/admin" className="flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#2d7a8c] mb-2">
+                        <Link href="/admin" className="flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#E3572D] mb-2">
                             <ArrowLeft size={14} /> Back to Dashboard
                         </Link>
                         <h1 className="text-2xl sm:text-3xl font-bold text-black mb-1">Testimonials</h1>
                         <p className="text-[#5c5c5c] text-sm">Manage what your clients say</p>
                     </div>
                     <Link href="/admin/testimonials/new">
-                        <Button className="bg-[#2d7a8c] hover:bg-[#256a7a] text-white font-bold text-xs sm:text-sm">
+                        <Button className="bg-[#E3572D] hover:bg-[#256a7a] text-white font-bold text-xs sm:text-sm">
                             <Plus size={14} className="mr-1 sm:mr-2" />
                             Add Testimonial
                         </Button>
@@ -141,7 +141,7 @@ export default function AdminTestimonialsPage() {
                                                         <Button
                                                             variant="ghost"
                                                             size="icon"
-                                                            className="text-[#5c5c5c] hover:text-[#2d7a8c]"
+                                                            className="text-[#5c5c5c] hover:text-[#E3572D]"
                                                         >
                                                             <Pencil size={16} />
                                                         </Button>
@@ -187,7 +187,7 @@ export default function AdminTestimonialsPage() {
                                                             <Button
                                                                 variant="ghost"
                                                                 size="icon"
-                                                                className="h-10 w-10 text-[#5c5c5c] hover:text-[#2d7a8c]"
+                                                                className="h-10 w-10 text-[#5c5c5c] hover:text-[#E3572D]"
                                                             >
                                                                 <Pencil size={18} />
                                                             </Button>

@@ -2,55 +2,47 @@
 
 import React from 'react';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const propertyTypes = [
   {
     title: 'VILLA',
-    count: '33 Properties',
     image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg'
   },
   {
     title: 'RESIDENTIAL',
-    count: '5 Properties',
     image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg'
   },
   {
     title: 'PLOT',
-    count: '1 Property',
     image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg'
   },
   {
     title: 'COMMERCIAL',
-    count: '1 Property',
     image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg'
   },
   {
     title: 'OFFICE',
-    count: '1 Property',
     image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-1-758x564-11.jpeg'
   },
   {
     title: 'RENT',
-    count: '1 Property',
     image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_45_58-PM-758x564-12.jpeg'
   }
 ];
-
-import { motion } from 'framer-motion';
 
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
+    transition: { staggerChildren: 0.1 }
   }
 };
 
 const item = {
-  hidden: { opacity: 0, scale: 0.9 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+  hidden: { opacity: 0, scale: 0.95 },
+  show: { opacity: 1, scale: 1, transition: { duration: 0.6 } }
 };
 
 interface PropertyTypesProps {
@@ -60,16 +52,19 @@ interface PropertyTypesProps {
 
 export function PropertyTypes({ images, counts }: PropertyTypesProps) {
   return (
-    <section className="bg-white py-8 sm:py-10 md:py-[40px]">
-      <div className="container mx-auto px-4 sm:px-5 max-w-[1170px]">
-        <div className="mb-6 sm:mb-[40px]">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-[18px] h-[18px] rounded-full border border-primary flex items-center justify-center">
-              <div className="w-[6px] h-[6px] rounded-full bg-primary"></div>
+    <section className="bg-[#0A192F] py-16 sm:py-24 border-t border-white/5 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[#0A192F] bg-[radial-gradient(#1A365D_1px,transparent_1px)] [background-size:20px_20px] opacity-10"></div>
+
+      <div className="container mx-auto px-4 sm:px-5 max-w-7xl relative z-10">
+        <div className="mb-12 sm:mb-16 text-center">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <div className="w-4 h-4 rounded-full border border-[#E3572D] flex items-center justify-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#E3572D]"></div>
             </div>
-            <span className="text-[11px] sm:text-[12px] font-semibold text-primary uppercase tracking-[1px]">Lifestyle</span>
+            <span className="text-xs font-semibold text-[#E3572D] uppercase tracking-[2px]">Lifestyle</span>
           </div>
-          <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-black m-0">Explore Property Types</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Explore Property Types</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Find the perfect property type that matches your lifestyle and investment goals, tailored for premium living.</p>
         </div>
 
         <motion.div
@@ -77,61 +72,56 @@ export function PropertyTypes({ images, counts }: PropertyTypesProps) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-[30px]"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {propertyTypes.map((type, index) => {
             const imageKey = type.title.toLowerCase();
-            const imageUrl = images?.[imageKey] || type.image; // fallback to default if imageKey not found
-            // Normalize key for counts
+            const imageUrl = images?.[imageKey] || type.image;
             const countKey = type.title.toLowerCase();
             const countValue = counts?.[countKey] || 0;
             const countText = countValue === 1 ? '1 Property' : `${countValue} Properties`;
 
-            // Determine filter based on title
             let href = `/listings?type=${type.title}`;
-            if (type.title === 'RENT') {
-              href = '/listings?type=Rent'; // This triggers listing_type filter in page.tsx
-            } else if (type.title === 'VILLA') {
-              href = '/listings?type=Villa';
-            } else if (type.title === 'RESIDENTIAL') {
-              href = '/listings?type=Residential';
-            } else if (type.title === 'PLOT') {
-              href = '/listings?type=Plot';
-            } else if (type.title === 'COMMERCIAL') {
-              href = '/listings?type=Commercial';
-            } else if (type.title === 'OFFICE') {
-              href = '/listings?type=Office';
-            } else {
-              // Default capitalize
-              href = `/listings?type=${type.title.charAt(0).toUpperCase() + type.title.slice(1).toLowerCase()}`;
-            }
+            if (type.title === 'RENT') href = '/listings?type=Rent';
+            else if (type.title === 'VILLA') href = '/listings?type=Villa';
+            else if (type.title === 'RESIDENTIAL') href = '/listings?type=Residential';
+            else if (type.title === 'PLOT') href = '/listings?type=Plot';
+            else if (type.title === 'COMMERCIAL') href = '/listings?type=Commercial';
+            else if (type.title === 'OFFICE') href = '/listings?type=Office';
+            else href = `/listings?type=${type.title.charAt(0).toUpperCase() + type.title.slice(1).toLowerCase()}`;
 
             return (
-              <motion.a
-                key={index}
-                variants={item}
-                href={href}
-                className="flex flex-col sm:flex-row items-center sm:items-start bg-white border border-[#eeeeee] p-[10px] rounded-[4px] hover:shadow-card transition-all duration-300 group text-center sm:text-left"
-              >
-                <div className="relative w-full h-[100px] sm:w-[100px] sm:h-[80px] overflow-hidden rounded-[2px] flex-shrink-0 mb-3 sm:mb-0">
+              <motion.div key={index} variants={item}>
+                <Link
+                  href={href}
+                  className="group relative block w-full h-[250px] sm:h-[300px] rounded-2xl overflow-hidden"
+                >
                   <ImageWithFallback
                     src={imageUrl}
                     alt={type.title}
                     fill
-                    width={200}
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
                   />
-                </div>
+                  {/* Dark premium gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
 
-                <div className="sm:ml-[20px] flex flex-col justify-center w-full">
-                  <h3 className="text-[13px] sm:text-[14px] font-bold text-black uppercase mb-[2px] sm:mb-[4px] tracking-[0.5px] truncate w-full">
-                    {type.title}
-                  </h3>
-                  <p className="text-[11px] sm:text-[13px] text-[#5c5c5c] font-medium m-0 whitespace-nowrap">
-                    {countText}
-                  </p>
-                </div>
-              </motion.a>
+                  <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between z-10 transition-transform duration-300 group-hover:-translate-y-2">
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-wider mb-1">
+                        {type.title}
+                      </h3>
+                      <p className="text-sm text-[#E3572D] font-medium tracking-wide">
+                        {countText}
+                      </p>
+                    </div>
+                    <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:bg-[#E3572D] group-hover:border-[#E3572D] transition-colors duration-300">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                        <path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
             )
           })}
         </motion.div>

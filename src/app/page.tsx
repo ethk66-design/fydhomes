@@ -19,10 +19,13 @@ const Newsletter = dynamic(() => import("@/components/sections/newsletter").then
 import { getPageAsset } from "@/lib/assets";
 import { getPropertyCounts, getFeaturedProperties } from "@/lib/queries";
 import { Property } from "@/lib/types";
+import { prisma } from "@/lib/db";
 
 export default async function Home() {
+  const heroSlidesData = await prisma.heroSlide.findMany({ orderBy: { order: 'asc' } });
+  const heroSlides = heroSlidesData.length > 0 ? heroSlidesData.map((s: any) => s.image_url) : undefined;
+
   const [
-    heroBg,
     ctaBg,
     newsletterBg,
     { typeGroups, rentCount },
@@ -30,7 +33,6 @@ export default async function Home() {
     featuredRent,
     propertyTypeImages
   ] = await Promise.all([
-    getPageAsset('/', 'hero_bg', "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/IMG_7368-758x564-2.jpg"),
     getPageAsset('/', 'cta_bg', "/expert-guidance-bg.png"),
     getPageAsset('/', 'newsletter_bg', "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-12-at-1_41_55-PM-758x564-28.jpeg"),
     getPropertyCounts(),
@@ -62,8 +64,8 @@ export default async function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
-      <Hero bgImage={heroBg} />
+    <main className="min-h-screen">
+      <Hero slides={heroSlides} />
       <AboutPartner />
       <FeaturedForSale initialProperties={featuredSale as Property[]} />
       <FeaturedForRent initialProperties={featuredRent as Property[]} />

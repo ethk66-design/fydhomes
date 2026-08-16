@@ -14,7 +14,7 @@ export default function ListingsLoading() {
               <div className="flex-1 h-[45px] bg-gray-100 animate-pulse rounded" />
               <div className="flex-1 h-[45px] bg-gray-100 animate-pulse rounded" />
               <div className="flex-1 h-[45px] bg-gray-100 animate-pulse rounded" />
-              <div className="w-[130px] h-[45px] bg-[#1db954]/30 animate-pulse rounded" />
+              <div className="w-[130px] h-[45px] bg-[#E3572D]/30 animate-pulse rounded" />
             </div>
           </div>
         </div>
@@ -29,7 +29,7 @@ export default function ListingsLoading() {
               <div className="p-5 space-y-3">
                 <div className="h-4 bg-gray-100 animate-pulse rounded w-3/4" />
                 <div className="h-3 bg-gray-100 animate-pulse rounded w-1/2" />
-                <div className="h-5 bg-[#2d7a8c]/20 animate-pulse rounded w-1/3" />
+                <div className="h-5 bg-[#E3572D]/20 animate-pulse rounded w-1/3" />
                 <div className="border-t border-[#eeeeee] pt-3 flex gap-4">
                   <div className="h-3 bg-gray-100 animate-pulse rounded w-10" />
                   <div className="h-3 bg-gray-100 animate-pulse rounded w-10" />

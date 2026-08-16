@@ -57,7 +57,7 @@ export function OurTeam() {
     <section className="py-[60px] md:py-[80px] bg-white">
       <div className="container mx-auto px-5">
         <div className="text-center mb-[40px] md:mb-[60px]">
-          <span className="text-[#1db954] uppercase tracking-wider font-semibold text-sm mb-2 block animate-fade-in-up">
+          <span className="text-[#E3572D] uppercase tracking-wider font-semibold text-sm mb-2 block animate-fade-in-up">
             Our Team
           </span>
           <h2 className="text-[32px] md:text-[42px] font-bold text-[#222222] mb-4 animate-fade-in-up animation-delay-100">

@@ -6,8 +6,8 @@ interface CTAConsultationProps {
   backgroundImage?: string;
 }
 
-const CTAConsultation: React.FC<CTAConsultationProps> = ({ 
-  backgroundImage = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+const CTAConsultation: React.FC<CTAConsultationProps> = ({
+  backgroundImage = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
 }) => {
   return (
     <section className="relative w-full overflow-hidden">
@@ -15,7 +15,7 @@ const CTAConsultation: React.FC<CTAConsultationProps> = ({
       <div className="relative w-full h-[600px] flex items-center">
         {/* Actual Image Background */}
         <div className="absolute inset-0 z-0">
-          <ImageWithFallback 
+          <ImageWithFallback
             src={backgroundImage}
             alt="Consultation background"
             fill
@@ -41,7 +41,7 @@ const CTAConsultation: React.FC<CTAConsultationProps> = ({
 
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center bg-[#D93025] hover:bg-[#b7281f] text-white font-sans text-[12px] font-bold uppercase tracking-[1px] px-[35px] py-[15px] rounded-[4px] transition-colors duration-200"
+              className="inline-flex items-center justify-center bg-[#E3572D] hover:bg-[#ff693e] text-white font-sans text-[12px] font-bold uppercase tracking-[1px] px-[35px] py-[15px] rounded-[4px] transition-colors duration-200"
             >
               CONTACT US
             </Link>

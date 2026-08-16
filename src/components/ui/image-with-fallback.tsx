@@ -50,12 +50,13 @@ const ImageWithFallback = ({
     fill,
     quality = 75,
     width,
+    unoptimized,
     onLoad,
     ...props
 }: ImageWithFallbackProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const imgRef = useRef<HTMLImageElement>(null);
-    
+
     // Check if image is already cached/loaded
     useEffect(() => {
         if (imgRef.current?.complete) {

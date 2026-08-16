@@ -18,7 +18,7 @@ export function ProjectsHero({ heroBg }: ProjectsHeroProps) {
     return (
         <section
             ref={sectionRef}
-            className="bg-[#1db954] py-[60px] md:py-[80px] text-white relative overflow-hidden bg-cover bg-center bg-[image:var(--hero-bg)]"
+            className="bg-[#E3572D] py-[60px] md:py-[80px] text-white relative overflow-hidden bg-cover bg-center bg-[image:var(--hero-bg)]"
         >
             {heroBg && <div className="absolute inset-0 bg-black/50 z-0"></div>}
             <div className="container mx-auto px-5 relative z-10">

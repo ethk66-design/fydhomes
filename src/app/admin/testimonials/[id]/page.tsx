@@ -145,7 +145,7 @@ export default function EditTestimonialPage({ params }: PageProps) {
     if (status === "loading" || loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-white">
-                <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
             </div>
         );
     }
@@ -282,7 +282,7 @@ export default function EditTestimonialPage({ params }: PageProps) {
                                 <Button
                                     onClick={handleSave}
                                     disabled={saving || !testimonial.name}
-                                    className="bg-[#2d7a8c] hover:bg-[#256a7a] text-white font-bold w-full sm:w-auto"
+                                    className="bg-[#E3572D] hover:bg-[#256a7a] text-white font-bold w-full sm:w-auto"
                                 >
                                     {saving ? (
                                         <>

@@ -70,7 +70,7 @@ export default function LeadsPage() {
     if (status === "loading" || loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-white">
-                <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
             </div>
         );
     }
@@ -85,7 +85,7 @@ export default function LeadsPage() {
                 <div className="mb-6 sm:mb-10">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                         <div>
-                            <Link href="/admin" className="text-sm text-[#5c5c5c] hover:text-[#2d7a8c] mb-2 inline-block">
+                            <Link href="/admin" className="text-sm text-[#5c5c5c] hover:text-[#E3572D] mb-2 inline-block">
                                 &larr; Back to Dashboard
                             </Link>
                             <h1 className="text-2xl sm:text-3xl font-bold text-black">Leads Manager</h1>
@@ -128,17 +128,17 @@ export default function LeadsPage() {
                                             <td className="px-6 py-4 align-top">
                                                 <div className="flex flex-col gap-1.5">
                                                     <div className="font-bold text-black text-sm flex items-center gap-2">
-                                                        <User size={14} className="text-[#2d7a8c]" />
+                                                        <User size={14} className="text-[#E3572D]" />
                                                         {lead.name}
                                                     </div>
                                                     {lead.email && (
-                                                        <a href={`mailto:${lead.email}`} className="text-xs text-[#5c5c5c] hover:text-[#2d7a8c] flex items-center gap-2">
+                                                        <a href={`mailto:${lead.email}`} className="text-xs text-[#5c5c5c] hover:text-[#E3572D] flex items-center gap-2">
                                                             <Mail size={14} />
                                                             {lead.email}
                                                         </a>
                                                     )}
                                                     {lead.phone && (
-                                                        <a href={`tel:${lead.phone}`} className="text-xs text-[#5c5c5c] hover:text-[#2d7a8c] flex items-center gap-2">
+                                                        <a href={`tel:${lead.phone}`} className="text-xs text-[#5c5c5c] hover:text-[#E3572D] flex items-center gap-2">
                                                             <Phone size={14} />
                                                             {lead.phone}
                                                         </a>
@@ -148,7 +148,7 @@ export default function LeadsPage() {
                                             <td className="px-6 py-4 align-top">
                                                 <div className="flex flex-col gap-1">
                                                     {lead.property ? (
-                                                        <Link href={`/listings/${lead.property.id}`} target="_blank" className="font-medium text-[#2d7a8c] hover:underline text-sm flex items-start gap-2">
+                                                        <Link href={`/listings/${lead.property.id}`} target="_blank" className="font-medium text-[#E3572D] hover:underline text-sm flex items-start gap-2">
                                                             <Home size={14} className="mt-0.5 shrink-0" />
                                                             {lead.property.title}
                                                         </Link>

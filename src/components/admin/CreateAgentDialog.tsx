@@ -32,7 +32,7 @@ export function CreateAgentDialog({ onSuccess }: { onSuccess: () => void }) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-[#2d7a8c] hover:bg-[#256a7a] text-white">
+                <Button className="bg-[#E3572D] hover:bg-[#256a7a] text-white">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Agent
                 </Button>
@@ -58,7 +58,7 @@ export function CreateAgentDialog({ onSuccess }: { onSuccess: () => void }) {
                         <Input name="password" type="password" placeholder="••••••••" required className="border-[#eeeeee]" minLength={6} />
                     </div>
                     <DialogFooter>
-                        <Button type="submit" disabled={loading} className="bg-[#2d7a8c] hover:bg-[#256a7a] text-white w-full sm:w-auto">
+                        <Button type="submit" disabled={loading} className="bg-[#E3572D] hover:bg-[#256a7a] text-white w-full sm:w-auto">
                             {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
                             Create Agent
                         </Button>

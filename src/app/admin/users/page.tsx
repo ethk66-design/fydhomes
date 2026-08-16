@@ -46,7 +46,7 @@ export default function AdminUsersPage() {
             <div className="h-[60px] sm:h-[80px] bg-white border-b border-[#eeeeee]"></div>
 
             <div className="container mx-auto px-4 sm:px-5 py-6 sm:py-10 max-w-5xl">
-                <Link href="/admin" className="flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#2d7a8c] mb-6">
+                <Link href="/admin" className="flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#E3572D] mb-6">
                     <ArrowLeft size={14} /> Back to Dashboard
                 </Link>
 
@@ -61,7 +61,7 @@ export default function AdminUsersPage() {
                 <div className="bg-white rounded-xl shadow-sm border border-[#eeeeee] overflow-hidden">
                     {loading ? (
                         <div className="flex items-center justify-center p-20">
-                            <Loader2 className="w-8 h-8 animate-spin text-[#2d7a8c]" />
+                            <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
                         </div>
                     ) : agents.length === 0 ? (
                         <div className="text-center py-20 px-4">
@@ -87,7 +87,7 @@ export default function AdminUsersPage() {
                                         <tr key={agent.id} className="hover:bg-gray-50 transition-colors">
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-8 h-8 rounded-full bg-[#2d7a8c]/10 flex items-center justify-center text-[#2d7a8c] font-bold text-xs">
+                                                    <div className="w-8 h-8 rounded-full bg-[#E3572D]/10 flex items-center justify-center text-[#E3572D] font-bold text-xs">
                                                         {agent.user_metadata?.full_name?.charAt(0).toUpperCase() || "A"}
                                                     </div>
                                                     <span className="font-medium text-black text-sm">{agent.user_metadata?.full_name || "Unknown"}</span>

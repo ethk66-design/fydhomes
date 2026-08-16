@@ -548,7 +548,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               id="tag-budget"
               checked={formData.tags?.includes('budget-friendly') || false}
               onChange={(e) => handleCheckboxChange(e.target.checked, 'budget-friendly')}
-              className="w-4 h-4 text-[#2d7a8c] rounded border-gray-300 focus:ring-[#2d7a8c]"
+              className="w-4 h-4 text-[#E3572D] rounded border-gray-300 focus:ring-[#E3572D]"
             />
             <label htmlFor="tag-budget" className="text-sm font-medium text-black cursor-pointer select-none">
               Budget Friendly
@@ -623,7 +623,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
                 type="button"
                 onClick={addImageByUrl}
                 variant="outline"
-                className="border-[#2d7a8c] text-[#2d7a8c] h-10"
+                className="border-[#E3572D] text-[#E3572D] h-10"
               >
                 Add
               </Button>
@@ -638,7 +638,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
                   {/* Actions Overlay */}
                   <div className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-2 transition-opacity duration-200 ${idx === 0 ? 'opacity-0 group-hover:opacity-100' : 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100'}`}>
                     {idx === 0 ? (
-                      <span className="bg-[#1db954] text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wide cursor-default">
+                      <span className="bg-[#E3572D] text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wide cursor-default">
                         Main
                       </span>
                     ) : (
@@ -654,7 +654,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
 
                   {/* Top Badges (Visible Always) */}
                   {idx === 0 && (
-                    <div className="absolute top-1 left-1 bg-[#1db954] text-white p-1.5 rounded-full shadow-sm z-10">
+                    <div className="absolute top-1 left-1 bg-[#E3572D] text-white p-1.5 rounded-full shadow-sm z-10">
                       <Star size={12} className="fill-current" />
                     </div>
                   )}
@@ -672,8 +672,8 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
               <label className={`aspect-square rounded-md border-2 border-dashed border-[#eeeeee] flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors ${uploading ? 'cursor-not-allowed opacity-70' : ''}`}>
                 {uploading ? (
                   <div className="flex flex-col items-center">
-                    <Loader2 className="animate-spin text-[#2d7a8c] w-5 h-5 mb-1" />
-                    <span className="text-[9px] font-bold text-[#2d7a8c]">{uploadProgress}%</span>
+                    <Loader2 className="animate-spin text-[#E3572D] w-5 h-5 mb-1" />
+                    <span className="text-[9px] font-bold text-[#E3572D]">{uploadProgress}%</span>
                   </div>
                 ) : (
                   <>
@@ -697,7 +697,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
                   ref={(el) => {
                     if (el) el.style.width = `${uploadProgress}%`;
                   }}
-                  className="bg-[#2d7a8c] h-1.5 rounded-full transition-all duration-300"
+                  className="bg-[#E3572D] h-1.5 rounded-full transition-all duration-300"
                 />
               </div>
             )}
@@ -718,7 +718,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
         <Button
           type="submit"
           disabled={loading || uploading}
-          className="bg-[#2d7a8c] hover:bg-[#256a7a] text-white px-6 sm:px-10 w-full sm:w-auto order-1 sm:order-2"
+          className="bg-[#E3572D] hover:bg-[#256a7a] text-white px-6 sm:px-10 w-full sm:w-auto order-1 sm:order-2"
         >
           {loading ? <Loader2 className="animate-spin mr-2 w-4 h-4" /> : null}
           {isEditing ? "Update Property" : "Create Property"}

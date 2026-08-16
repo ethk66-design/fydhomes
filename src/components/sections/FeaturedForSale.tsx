@@ -35,7 +35,7 @@ export function FeaturedForSale({ initialProperties }: FeaturedForSaleProps) {
   }, [initialProperties]);
 
   return (
-    <section className="bg-white py-8 sm:py-10 md:py-[40px] overflow-hidden">
+    <section className="bg-[#0A192F] py-12 sm:py-16 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-5 lg:px-[15px] max-w-[1170px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,12 +46,12 @@ export function FeaturedForSale({ initialProperties }: FeaturedForSaleProps) {
         >
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <div className="w-4 h-4 rounded-full border border-[#2D7A8C] flex items-center justify-center p-[2px]">
-                <div className="w-full h-full rounded-full bg-[#2D7A8C]"></div>
+              <div className="w-4 h-4 rounded-full border border-[#E3572D] flex items-center justify-center p-[2px]">
+                <div className="w-full h-full rounded-full bg-[#E3572D]"></div>
               </div>
-              <span className="text-[11px] sm:text-[12px] font-semibold text-[#2D7A8C] uppercase tracking-wider">Properties</span>
+              <span className="text-[11px] sm:text-[12px] font-semibold text-[#E3572D] uppercase tracking-wider">Properties</span>
             </div>
-            <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-black leading-tight">
+            <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-white leading-tight">
               Featured For Sale
             </h2>
           </div>
@@ -59,7 +59,7 @@ export function FeaturedForSale({ initialProperties }: FeaturedForSaleProps) {
           <div className="hidden md:flex items-center gap-2">
             <Link
               href="/listings?type=sale"
-              className="text-[12px] font-bold text-[#2D7A8C] uppercase tracking-wider hover:underline mr-4"
+              className="text-[12px] font-bold text-[#E3572D] uppercase tracking-wider hover:underline mr-4"
             >
               View All
             </Link>
@@ -107,7 +107,7 @@ export function FeaturedForSale({ initialProperties }: FeaturedForSaleProps) {
                 </motion.div>
               ))
             ) : (
-              <div className="col-span-full text-center py-10 text-[#5c5c5c]">
+              <div className="col-span-full text-center py-10 text-gray-400">
                 No properties available for sale at the moment.
               </div>
             )}
@@ -117,7 +117,7 @@ export function FeaturedForSale({ initialProperties }: FeaturedForSaleProps) {
         <div className="flex md:hidden justify-center mt-6 sm:mt-8">
           <Link
             href="/listings?type=sale"
-            className="bg-[#205c6d] text-white px-6 sm:px-8 py-3 rounded-sm text-[12px] sm:text-[13px] font-bold uppercase tracking-wider"
+            className="bg-[#E3572D] text-white px-6 sm:px-8 py-3 rounded-sm text-[12px] sm:text-[13px] font-bold uppercase tracking-wider"
           >
             View All Properties
           </Link>

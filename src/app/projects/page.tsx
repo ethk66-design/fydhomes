@@ -65,7 +65,7 @@ export default async function ProjectsPage() {
                     />
                     <div className="absolute top-6 left-6">
                       <span className={`px-4 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-wider text-white ${project.status === 'Ongoing' ? 'bg-[#2b7489]' :
-                        project.status === 'Completed' ? 'bg-[#1db954]' : 'bg-[#eab308]'
+                        project.status === 'Completed' ? 'bg-[#E3572D]' : 'bg-[#eab308]'
                         }`}>
                         {project.status}
                       </span>
@@ -105,7 +105,7 @@ export default async function ProjectsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-[#1db954] text-white px-10 py-5 rounded-[8px] font-bold uppercase text-[14px] tracking-[2px] hover:shadow-lg transition-all"
+            className="inline-block bg-[#E3572D] text-white px-10 py-5 rounded-[8px] font-bold uppercase text-[14px] tracking-[2px] hover:shadow-lg transition-all"
           >
             Work With Us
           </Link>

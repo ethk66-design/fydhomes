@@ -71,7 +71,7 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[1000] w-full transition-all duration-300 border-b border-[#eeeeee] ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'
+      className={`fixed top-0 left-0 right-0 z-[1000] w-full transition-all duration-300 border-b border-[#0F172A] ${isScrolled ? 'bg-[#16243E] shadow-xl py-2' : 'bg-[#16243E] py-4'
         }`}
     >
       <div className="container mx-auto px-5 lg:px-0">
@@ -79,7 +79,7 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="block relative h-[50px] lg:h-[60px] w-[100px] lg:w-[120px]">
-              <ImageWithFallback 
+              <ImageWithFallback
                 src="/assets/fyd-logo.png"
                 alt="fyd homes"
                 fill
@@ -97,7 +97,7 @@ const Navigation = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-[15px] font-medium uppercase tracking-[0.5px] text-black hover:text-[#2d7a8c] transition-colors font-sans"
+                    className="text-[15px] font-medium uppercase tracking-[0.5px] text-white hover:text-[#E3572D] transition-colors font-sans"
                   >
                     {link.name}
                   </Link>
@@ -115,7 +115,7 @@ const Navigation = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-8 h-8 rounded-full text-black hover:text-[#1db954] transition-all duration-200"
+                  className="flex items-center justify-center w-8 h-8 rounded-full text-white hover:text-[#E3572D] transition-all duration-200"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -126,7 +126,7 @@ const Navigation = () => {
             {/* Mobile-only CTA */}
             <Link
               href="/listings"
-              className="lg:hidden text-[12px] font-bold uppercase tracking-[0.5px] bg-[#1db954] text-white px-4 py-2 rounded-[4px] hover:opacity-90 active:scale-95 transition-all"
+              className="lg:hidden text-[12px] font-bold uppercase tracking-[0.5px] bg-[#E3572D] text-white px-4 py-2 rounded-[4px] hover:opacity-90 active:scale-95 transition-all"
             >
               Listings
             </Link>
@@ -134,7 +134,7 @@ const Navigation = () => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-black"
+              className="lg:hidden p-2 text-white"
               aria-label="Toggle Navigation"
             >
               <svg
@@ -166,7 +166,7 @@ const Navigation = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-white z-[999] transition-transform duration-500 ease-in-out transform lg:hidden top-[80px] ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-0 bg-[#16243E] z-[999] transition-transform duration-500 ease-in-out transform lg:hidden top-[80px] ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
         <div className="flex flex-col p-8 space-y-6">
@@ -175,7 +175,7 @@ const Navigation = () => {
               <li key={link.name}>
                 <Link
                   href={link.href}
-                  className="text-2xl font-bold text-black border-b border-[#eeeeee] pb-4 block"
+                  className="text-2xl font-bold text-white border-b border-[#0F172A] pb-4 block"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -188,7 +188,7 @@ const Navigation = () => {
               <a
                 key={social.name}
                 href={social.href}
-                className="text-black hover:text-[#1db954] transition-colors"
+                className="text-white hover:text-[#E3572D] transition-colors"
               >
                 {React.cloneElement(social.icon as React.ReactElement<{ className?: string }>, {
                   className: 'w-8 h-8',

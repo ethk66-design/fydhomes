@@ -50,7 +50,7 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
     </div>
 
     <div className="p-3 sm:p-4">
-      <h3 className="text-[#000000] text-[13px] sm:text-[15px] font-medium leading-[1.4] mb-2 sm:mb-3 line-clamp-2 min-h-[36px] sm:min-h-[42px] group-hover:text-[#D32F2F] transition-colors">
+      <h3 className="text-[#000000] text-[13px] sm:text-[15px] font-medium leading-[1.4] mb-2 sm:mb-3 line-clamp-2 min-h-[36px] sm:min-h-[42px] group-hover:text-[#E3572D] transition-colors">
         <Link href={`/listings/${listing.id}`}>{listing.title}</Link>
       </h3>
 
@@ -104,10 +104,10 @@ const SimilarListings = ({ listings = [] }: SimilarListingsProps) => {
       <div className="container mx-auto px-4 sm:px-5 md:px-0">
         <div className="mb-6 sm:mb-10">
           <div className="section-marker mb-2 sm:mb-3 relative flex items-center gap-2">
-            <span className="inline-block w-3.5 h-3.5 sm:w-4 sm:h-4 border-2 border-[#00AEEF] rounded-full relative">
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#00AEEF] rounded-full"></span>
+            <span className="inline-block w-3.5 h-3.5 sm:w-4 sm:h-4 border-2 border-[#16243E] rounded-full relative">
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#16243E] rounded-full"></span>
             </span>
-            <span className="text-[#00AEEF] text-[11px] sm:text-[12px] font-bold tracking-[0.1em] uppercase">
+            <span className="text-[#16243E] text-[11px] sm:text-[12px] font-bold tracking-[0.1em] uppercase">
               Similar Listings
             </span>
           </div>

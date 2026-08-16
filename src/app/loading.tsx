@@ -35,7 +35,7 @@ export default function HomeLoading() {
               <div className="p-5 space-y-3">
                 <div className="h-4 bg-gray-100 animate-pulse rounded w-3/4" />
                 <div className="h-3 bg-gray-100 animate-pulse rounded w-1/2" />
-                <div className="h-5 bg-[#2d7a8c]/20 animate-pulse rounded w-1/3" />
+                <div className="h-5 bg-[#E3572D]/20 animate-pulse rounded w-1/3" />
               </div>
             </div>
           ))}

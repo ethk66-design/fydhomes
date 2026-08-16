@@ -36,10 +36,10 @@ const WhyChooseUs = ({ featureImages = [] }: { featureImages?: string[] }) => {
   ];
 
   return (
-    <section className="py-[60px] md:py-[80px] bg-[#f9f9f9]">
+    <section className="py-[60px] md:py-[80px] bg-white">
       <div className="container mx-auto px-5">
         <div className="text-center mb-[50px]">
-          <span className="text-[#1db954] uppercase tracking-wider font-semibold text-sm mb-2 block animate-fade-in-up">
+          <span className="text-[#E3572D] uppercase tracking-wider font-semibold text-sm mb-2 block animate-fade-in-up">
             Why Choose Us
           </span>
           <h2 className="text-[32px] md:text-[42px] font-bold text-[#222222] mb-4 animate-fade-in-up animation-delay-100">
@@ -56,11 +56,11 @@ const WhyChooseUs = ({ featureImages = [] }: { featureImages?: string[] }) => {
             <div
               key={index}
               ref={el => { itemsRef.current[index] = el; }}
-              className="flex flex-col animate-fadeInUp"
+              className="flex flex-col animate-fadeInUp bg-[#0A192F] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/5"
             >
               {/* Image Container */}
-              <div className="relative mb-[20px] rounded-[8px] overflow-hidden aspect-[1024/683]">
-                <ImageWithFallback 
+              <div className="relative rounded-b-none min-h-[220px] aspect-[1024/683]">
+                <ImageWithFallback
                   src={feature.image}
                   alt={feature.alt}
                   fill
@@ -70,11 +70,11 @@ const WhyChooseUs = ({ featureImages = [] }: { featureImages?: string[] }) => {
               </div>
 
               {/* Text Content */}
-              <div className="flex flex-col">
-                <h3 className="h3 text-[20px] font-semibold mb-[15px] leading-[1.4] text-[#000000]">
+              <div className="flex flex-col p-6 sm:p-8">
+                <h3 className="h3 text-[20px] font-semibold mb-[15px] leading-[1.4] text-white">
                   {feature.title}
                 </h3>
-                <p className="text-[16px] font-normal leading-[1.7] text-[#333333] m-0">
+                <p className="text-[15px] font-normal leading-[1.7] text-gray-400 m-0">
                   {feature.description}
                 </p>
               </div>

@@ -54,11 +54,11 @@ const teamMembers: TeamMember[] = [
 
 export default function TeamGrid({ agentImages = [] }: { agentImages?: string[] }) {
   return (
-    <section className="bg-white py-[80px]">
+    <section className="bg-[#0A192F] py-[80px]">
       <div className="container mx-auto px-6 max-w-[1140px]">
         {/* Section Heading */}
         <div className="mb-[50px]">
-          <h2 className="font-display text-[32px] font-bold leading-[1.3] text-black mb-4">
+          <h2 className="font-display text-[32px] font-bold leading-[1.3] text-white mb-4">
             Our Team
           </h2>
           <div className="w-full h-[1px]"></div> {/* Spacer simulation from elementor structure */}
@@ -84,10 +84,10 @@ export default function TeamGrid({ agentImages = [] }: { agentImages?: string[] 
               {/* Info & Contact Details below the card */}
               <div className="flex flex-col space-y-2 px-1">
                 <div>
-                  <h3 className="text-[#222222] font-sans text-[18px] font-bold leading-tight mb-1">
+                  <h3 className="text-white font-sans text-[18px] font-bold leading-tight mb-1">
                     {member.name}
                   </h3>
-                  <p className="text-[#666666] font-sans text-[13px] font-normal m-0 p-0 leading-tight mb-2">
+                  <p className="text-gray-400 font-sans text-[13px] font-normal m-0 p-0 leading-tight mb-2">
                     {member.role}
                   </p>
                 </div>
@@ -95,14 +95,14 @@ export default function TeamGrid({ agentImages = [] }: { agentImages?: string[] 
                 <div className="flex flex-col space-y-1.5">
                   <a
                     href={`tel:${member.phone.replace(/\s/g, '')}`}
-                    className="flex items-center text-[#357388] text-[13px] hover:opacity-80 transition-opacity"
+                    className="flex items-center text-[#E3572D] text-[13px] hover:opacity-80 transition-opacity"
                   >
                     <Phone className="w-3.5 h-3.5 mr-2 -rotate-90" />
                     <span className="font-sans font-medium">{member.phone}</span>
                   </a>
                   <a
                     href={`mailto:${member.email}`}
-                    className="flex items-center text-[#357388] text-[13px] hover:opacity-80 transition-opacity"
+                    className="flex items-center text-[#E3572D] text-[13px] hover:opacity-80 transition-opacity"
                   >
                     <Mail className="w-3.5 h-3.5 mr-2" />
                     <span className="font-sans font-medium">{member.email}</span>

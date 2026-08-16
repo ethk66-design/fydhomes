@@ -18,7 +18,7 @@ export function FindPerfectHome() {
             </p>
             <a
               href="tel:+919544593991"
-              className="inline-flex items-center gap-2.5 bg-[#205c6d] text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-[4px] text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.5px] hover:bg-[#1a4b59] transition-colors"
+              className="inline-flex items-center gap-2.5 bg-[#E3572D] text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-[4px] text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.5px] hover:bg-[#1a4b59] transition-colors"
             >
               <Phone size={16} className="sm:w-[18px] sm:h-[18px]" />
               CALL US +91 9544593991

@@ -36,9 +36,9 @@ const PropertyOverviewTable = ({
       <div className="container mx-auto px-4 sm:px-[20px] max-w-[1240px]">
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-[30px]">
           <div className="lg:w-1/3">
-            <div className="section-marker relative pl-6 sm:pl-8 mb-2 sm:mb-[12px] flex items-center gap-[8px] text-[10px] font-bold uppercase tracking-[0.1em] text-[#00AEEF]">
-              <span className="absolute left-0 w-3 h-3 border-2 border-[#00AEEF] rounded-full flex items-center justify-center">
-                <span className="w-1 h-1 bg-[#00AEEF] rounded-full"></span>
+            <div className="section-marker relative pl-6 sm:pl-8 mb-2 sm:mb-[12px] flex items-center gap-[8px] text-[10px] font-bold uppercase tracking-[0.1em] text-[#16243E]">
+              <span className="absolute left-0 w-3 h-3 border-2 border-[#16243E] rounded-full flex items-center justify-center">
+                <span className="w-1 h-1 bg-[#16243E] rounded-full"></span>
               </span>
               Details
             </div>

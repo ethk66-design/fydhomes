@@ -113,7 +113,7 @@ const SearchBar = () => {
             <div className="w-full md:w-auto md:min-w-[70px] lg:basis-[10%]">
               <button
                 type="submit"
-                className="w-full h-[50px] bg-[#1db043] hover:bg-[#199a3a] text-white flex items-center justify-center rounded-[4px] transition-all cursor-pointer group"
+                className="w-full h-[50px] bg-[#E3572D] hover:bg-[#199a3a] text-white flex items-center justify-center rounded-[4px] transition-all cursor-pointer group"
                 aria-label="Search"
               >
                 <Search size={22} className="group-hover:scale-110 transition-transform" />

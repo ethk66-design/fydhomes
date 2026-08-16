@@ -9,12 +9,12 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="w-full bg-white border-b border-[#EAEAEA] sticky top-0 z-[1000]">
+    <header className="w-full bg-[#16243E] border-b border-[#0F172A] sticky top-0 z-[1000]">
       <div className="container mx-auto max-w-[1200px] px-4 sm:px-5 md:px-10 h-[80px] sm:h-[100px] flex items-center justify-between">
 
         <div className="flex-shrink-0">
           <Link href="/" className="block">
-            <ImageWithFallback 
+            <ImageWithFallback
               src="/assets/fyd-logo.png"
               alt="fyd homes"
               width={240}
@@ -31,7 +31,7 @@ export default function Header() {
             <li>
               <Link
                 href="/"
-                className="text-[13px] xl:text-[14px] font-semibold text-black hover:text-[#D32F2F] uppercase tracking-wider transition-colors duration-200"
+                className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200"
               >
                 Home
               </Link>
@@ -39,7 +39,7 @@ export default function Header() {
             <li>
               <Link
                 href="/about"
-                className="text-[13px] xl:text-[14px] font-semibold text-black hover:text-[#D32F2F] uppercase tracking-wider transition-colors duration-200"
+                className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200"
               >
                 About
               </Link>
@@ -47,7 +47,7 @@ export default function Header() {
             <li>
               <Link
                 href="/listings"
-                className="text-[13px] xl:text-[14px] font-semibold text-black hover:text-[#D32F2F] uppercase tracking-wider transition-colors duration-200"
+                className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200"
               >
                 Listings
               </Link>
@@ -55,7 +55,7 @@ export default function Header() {
             <li>
               <Link
                 href="/contact"
-                className="text-[13px] xl:text-[14px] font-semibold text-black hover:text-[#D32F2F] uppercase tracking-wider transition-colors duration-200"
+                className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200"
               >
                 Contact
               </Link>
@@ -69,7 +69,7 @@ export default function Header() {
               href="https://www.instagram.com/findyourdreamhome_/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#333333] text-white hover:bg-[#D32F2F] transition-all duration-300"
+              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#333333] text-white hover:bg-[#E3572D] transition-all duration-300"
             >
               <Instagram size={16} className="sm:w-[18px] sm:h-[18px]" />
               <span className="sr-only">Instagram</span>
@@ -78,7 +78,7 @@ export default function Header() {
               href="https://www.youtube.com/@findyourdreamhome6667"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#D32F2F] text-white hover:bg-[#CC0000] transition-all duration-300"
+              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#E3572D] text-white hover:bg-[#16243E] transition-all duration-300"
             >
               <Youtube size={16} className="sm:w-[18px] sm:h-[18px]" />
               <span className="sr-only">Youtube</span>
@@ -86,7 +86,7 @@ export default function Header() {
           </div>
 
           <button
-            className="lg:hidden p-2 text-black hover:text-[#D32F2F] transition-colors"
+            className="lg:hidden p-2 text-white hover:text-[#E3572D] transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -103,7 +103,7 @@ export default function Header() {
 
       {/* Mobile Menu Panel */}
       <div
-        className={`lg:hidden absolute top-[80px] sm:top-[100px] left-0 right-0 bg-white/95 backdrop-blur-md border-b border-[#EAEAEA] shadow-xl z-50 transition-all duration-300 transform ${mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'}`}
+        className={`lg:hidden absolute top-[80px] sm:top-[100px] left-0 right-0 bg-[#16243E]/95 backdrop-blur-md border-b border-[#0F172A] shadow-xl z-50 transition-all duration-300 transform ${mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'}`}
       >
         <nav className="container mx-auto px-6 py-6">
           <ul className="flex flex-col gap-4">
@@ -111,7 +111,7 @@ export default function Header() {
               <li key={item}>
                 <Link
                   href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                  className="block text-[18px] font-bold text-black hover:text-[#D32F2F] tracking-wide transition-colors py-2 border-b border-gray-100"
+                  className="block text-[18px] font-bold text-white hover:text-[#E3572D] tracking-wide transition-colors py-2 border-b border-[#0F172A]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item}
@@ -124,7 +124,7 @@ export default function Header() {
               href="https://www.instagram.com/findyourdreamhome_/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100/10 text-white hover:bg-[#E3572D] hover:text-white transition-all duration-300"
             >
               <Instagram size={20} />
               <span className="sr-only">Instagram</span>
@@ -133,7 +133,7 @@ export default function Header() {
               href="https://www.youtube.com/@findyourdreamhome6667"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-black hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100/10 text-white hover:bg-[#E3572D] hover:text-white transition-all duration-300"
             >
               <Youtube size={20} />
               <span className="sr-only">Youtube</span>

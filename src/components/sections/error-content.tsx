@@ -21,7 +21,7 @@ const ErrorContent: React.FC = () => {
                   <div className="btn-box">
                     <Link
                       href="/"
-                      className="inline-block bg-[#1db954] text-white px-[30px] py-[15px] text-sm font-bold uppercase tracking-[1px] rounded-[50px] transition-all duration-300 hover:bg-[#121212] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
+                      className="inline-block bg-[#E3572D] text-white px-[30px] py-[15px] text-sm font-bold uppercase tracking-[1px] rounded-[50px] transition-all duration-300 hover:bg-[#121212] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
                     >
                       Back to Homepage
                     </Link>

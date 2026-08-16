@@ -24,7 +24,7 @@ export default function ListingGrid({ properties, keyword, type, area, listing_t
                 <p className="text-[#5c5c5c] font-medium text-sm sm:text-base">
                     Showing <span className="text-black font-bold">{totalCount}</span> properties
                     {(keyword || type || area || listing_type) && (
-                        <span className="ml-2 text-xs uppercase tracking-widest text-[#2d7a8c]"> (Filtered)</span>
+                        <span className="ml-2 text-xs uppercase tracking-widest text-[#E3572D]"> (Filtered)</span>
                     )}
                 </p>
             </div>
@@ -52,7 +52,7 @@ export default function ListingGrid({ properties, keyword, type, area, listing_t
                                 show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
                             }}
                         >
-                            <PropertyCard property={property} />
+                            <PropertyCard property={property} theme="light" />
                         </motion.div>
                     ))}
                 </motion.div>
@@ -65,7 +65,7 @@ export default function ListingGrid({ properties, keyword, type, area, listing_t
                     <h3 className="text-[#5c5c5c] font-medium text-sm sm:text-base">No properties match your search criteria.</h3>
                     <Link
                         href="/listings"
-                        className="mt-4 inline-block text-[#2d7a8c] font-bold uppercase text-xs tracking-widest hover:underline"
+                        className="mt-4 inline-block text-[#E3572D] font-bold uppercase text-xs tracking-widest hover:underline"
                     >
                         Clear all filters
                     </Link>

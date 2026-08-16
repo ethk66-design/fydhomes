@@ -73,7 +73,7 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
         <main className="min-h-screen bg-white pt-[80px] sm:pt-[100px] md:pt-[120px]">
             <section
                 ref={heroRef}
-                className="bg-[#1db954] py-10 sm:py-16 md:py-[60px] lg:py-[100px] text-white overflow-hidden relative bg-cover bg-center bg-[image:var(--hero-bg)]"
+                className="bg-[#E3572D] py-10 sm:py-16 md:py-[60px] lg:py-[100px] text-white overflow-hidden relative bg-cover bg-center bg-[image:var(--hero-bg)]"
             >
                 {heroBg && <div className="absolute inset-0 bg-black/50 z-0"></div>}
                 <div className="container mx-auto px-4 sm:px-5 relative z-10">
@@ -100,8 +100,8 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                             <h2 className="text-[22px] sm:text-[26px] md:text-[28px] font-bold mb-6 sm:mb-8">Property Details</h2>
 
                             {submitted ? (
-                                <div className="bg-[#1db954]/10 p-6 sm:p-8 rounded-[15px] text-center">
-                                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#1db954] text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                                <div className="bg-[#E3572D]/10 p-6 sm:p-8 rounded-[15px] text-center">
+                                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#E3572D] text-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                                         <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                     <h3 className="text-lg sm:text-xl font-bold mb-2">Thank You!</h3>
@@ -126,7 +126,7 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                                 value={formData.name}
                                                 onChange={handleChange}
                                                 placeholder="Your Name"
-                                                className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#1db954] transition-colors text-sm sm:text-base"
+                                                className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#E3572D] transition-colors text-sm sm:text-base"
                                             />
                                         </div>
                                         <div>
@@ -139,7 +139,7 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                                 value={formData.phone}
                                                 onChange={handleChange}
                                                 placeholder="Your Phone"
-                                                className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#1db954] transition-colors text-sm sm:text-base"
+                                                className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#E3572D] transition-colors text-sm sm:text-base"
                                             />
                                         </div>
                                     </div>
@@ -152,7 +152,7 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                                 name="propertyType"
                                                 value={formData.propertyType}
                                                 onChange={handleChange}
-                                                className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#1db954] transition-colors appearance-none text-sm sm:text-base"
+                                                className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#E3572D] transition-colors appearance-none text-sm sm:text-base"
                                             >
                                                 <option value="">Select Type</option>
                                                 <option value="Villa">Villa</option>
@@ -170,7 +170,7 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                                 value={formData.location}
                                                 onChange={handleChange}
                                                 placeholder="Property Location"
-                                                className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#1db954] transition-colors text-sm sm:text-base"
+                                                className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#E3572D] transition-colors text-sm sm:text-base"
                                             />
                                         </div>
                                     </div>
@@ -184,7 +184,7 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                             value={formData.expectedPrice}
                                             onChange={handleChange}
                                             placeholder="e.g. ₹ 85 Lakhs"
-                                            className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#1db954] transition-colors text-sm sm:text-base"
+                                            className="w-full h-[48px] sm:h-[54px] px-4 sm:px-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#E3572D] transition-colors text-sm sm:text-base"
                                         />
                                     </div>
 
@@ -197,14 +197,14 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                             onChange={handleChange}
                                             rows={4}
                                             placeholder="Tell us more about your property..."
-                                            className="w-full p-4 sm:p-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#1db954] transition-colors resize-none text-sm sm:text-base"
+                                            className="w-full p-4 sm:p-5 bg-[#f8fafc] border border-[#eeeeee] rounded-[8px] focus:outline-none focus:border-[#E3572D] transition-colors resize-none text-sm sm:text-base"
                                         ></textarea>
                                     </div>
 
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full h-[52px] sm:h-[60px] bg-black text-white font-bold uppercase tracking-[1px] sm:tracking-[2px] rounded-[8px] hover:bg-[#1db954] transition-all duration-300 disabled:bg-[#cccccc] text-sm sm:text-base"
+                                        className="w-full h-[52px] sm:h-[60px] bg-black text-white font-bold uppercase tracking-[1px] sm:tracking-[2px] rounded-[8px] hover:bg-[#E3572D] transition-all duration-300 disabled:bg-[#cccccc] text-sm sm:text-base"
                                     >
                                         {loading ? 'Submitting...' : 'Submit Property'}
                                     </button>
@@ -227,8 +227,8 @@ export default function SellPageForm({ heroBg }: SellPageFormProps) {
                                 </div>
 
                                 <div className="flex gap-4 sm:gap-6">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#1db954]/10 rounded-full flex-shrink-0 flex items-center justify-center">
-                                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#E3572D]/10 rounded-full flex-shrink-0 flex items-center justify-center">
+                                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#E3572D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                                     </div>
                                     <div>
                                         <h3 className="text-[17px] sm:text-[20px] font-bold mb-1 sm:mb-2">Verified Buyers</h3>

@@ -16,7 +16,7 @@ const PropertyAmenities = ({ amenities = [] }: PropertyAmenitiesProps) => {
                 <div className="flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-[30px]">
                     <div className="md:w-1/3">
                         <div className="section-marker mb-2 sm:mb-[12px]">
-                            <span className="text-[10px] font-bold tracking-[0.1em] text-[#00AEEF]">FEATURES</span>
+                            <span className="text-[10px] font-bold tracking-[0.1em] text-[#16243E]">FEATURES</span>
                         </div>
                         <h2 className="font-display text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.3] text-[#000000] mb-4 sm:mb-[20px]">
                             Amenities
@@ -29,7 +29,7 @@ const PropertyAmenities = ({ amenities = [] }: PropertyAmenitiesProps) => {
                                 {amenities.map((amenity, index) => (
                                     <li key={index} className="flex items-center gap-2.5">
                                         <div className="w-5 h-5 rounded-full bg-white border border-[#EAEAEA] flex items-center justify-center shrink-0">
-                                            <Check className="w-3 h-3 text-[#00AEEF]" strokeWidth={2.5} />
+                                            <Check className="w-3 h-3 text-[#16243E]" strokeWidth={2.5} />
                                         </div>
                                         <span className="text-[13px] sm:text-[14px] text-[#444444] font-medium">
                                             {amenity}

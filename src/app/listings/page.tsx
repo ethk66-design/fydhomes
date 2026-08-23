@@ -128,7 +128,7 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
         area: true,
         land_area: true
       },
-      take: 500, 
+      take: 500,
     });
 
     const parsedProperties = rawProperties.map(p => {
@@ -224,12 +224,12 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
     : "Property Listings";
 
   return (
-    <main className="min-h-screen bg-white pb-12 sm:pb-20">
-      <div className="h-[20px] sm:h-[40px] bg-[#f4f8fb]"></div>
+    <main className="min-h-screen bg-[#0A192F] pb-12 sm:pb-20">
+      <div className="h-[20px] sm:h-[40px] bg-[#0A192F]"></div>
 
-      <div className="bg-[#f4f8fb] pt-4 sm:pt-6 pb-8 sm:pb-12">
+      <div className="bg-[#0A192F] pt-4 sm:pt-6 pb-8 sm:pb-12">
         <div className="container mx-auto px-4 sm:px-5">
-          <h1 className="text-center mb-6 sm:mb-8 text-2xl sm:text-3xl md:text-4xl font-bold text-black uppercase tracking-tight">
+          <h1 className="text-center mb-6 sm:mb-8 text-2xl sm:text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">
             {pageTitle}
           </h1>
           <Suspense fallback={<div className="text-center">Loading filters...</div>}>

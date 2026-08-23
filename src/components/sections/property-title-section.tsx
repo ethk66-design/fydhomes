@@ -77,40 +77,40 @@ const PropertyTitleSection = ({
     email: `mailto:?subject=${encodeURIComponent(`Check out this property: ${title}`)}&body=${encodeURIComponent(`I found this amazing property and wanted to share it with you: ${currentUrl}`)}`
   };
   return (
-    <section className="bg-white">
+    <section className="bg-[#0A192F]">
       <div className="container mx-auto max-w-[1240px] px-4 sm:px-5 pt-6 sm:pt-10 pb-4 sm:pb-6">
         <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 sm:gap-6">
           <div className="flex-1">
-            <h1 className="text-[22px] sm:text-[26px] md:text-[32px] font-bold leading-[1.2] text-[#000000] mb-3 sm:mb-5 tracking-[-0.02em]">
+            <h1 className="text-[22px] sm:text-[26px] md:text-[32px] font-bold leading-[1.2] text-white mb-3 sm:mb-5 tracking-[-0.02em]">
               {title}
             </h1>
 
             <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 sm:gap-y-3 mb-4 sm:mb-6">
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <BedDouble className="text-[#666666] w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] tracking-wide">{beds}</span>
-                <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] uppercase">Beds</span>
+                <BedDouble className="text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 tracking-wide">{beds}</span>
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 uppercase">Beds</span>
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <Bath className="text-[#666666] w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] tracking-wide">{baths}</span>
-                <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] uppercase">Baths</span>
+                <Bath className="text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 tracking-wide">{baths}</span>
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 uppercase">Baths</span>
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <Car className="text-[#666666] w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] tracking-wide">{parkings}</span>
-                <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] uppercase">Parkings</span>
+                <Car className="text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 tracking-wide">{parkings}</span>
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 uppercase">Parkings</span>
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <Scaling className="text-[#666666] w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] tracking-wide">{sqft}</span>
-                <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] uppercase">SQFT</span>
+                <Scaling className="text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 tracking-wide">{sqft}</span>
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 uppercase">SQFT</span>
               </div>
               {landArea && (
                 <div className="flex items-center gap-1.5 sm:gap-2">
-                  <Trees className="text-[#666666] w-4 h-4 sm:w-5 sm:h-5" />
-                  <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] tracking-wide">{landArea}</span>
-                  <span className="text-[12px] sm:text-[13px] font-medium text-[#666666] uppercase">Land</span>
+                  <Trees className="text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 tracking-wide">{landArea}</span>
+                  <span className="text-[12px] sm:text-[13px] font-medium text-gray-400 uppercase">Land</span>
                 </div>
               )}
             </div>
@@ -124,7 +124,7 @@ const PropertyTitleSection = ({
 
           <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start shrink-0 gap-4">
             <div className="flex flex-col items-end">
-              <div className="text-[20px] sm:text-[24px] md:text-[28px] font-bold text-[#000000] md:mb-1">
+              <div className="text-[20px] sm:text-[24px] md:text-[28px] font-bold text-[#E3572D] md:mb-1">
                 {formatPrice(price)}
               </div>
             </div>
@@ -132,17 +132,17 @@ const PropertyTitleSection = ({
             <div className="flex items-center gap-1 print:hidden">
               <button
                 onClick={toggleLike}
-                className="w-8 h-8 flex items-center justify-center border border-[#EAEAEA] rounded-[2px] transition-colors hover:bg-gray-50 group"
+                className="w-8 h-8 flex items-center justify-center border border-white/10 rounded-[2px] transition-colors hover:bg-[#16243E] group"
                 title={isLiked ? "Remove from favorites" : "Add to favorites"}
               >
-                <Heart className={`w-4 h-4 transition-colors ${isLiked ? 'fill-red-500 text-red-500' : 'text-[#000000] group-hover:text-red-500'}`} />
+                <Heart className={`w-4 h-4 transition-colors ${isLiked ? 'fill-red-500 text-red-500' : 'text-gray-400 group-hover:text-red-500'}`} />
               </button>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <div className="relative group">
-                    <button className="w-8 h-8 flex items-center justify-center border border-[#EAEAEA] rounded-[2px] transition-colors hover:bg-gray-50" aria-label="Share property">
-                      <Share2 className="w-4 h-4 text-[#000000]" />
+                    <button className="w-8 h-8 flex items-center justify-center border border-white/10 rounded-[2px] transition-colors hover:bg-[#16243E]" aria-label="Share property">
+                      <Share2 className="w-4 h-4 text-gray-400" />
                     </button>
                   </div>
                 </DropdownMenuTrigger>
@@ -190,10 +190,10 @@ const PropertyTitleSection = ({
 
               <button
                 onClick={handlePrint}
-                className="w-8 h-8 flex items-center justify-center border border-[#EAEAEA] rounded-[2px] transition-colors hover:bg-gray-50"
+                className="w-8 h-8 flex items-center justify-center border border-white/10 rounded-[2px] transition-colors hover:bg-[#16243E]"
                 title="Print this page"
               >
-                <Printer className="w-4 h-4 text-[#000000]" />
+                <Printer className="w-4 h-4 text-gray-400" />
               </button>
             </div>
           </div>

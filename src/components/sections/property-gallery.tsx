@@ -28,14 +28,14 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
   };
 
   return (
-    <section className="w-full bg-white pt-4 sm:pt-6 pb-2">
+    <section className="w-full bg-[#0A192F] pt-4 sm:pt-6 pb-2">
       <div className="container mx-auto px-4 sm:px-5 lg:max-w-[1480px]">
         <div className="relative group">
           {moreCount > 0 && (
             <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 z-10">
               <button
                 onClick={() => openModal(3)}
-                className="flex items-center gap-1.5 sm:gap-2 bg-white/90 hover:bg-white text-black px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-[4px] text-[12px] sm:text-[13px] font-medium shadow-sm border border-black/5 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 sm:gap-2 bg-[#16243E]/90 hover:bg-[#1E293B] text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-[4px] text-[12px] sm:text-[13px] font-medium shadow-sm border border-white/10 transition-colors cursor-pointer"
                 aria-label="View more photos"
               >
                 <svg
@@ -47,7 +47,7 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-gray-700 sm:w-4 sm:h-4"
+                  className="text-gray-300 sm:w-4 sm:h-4"
                 >
                   <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                   <circle cx="8.5" cy="8.5" r="1.5" />
@@ -59,7 +59,7 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-[10px]">
-            <div className="md:col-span-2 overflow-hidden rounded-[4px] relative aspect-video cursor-pointer bg-white group/main" onClick={() => openModal(0)}>
+            <div className="md:col-span-2 overflow-hidden rounded-[4px] relative aspect-video cursor-pointer bg-[#040C1A] group/main" onClick={() => openModal(0)}>
               <ImageWithFallback
                 src={displayImages[0]}
                 alt="Property Main View"
@@ -70,7 +70,7 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
             </div>
 
             <div className="flex flex-row md:flex-col gap-2 sm:gap-[10px]">
-              <div className="flex-1 overflow-hidden rounded-[4px] relative aspect-video md:aspect-auto md:h-full cursor-pointer bg-white group/sub1" onClick={() => openModal(1)}>
+              <div className="flex-1 overflow-hidden rounded-[4px] relative aspect-video md:aspect-auto md:h-full cursor-pointer bg-[#040C1A] group/sub1" onClick={() => openModal(1)}>
                 <ImageWithFallback
                   src={displayImages[1] || displayImages[0]}
                   alt="Property Secondary View 1"
@@ -78,7 +78,7 @@ const PropertyGallery = ({ images = [], propertyTitle = "Property" }: PropertyGa
                   className="object-cover w-full h-full scale-[0.90] transition-transform duration-500 group-hover/sub1:scale-[0.92]"
                 />
               </div>
-              <div className="flex-1 overflow-hidden rounded-[4px] relative aspect-video md:aspect-auto md:h-full cursor-pointer bg-white group/sub2" onClick={() => openModal(2)}>
+              <div className="flex-1 overflow-hidden rounded-[4px] relative aspect-video md:aspect-auto md:h-full cursor-pointer bg-[#040C1A] group/sub2" onClick={() => openModal(2)}>
                 <ImageWithFallback
                   src={displayImages[2] || displayImages[0]}
                   alt="Property Secondary View 2"

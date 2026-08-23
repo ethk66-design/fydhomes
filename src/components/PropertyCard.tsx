@@ -7,21 +7,19 @@ import { formatPrice } from '@/lib/utils';
 
 interface PropertyCardProps {
   property: Property;
-  theme?: 'light' | 'dark';
 }
 
-export default function PropertyCard({ property, theme = 'dark' }: PropertyCardProps) {
-  const isLight = theme === 'light';
+export default function PropertyCard({ property }: PropertyCardProps) {
   const firstImage = property.images && property.images.length > 0
     ? property.images[0]
     : '/assets/placeholder-house.svg';
 
   return (
     <div
-      className="bg-white border-[#EAEAEA] shadow-md border flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group h-full relative rounded-xl overflow-hidden"
+      className="shadow-md border flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group h-full relative rounded-xl overflow-hidden bg-white border-[#EAEAEA]"
     >
       {/* Image Section */}
-      <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#0A192F]">
+      <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#f8f9fa]">
         <ImageWithFallback
           src={firstImage}
           alt={property.title}
@@ -39,7 +37,7 @@ export default function PropertyCard({ property, theme = 'dark' }: PropertyCardP
             </span>
           )}
           {property.listing_type && (
-            <span className="text-[10px] sm:text-xs font-bold px-3 py-1 uppercase rounded-md bg-[#0A192F]/90 text-white backdrop-blur-md shadow-lg tracking-wider">
+            <span className="text-[10px] sm:text-xs font-bold px-3 py-1 uppercase rounded-md bg-[#16243E] text-white shadow-lg tracking-wider">
               FOR {property.listing_type}
             </span>
           )}
@@ -54,7 +52,7 @@ export default function PropertyCard({ property, theme = 'dark' }: PropertyCardP
             <span className="truncate">{property.location}</span>
           </div>
 
-          <h3 className="text-[16px] sm:text-[18px] font-semibold text-[#222222] mb-3 line-clamp-2 leading-snug group-hover:text-[#E3572D] transition-colors">
+          <h3 className="text-[16px] sm:text-[18px] font-semibold mb-3 line-clamp-2 leading-snug group-hover:text-[#E3572D] transition-colors text-black">
             {property.title}
           </h3>
 
@@ -62,22 +60,21 @@ export default function PropertyCard({ property, theme = 'dark' }: PropertyCardP
             {formatPrice(property.price)}
           </div>
 
-          {/* Amenities Footer */}
           <div className="mt-auto pt-4 border-t flex items-center justify-between gap-4 overflow-x-auto [-webkit-overflow-scrolling:touch] snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [scrollbar-width:none] border-[#EAEAEA] text-[#555555]">
-            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-gray-50 border-[#EAEAEA]">
+            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-white border-[#EAEAEA]">
               <BedDouble size={16} className="text-[#E3572D]" />
               <span className="text-xs font-medium">{property.beds || 0}</span>
             </div>
-            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-gray-50 border-[#EAEAEA]">
+            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-white border-[#EAEAEA]">
               <Bath size={16} className="text-[#E3572D]" />
               <span className="text-xs font-medium">{property.baths || 0}</span>
             </div>
-            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-gray-50 border-[#EAEAEA]">
+            <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-white border-[#EAEAEA]">
               <Scaling size={16} className="text-[#E3572D]" />
               <span className="text-xs font-medium">{property.area || 'N/A'}</span>
             </div>
             {property.land_area && (
-              <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-gray-50 border-[#EAEAEA]">
+              <div className="flex items-center gap-1.5 shrink-0 snap-start px-3 py-1.5 rounded-lg border bg-white border-[#EAEAEA]">
                 <Trees size={16} className="text-[#E3572D]" />
                 <span className="text-xs font-medium">{property.land_area}</span>
               </div>

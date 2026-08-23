@@ -49,25 +49,24 @@ const SearchFilter: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="relative z-20 w-full max-w-[1170px] mx-auto px-0"
     >
-      <div className="bg-white p-4 sm:p-6 md:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-none">
+      <div className="bg-[#040C1A] p-4 sm:p-6 md:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.2)] rounded-none border-b border-[#1E293B]">
         <form onSubmit={handleSearch} className="flex flex-col gap-4">
           <div className="flex flex-col lg:flex-row items-end gap-3 sm:gap-4 lg:gap-5 w-full">
 
             <div className="w-full lg:flex-[1.2]">
-              <label className="block text-[11px] sm:text-[13px] font-semibold text-black mb-2 font-sans uppercase tracking-wide">
-                SEARCH
+              <label className="block text-[11px] sm:text-[13px] font-semibold text-gray-400 mb-2 font-sans uppercase tracking-wide">
               </label>
               <input
                 type="text"
                 placeholder="Search keyword"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#E3572D] placeholder:text-[#5c5c5c]/50 font-sans transition-all"
+                className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 border border-[#1E293B] bg-[#16243E] rounded-[4px] text-[16px] sm:text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#E3572D] placeholder:text-gray-500 font-sans transition-all"
               />
             </div>
 
             <div className="w-full lg:flex-1">
-              <label className="block text-[11px] sm:text-[13px] font-semibold text-black mb-2 font-sans uppercase tracking-wide">
+              <label className="block text-[11px] sm:text-[13px] font-semibold text-gray-400 mb-2 font-sans uppercase tracking-wide">
                 LOOKING FOR
               </label>
               <div className="relative">
@@ -75,7 +74,7 @@ const SearchFilter: React.FC = () => {
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                   title="Property Type"
-                  className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-white font-sans cursor-pointer transition-all"
+                  className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#1E293B] rounded-[4px] text-[16px] sm:text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-[#16243E] font-sans cursor-pointer transition-all"
                 >
                   <option value="">Property Type</option>
                   <option value="Commercial">Commercial</option>
@@ -87,14 +86,14 @@ const SearchFilter: React.FC = () => {
                 </select>
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                   <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M1 1L5 5L9 1" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               </div>
             </div>
 
             <div className="w-full lg:flex-1">
-              <label className="block text-[11px] sm:text-[13px] font-semibold text-black mb-2 font-sans uppercase tracking-wide">
+              <label className="block text-[11px] sm:text-[13px] font-semibold text-gray-400 mb-2 font-sans uppercase tracking-wide">
                 SEARCH BY AREA
               </label>
               <div className="relative">
@@ -102,7 +101,7 @@ const SearchFilter: React.FC = () => {
                   value={area}
                   onChange={(e) => setArea(e.target.value)}
                   title="Area"
-                  className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-white font-sans cursor-pointer transition-all"
+                  className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#1E293B] rounded-[4px] text-[16px] sm:text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-[#16243E] font-sans cursor-pointer transition-all"
                 >
                   <option value="">Area</option>
                   <option value="Aluva">ALUVA</option>
@@ -114,7 +113,7 @@ const SearchFilter: React.FC = () => {
                 </select>
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                   <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M1 1L5 5L9 1" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               </div>
@@ -162,10 +161,10 @@ const SearchFilter: React.FC = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-5 pt-4 border-t border-[#eeeeee] w-full mt-2 overflow-hidden"
+              className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-5 pt-4 border-t border-[#1E293B] w-full mt-2 overflow-hidden"
             >
               <div className="w-full lg:flex-1">
-                <label className="block text-[11px] sm:text-[13px] font-semibold text-black mb-2 font-sans uppercase tracking-wide">
+                <label className="block text-[11px] sm:text-[13px] font-semibold text-gray-400 mb-2 font-sans uppercase tracking-wide">
                   MIN PRICE
                 </label>
                 <div className="relative">
@@ -173,7 +172,7 @@ const SearchFilter: React.FC = () => {
                     value={minPrice}
                     onChange={(e) => setMinPrice(e.target.value)}
                     title="Minimum Price"
-                    className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-white font-sans cursor-pointer transition-all"
+                    className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#1E293B] rounded-[4px] text-[16px] sm:text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-[#16243E] font-sans cursor-pointer transition-all"
                   >
                     <option value="">Any</option>
                     <option value="5000000">₹ 50 Lakhs</option>
@@ -184,14 +183,14 @@ const SearchFilter: React.FC = () => {
                   </select>
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M1 1L5 5L9 1" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                 </div>
               </div>
 
               <div className="w-full lg:flex-1">
-                <label className="block text-[11px] sm:text-[13px] font-semibold text-black mb-2 font-sans uppercase tracking-wide">
+                <label className="block text-[11px] sm:text-[13px] font-semibold text-gray-400 mb-2 font-sans uppercase tracking-wide">
                   MAX PRICE
                 </label>
                 <div className="relative">
@@ -199,7 +198,7 @@ const SearchFilter: React.FC = () => {
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                     title="Maximum Price"
-                    className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-white font-sans cursor-pointer transition-all"
+                    className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#1E293B] rounded-[4px] text-[16px] sm:text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-[#16243E] font-sans cursor-pointer transition-all"
                   >
                     <option value="">Any</option>
                     <option value="7500000">₹ 75 Lakhs</option>
@@ -211,7 +210,7 @@ const SearchFilter: React.FC = () => {
                   </select>
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M1 1L5 5L9 1" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                 </div>
@@ -219,7 +218,7 @@ const SearchFilter: React.FC = () => {
 
               <div className="w-full lg:flex-1 flex gap-3 sm:gap-4 lg:gap-5">
                 <div className="flex-1">
-                  <label className="block text-[11px] sm:text-[13px] font-semibold text-black mb-2 font-sans uppercase tracking-wide">
+                  <label className="block text-[11px] sm:text-[13px] font-semibold text-gray-400 mb-2 font-sans uppercase tracking-wide">
                     BEDS
                   </label>
                   <div className="relative">
@@ -227,7 +226,7 @@ const SearchFilter: React.FC = () => {
                       value={beds}
                       onChange={(e) => setBeds(e.target.value)}
                       title="Bedrooms"
-                      className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-white font-sans cursor-pointer transition-all"
+                      className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#1E293B] rounded-[4px] text-[16px] sm:text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-[#16243E] font-sans cursor-pointer transition-all"
                     >
                       <option value="">Any</option>
                       <option value="1">1+</option>
@@ -238,14 +237,14 @@ const SearchFilter: React.FC = () => {
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                       <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M1 1L5 5L9 1" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex-1">
-                  <label className="block text-[11px] sm:text-[13px] font-semibold text-black mb-2 font-sans uppercase tracking-wide">
+                  <label className="block text-[11px] sm:text-[13px] font-semibold text-gray-400 mb-2 font-sans uppercase tracking-wide">
                     BATHS
                   </label>
                   <div className="relative">
@@ -253,7 +252,7 @@ const SearchFilter: React.FC = () => {
                       value={baths}
                       onChange={(e) => setBaths(e.target.value)}
                       title="Bathrooms"
-                      className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#eeeeee] rounded-[4px] text-[16px] sm:text-[14px] text-[#5c5c5c] focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-white font-sans cursor-pointer transition-all"
+                      className="w-full h-[42px] sm:h-[45px] px-3 sm:px-4 appearance-none border border-[#1E293B] rounded-[4px] text-[16px] sm:text-[14px] text-white focus:outline-none focus:ring-1 focus:ring-[#E3572D] bg-[#16243E] font-sans cursor-pointer transition-all"
                     >
                       <option value="">Any</option>
                       <option value="1">1+</option>
@@ -264,7 +263,7 @@ const SearchFilter: React.FC = () => {
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                       <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L5 5L9 1" stroke="#5c5c5c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M1 1L5 5L9 1" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                   </div>

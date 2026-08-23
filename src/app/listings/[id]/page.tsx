@@ -131,7 +131,7 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
   const similarProperties = await getSimilarProperties(property);
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#0A192F]">
       {/* Header Spacer (handled by sticky header in layout) */}
       <div className="h-[90px]"></div>
 

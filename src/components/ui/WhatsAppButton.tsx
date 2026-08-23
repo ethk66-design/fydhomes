@@ -2,7 +2,7 @@ import React from 'react';
 import { Phone } from 'lucide-react';
 
 export default function WhatsAppButton() {
-  const phoneNumber = "919544593991";
+  const phoneNumber = "919778393991";
   const message = 'Hello, I am interested in your properties.';
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   const callUrl = `tel:+${phoneNumber}`;

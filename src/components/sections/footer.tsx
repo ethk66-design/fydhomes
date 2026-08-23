@@ -28,7 +28,7 @@ const Footer = () => {
               <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-3 sm:mb-6 text-white tracking-wider">Contact Us</h3>
               <div className="contact-details">
                 <p className="text-[13px] sm:text-[14px] text-gray-300 mb-2 sm:mb-3 leading-relaxed">
-                  +91 9544593991
+                  +91 9778393991
                 </p>
                 <p className="text-[13px] sm:text-[14px] text-gray-300 mb-2 sm:mb-3 leading-relaxed">
                   info@fydhomes.com
@@ -115,7 +115,7 @@ const Footer = () => {
             <h3 className="text-[13px] sm:text-[14px] font-[700] uppercase mb-4 sm:mb-6 text-white tracking-wider">Contact Us</h3>
             <div className="contact-details">
               <p className="text-[13px] sm:text-[14px] text-gray-300 mb-2 sm:mb-3 leading-relaxed">
-                Call us : +91 9544593991
+                Call us : +91 9778393991
               </p>
               <p className="text-[13px] sm:text-[14px] text-gray-300 mb-2 sm:mb-3 leading-relaxed">
                 info@fydhomes.com

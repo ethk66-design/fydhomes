@@ -15,11 +15,11 @@ const ContactInfoForm = () => {
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <a 
-                  href="tel:+919544593991" 
+                  href="tel:+919778393991" 
                   className="flex items-center gap-3 text-[14px] text-black hover:text-[#E3572D] transition-colors"
                 >
                   <Phone className="w-[18px] h-[18px] text-[#E3572D]" />
-                  <span>+91 9544593991</span>
+                  <span>+91 9778393991</span>
                 </a>
               </li>
               <li className="flex items-center gap-3">

@@ -12,11 +12,11 @@ const ContactForm = () => {
             </h2>
             <ul className="space-y-3 sm:space-y-[15px]">
               <li className="flex items-center gap-3 sm:gap-[12px] group">
-                <a href="tel:+919544593991" className="flex items-center gap-3 sm:gap-[12px] text-gray-300 text-[13px] sm:text-[14px] hover:text-[#E3572D] transition-colors">
+                <a href="tel:+919778393991" className="flex items-center gap-3 sm:gap-[12px] text-gray-300 text-[13px] sm:text-[14px] hover:text-[#E3572D] transition-colors">
                   <span className="text-[#E3572D]">
                     <Phone size={14} className="sm:w-4 sm:h-4" />
                   </span>
-                  +91 9544593991
+                  +91 9778393991
                 </a>
               </li>
               <li className="flex items-center gap-3 sm:gap-[12px] group">

@@ -31,7 +31,7 @@ const teamMembers: TeamMember[] = [
     name: 'Shyam',
     role: 'Agent',
     image: 'https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/GHHH-02-scaled-8.png',
-    phone: '+919544593991',
+    phone: '+919778393991',
     email: 'shyamdio6@gmail.com',
   },
   {

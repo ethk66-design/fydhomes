@@ -20,9 +20,9 @@ interface ListingGridProps {
 export default function ListingGrid({ properties, keyword, type, area, listing_type, totalCount, currentPage, totalPages }: ListingGridProps) {
     return (
         <div className="container mx-auto mt-10 sm:mt-16 md:mt-20 px-4 sm:px-5">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-10 border-b border-[#eeeeee] pb-4 gap-2">
-                <p className="text-[#5c5c5c] font-medium text-sm sm:text-base">
-                    Showing <span className="text-black font-bold">{totalCount}</span> properties
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-10 border-b border-[#1E293B] pb-4 gap-2">
+                <p className="text-gray-400 font-medium text-sm sm:text-base">
+                    Showing <span className="text-white font-bold">{totalCount}</span> properties
                     {(keyword || type || area || listing_type) && (
                         <span className="ml-2 text-xs uppercase tracking-widest text-[#E3572D]"> (Filtered)</span>
                     )}
@@ -52,7 +52,7 @@ export default function ListingGrid({ properties, keyword, type, area, listing_t
                                 show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
                             }}
                         >
-                            <PropertyCard property={property} theme="light" />
+                            <PropertyCard property={property} />
                         </motion.div>
                     ))}
                 </motion.div>
@@ -60,9 +60,9 @@ export default function ListingGrid({ properties, keyword, type, area, listing_t
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-12 sm:py-20 bg-[#f4f8fb] rounded-lg border-2 border-dashed border-[#eeeeee]"
+                    className="text-center py-12 sm:py-20 bg-[#16243E] rounded-lg border-2 border-dashed border-[#1E293B]"
                 >
-                    <h3 className="text-[#5c5c5c] font-medium text-sm sm:text-base">No properties match your search criteria.</h3>
+                    <h3 className="text-gray-400 font-medium text-sm sm:text-base">No properties match your search criteria.</h3>
                     <Link
                         href="/listings"
                         className="mt-4 inline-block text-[#E3572D] font-bold uppercase text-xs tracking-widest hover:underline"

@@ -27,8 +27,8 @@ interface SimilarListing {
 }
 
 const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
-  <div className="group bg-white border border-[#EAEAEA] rounded-[4px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
-    <div className="relative w-full aspect-video overflow-hidden bg-[#f8f9fa]">
+  <div className="group bg-[#16243E] border border-[#1E293B] rounded-[4px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
+    <div className="relative w-full aspect-video overflow-hidden bg-[#0A192F]">
       <ImageWithFallback
         src={listing.image}
         fallbackSrc="/assets/placeholder-house.svg"
@@ -50,26 +50,26 @@ const PropertyCard = ({ listing }: { listing: SimilarListing }) => (
     </div>
 
     <div className="p-3 sm:p-4">
-      <h3 className="text-[#000000] text-[13px] sm:text-[15px] font-medium leading-[1.4] mb-2 sm:mb-3 line-clamp-2 min-h-[36px] sm:min-h-[42px] group-hover:text-[#E3572D] transition-colors">
+      <h3 className="text-white text-[13px] sm:text-[15px] font-medium leading-[1.4] mb-2 sm:mb-3 line-clamp-2 min-h-[36px] sm:min-h-[42px] group-hover:text-[#E3572D] transition-colors">
         <Link href={`/listings/${listing.id}`}>{listing.title}</Link>
       </h3>
 
-      <div className="flex items-center justify-between mt-auto pt-2 border-t border-[#EAEAEA]">
-        <div className="text-[#000000] text-[14px] sm:text-[16px] font-bold">
+      <div className="flex items-center justify-between mt-auto pt-2 border-t border-[#1E293B]">
+        <div className="text-white text-[14px] sm:text-[16px] font-bold">
           {formatPrice(listing.price)}
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
           {(listing.beds && listing.beds > 0) ? (
             <div className="flex items-center gap-1">
-              <Bed size={12} className="text-[#666666] sm:w-3.5 sm:h-3.5" />
-              <span className="text-[#666666] text-[11px] sm:text-[13px]">{listing.beds}</span>
+              <Bed size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5" />
+              <span className="text-gray-400 text-[11px] sm:text-[13px]">{listing.beds}</span>
             </div>
           ) : null}
           {(listing.baths && listing.baths > 0) ? (
             <div className="flex items-center gap-1">
-              <Bath size={12} className="text-[#666666] sm:w-3.5 sm:h-3.5" />
-              <span className="text-[#666666] text-[11px] sm:text-[13px]">{listing.baths}</span>
+              <Bath size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5" />
+              <span className="text-gray-400 text-[11px] sm:text-[13px]">{listing.baths}</span>
             </div>
           ) : null}
         </div>
@@ -100,18 +100,18 @@ const SimilarListings = ({ listings = [] }: SimilarListingsProps) => {
   }));
 
   return (
-    <section className="py-8 sm:py-12 md:py-[60px] bg-white">
+    <section className="py-8 sm:py-12 md:py-[60px] bg-[#0A192F]">
       <div className="container mx-auto px-4 sm:px-5 md:px-0">
         <div className="mb-6 sm:mb-10">
           <div className="section-marker mb-2 sm:mb-3 relative flex items-center gap-2">
-            <span className="inline-block w-3.5 h-3.5 sm:w-4 sm:h-4 border-2 border-[#16243E] rounded-full relative">
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#16243E] rounded-full"></span>
+            <span className="inline-block w-3.5 h-3.5 sm:w-4 sm:h-4 border-2 border-gray-400 rounded-full relative">
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gray-400 rounded-full"></span>
             </span>
-            <span className="text-[#16243E] text-[11px] sm:text-[12px] font-bold tracking-[0.1em] uppercase">
+            <span className="text-gray-400 text-[11px] sm:text-[12px] font-bold tracking-[0.1em] uppercase">
               Similar Listings
             </span>
           </div>
-          <h2 className="text-[#000000] font-display text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-tight mt-1 sm:mt-2">
+          <h2 className="text-white font-display text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-tight mt-1 sm:mt-2">
             You May Also Like
           </h2>
         </div>

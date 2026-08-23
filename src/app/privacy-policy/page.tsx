@@ -141,7 +141,7 @@ const PrivacyPolicyPage = () => {
                     <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
                         <p className="font-bold text-lg mb-1">FYD Homes</p>
                         <p className="mb-1"><span className="font-medium text-black">Email:</span> <a href="mailto:info@fydhomes.com" className="text-[#E3572D] hover:underline">info@fydhomes.com</a></p>
-                        <p><span className="font-medium text-black">Phone:</span> <a href="tel:+919544593991" className="text-[#E3572D] hover:underline">+91 9544593991</a></p>
+                        <p><span className="font-medium text-black">Phone:</span> <a href="tel:+919778393991" className="text-[#E3572D] hover:underline">+91 9778393991</a></p>
                     </div>
                 </section>
             </div>

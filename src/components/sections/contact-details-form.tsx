@@ -95,11 +95,11 @@ const ContactDetailsForm = () => {
             <ul className="list-none p-0 flex flex-col gap-[15px]">
               <li>
                 <a
-                  href="tel:+919544593991"
+                  href="tel:+919778393991"
                   className="flex items-center gap-[12px] text-[15px] text-black hover:text-[#E3572D] transition-colors duration-200"
                 >
                   <Phone size={16} fill="currentColor" strokeWidth={0} className="text-black" />
-                  <span>+91 9544593991</span>
+                  <span>+91 9778393991</span>
                 </a>
               </li>
               <li>

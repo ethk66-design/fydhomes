@@ -91,24 +91,24 @@ export function Hero({ slides }: { slides?: string[] }) {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <span className="inline-block py-1 px-3 rounded-full bg-[#E3572D]/20 text-[#E3572D] text-xs font-bold uppercase tracking-wider mb-4 sm:mb-6 border border-[#E3572D]/30 backdrop-blur-sm">
-                Premium Real Estate Platform
+                End-to-End Property Management
               </span>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white mb-4 sm:mb-6 tracking-tight">
-                Discover Your <br />
+                FYD: Find Your <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E3572D] to-[#ff8c6b]">
-                  Perfect Sanctuary
+                  Dream Home
                 </span>
               </h1>
               <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto font-light">
-                Experience the pinnacle of luxury living. We provide exclusive access to the most luxurious properties in prime locations.
+                We are dedicated property management experts providing seamless, end-to-end solutions for luxury living and investment properties across Kerala.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="w-full bg-[#f4f8fb] py-8 sm:py-12 px-4 shadow-[0_10px_40px_rgba(0,0,0,0.05)] border-b border-gray-200">
-        {/* Premium Floating Search Bar - Light Theme */}
+      <section className="w-full bg-[#040C1A] py-8 sm:py-12 px-4 shadow-[0_10px_40px_rgba(0,0,0,0.5)] border-b border-white/5">
+        {/* Premium Floating Search Bar */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

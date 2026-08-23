@@ -35,7 +35,7 @@ export function FeaturedForRent({ initialProperties }: FeaturedForRentProps) {
   }, [initialProperties]);
 
   return (
-    <section className="bg-[#f4f8fb] py-12 sm:py-16 overflow-hidden">
+    <section className="bg-[#0A192F] py-12 sm:py-16 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-5 lg:px-[15px] max-w-[1170px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -51,7 +51,7 @@ export function FeaturedForRent({ initialProperties }: FeaturedForRentProps) {
               </div>
               <span className="text-[11px] sm:text-[12px] font-semibold text-[#E3572D] uppercase tracking-wider">Properties</span>
             </div>
-            <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-[#0A192F] leading-tight">
+            <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-white leading-tight">
               Featured For Rent
             </h2>
           </div>
@@ -103,7 +103,7 @@ export function FeaturedForRent({ initialProperties }: FeaturedForRentProps) {
                     show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
                   }}
                 >
-                  <PropertyCard property={property} theme="light" />
+                  <PropertyCard property={property} />
                 </motion.div>
               ))
             ) : (

@@ -78,10 +78,10 @@ const Navigation = () => {
         }`}
     >
       <div className="container mx-auto px-5 lg:px-0">
-        <div className="flex items-center justify-between h-[80px]">
+        <div className="flex items-center justify-between h-[90px]">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="block relative h-[65px] lg:h-[78px] w-[130px] lg:w-[156px]">
+            <Link href="/" className="block relative h-[70px] lg:h-[80px] w-[130px] lg:w-[156px]">
               <ImageWithFallback
                 src="/assets/fyd-logo.png"
                 alt="fyd homes"
@@ -170,7 +170,7 @@ const Navigation = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-[#16243E] z-[999] transition-transform duration-500 ease-in-out transform lg:hidden top-[80px] ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-0 bg-[#16243E] z-[999] transition-transform duration-500 ease-in-out transform lg:hidden top-[90px] ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
         <div className="flex flex-col p-8 space-y-6">

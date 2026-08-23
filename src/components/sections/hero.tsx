@@ -94,7 +94,7 @@ export function Hero({ slides }: { slides?: string[] }) {
                 End-to-End Property Management
               </span>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white mb-4 sm:mb-6 tracking-tight">
-                FYD: Find Your <br />
+                Find Your <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E3572D] to-[#ff8c6b]">
                   Dream Home
                 </span>

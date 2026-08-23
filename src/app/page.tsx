@@ -70,7 +70,7 @@ export default async function Home() {
       <FeaturedForSale initialProperties={featuredSale as Property[]} />
       <FeaturedForRent initialProperties={featuredRent as Property[]} />
       <PropertyTypes images={propertyTypeImages} counts={counts} />
-      <ExpertGuidance bgImage={ctaBg} />
+      <ExpertGuidance bgImage="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop" />
       <Testimonials />
       <Newsletter bgImage={newsletterBg} />
     </main>

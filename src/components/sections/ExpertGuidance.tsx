@@ -6,10 +6,11 @@ import ImageWithFallback from "@/components/ui/image-with-fallback";
 import { motion } from 'framer-motion';
 
 export function ExpertGuidance({ bgImage }: { bgImage?: string }) {
-  const backgroundImage = bgImage || "https://vexsmxrfxbatpyelugch.supabase.co/storage/v1/object/public/test-clones/0149254b-b2ea-40e6-ad6a-70e092f9e191-fydhomes-in/assets/images/WhatsApp-Image-2025-12-26-at-12_46_13-PM-758x564-27.jpeg";
+  // Use a premium real estate stock image instead of the orange sunset
+  const backgroundImage = bgImage || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop";
 
   return (
-    <section className="relative w-full py-12 sm:py-16 md:py-[80px] lg:py-[100px] overflow-hidden bg-[#0A192F]">
+    <section className="w-full overflow-hidden bg-[#0A192F] py-0">
       <div className="container mx-auto px-4 sm:px-5">
         <div className="relative w-full min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[550px] rounded-[10px] overflow-hidden shadow-2xl">
           <div className="absolute inset-0 z-0">

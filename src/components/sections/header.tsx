@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
 import Link from 'next/link';
-import { Instagram, Youtube, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,14 +12,15 @@ export default function Header() {
     <header className="w-full bg-[#16243E] border-b border-[#0F172A] sticky top-0 z-[1000]">
       <div className="container mx-auto max-w-[1200px] px-4 sm:px-5 md:px-10 h-[80px] sm:h-[100px] flex items-center justify-between">
 
+        {/* Logo — 30% larger than original */}
         <div className="flex-shrink-0">
           <Link href="/" className="block">
             <ImageWithFallback
               src="/assets/fyd-logo.png"
               alt="fyd homes"
-              width={240}
-              height={90}
-              className="h-[60px] sm:h-[90px] w-auto object-contain"
+              width={312}
+              height={117}
+              className="h-[78px] sm:h-[117px] w-auto object-contain"
               unoptimized={true}
               priority
             />
@@ -29,34 +30,22 @@ export default function Header() {
         <nav className="hidden lg:flex flex-1 justify-center">
           <ul className="flex items-center gap-6 xl:gap-10">
             <li>
-              <Link
-                href="/"
-                className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200"
-              >
+              <Link href="/" className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200">
                 Home
               </Link>
             </li>
             <li>
-              <Link
-                href="/about"
-                className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200"
-              >
+              <Link href="/about" className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200">
                 About
               </Link>
             </li>
             <li>
-              <Link
-                href="/listings"
-                className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200"
-              >
+              <Link href="/listings" className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200">
                 Listings
               </Link>
             </li>
             <li>
-              <Link
-                href="/contact"
-                className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200"
-              >
+              <Link href="/contact" className="text-[13px] xl:text-[14px] font-semibold text-white hover:text-[#E3572D] uppercase tracking-wider transition-colors duration-200">
                 Contact
               </Link>
             </li>
@@ -64,24 +53,42 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3 sm:gap-4">
-          <div className="hidden sm:flex items-center gap-2 sm:gap-3">
+          {/* Colored Social Icons with Text Labels */}
+          <div className="hidden sm:flex items-center gap-3">
             <a
               href="https://www.instagram.com/findyourdreamhome_/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#333333] text-white hover:bg-[#E3572D] transition-all duration-300"
+              className="flex items-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 pl-2 pr-3 py-1.5 rounded-full text-white transition-all duration-200"
             >
-              <Instagram size={16} className="sm:w-[18px] sm:h-[18px]" />
-              <span className="sr-only">Instagram</span>
+              <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                <rect width="24" height="24" rx="6" fill="url(#ig-grad-header)" />
+                <rect x="5" y="5" width="14" height="14" rx="4" stroke="white" strokeWidth="1.5" fill="none" />
+                <circle cx="12" cy="12" r="3.5" stroke="white" strokeWidth="1.5" fill="none" />
+                <circle cx="17.5" cy="6.5" r="1.2" fill="white" />
+                <defs>
+                  <linearGradient id="ig-grad-header" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#FEDA77" />
+                    <stop offset="0.25" stopColor="#F58529" />
+                    <stop offset="0.5" stopColor="#DD2A7B" />
+                    <stop offset="0.75" stopColor="#8134AF" />
+                    <stop offset="1" stopColor="#515BD4" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <span className="text-[12px] font-semibold tracking-wide">Instagram</span>
             </a>
             <a
               href="https://www.youtube.com/@findyourdreamhome6667"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#E3572D] text-white hover:bg-[#16243E] transition-all duration-300"
+              className="flex items-center gap-2 bg-white/5 hover:bg-white/15 border border-white/10 pl-2 pr-3 py-1.5 rounded-full text-white transition-all duration-200"
             >
-              <Youtube size={16} className="sm:w-[18px] sm:h-[18px]" />
-              <span className="sr-only">Youtube</span>
+              <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                <rect width="24" height="24" rx="6" fill="#FF0000" />
+                <path d="M10 15.5L16 12L10 8.5V15.5Z" fill="white" />
+              </svg>
+              <span className="text-[12px] font-semibold tracking-wide">Youtube</span>
             </a>
           </div>
 
@@ -124,19 +131,36 @@ export default function Header() {
               href="https://www.instagram.com/findyourdreamhome_/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100/10 text-white hover:bg-[#E3572D] hover:text-white transition-all duration-300"
+              className="flex items-center gap-2 bg-gray-100/10 text-white hover:bg-[#E3572D] rounded-full px-3 py-2 transition-all duration-300"
             >
-              <Instagram size={20} />
-              <span className="sr-only">Instagram</span>
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                <rect width="24" height="24" rx="6" fill="url(#ig-grad-mobile)" />
+                <rect x="5" y="5" width="14" height="14" rx="4" stroke="white" strokeWidth="1.5" fill="none" />
+                <circle cx="12" cy="12" r="3.5" stroke="white" strokeWidth="1.5" fill="none" />
+                <circle cx="17.5" cy="6.5" r="1.2" fill="white" />
+                <defs>
+                  <linearGradient id="ig-grad-mobile" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#FEDA77" />
+                    <stop offset="0.25" stopColor="#F58529" />
+                    <stop offset="0.5" stopColor="#DD2A7B" />
+                    <stop offset="0.75" stopColor="#8134AF" />
+                    <stop offset="1" stopColor="#515BD4" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <span className="text-sm font-semibold">Instagram</span>
             </a>
             <a
               href="https://www.youtube.com/@findyourdreamhome6667"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100/10 text-white hover:bg-[#E3572D] hover:text-white transition-all duration-300"
+              className="flex items-center gap-2 bg-gray-100/10 text-white hover:bg-[#E3572D] rounded-full px-3 py-2 transition-all duration-300"
             >
-              <Youtube size={20} />
-              <span className="sr-only">Youtube</span>
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                <rect width="24" height="24" rx="6" fill="#FF0000" />
+                <path d="M10 15.5L16 12L10 8.5V15.5Z" fill="white" />
+              </svg>
+              <span className="text-sm font-semibold">Youtube</span>
             </a>
           </div>
         </nav>

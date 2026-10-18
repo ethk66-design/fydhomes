@@ -130,7 +130,7 @@ export default function LeadsPage() {
 
                 {/* Leads Table */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200/80 overflow-hidden">
-                    <div className="overflow-x-auto">
+                    <div className="hidden md:block overflow-x-auto">
                         <table className="w-full text-left">
                             <thead>
                                 <tr className="bg-[#F8FAFC] border-b border-gray-200 text-xs font-bold text-gray-700 uppercase tracking-wider">
@@ -215,6 +215,64 @@ export default function LeadsPage() {
                                 ))}
                             </tbody>
                         </table>
+                    </div>
+
+                    {/* Mobile Responsive Cards */}
+                    <div className="md:hidden divide-y divide-gray-100">
+                        {filteredLeads.map((lead) => (
+                            <div key={lead.id} className="p-4 hover:bg-slate-50 transition-colors">
+                                <div className="flex justify-between items-start gap-3 mb-2">
+                                    <div>
+                                        <div className="font-bold text-gray-900 text-sm flex items-center gap-1.5">
+                                            <User size={14} className="text-[#E3572D]" />
+                                            {lead.name}
+                                        </div>
+                                        <div className="text-[11px] text-gray-400 mt-0.5">
+                                            {format(new Date(lead.created_at), "MMM d, yyyy • h:mm a")}
+                                        </div>
+                                    </div>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="h-8 w-8 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg shrink-0"
+                                        onClick={() => handleDeleteLead(lead.id, lead.name)}
+                                        title="Delete Lead"
+                                    >
+                                        <Trash2 size={15} />
+                                    </Button>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-2 my-2 text-xs">
+                                    {lead.phone && (
+                                        <a href={`tel:${lead.phone}`} className="flex items-center gap-1.5 text-gray-700 bg-gray-50 border border-gray-200/80 p-2 rounded-lg font-medium hover:text-[#E3572D]">
+                                            <Phone size={13} className="text-[#E3572D]" />
+                                            <span className="truncate">{lead.phone}</span>
+                                        </a>
+                                    )}
+                                    {lead.email && (
+                                        <a href={`mailto:${lead.email}`} className="flex items-center gap-1.5 text-gray-700 bg-gray-50 border border-gray-200/80 p-2 rounded-lg font-medium hover:text-[#E3572D]">
+                                            <Mail size={13} className="text-[#E3572D]" />
+                                            <span className="truncate">{lead.email}</span>
+                                        </a>
+                                    )}
+                                </div>
+
+                                {lead.property && (
+                                    <div className="text-xs bg-slate-50 border border-gray-100 p-2 rounded-lg mb-2">
+                                        <span className="text-gray-400 font-medium">Interested in: </span>
+                                        <Link href={`/listings/${lead.property.id}`} target="_blank" className="font-semibold text-gray-900 hover:text-[#E3572D]">
+                                            {lead.property.title}
+                                        </Link>
+                                    </div>
+                                )}
+
+                                {lead.message && (
+                                    <div className="text-xs text-gray-600 bg-white border border-gray-100 p-2.5 rounded-lg whitespace-pre-line mt-2">
+                                        {lead.message}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
                     </div>
 
                     {filteredLeads.length === 0 && (

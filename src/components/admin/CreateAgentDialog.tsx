@@ -37,7 +37,7 @@ export function CreateAgentDialog({ onSuccess }: { onSuccess: () => void }) {
                     Add Agent
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] bg-white text-black">
+            <DialogContent className="w-[95vw] sm:max-w-[425px] max-h-[90vh] overflow-y-auto bg-white text-black p-5 sm:p-6 rounded-2xl">
                 <DialogHeader>
                     <DialogTitle>Add New Agent</DialogTitle>
                     <DialogDescription>

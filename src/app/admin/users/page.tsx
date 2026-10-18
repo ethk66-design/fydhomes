@@ -69,60 +69,101 @@ export default function AdminUsersPage() {
                             <CreateAgentDialog onSuccess={fetchAgents} />
                         </div>
                     ) : (
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left">
-                                <thead>
-                                    <tr className="bg-[#f4f8fb] border-b border-[#eeeeee]">
-                                        <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider">Agent Name</th>
-                                        <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider">Email</th>
-                                        <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider">Joined Date</th>
-                                        <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider">Last Login</th>
-                                        <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-[#eeeeee]">
-                                    {agents.map((agent) => (
-                                        <tr key={agent.id} className="hover:bg-gray-50 transition-colors">
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-8 h-8 rounded-full bg-[#E3572D]/10 flex items-center justify-center text-[#E3572D] font-bold text-xs">
-                                                        {agent.user_metadata?.full_name?.charAt(0).toUpperCase() || "A"}
-                                                    </div>
-                                                    <span className="font-medium text-black text-sm">{agent.user_metadata?.full_name || "Unknown"}</span>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-[#5c5c5c]">
-                                                {agent.email}
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-[#5c5c5c]">
-                                                <div className="flex items-center gap-2">
-                                                    <Calendar size={14} className="text-gray-400" />
-                                                    {format(new Date(agent.created_at), "MMM d, yyyy")}
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-[#5c5c5c]">
-                                                {agent.last_sign_in_at ? (
-                                                    format(new Date(agent.last_sign_in_at), "MMM d, HH:mm")
-                                                ) : (
-                                                    <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">Never</span>
-                                                )}
-                                            </td>
-                                            <td className="px-6 py-4 text-right">
-                                                <Button
-                                                    variant="ghost"
-                                                    size="icon"
-                                                    onClick={() => handleDelete(agent.id, agent.email || "")}
-                                                    className="h-8 w-8 text-gray-400 hover:text-red-500 hover:bg-red-50"
-                                                    title="Delete Agent"
-                                                >
-                                                    <Trash2 size={16} />
-                                                </Button>
-                                            </td>
+                        <>
+                            {/* Desktop Table View */}
+                            <div className="hidden md:block overflow-x-auto">
+                                <table className="w-full text-left">
+                                    <thead>
+                                        <tr className="bg-[#f4f8fb] border-b border-[#eeeeee]">
+                                            <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider">Agent Name</th>
+                                            <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider">Email</th>
+                                            <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider">Joined Date</th>
+                                            <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider">Last Login</th>
+                                            <th className="px-6 py-4 text-xs font-bold text-black uppercase tracking-wider text-right">Actions</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody className="divide-y divide-[#eeeeee]">
+                                        {agents.map((agent) => (
+                                            <tr key={agent.id} className="hover:bg-gray-50 transition-colors">
+                                                <td className="px-6 py-4">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-8 h-8 rounded-full bg-[#E3572D]/10 flex items-center justify-center text-[#E3572D] font-bold text-xs">
+                                                            {agent.user_metadata?.full_name?.charAt(0).toUpperCase() || "A"}
+                                                        </div>
+                                                        <span className="font-medium text-black text-sm">{agent.user_metadata?.full_name || "Unknown"}</span>
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 text-sm text-[#5c5c5c]">
+                                                    {agent.email}
+                                                </td>
+                                                <td className="px-6 py-4 text-sm text-[#5c5c5c]">
+                                                    <div className="flex items-center gap-2">
+                                                        <Calendar size={14} className="text-gray-400" />
+                                                        {format(new Date(agent.created_at), "MMM d, yyyy")}
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 text-sm text-[#5c5c5c]">
+                                                    {agent.last_sign_in_at ? (
+                                                        format(new Date(agent.last_sign_in_at), "MMM d, HH:mm")
+                                                    ) : (
+                                                        <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">Never</span>
+                                                    )}
+                                                </td>
+                                                <td className="px-6 py-4 text-right">
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="icon"
+                                                        onClick={() => handleDelete(agent.id, agent.email || "")}
+                                                        className="h-8 w-8 text-gray-400 hover:text-red-500 hover:bg-red-50"
+                                                        title="Delete Agent"
+                                                    >
+                                                        <Trash2 size={16} />
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {/* Mobile Card View */}
+                            <div className="md:hidden divide-y divide-[#eeeeee]">
+                                {agents.map((agent) => (
+                                    <div key={agent.id} className="p-4 space-y-3">
+                                        <div className="flex items-center justify-between gap-2">
+                                            <div className="flex items-center gap-2.5">
+                                                <div className="w-9 h-9 rounded-full bg-[#E3572D]/10 flex items-center justify-center text-[#E3572D] font-bold text-sm">
+                                                    {agent.user_metadata?.full_name?.charAt(0).toUpperCase() || "A"}
+                                                </div>
+                                                <div>
+                                                    <div className="font-semibold text-black text-sm">{agent.user_metadata?.full_name || "Unknown"}</div>
+                                                    <div className="text-xs text-[#5c5c5c] break-all">{agent.email}</div>
+                                                </div>
+                                            </div>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                onClick={() => handleDelete(agent.id, agent.email || "")}
+                                                className="h-8 w-8 text-gray-400 hover:text-red-500 hover:bg-red-50 shrink-0"
+                                                title="Delete Agent"
+                                            >
+                                                <Trash2 size={16} />
+                                            </Button>
+                                        </div>
+
+                                        <div className="flex items-center justify-between text-xs text-[#71717A] pt-1">
+                                            <span className="flex items-center gap-1.5">
+                                                <Calendar size={13} className="text-[#A1A1AA]" />
+                                                Joined {format(new Date(agent.created_at), "MMM d, yyyy")}
+                                            </span>
+                                            <span>
+                                                Last: {agent.last_sign_in_at ? format(new Date(agent.last_sign_in_at), "MMM d") : "Never"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
                     )}
                 </div>
             </div>

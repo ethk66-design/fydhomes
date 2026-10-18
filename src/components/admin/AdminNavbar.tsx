@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 import { usePathname, useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import {
@@ -59,30 +60,19 @@ export default function AdminNavbar() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo & Brand */}
           <div className="flex items-center gap-4">
-            <Link href="/admin" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden bg-white/10 p-1 flex items-center justify-center border border-white/10">
-                <Image
-                  src="/fyd-logo.png"
-                  alt="FYD Homes Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-base sm:text-lg tracking-tight text-white group-hover:text-[#E3572D] transition-colors">
-                    FYD HOMES
-                  </span>
-                  <span className="px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-[#E3572D]/20 text-[#E3572D] border border-[#E3572D]/30 rounded">
-                    Admin
-                  </span>
-                </div>
-                <span className="text-[11px] text-gray-400 font-medium hidden sm:block">
-                  Control Center & Management
-                </span>
-              </div>
+            <Link href="/admin" className="flex items-center gap-2.5 sm:gap-3 group">
+              <ImageWithFallback
+                src="/assets/fyd-logo.png"
+                alt="FYD Homes Logo"
+                width={220}
+                height={75}
+                className="h-10 sm:h-12 w-auto object-contain brightness-105"
+                unoptimized={true}
+                priority
+              />
+              <span className="px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-[#E3572D]/20 text-[#E3572D] border border-[#E3572D]/30 rounded">
+                Admin
+              </span>
             </Link>
           </div>
 

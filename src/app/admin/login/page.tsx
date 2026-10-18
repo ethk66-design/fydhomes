@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,7 +46,7 @@ export default function AdminLoginPage() {
 
       <div className="w-full max-w-[420px] relative z-10">
         {/* Back to Public Site */}
-        <div className="mb-6 text-center">
+        <div className="mb-4 text-center">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-xs font-semibold text-gray-400 hover:text-white transition-colors"
@@ -54,20 +55,30 @@ export default function AdminLoginPage() {
           </Link>
         </div>
 
-        <Card className="shadow-2xl border border-white/10 bg-white/95 backdrop-blur-md rounded-2xl overflow-hidden">
-          <CardHeader className="text-center px-6 pt-8 pb-4">
-            <div className="mx-auto w-14 h-14 rounded-2xl bg-[#0A192F] p-2 flex items-center justify-center border border-gray-100 shadow-md mb-4">
-              <Image
-                src="/fyd-logo.png"
+        {/* Prominent FYD Homes Brand Logo Header */}
+        <div className="flex flex-col items-center justify-center mb-6 text-center">
+          <Link href="/" className="inline-block group mb-3" title="FYD Homes">
+            <div className="bg-[#071324] border border-white/15 px-6 py-3.5 rounded-2xl shadow-2xl flex items-center justify-center hover:border-[#E3572D]/50 transition-colors">
+              <ImageWithFallback
+                src="/assets/fyd-logo.png"
                 alt="FYD Homes Logo"
-                width={48}
-                height={48}
-                className="object-contain"
+                width={240}
+                height={80}
+                className="h-12 sm:h-14 w-auto object-contain"
                 priority
+                unoptimized={true}
               />
             </div>
-            <CardTitle className="text-2xl font-bold text-gray-900 tracking-tight">Admin Portal</CardTitle>
-            <p className="text-xs text-gray-500 mt-1">Sign in with authorized FYD Homes credentials</p>
+          </Link>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#E3572D]/20 text-[#E3572D] border border-[#E3572D]/30 rounded-full text-[11px] font-bold uppercase tracking-wider">
+            <Lock size={12} /> FYD Admin Control Center
+          </div>
+        </div>
+
+        <Card className="shadow-2xl border border-white/10 bg-white/95 backdrop-blur-md rounded-2xl overflow-hidden">
+          <CardHeader className="text-center px-6 pt-6 pb-3">
+            <CardTitle className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Sign In to Dashboard</CardTitle>
+            <p className="text-xs text-gray-500 mt-1">Authorized FYD Homes credentials required</p>
           </CardHeader>
 
           <CardContent className="px-6 py-4">

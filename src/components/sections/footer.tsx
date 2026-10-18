@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
-import { Facebook, Instagram, Youtube, Lock } from 'lucide-react';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -59,11 +59,6 @@ const Footer = () => {
               <li className="mb-2 sm:mb-3">
                 <Link href="/contact" className="text-[13px] sm:text-[14px] text-gray-300 hover:text-white transition-colors duration-200">
                   Contact
-                </Link>
-              </li>
-              <li className="mb-2 sm:mb-3">
-                <Link href="/admin/login" className="text-[13px] sm:text-[14px] text-gray-300 hover:text-[#E3572D] transition-colors duration-200">
-                  Admin Login
                 </Link>
               </li>
             </ul>
@@ -144,11 +139,6 @@ const Footer = () => {
               <div className="h-3 w-[1px] bg-white/20"></div>
               <Link href="/terms-conditions" className="text-[12px] sm:text-[13px] text-gray-400 font-medium hover:text-[#E3572D] transition-colors">
                 Terms & Conditions
-              </Link>
-              <div className="h-3 w-[1px] bg-white/20"></div>
-              <Link href="/admin/login" className="text-[12px] sm:text-[13px] text-gray-400 font-medium hover:text-[#E3572D] transition-colors inline-flex items-center gap-1.5">
-                <Lock size={12} className="text-[#E3572D]" />
-                <span>Admin Portal</span>
               </Link>
             </div>
           </div>

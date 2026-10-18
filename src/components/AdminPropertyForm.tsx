@@ -718,7 +718,7 @@ export default function AdminPropertyForm({ initialData, isEditing = false }: Ad
         <Button
           type="submit"
           disabled={loading || uploading}
-          className="bg-[#E3572D] hover:bg-[#256a7a] text-white px-6 sm:px-10 w-full sm:w-auto order-1 sm:order-2"
+          className="bg-[#E3572D] hover:bg-[#cf4b22] text-white font-semibold px-6 sm:px-10 w-full sm:w-auto order-1 sm:order-2 shadow-sm"
         >
           {loading ? <Loader2 className="animate-spin mr-2 w-4 h-4" /> : null}
           {isEditing ? "Update Property" : "Create Property"}

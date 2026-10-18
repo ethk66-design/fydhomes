@@ -60,3 +60,27 @@ export async function GET(_request: NextRequest) {
         return NextResponse.json({ error: 'Failed to fetch leads' }, { status: 500 });
     }
 }
+
+// DELETE /api/leads?id=... - Delete lead (admin only)
+export async function DELETE(request: NextRequest) {
+    try {
+        const session = await getServerSession(authOptions);
+        if (!session || (session.user as { role?: string })?.role !== 'admin') {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const { searchParams } = new URL(request.url);
+        const id = searchParams.get('id');
+
+        if (!id) {
+            return NextResponse.json({ error: 'Lead ID is required' }, { status: 400 });
+        }
+
+        await db.lead.delete({ where: { id } });
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error('Error deleting lead:', error);
+        return NextResponse.json({ error: 'Failed to delete lead' }, { status: 500 });
+    }
+}
+

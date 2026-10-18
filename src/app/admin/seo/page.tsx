@@ -2,7 +2,6 @@
 
 export const dynamic = 'force-dynamic';
 
-
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -56,8 +55,9 @@ export default function AdminSeoPage() {
 
     if (status === "loading" || loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-white">
+            <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
                 <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
+                <span className="text-sm text-gray-500 font-medium">Loading SEO configurations...</span>
             </div>
         );
     }
@@ -67,66 +67,64 @@ export default function AdminSeoPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#f4f8fb] pb-12 sm:pb-20">
-            <div className="h-[60px] sm:h-[80px] bg-white border-b border-[#eeeeee]"></div>
-
-            <div className="container mx-auto px-4 sm:px-5 py-6 sm:py-10">
-                <div className="flex flex-col gap-6 mb-6 sm:mb-10">
-                    {/* Header & Controls */}
-                    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-6">
-                        <div>
-                            <Link href="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#E3572D] mb-2">
-                                <ArrowLeft size={16} />
-                                Back to Dashboard
-                            </Link>
-                            <h1 className="text-2xl sm:text-3xl font-bold text-black mb-1 sm:mb-2">SEO Manager</h1>
-                            <p className="text-[#5c5c5c] text-sm sm:text-base">Manage titles and meta descriptions for your pages</p>
+        <div className="pb-12 sm:pb-20">
+            <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-5xl">
+                {/* Header & Controls */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
+                    <div>
+                        <Link href="/admin" className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-gray-500 hover:text-[#E3572D] transition-colors mb-2">
+                            <ArrowLeft size={16} /> Back to Dashboard
+                        </Link>
+                        <div className="flex items-center gap-2">
+                            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">SEO Manager</h1>
+                            <span className="text-xs px-2.5 py-1 bg-gray-100 font-bold rounded-full text-gray-600">
+                                {pages.length} Pages
+                            </span>
                         </div>
+                        <p className="text-gray-500 text-sm mt-1">Configure search engine titles, meta descriptions, and social previews.</p>
+                    </div>
 
-                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
-                            <div className="relative flex-1 sm:w-64">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5c5c5c] h-4 w-4" />
-                                <Input
-                                    placeholder="Search pages..."
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="pl-9 bg-white border-[#eeeeee] h-10 sm:h-auto text-base sm:text-sm shadow-sm"
-                                />
-                            </div>
-                        </div>
+                    <div className="relative w-full sm:w-64">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+                        <Input
+                            placeholder="Search page routes..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="pl-9 bg-white border-gray-200 h-10 text-sm rounded-lg shadow-sm"
+                        />
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl shadow-sm border border-[#eeeeee] overflow-hidden">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200/80 overflow-hidden">
                     <div className="hidden md:block overflow-x-auto">
                         <table className="w-full text-left">
                             <thead>
-                                <tr className="bg-[#f4f8fb] border-b border-[#eeeeee]">
-                                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-[10px] lg:text-xs font-bold text-black uppercase tracking-wider">Page Route</th>
-                                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-[10px] lg:text-xs font-bold text-black uppercase tracking-wider">Meta Title</th>
-                                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-[10px] lg:text-xs font-bold text-black uppercase tracking-wider">Description</th>
-                                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-[10px] lg:text-xs font-bold text-black uppercase tracking-wider text-right">Actions</th>
+                                <tr className="bg-[#F8FAFC] border-b border-gray-200 text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                    <th className="px-5 py-3.5">Page Route</th>
+                                    <th className="px-5 py-3.5">Meta Title</th>
+                                    <th className="px-5 py-3.5">Description</th>
+                                    <th className="px-5 py-3.5 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-[#eeeeee]">
+                            <tbody className="divide-y divide-gray-100">
                                 {filteredPages.map((page) => (
-                                    <tr key={page.id} className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-4 lg:px-6 py-3 lg:py-4">
-                                            <div className="flex items-center gap-2 font-mono text-sm text-[#E3572D] bg-blue-50/50 px-2 py-1 rounded w-fit">
-                                                <Globe size={14} />
+                                    <tr key={page.id} className="hover:bg-slate-50/70 transition-colors">
+                                        <td className="px-5 py-3.5">
+                                            <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-[#E3572D] bg-[#E3572D]/10 px-2.5 py-1 rounded w-fit">
+                                                <Globe size={13} />
                                                 {page.route}
                                             </div>
                                         </td>
-                                        <td className="px-4 lg:px-6 py-3 lg:py-4">
-                                            <div className="font-bold text-black text-xs lg:text-sm line-clamp-1">{page.title}</div>
+                                        <td className="px-5 py-3.5">
+                                            <div className="font-semibold text-gray-900 text-sm line-clamp-1">{page.title}</div>
                                         </td>
-                                        <td className="px-4 lg:px-6 py-3 lg:py-4">
-                                            <div className="text-xs text-[#5c5c5c] line-clamp-2 max-w-[300px]">{page.description || '-'}</div>
+                                        <td className="px-5 py-3.5">
+                                            <div className="text-xs text-gray-500 line-clamp-2 max-w-sm">{page.description || '—'}</div>
                                         </td>
-                                        <td className="px-4 lg:px-6 py-3 lg:py-4 text-right">
+                                        <td className="px-5 py-3.5 text-right">
                                             <Link href={`/admin/seo/${page.id}`}>
-                                                <Button variant="ghost" size="icon" className="h-8 w-8 text-[#5c5c5c] hover:text-[#E3572D]">
-                                                    <Pencil size={14} />
+                                                <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-[#E3572D] hover:bg-[#E3572D]/10 rounded-lg">
+                                                    <Pencil size={15} />
                                                 </Button>
                                             </Link>
                                         </td>
@@ -136,37 +134,29 @@ export default function AdminSeoPage() {
                         </table>
                     </div>
 
-                    <div className="md:hidden divide-y divide-[#eeeeee]">
+                    <div className="md:hidden divide-y divide-gray-100">
                         {filteredPages.map((page) => (
-                            <div key={page.id} className="p-4 hover:bg-gray-50">
-                                <div className="flex items-center justify-between mb-3">
-                                    <div className="flex items-center gap-2 font-mono text-sm text-[#E3572D] bg-blue-50/50 px-2 py-1 rounded w-fit">
-                                        <Globe size={14} />
+                            <div key={page.id} className="p-4 hover:bg-slate-50 transition-colors">
+                                <div className="flex justify-between items-start gap-2 mb-2">
+                                    <div className="font-mono text-xs font-semibold text-[#E3572D] bg-[#E3572D]/10 px-2 py-0.5 rounded">
                                         {page.route}
                                     </div>
                                     <Link href={`/admin/seo/${page.id}`}>
-                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-[#5c5c5c] hover:text-[#E3572D]">
+                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-[#E3572D]">
                                             <Pencil size={16} />
                                         </Button>
                                     </Link>
                                 </div>
-                                <div className="mb-2">
-                                    <div className="text-[10px] uppercase font-bold text-[#5c5c5c] mb-1">Title</div>
-                                    <div className="font-bold text-black text-sm">{page.title}</div>
-                                </div>
-                                <div>
-                                    <div className="text-[10px] uppercase font-bold text-[#5c5c5c] mb-1">Description</div>
-                                    <div className="text-sm text-[#5c5c5c] line-clamp-2">{page.description}</div>
-                                </div>
+                                <div className="font-semibold text-gray-900 text-sm mb-1">{page.title}</div>
+                                <div className="text-xs text-gray-500 line-clamp-2">{page.description || 'No description provided.'}</div>
                             </div>
                         ))}
                     </div>
 
                     {filteredPages.length === 0 && (
-                        <div className="text-center py-12 sm:py-20">
-                            <p className="text-[#5c5c5c] text-sm sm:text-base">
-                                {searchQuery ? "No pages match your search." : "No pages found."}
-                            </p>
+                        <div className="text-center py-16 px-4">
+                            <Globe className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                            <p className="text-gray-600 font-semibold text-base">No page routes found.</p>
                         </div>
                     )}
                 </div>

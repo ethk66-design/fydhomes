@@ -36,20 +36,18 @@ export default async function EditPropertyPage({ params }: EditPropertyPageProps
   } as unknown as Property;
 
   return (
-    <div className="min-h-screen bg-[#f4f8fb] pb-12 sm:pb-20">
-      <div className="h-[60px] sm:h-[80px] bg-white border-b border-[#eeeeee]"></div>
-
-      <div className="container mx-auto px-4 sm:px-5 py-6 sm:py-10">
-        <div className="mb-6 sm:mb-10">
+    <div className="pb-12 sm:pb-20">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-5xl">
+        <div className="mb-6 sm:mb-8">
           <Link
             href="/admin"
-            className="flex items-center gap-1.5 sm:gap-2 text-[#5c5c5c] hover:text-[#E3572D] transition-colors text-xs sm:text-sm font-medium mb-3 sm:mb-4"
+            className="inline-flex items-center gap-1.5 text-gray-500 hover:text-[#E3572D] transition-colors text-xs sm:text-sm font-semibold mb-3"
           >
-            <ChevronLeft size={14} className="sm:w-4 sm:h-4" />
+            <ChevronLeft size={16} />
             Back to Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-black">Edit Property</h1>
-          <p className="text-[#5c5c5c] text-sm sm:text-base line-clamp-1">Update the details for &quot;{property.title}&quot;</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">Edit Property</h1>
+          <p className="text-gray-500 text-sm mt-1 line-clamp-1">Update details for &quot;{property.title}&quot;</p>
         </div>
 
         <AdminPropertyForm initialData={propertyData} isEditing />

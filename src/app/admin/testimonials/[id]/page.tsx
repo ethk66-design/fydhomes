@@ -153,9 +153,7 @@ export default function EditTestimonialPage({ params }: PageProps) {
     if (status === "unauthenticated" || !testimonial) return null;
 
     return (
-        <div className="min-h-screen bg-[#f4f8fb] pb-12 sm:pb-20">
-            <div className="h-[60px] sm:h-[80px] bg-white border-b border-[#eeeeee]"></div>
-
+        <div className="pb-12 sm:pb-20">
             <div className="container mx-auto px-4 sm:px-5 py-6 sm:py-10">
                 <div className="max-w-3xl mx-auto">
                     <div className="flex items-center gap-4 mb-6 sm:mb-8">
@@ -282,7 +280,7 @@ export default function EditTestimonialPage({ params }: PageProps) {
                                 <Button
                                     onClick={handleSave}
                                     disabled={saving || !testimonial.name}
-                                    className="bg-[#E3572D] hover:bg-[#256a7a] text-white font-bold w-full sm:w-auto"
+                                    className="bg-[#E3572D] hover:bg-[#cf4b22] text-white font-bold w-full sm:w-auto shadow-sm"
                                 >
                                     {saving ? (
                                         <>

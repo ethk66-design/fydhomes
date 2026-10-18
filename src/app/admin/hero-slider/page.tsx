@@ -69,9 +69,9 @@ export default function AdminHeroSliderPage() {
             });
             if (!slideRes.ok) throw new Error("Failed to save slide");
 
-            toast.success("Slide added");
+            toast.success("Slide added successfully");
             fetchSlides();
-        } catch (error) {
+        } catch (_error) {
             toast.error("Failed to add slide");
         } finally {
             setUploading(false);
@@ -80,11 +80,11 @@ export default function AdminHeroSliderPage() {
     };
 
     const handleDelete = async (id: string) => {
-        if (!confirm("Delete this slide?")) return;
+        if (!confirm("Are you sure you want to delete this hero slide?")) return;
         try {
             const res = await fetch(`/api/hero-slides/${id}`, { method: 'DELETE' });
-            if (!res.ok) throw new Error("Failed");
-            toast.success("Deleted slide");
+            if (!res.ok) throw new Error("Failed to delete");
+            toast.success("Slide deleted successfully");
             fetchSlides();
         } catch (_e) {
             toast.error("Delete failed");
@@ -92,45 +92,75 @@ export default function AdminHeroSliderPage() {
     };
 
     if (status === "loading" || loading) {
-        return <div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" /></div>;
+        return (
+            <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
+                <Loader2 className="w-8 h-8 animate-spin text-[#E3572D]" />
+                <span className="text-sm text-gray-500 font-medium">Loading hero slides...</span>
+            </div>
+        );
     }
 
     if (status === "unauthenticated") return null;
 
     return (
-        <div className="min-h-screen bg-[#f4f8fb] pb-12">
-            <div className="h-[60px] sm:h-[80px] bg-white border-b border-[#eeeeee]"></div>
-            <div className="container mx-auto px-4 py-8 max-w-4xl">
-                <div className="flex items-center gap-4 mb-8">
-                    <Link href="/admin">
-                        <Button variant="ghost" size="icon" className="bg-white border"><ArrowLeft size={18} /></Button>
+        <div className="pb-12 sm:pb-20">
+            <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
+                <div className="mb-6 sm:mb-8">
+                    <Link
+                        href="/admin"
+                        className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-gray-500 hover:text-[#E3572D] transition-colors mb-2"
+                    >
+                        <ArrowLeft size={16} /> Back to Dashboard
                     </Link>
-                    <h1 className="text-2xl font-bold">Hero Slider Management</h1>
-                </div>
-
-                <div className="bg-white rounded-xl shadow-sm border p-6 mb-8">
-                    <div className="flex justify-between items-center mb-6">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div>
-                            <h2 className="font-bold text-lg">Manage Slides</h2>
-                            <p className="text-sm text-gray-500">Upload background images for the premium dark hero slider.</p>
+                            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">Hero Slider Management</h1>
+                            <p className="text-gray-500 text-sm mt-1">Upload and manage rotating hero banner backgrounds on the homepage.</p>
                         </div>
-                        <Button disabled={uploading} className="bg-[#E3572D] hover:bg-[#c74c28] relative">
+
+                        <Button disabled={uploading} className="bg-[#E3572D] hover:bg-[#cf4b22] text-white font-bold text-xs sm:text-sm h-10 px-4 rounded-lg shadow-sm relative overflow-hidden">
                             {uploading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
-                            {uploading ? "Uploading..." : "Add Slide"}
-                            <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" onChange={handleUpload} disabled={uploading} />
+                            {uploading ? "Uploading..." : "Add New Slide"}
+                            <input
+                                type="file"
+                                className="absolute inset-0 opacity-0 cursor-pointer"
+                                accept="image/*"
+                                onChange={handleUpload}
+                                disabled={uploading}
+                            />
                         </Button>
                     </div>
+                </div>
 
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200/80 p-6">
                     <div className="space-y-4">
-                        {slides.length === 0 && <p className="text-gray-500 text-center py-8">No slides found.</p>}
+                        {slides.length === 0 && (
+                            <div className="text-center py-12 px-4">
+                                <ImageIcon className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                                <p className="text-gray-600 font-semibold text-base">No custom hero slides yet.</p>
+                                <p className="text-gray-400 text-xs mt-1">
+                                    The homepage is currently displaying the default high-resolution luxury villa image.
+                                </p>
+                            </div>
+                        )}
+
                         {slides.map((slide, index) => (
-                            <div key={slide.id} className="flex items-center gap-4 p-4 border rounded-lg bg-gray-50">
-                                <span className="font-bold text-gray-400 w-6">{index + 1}.</span>
-                                <div className="relative w-32 h-20 rounded bg-gray-200 overflow-hidden shrink-0">
-                                    <Image src={slide.image_url} alt="Slide" fill className="object-cover" />
+                            <div key={slide.id} className="flex items-center gap-4 p-4 border border-gray-200/80 rounded-xl bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                                <span className="font-bold text-gray-400 text-sm w-6 text-center">{index + 1}.</span>
+                                <div className="relative w-36 h-20 rounded-lg bg-gray-100 overflow-hidden shrink-0 border border-gray-200">
+                                    <Image src={slide.image_url} alt={`Slide ${index + 1}`} fill className="object-cover" />
                                 </div>
-                                <div className="flex-1 text-xs font-mono text-gray-500 truncate">{slide.image_url}</div>
-                                <Button variant="ghost" className="text-red-500 hover:text-red-700 hover:bg-red-50" onClick={() => handleDelete(slide.id)}>
+                                <div className="flex-1 min-w-0">
+                                    <div className="text-xs font-semibold text-gray-900 mb-1">Slide #{index + 1}</div>
+                                    <div className="text-[11px] font-mono text-gray-400 truncate">{slide.image_url}</div>
+                                </div>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
+                                    onClick={() => handleDelete(slide.id)}
+                                    title="Delete Slide"
+                                >
                                     <Trash2 className="w-4 h-4" />
                                 </Button>
                             </div>

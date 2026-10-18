@@ -42,9 +42,7 @@ export default function AdminUsersPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#f4f8fb] pb-12 sm:pb-20">
-            <div className="h-[60px] sm:h-[80px] bg-white border-b border-[#eeeeee]"></div>
-
+        <div className="pb-12 sm:pb-20">
             <div className="container mx-auto px-4 sm:px-5 py-6 sm:py-10 max-w-5xl">
                 <Link href="/admin" className="flex items-center gap-2 text-sm text-[#5c5c5c] hover:text-[#E3572D] mb-6">
                     <ArrowLeft size={14} /> Back to Dashboard
